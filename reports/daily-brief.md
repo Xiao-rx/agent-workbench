@@ -1,6 +1,6 @@
 # GitHub Trend Lab Daily Brief
 
-Generated: 2026\-05\-19T11:18:48Z
+Generated: 2026\-05\-19T11:22:35Z
 Search window: repositories created since 2026\-01\-01
 Query: `created:>=2026-01-01 stars:>=50 archived:false fork:false`
 
@@ -10,14 +10,14 @@ Query: `created:>=2026-01-01 stars:>=50 archived:false fork:false`
 
 Observed top repositories:
 - [ultraworkers/claw\-code](https://github.com/ultraworkers/claw-code) - 191960 stars - The repo is finally unlocked\. enjoy the party\! The fastest repo in history to surpass 100K stars ⭐\. Join Discord: https://discord\.gg/5TUQKqFWd Built in Rust using oh\-my\-codex\.
-- [affaan\-m/ECC](https://github.com/affaan-m/ECC) - 186919 stars - The agent harness performance optimization system\. Skills, instincts, memory, security, and research\-first development for Claude Code, Codex, Opencode, Cursor and beyond\.
-- [multica\-ai/andrej\-karpathy\-skills](https://github.com/multica-ai/andrej-karpathy-skills) - 137015 stars - A single CLAUDE\.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls\.
-- [garrytan/gstack](https://github.com/garrytan/gstack) - 99338 stars - Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager, Doc Engineer, and QA
-- [mattpocock/skills](https://github.com/mattpocock/skills) - 93258 stars - Skills for Real Engineers\. Straight from my \.claude directory\.
-- [karpathy/autoresearch](https://github.com/karpathy/autoresearch) - 81860 stars - AI agents running research on single\-GPU nanochat training automatically
-- [VoltAgent/awesome\-design\-md](https://github.com/VoltAgent/awesome-design-md) - 81148 stars - A collection of DESIGN\.md files inspired by popular brand design systems\. Drop one into your project and let coding agents generate a matching UI\.
-- [paperclipai/paperclip](https://github.com/paperclipai/paperclip) - 66463 stars - The open\-source app everyone uses to manage agents at work
-- [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) - 62082 stars - 🪨 why use many token when few token do trick — Claude Code skill that cuts 65% of tokens by talking like caveman
+- [affaan\-m/ECC](https://github.com/affaan-m/ECC) - 186921 stars - The agent harness performance optimization system\. Skills, instincts, memory, security, and research\-first development for Claude Code, Codex, Opencode, Cursor and beyond\.
+- [multica\-ai/andrej\-karpathy\-skills](https://github.com/multica-ai/andrej-karpathy-skills) - 137018 stars - A single CLAUDE\.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls\.
+- [garrytan/gstack](https://github.com/garrytan/gstack) - 99342 stars - Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager, Doc Engineer, and QA
+- [mattpocock/skills](https://github.com/mattpocock/skills) - 93269 stars - Skills for Real Engineers\. Straight from my \.claude directory\.
+- [karpathy/autoresearch](https://github.com/karpathy/autoresearch) - 81861 stars - AI agents running research on single\-GPU nanochat training automatically
+- [VoltAgent/awesome\-design\-md](https://github.com/VoltAgent/awesome-design-md) - 81149 stars - A collection of DESIGN\.md files inspired by popular brand design systems\. Drop one into your project and let coding agents generate a matching UI\.
+- [paperclipai/paperclip](https://github.com/paperclipai/paperclip) - 66464 stars - The open\-source app everyone uses to manage agents at work
+- [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) - 62084 stars - 🪨 why use many token when few token do trick — Claude Code skill that cuts 65% of tokens by talking like caveman
 - [koala73/worldmonitor](https://github.com/koala73/worldmonitor) - 54435 stars - Real\-time global intelligence dashboard\. AI\-powered news aggregation, geopolitical monitoring, and infrastructure tracking in a unified situational awareness interface
 
 Learning candidate leaders:
@@ -43,25 +43,25 @@ Per-repository lessons:
 - affaan\-m/ECC
   - Trust: high (100/100)
   - Why popular: affaan\-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging\.
-  - Evidence: 186919 stars; 28945 forks corroborate reuse; MIT license; 0 open issues; recent push activity
+  - Evidence: 186921 stars; 28945 forks corroborate reuse; MIT license; 1 open issues; recent push activity
   - Emulate: Use a concrete one\-sentence value proposition\.; Keep license and reuse rights explicit\.; Show active maintenance through recent commits\.
   - Avoid: Avoid copying surface topics without reproducing the proof path\.
 - multica\-ai/andrej\-karpathy\-skills
   - Trust: medium (70/100)
   - Why popular: multica\-ai/andrej\-karpathy\-skills is likely gaining attention because it combines AI/agent positioning\.
-  - Evidence: 137015 stars; 14053 forks corroborate reuse; unclear license
+  - Evidence: 137018 stars; 14053 forks corroborate reuse; unclear license
   - Emulate: Use a concrete one\-sentence value proposition\.; Show active maintenance through recent commits\.
   - Avoid: Avoid copying surface topics without reproducing the proof path\.
 - garrytan/gstack
   - Trust: high (99/100)
   - Why popular: garrytan/gstack is likely gaining attention because it combines TypeScript ecosystem fit\.
-  - Evidence: 99338 stars; 14808 forks corroborate reuse; MIT license; recent push activity
+  - Evidence: 99342 stars; 14808 forks corroborate reuse; MIT license; recent push activity
   - Emulate: Use a concrete one\-sentence value proposition\.; Keep license and reuse rights explicit\.; Show active maintenance through recent commits\.
   - Avoid: Avoid copying surface topics without reproducing the proof path\.
 - mattpocock/skills
   - Trust: high (93/100)
   - Why popular: mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit\.
-  - Evidence: 93258 stars; 8193 forks corroborate reuse; MIT license; recent push activity
+  - Evidence: 93269 stars; 8194 forks corroborate reuse; MIT license; recent push activity
   - Emulate: Use a concrete one\-sentence value proposition\.; Keep license and reuse rights explicit\.; Show active maintenance through recent commits\.
   - Avoid: Avoid copying surface topics without reproducing the proof path\.
 
@@ -173,14 +173,14 @@ Description terms:
 - Stars: 0
 - Forks: 0
 - Open issues: 0
-- Sampled at: 2026\-05\-19T11:18:49Z
+- Sampled at: 2026\-05\-19T11:22:35Z
 
 ## Git Steward
 
 - Repository: Xiao\-rx/agent\-workbench
 - Current stars: 0
 - Star delta in local history: 0
-- Samples seen: 24
+- Samples seen: 26
 - Recommendation: Commit small, explainable improvements and watch the next star sample for response\.
 
 Git status:
