@@ -33,7 +33,7 @@ agent-workbench demo --adapter all --check --print-kickoff
   opencode.json
 ```
 
-普通文本输出也会打印 `Proof:` 行，内容和 JSON 里的 `proof_summary` 对齐，方便截图或粘贴到 issue。
+普通文本输出也会打印 `Proof:` 行，内容和 JSON 里的 `proof_summary` 对齐，并包含 adapter 与现有 agent asset 数量，方便截图或粘贴到 issue。
 demo 仓库内置一个安全的 `.github/copilot-instructions.md`，生成结果会直接展示现有 agent 资产探测效果。
 
 ## 在当前仓库生成工作区

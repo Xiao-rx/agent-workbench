@@ -473,6 +473,7 @@ class AgentWorkbenchTests(unittest.TestCase):
             tasks = (output / ".agent-workbench" / "agent-task-pack.md").read_text(encoding="utf-8")
             self.assertIn("Demo repository:", stdout.getvalue())
             self.assertIn("Proof: wrote 2 files", stdout.getvalue())
+            self.assertIn("detected 1 existing agent asset", stdout.getvalue())
             self.assertIn("verify with `python -m unittest discover -s tests`", stdout.getvalue())
             self.assertIn("agent-workbench-demo", agents)
             self.assertIn("Existing Agent Assets", agents)
@@ -563,6 +564,7 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertIn("python -m unittest discover -s tests", payload["verification_command"])
             self.assertIn("wrote 6 files", payload["proof_summary"])
             self.assertIn("4 adapter handoffs", payload["proof_summary"])
+            self.assertIn("detected 1 existing agent asset", payload["proof_summary"])
             self.assertIn("python -m unittest discover -s tests", payload["proof_summary"])
             self.assertIn("You are working in agent-workbench-demo.", payload["kickoff_prompt"])
             self.assertIn(".github/copilot-instructions.md", payload["agent_assets"][0]["path"])
@@ -588,6 +590,7 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertIn("python -m unittest discover -s tests", payload["verification_command"])
             self.assertIn("wrote 6 files", payload["proof_summary"])
             self.assertIn("4 adapter handoffs", payload["proof_summary"])
+            self.assertIn("detected 1 existing agent asset", payload["proof_summary"])
 
     def test_init_command_writes_requested_adapter(self):
         with tempfile.TemporaryDirectory() as tmp:

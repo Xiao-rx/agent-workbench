@@ -46,7 +46,7 @@ One command generates:
 - `agent-workbench check` for a quick readiness gate before handing the repo to an agent
 - `--print-kickoff` to copy the generated first prompt straight from the terminal
 - the no-secret demo includes a safe `.github/copilot-instructions.md`, so the generated workbench visibly reports existing agent assets
-- text output prints a copyable `Proof:` line for screenshots, issues, and release notes
+- text output prints a copyable `Proof:` line with adapter and existing agent asset counts for screenshots, issues, and release notes
 - scan JSON reports existing agent assets such as `AGENTS.md`, `CLAUDE.md`, Codex, Cursor, Copilot, Gemini, and OpenCode instruction files
 - `demo --format json` and `init --format json` for machine-readable proofs with written files, artifact summary, existing agent assets, copyable proof summary, verification command, kickoff prompt, and readiness
 - JSON artifacts with `--output-json` for CI and downstream agent harnesses
@@ -79,7 +79,7 @@ It scans the repo and writes:
 - Codex adapter: .codex/AGENTS.md handoff that points to the generated workbench
 - OpenCode adapter: opencode.json instructions that point to the generated workbench
 - readiness check: a pass/fail command for existing workbench files
-- Proof line: a copyable summary in normal terminal output
+- Proof line: a copyable summary in normal terminal output with adapter and existing agent asset counts
 - scan JSON: machine-readable repo map with file signals, package managers, safe commands, and existing agent assets
 - output JSON files: reusable artifacts for CI and agent harnesses, including artifact summaries, existing agent assets, copyable proof summaries, and verification commands
 

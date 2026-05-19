@@ -197,21 +197,16 @@ def _workbench_payload(
     task_pack = workbench / "agent-task-pack.md"
     repo = scan_repo(root)
     artifact_summary = _artifact_summary(workbench, paths)
+    agent_assets = _agent_asset_payload(repo)
     verification_command = repo.test_commands[0] if repo.test_commands else _verification_command(root, workbench)
     payload = {
         "root": str(root),
         "workbench": str(workbench),
         "written": [str(path) for path in paths],
         "artifact_summary": artifact_summary,
-        "agent_assets": [
-            {
-                "path": asset.path,
-                "label": asset.label,
-            }
-            for asset in repo.agent_assets
-        ],
+        "agent_assets": agent_assets,
         "verification_command": verification_command,
-        "proof_summary": _proof_summary(artifact_summary, verification_command),
+        "proof_summary": _proof_summary(artifact_summary, verification_command, agent_assets),
         "kickoff_prompt": _extract_kickoff_prompt(task_pack.read_text(encoding="utf-8")),
     }
     if demo_repository is not None:
@@ -242,13 +237,25 @@ def _verification_command(root: Path, workbench: Path) -> str:
     return f'agent-workbench check "{root}" --workbench "{workbench}" --format json'
 
 
-def _proof_summary(artifact_summary: dict[str, object], verification_command: str) -> str:
+def _agent_asset_payload(repo: RepoMap) -> list[dict[str, str]]:
+    return [
+        {
+            "path": asset.path,
+            "label": asset.label,
+        }
+        for asset in repo.agent_assets
+    ]
+
+
+def _proof_summary(artifact_summary: dict[str, object], verification_command: str, agent_assets: list[dict[str, str]]) -> str:
     core_files = artifact_summary["core_files"]
     adapter_files = artifact_summary["adapter_files"]
     core_text = ", ".join(str(item) for item in core_files)
     adapter_count = len(adapter_files) if isinstance(adapter_files, list) else 0
     adapter_text = f", {adapter_count} adapter handoff{'s' if adapter_count != 1 else ''}" if adapter_count else ""
-    return f"wrote {artifact_summary['written_total']} files: {core_text}{adapter_text}; verify with `{verification_command}`."
+    asset_count = len(agent_assets)
+    asset_text = f", detected {asset_count} existing agent asset{'s' if asset_count != 1 else ''}" if asset_count else ""
+    return f"wrote {artifact_summary['written_total']} files: {core_text}{adapter_text}{asset_text}; verify with `{verification_command}`."
 
 
 def _write_json_file(path: Path, payload: dict[str, object]) -> None:
@@ -272,13 +279,7 @@ def _repo_map_payload(repo: RepoMap) -> dict[str, object]:
         "package_managers": list(repo.package_managers),
         "test_commands": list(repo.test_commands),
         "risk_notes": list(repo.risk_notes),
-        "agent_assets": [
-            {
-                "path": asset.path,
-                "label": asset.label,
-            }
-            for asset in repo.agent_assets
-        ],
+        "agent_assets": _agent_asset_payload(repo),
         "files": [
             {
                 "path": file.path,

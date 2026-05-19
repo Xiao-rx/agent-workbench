@@ -7,7 +7,7 @@ Help AI coding agents make small, verifiable changes in this repository without 
 ## Repository Map
 
 - Files scanned: 87
-- Lines scanned: 7616
+- Lines scanned: 7622
 - Main file kinds: python=39, docs=21, config=12, other=11, script=2, typescript=1
 - Package managers: python/pyproject
 
@@ -28,10 +28,10 @@ Help AI coding agents make small, verifiable changes in this repository without 
 
 ## High-Signal Files
 
-- `tests/test_agent_workbench.py` (python, 723 lines)
+- `tests/test_agent_workbench.py` (python, 726 lines)
 - `src/github_trend_lab/agents.py` (python, 490 lines)
 - `data/snapshots/product-direction-live.json` (config, 470 lines)
-- `src/agent_workbench/cli.py` (python, 343 lines)
+- `src/agent_workbench/cli.py` (python, 344 lines)
 - `reports/product-direction-decisions.json` (config, 308 lines)
 - `reports/daily-decisions.json` (config, 302 lines)
 - `README.md` (docs, 278 lines)
