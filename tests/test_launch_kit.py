@@ -11,9 +11,10 @@ class LaunchKitTests(unittest.TestCase):
         self.assertIn("Show HN", launch)
         self.assertIn("--adapter claude --adapter cursor", launch)
         self.assertIn("agent-workbench demo --adapter claude --adapter cursor", launch)
+        self.assertIn("scan JSON", launch)
         self.assertIn("Python and TypeScript", launch)
         self.assertIn("uv tool install git+https://github.com/Xiao-rx/agent-workbench.git", launch)
-        self.assertIn("https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.2.0", launch)
+        self.assertIn("https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.3.0", launch)
         self.assertIn("<svg", preview)
         self.assertIn("Agent Workbench", preview)
 

@@ -6,7 +6,7 @@ Agent Workbench v0.2.0 keeps the core output provider-neutral while adding optio
 
 ```powershell
 uv tool install git+https://github.com/Xiao-rx/agent-workbench.git
-agent-workbench demo --adapter claude --adapter cursor
+agent-workbench demo
 ```
 
 ## What ships
@@ -22,7 +22,6 @@ agent-workbench demo --adapter claude --adapter cursor
 
 ```powershell
 agent-workbench init . --output .agent-workbench --adapter claude --adapter cursor
-agent-workbench demo --adapter claude --adapter cursor
 ```
 
 Without adapters, Agent Workbench still writes only the two plain Markdown files: `AGENTS.md` and `agent-task-pack.md`.

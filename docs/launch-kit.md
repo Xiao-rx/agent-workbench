@@ -19,7 +19,7 @@ agent-workbench demo --adapter claude --adapter cursor
 
 ## Share post
 
-I shipped Agent Workbench v0.2.0: a tiny provider-neutral CLI that turns any repo into an AI-agent-ready workspace.
+I shipped Agent Workbench v0.3.0: a tiny provider-neutral CLI that turns any repo into an AI-agent-ready workspace.
 
 One command generates:
 
@@ -32,7 +32,7 @@ The output gives Codex, Claude Code, Cursor, OpenCode, and other coding agents a
 Examples include generated workbench output for both Python and TypeScript CLI repositories.
 
 Repo: https://github.com/Xiao-rx/agent-workbench
-Release: https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.2.0
+Release: https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.3.0
 
 ## Show HN draft
 
@@ -51,6 +51,7 @@ It scans the repo and writes:
 
 - AGENTS.md: repo map, safe commands, high-signal files, guardrails
 - agent-task-pack.md: kickoff prompt, first jobs, acceptance gates
+- scan JSON: machine-readable repo map with file signals, package managers, and safe commands
 
 It is provider-neutral and outputs plain Markdown, so it can be used with Codex, Claude Code, Cursor, OpenCode, or any coding agent workflow.
 

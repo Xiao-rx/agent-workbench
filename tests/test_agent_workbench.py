@@ -2,6 +2,7 @@ import tempfile
 import unittest
 from contextlib import redirect_stdout
 from io import StringIO
+import json
 from pathlib import Path
 
 from agent_workbench import __version__
@@ -137,6 +138,23 @@ class AgentWorkbenchTests(unittest.TestCase):
         self.assertNotIn("reports/demo-decisions.json", scanned_paths)
         self.assertIn(".env.example", scanned_paths)
         self.assertIn("reports/daily-brief.md", scanned_paths)
+
+    def test_scan_command_can_emit_json_repo_map(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "pyproject.toml").write_text("[project]\nname='x'\n", encoding="utf-8")
+            (root / "app.py").write_text("print('hello')\n", encoding="utf-8")
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["scan", str(root), "--format", "json"])
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(payload["total_files"], 2)
+        self.assertEqual(payload["package_managers"], ["python/pyproject"])
+        self.assertIn("python -m unittest discover -s tests", payload["test_commands"])
+        self.assertEqual(payload["files"][0]["path"], "app.py")
 
     def test_demo_command_writes_visible_workbench(self):
         with tempfile.TemporaryDirectory() as tmp:

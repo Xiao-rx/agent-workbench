@@ -123,6 +123,7 @@ Inspect a repository before generating files:
 
 ```powershell
 uv run --python 3.12 python -m agent_workbench scan .
+uv run --python 3.12 python -m agent_workbench scan . --format json
 ```
 
 Run tests:
@@ -150,17 +151,17 @@ The goal is not to be another agent. The goal is to make every repository easier
 
 ```text
 agent-workbench demo [--output PATH] [--adapter claude] [--adapter cursor]
-agent-workbench scan [ROOT]
+agent-workbench scan [ROOT] [--format text|json]
 agent-workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude] [--adapter cursor]
 
-python -m agent_workbench scan [ROOT]
+python -m agent_workbench scan [ROOT] [--format text|json]
 python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude] [--adapter cursor]
 python -m agent_workbench demo [--output PATH] [--adapter claude] [--adapter cursor]
 ```
 
 ## Release
 
-- Current release notes: [`docs/release-v0.2.0.md`](docs/release-v0.2.0.md)
+- Current release notes: [`docs/release-v0.3.0.md`](docs/release-v0.3.0.md)
 - Launch kit: [`docs/launch-kit.md`](docs/launch-kit.md)
 - Install from GitHub: `uv tool install git+https://github.com/Xiao-rx/agent-workbench.git`
 

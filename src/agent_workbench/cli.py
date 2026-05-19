@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import argparse
+import json
 from pathlib import Path
 import tempfile
 
 from . import __version__
 from .generator import SUPPORTED_ADAPTERS, write_workbench
+from .models import RepoMap
 from .scanner import scan_repo
 
 
@@ -16,6 +18,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     scan = subparsers.add_parser("scan", help="Print a compact repository map.")
     scan.add_argument("root", nargs="?", type=Path, default=Path("."))
+    scan.add_argument("--format", choices=("text", "json"), default="text", help="Output format.")
 
     init = subparsers.add_parser("init", help="Generate AGENTS.md and an agent task pack.")
     init.add_argument("root", nargs="?", type=Path, default=Path("."))
@@ -48,6 +51,9 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "scan":
         repo = scan_repo(args.root)
+        if args.format == "json":
+            print(json.dumps(_repo_map_payload(repo), ensure_ascii=False, indent=2))
+            return 0
         print(f"root={repo.root}")
         print(f"files={repo.total_files}")
         print(f"lines={repo.total_lines}")
@@ -72,6 +78,26 @@ def main(argv: list[str] | None = None) -> int:
 
     parser.error(f"Unknown command: {args.command}")
     return 2
+
+
+def _repo_map_payload(repo: RepoMap) -> dict[str, object]:
+    return {
+        "root": str(repo.root),
+        "total_files": repo.total_files,
+        "total_lines": repo.total_lines,
+        "package_managers": list(repo.package_managers),
+        "test_commands": list(repo.test_commands),
+        "risk_notes": list(repo.risk_notes),
+        "files": [
+            {
+                "path": file.path,
+                "kind": file.kind,
+                "lines": file.lines,
+                "bytes": file.bytes,
+            }
+            for file in repo.files
+        ],
+    }
 
 
 def _prepare_demo_workspace(output: Path | None) -> tuple[Path, Path]:
