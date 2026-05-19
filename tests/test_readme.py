@@ -1,0 +1,17 @@
+import unittest
+from pathlib import Path
+
+
+class ReadmeTests(unittest.TestCase):
+    def test_readme_shows_demo_and_output_preview(self):
+        readme = Path("README.md").read_text(encoding="utf-8")
+
+        self.assertIn("python -m agent_workbench demo", readme)
+        self.assertIn(".agent-workbench/", readme)
+        self.assertIn("AGENTS.md", readme)
+        self.assertIn("agent-task-pack.md", readme)
+        self.assertIn("provider-neutral", readme.lower())
+
+
+if __name__ == "__main__":
+    unittest.main()
