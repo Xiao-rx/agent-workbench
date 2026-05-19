@@ -107,6 +107,7 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         for path in paths:
             print(f"Wrote {path}")
+        print(f"Proof: {_workbench_payload(args.root.resolve(), args.output, paths)['proof_summary']}")
         if args.print_kickoff:
             _print_kickoff(args.output)
         if args.check:
@@ -135,6 +136,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Demo repository: {root}")
         for path in paths:
             print(f"Wrote {path}")
+        print(f"Proof: {_workbench_payload(root, output, paths, demo_repository=root)['proof_summary']}")
         if args.print_kickoff:
             _print_kickoff(output)
         if args.check:

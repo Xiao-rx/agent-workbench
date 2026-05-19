@@ -31,6 +31,8 @@ agent-workbench demo --adapter all --check --print-kickoff
   .cursor/rules/agent-workbench.md
 ```
 
+普通文本输出也会打印 `Proof:` 行，内容和 JSON 里的 `proof_summary` 对齐，方便截图或粘贴到 issue。
+
 ## 在当前仓库生成工作区
 
 ```powershell

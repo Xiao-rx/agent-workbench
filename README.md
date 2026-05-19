@@ -113,6 +113,8 @@ $env:PYTHONPATH='src'
 uv run --python 3.12 python -m agent_workbench demo --adapter all --check --print-kickoff
 ```
 
+Text output prints a `Proof:` line with the same copyable summary as JSON, so the first run is easy to screenshot or paste into an issue.
+
 Generate a machine-readable demo proof:
 
 ```powershell

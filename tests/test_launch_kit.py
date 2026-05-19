@@ -15,6 +15,7 @@ class LaunchKitTests(unittest.TestCase):
         self.assertIn("agent-workbench demo --adapter all --check --print-kickoff", launch)
         self.assertIn("agent-workbench demo --adapter all --check --format json --output-json .agent-workbench/demo-proof.json", launch)
         self.assertIn("agent-workbench init . --output .agent-workbench --adapter all --check --format json --output-json .agent-workbench/init-proof.json", launch)
+        self.assertIn("copyable `Proof:` line", launch)
         self.assertIn("--print-kickoff", launch)
         self.assertIn("demo --format json", launch)
         self.assertIn("init --format json", launch)

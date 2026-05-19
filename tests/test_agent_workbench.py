@@ -408,6 +408,8 @@ class AgentWorkbenchTests(unittest.TestCase):
             agents = (output / ".agent-workbench" / "AGENTS.md").read_text(encoding="utf-8")
             tasks = (output / ".agent-workbench" / "agent-task-pack.md").read_text(encoding="utf-8")
             self.assertIn("Demo repository:", stdout.getvalue())
+            self.assertIn("Proof: wrote 2 files", stdout.getvalue())
+            self.assertIn("verify with `python -m unittest discover -s tests`", stdout.getvalue())
             self.assertIn("agent-workbench-demo", agents)
             self.assertIn("python -m unittest discover -s tests", agents)
             self.assertIn("Agent Task Pack", tasks)
@@ -452,6 +454,8 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertTrue((output / ".agent-workbench" / "CLAUDE.md").exists())
             self.assertTrue((output / ".agent-workbench" / ".codex" / "AGENTS.md").exists())
             self.assertTrue((output / ".agent-workbench" / ".cursor" / "rules" / "agent-workbench.md").exists())
+            self.assertIn("Proof: wrote 5 files", stdout.getvalue())
+            self.assertIn("3 adapter handoffs", stdout.getvalue())
             self.assertIn("status=ready", stdout.getvalue())
 
     def test_demo_command_can_print_kickoff_prompt(self):
@@ -527,6 +531,8 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertEqual(exit_code, 0)
             self.assertTrue((out / ".codex" / "AGENTS.md").exists())
             self.assertIn(".codex", stdout.getvalue())
+            self.assertIn("Proof: wrote 3 files", stdout.getvalue())
+            self.assertIn("1 adapter handoff", stdout.getvalue())
 
     def test_init_command_writes_all_adapters(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -543,6 +549,8 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertTrue((out / "CLAUDE.md").exists())
             self.assertTrue((out / ".codex" / "AGENTS.md").exists())
             self.assertTrue((out / ".cursor" / "rules" / "agent-workbench.md").exists())
+            self.assertIn("Proof: wrote 5 files", stdout.getvalue())
+            self.assertIn("3 adapter handoffs", stdout.getvalue())
             self.assertIn("status=ready", stdout.getvalue())
 
     def test_init_command_can_print_kickoff_prompt(self):

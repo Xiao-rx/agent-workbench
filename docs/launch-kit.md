@@ -45,6 +45,7 @@ One command generates:
 - optional Claude Code, Codex, and Cursor adapters with `--adapter all`
 - `agent-workbench check` for a quick readiness gate before handing the repo to an agent
 - `--print-kickoff` to copy the generated first prompt straight from the terminal
+- text output prints a copyable `Proof:` line for screenshots, issues, and release notes
 - `demo --format json` and `init --format json` for machine-readable proofs with written files, artifact summary, copyable proof summary, verification command, kickoff prompt, and readiness
 - JSON artifacts with `--output-json` for CI and downstream agent harnesses
 
@@ -75,6 +76,7 @@ It scans the repo and writes:
 - agent-task-pack.md: kickoff prompt, first jobs, acceptance gates
 - Codex adapter: .codex/AGENTS.md handoff that points to the generated workbench
 - readiness check: a pass/fail command for existing workbench files
+- Proof line: a copyable summary in normal terminal output
 - scan JSON: machine-readable repo map with file signals, package managers, and safe commands
 - output JSON files: reusable artifacts for CI and agent harnesses, including artifact summaries, copyable proof summaries, and verification commands
 

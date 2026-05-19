@@ -13,6 +13,7 @@ agent-workbench demo --adapter all --check --print-kickoff
 
 - `--adapter all`: generate Claude Code, Codex, and Cursor handoff files in one option.
 - `--print-kickoff`: print the generated kickoff prompt after writing files.
+- Text output now prints a copyable `Proof:` line for screenshots and issue updates.
 - `demo --format json` and `init --format json`: emit machine-readable proofs with written files, kickoff prompt, and optional readiness.
 - `--output-json`: save demo and init proof payloads for CI and downstream agent harnesses.
 - JSON proof payloads now include an artifact summary, a copyable proof summary, and a verification command for easier sharing and routing.
