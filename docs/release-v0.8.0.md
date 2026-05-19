@@ -13,6 +13,7 @@ agent-workbench demo --adapter all --check
 
 - `--adapter all`: generate Claude Code, Codex, and Cursor handoff files in one option.
 - Duplicate adapter requests are deduplicated, so `--adapter all --adapter codex` still writes each adapter once.
+- Generated `AGENTS.md` and `agent-task-pack.md` now list the adapter handoff files when adapters are requested.
 - English and Chinese README paths now use the shorter all-adapter demo command.
 - Launch assets now describe the v0.8.0 first-run path.
 

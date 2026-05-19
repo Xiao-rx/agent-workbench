@@ -7,9 +7,14 @@ from .models import RepoMap
 
 CONCRETE_ADAPTERS = ("claude", "codex", "cursor")
 SUPPORTED_ADAPTERS = (*CONCRETE_ADAPTERS, "all")
+ADAPTER_HANDOFFS = {
+    "claude": ("Claude Code", "CLAUDE.md"),
+    "codex": ("Codex", ".codex/AGENTS.md"),
+    "cursor": ("Cursor", ".cursor/rules/agent-workbench.md"),
+}
 
 
-def render_agents_md(repo: RepoMap, project_name: str | None = None) -> str:
+def render_agents_md(repo: RepoMap, project_name: str | None = None, adapters: tuple[str, ...] = ()) -> str:
     name = project_name or repo.root.name
     kinds = Counter(file.kind for file in repo.files)
     lines = [
@@ -26,9 +31,12 @@ def render_agents_md(repo: RepoMap, project_name: str | None = None) -> str:
         f"- Main file kinds: {_counter_text(kinds)}",
         f"- Package managers: {', '.join(repo.package_managers) if repo.package_managers else 'not detected'}",
         "",
-        "## Safe Commands",
-        "",
     ]
+    handoffs = _adapter_handoff_lines(adapters)
+    if handoffs:
+        lines.extend(["## Agent Tool Handoffs", "", *handoffs, ""])
+
+    lines.extend(["## Safe Commands", ""])
     if repo.test_commands:
         lines.extend(f"- `{command}`" for command in repo.test_commands)
     else:
@@ -45,12 +53,13 @@ def render_agents_md(repo: RepoMap, project_name: str | None = None) -> str:
     return "\n".join(lines)
 
 
-def render_task_pack(repo: RepoMap, project_name: str | None = None) -> str:
+def render_task_pack(repo: RepoMap, project_name: str | None = None, adapters: tuple[str, ...] = ()) -> str:
     name = project_name or repo.root.name
     safe_commands = repo.test_commands or ("Add and document a safe verification command before making risky edits.",)
     high_signal_files = _task_pack_files(repo)
     first_file = high_signal_files[0].path if high_signal_files else "README.md"
     guardrails = repo.risk_notes or ("Keep changes small and run verification before committing.",)
+    handoffs = _adapter_handoff_lines(adapters)
     return "\n".join(
         [
             f"# Agent Task Pack: {name}",
@@ -61,6 +70,7 @@ def render_task_pack(repo: RepoMap, project_name: str | None = None) -> str:
             f"You are working in {name}. Read AGENTS.md first, inspect `{first_file}`, make one small improvement, and verify it before summarizing the change.",
             "```",
             "",
+            *(["## Agent Tool Handoffs", "", *handoffs, ""] if handoffs else []),
             "## Verification Commands",
             "",
             *[f"- `{command}`" for command in safe_commands],
@@ -111,8 +121,8 @@ def write_workbench(
     output.mkdir(parents=True, exist_ok=True)
     agents_path = output / "AGENTS.md"
     tasks_path = output / "agent-task-pack.md"
-    agents_path.write_text(render_agents_md(repo, project_name), encoding="utf-8")
-    tasks_path.write_text(render_task_pack(repo, project_name), encoding="utf-8")
+    agents_path.write_text(render_agents_md(repo, project_name, expanded_adapters), encoding="utf-8")
+    tasks_path.write_text(render_task_pack(repo, project_name, expanded_adapters), encoding="utf-8")
     written = [agents_path, tasks_path]
     for adapter in expanded_adapters:
         written.append(_write_adapter(output, adapter))
@@ -127,6 +137,11 @@ def expand_adapters(adapters: tuple[str, ...]) -> tuple[str, ...]:
             if choice not in expanded:
                 expanded.append(choice)
     return tuple(expanded)
+
+
+def _adapter_handoff_lines(adapters: tuple[str, ...]) -> tuple[str, ...]:
+    expanded = expand_adapters(adapters)
+    return tuple(f"- {label}: `{path}`" for label, path in (ADAPTER_HANDOFFS[adapter] for adapter in expanded))
 
 
 def _counter_text(counter: Counter[str]) -> str:

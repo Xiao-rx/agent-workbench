@@ -68,6 +68,23 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertIn(".agent-workbench/agent-task-pack.md", (out / ".codex" / "AGENTS.md").read_text(encoding="utf-8"))
             self.assertIn(".agent-workbench/AGENTS.md", (out / ".cursor" / "rules" / "agent-workbench.md").read_text(encoding="utf-8"))
 
+    def test_write_workbench_records_adapter_handoffs_in_core_docs(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            out = Path(tmp) / "out"
+            root.mkdir()
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+
+            write_workbench(root, out, "demo", ("all",))
+
+            agents = (out / "AGENTS.md").read_text(encoding="utf-8")
+            tasks = (out / "agent-task-pack.md").read_text(encoding="utf-8")
+            for text in (agents, tasks):
+                self.assertIn("## Agent Tool Handoffs", text)
+                self.assertIn("- Claude Code: `CLAUDE.md`", text)
+                self.assertIn("- Codex: `.codex/AGENTS.md`", text)
+                self.assertIn("- Cursor: `.cursor/rules/agent-workbench.md`", text)
+
     def test_write_workbench_expands_all_adapter_shortcut_once(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp) / "repo"
