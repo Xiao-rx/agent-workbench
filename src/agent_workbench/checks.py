@@ -41,6 +41,21 @@ REQUIRED_DOCUMENTS = {
     ),
 }
 
+OPTIONAL_ADAPTERS = {
+    "Claude Code handoff": (
+        Path("CLAUDE.md"),
+        ("AGENTS.md", "agent-task-pack.md"),
+    ),
+    "Codex handoff": (
+        Path(".codex") / "AGENTS.md",
+        (".agent-workbench/AGENTS.md", ".agent-workbench/agent-task-pack.md"),
+    ),
+    "Cursor handoff": (
+        Path(".cursor") / "rules" / "agent-workbench.md",
+        (".agent-workbench/AGENTS.md", ".agent-workbench/agent-task-pack.md"),
+    ),
+}
+
 
 def check_workbench(root: Path, workbench: Path | None = None) -> ReadinessReport:
     root = root.resolve()
@@ -70,6 +85,8 @@ def check_workbench(root: Path, workbench: Path | None = None) -> ReadinessRepor
         else:
             checks.append(ReadinessCheck(f"{filename} sections", "pass", "Required sections are present"))
 
+    checks.extend(_check_optional_adapters(workbench_path))
+
     repo = scan_repo(root)
     if repo.test_commands:
         checks.append(ReadinessCheck("verification commands", "pass", ", ".join(repo.test_commands)))
@@ -88,6 +105,25 @@ def check_workbench(root: Path, workbench: Path | None = None) -> ReadinessRepor
         checks.append(ReadinessCheck("risk notes", "pass", "No local risk notes detected"))
 
     return ReadinessReport(root=root, workbench=workbench_path, checks=tuple(checks))
+
+
+def _check_optional_adapters(workbench: Path) -> tuple[ReadinessCheck, ...]:
+    checks: list[ReadinessCheck] = []
+    for name, (relative_path, required_text) in OPTIONAL_ADAPTERS.items():
+        path = workbench / relative_path
+        if not path.exists():
+            continue
+        if not path.is_file():
+            checks.append(ReadinessCheck(name, "fail", f"{path} is not a file"))
+            continue
+
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        missing = tuple(item for item in required_text if item not in text)
+        if missing:
+            checks.append(ReadinessCheck(name, "fail", f"Missing references: {', '.join(missing)}"))
+        else:
+            checks.append(ReadinessCheck(name, "pass", f"Found {path}"))
+    return tuple(checks)
 
 
 def readiness_payload(report: ReadinessReport) -> dict[str, object]:

@@ -153,6 +153,8 @@ agent-workbench check . --format json
 agent-workbench check . --format json --output-json .agent-workbench/readiness.json
 ```
 
+`check` also validates optional Claude Code, Codex, and Cursor handoff files when they are present.
+
 Run tests:
 
 ```powershell

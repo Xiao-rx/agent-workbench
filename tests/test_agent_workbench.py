@@ -114,6 +114,35 @@ class AgentWorkbenchTests(unittest.TestCase):
         self.assertEqual(payload["status"], "ready")
         self.assertTrue(any(check.name == "verification commands" and check.status == "pass" for check in report.checks))
 
+    def test_check_workbench_reports_adapter_handoffs(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            out = root / ".agent-workbench"
+            root.mkdir()
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+            write_workbench(root, out, "demo", ("all",))
+
+            report = check_workbench(root)
+            checks = {(check.name, check.status) for check in report.checks}
+
+        self.assertIn(("Claude Code handoff", "pass"), checks)
+        self.assertIn(("Codex handoff", "pass"), checks)
+        self.assertIn(("Cursor handoff", "pass"), checks)
+
+    def test_check_workbench_fails_broken_adapter_handoff(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            out = root / ".agent-workbench"
+            root.mkdir()
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+            write_workbench(root, out, "demo", ("codex",))
+            (out / ".codex" / "AGENTS.md").write_text("# Broken\n", encoding="utf-8")
+
+            report = check_workbench(root)
+
+        self.assertFalse(report.ready)
+        self.assertTrue(any(check.name == "Codex handoff" and check.status == "fail" for check in report.checks))
+
     def test_check_workbench_reports_missing_files(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

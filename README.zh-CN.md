@@ -69,6 +69,8 @@ agent-workbench check . --format json
 agent-workbench check . --format json --output-json .agent-workbench/readiness.json
 ```
 
+如果存在 Claude Code、Codex 或 Cursor handoff 文件，`check` 也会一起验证这些适配文件是否指向核心 workbench。
+
 ## 真实示例
 
 - Python 输入仓库：[`examples/python-cli/source`](examples/python-cli/source)

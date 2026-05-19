@@ -16,6 +16,7 @@ agent-workbench demo --adapter all --check --print-kickoff
 - `demo --format json` and `init --format json`: emit machine-readable proofs with written files, kickoff prompt, and optional readiness.
 - `--output-json`: save demo and init proof payloads for CI and downstream agent harnesses.
 - Duplicate adapter requests are deduplicated, so `--adapter all --adapter codex` still writes each adapter once.
+- `check`: validates optional Claude Code, Codex, and Cursor handoff files when they are present.
 - Generated `AGENTS.md` and `agent-task-pack.md` now list the adapter handoff files when adapters are requested.
 - English and Chinese README paths now use the shorter all-adapter demo command.
 - Launch assets now describe the v0.8.0 first-run path.
