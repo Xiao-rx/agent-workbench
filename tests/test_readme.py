@@ -7,6 +7,7 @@ class ReadmeTests(unittest.TestCase):
         readme = Path("README.md").read_text(encoding="utf-8")
 
         self.assertIn("python -m agent_workbench demo", readme)
+        self.assertIn("[中文](README.zh-CN.md)", readme)
         self.assertIn("agent-workbench demo --adapter claude --adapter cursor", readme)
         self.assertIn("python -m agent_workbench scan . --format json", readme)
         self.assertIn("agent-workbench scan [ROOT] [--format text|json]", readme)
@@ -28,6 +29,16 @@ class ReadmeTests(unittest.TestCase):
         self.assertIn("provider-neutral", readme.lower())
         self.assertIn("用一条命令把任意代码仓库变成 AI coding agent 可以安全接手的工作区", readme)
         self.assertIn("默认输出不绑定任何模型或工具", readme)
+
+    def test_chinese_readme_covers_first_run_path(self):
+        readme = Path("README.zh-CN.md").read_text(encoding="utf-8")
+
+        self.assertIn("[English](README.md)", readme)
+        self.assertIn("用一条命令把任意代码仓库变成 AI coding agent 可以安全接手的工作区", readme)
+        self.assertIn("agent-workbench demo --adapter claude --adapter cursor", readme)
+        self.assertIn("agent-workbench scan . --format json", readme)
+        self.assertIn("examples/typescript-cli/source", readme)
+        self.assertIn("趋势分析不是产品本体", readme)
 
 
 if __name__ == "__main__":

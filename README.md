@@ -1,5 +1,7 @@
 # Agent Workbench
 
+[中文](README.zh-CN.md)
+
 Turn any repository into an AI-agent-ready workspace with one command.
 
 一句话：用一条命令把任意代码仓库变成 AI coding agent 可以安全接手的工作区。
