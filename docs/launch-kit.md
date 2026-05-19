@@ -33,7 +33,7 @@ agent-workbench demo --adapter claude --adapter cursor --check
 
 ## Share post
 
-I shipped Agent Workbench v0.5.0: a tiny provider-neutral CLI that turns any repo into an AI-agent-ready workspace.
+I shipped Agent Workbench v0.6.0: a tiny provider-neutral CLI that turns any repo into an AI-agent-ready workspace.
 
 One command generates:
 
@@ -41,13 +41,14 @@ One command generates:
 - `agent-task-pack.md`
 - optional Claude Code and Cursor adapters with `--adapter claude --adapter cursor`
 - `agent-workbench check` for a quick readiness gate before handing the repo to an agent
+- JSON artifacts with `--output-json` for CI and downstream agent harnesses
 
 The output gives Codex, Claude Code, Cursor, OpenCode, and other coding agents a repo map, safe commands, high-signal files, a kickoff prompt, and guardrails before they touch code.
 
 Examples include generated workbench output for both Python and TypeScript CLI repositories.
 
 Repo: https://github.com/Xiao-rx/agent-workbench
-Release: https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.5.0
+Release: https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.6.0
 
 ## Show HN draft
 
@@ -68,6 +69,7 @@ It scans the repo and writes:
 - agent-task-pack.md: kickoff prompt, first jobs, acceptance gates
 - readiness check: a pass/fail command for existing workbench files
 - scan JSON: machine-readable repo map with file signals, package managers, and safe commands
+- output JSON files: reusable artifacts for CI and agent harnesses
 
 It is provider-neutral and outputs plain Markdown, so it can be used with Codex, Claude Code, Cursor, OpenCode, or any coding agent workflow.
 
@@ -81,6 +83,10 @@ agent-workbench demo --adapter claude --adapter cursor --check
 
 Check:
 agent-workbench check . --format json
+
+Artifacts:
+agent-workbench scan . --format json --output-json .agent-workbench/repo-map.json
+agent-workbench check . --format json --output-json .agent-workbench/readiness.json
 
 I am using a daily GitHub trend/feedback loop to decide what to improve next.
 ```

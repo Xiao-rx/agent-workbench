@@ -20,11 +20,13 @@ def build_parser() -> argparse.ArgumentParser:
     scan = subparsers.add_parser("scan", help="Print a compact repository map.")
     scan.add_argument("root", nargs="?", type=Path, default=Path("."))
     scan.add_argument("--format", choices=("text", "json"), default="text", help="Output format.")
+    scan.add_argument("--output-json", type=Path, help="Write the JSON repository map to a file.")
 
     check = subparsers.add_parser("check", help="Check whether a repository has an agent-ready workbench.")
     check.add_argument("root", nargs="?", type=Path, default=Path("."))
     check.add_argument("--workbench", type=Path, help="Workbench directory. Defaults to ROOT/.agent-workbench.")
     check.add_argument("--format", choices=("text", "json"), default="text", help="Output format.")
+    check.add_argument("--output-json", type=Path, help="Write the JSON readiness report to a file.")
 
     init = subparsers.add_parser("init", help="Generate AGENTS.md and an agent task pack.")
     init.add_argument("root", nargs="?", type=Path, default=Path("."))
@@ -58,9 +60,16 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     if args.command == "scan":
+        if args.output_json and args.format != "json":
+            parser.error("--output-json requires --format json")
         repo = scan_repo(args.root)
         if args.format == "json":
-            print(json.dumps(_repo_map_payload(repo), ensure_ascii=False, indent=2))
+            payload = _repo_map_payload(repo)
+            if args.output_json:
+                _write_json_file(args.output_json, payload)
+                print(f"Wrote {args.output_json}")
+            else:
+                print(json.dumps(payload, ensure_ascii=False, indent=2))
             return 0
         print(f"root={repo.root}")
         print(f"files={repo.total_files}")
@@ -78,7 +87,9 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.command == "check":
-        return _print_readiness(args.root, args.workbench, args.format)
+        if args.output_json and args.format != "json":
+            parser.error("--output-json requires --format json")
+        return _print_readiness(args.root, args.workbench, args.format, args.output_json)
 
     if args.command == "demo":
         root, output = _prepare_demo_workspace(args.output)
@@ -95,13 +106,23 @@ def main(argv: list[str] | None = None) -> int:
     return 2
 
 
-def _print_readiness(root: Path, workbench: Path | None, output_format: str) -> int:
+def _print_readiness(root: Path, workbench: Path | None, output_format: str, output_json: Path | None = None) -> int:
     report = check_workbench(root, workbench)
     if output_format == "json":
-        print(json.dumps(readiness_payload(report), ensure_ascii=False, indent=2))
+        payload = readiness_payload(report)
+        if output_json:
+            _write_json_file(output_json, payload)
+            print(f"Wrote {output_json}")
+        else:
+            print(json.dumps(payload, ensure_ascii=False, indent=2))
     else:
         print(render_readiness_text(report))
     return 0 if report.ready else 1
+
+
+def _write_json_file(path: Path, payload: dict[str, object]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def _repo_map_payload(repo: RepoMap) -> dict[str, object]:

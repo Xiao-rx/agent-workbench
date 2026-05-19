@@ -47,6 +47,7 @@ agent-workbench init . --output .agent-workbench --adapter claude --adapter curs
 ```powershell
 agent-workbench scan .
 agent-workbench scan . --format json
+agent-workbench scan . --format json --output-json .agent-workbench/repo-map.json
 ```
 
 检查当前仓库是否已经可以交给 agent：
@@ -54,6 +55,7 @@ agent-workbench scan . --format json
 ```powershell
 agent-workbench check .
 agent-workbench check . --format json
+agent-workbench check . --format json --output-json .agent-workbench/readiness.json
 ```
 
 ## 真实示例
@@ -75,9 +77,9 @@ AI coding agent 最容易在缺少上下文时犯错。Agent Workbench 的目标
 
 ## 当前版本
 
-- Release notes: [`docs/release-v0.5.0.md`](docs/release-v0.5.0.md)
+- Release notes: [`docs/release-v0.6.0.md`](docs/release-v0.6.0.md)
 - Launch kit: [`docs/launch-kit.md`](docs/launch-kit.md)
-- 最新 release: <https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.5.0>
+- 最新 release: <https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.6.0>
 
 ## 内部增长闭环
 

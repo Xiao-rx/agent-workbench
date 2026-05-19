@@ -183,6 +183,24 @@ class AgentWorkbenchTests(unittest.TestCase):
         self.assertIn("python -m unittest discover -s tests", payload["test_commands"])
         self.assertEqual(payload["files"][0]["path"], "app.py")
 
+    def test_scan_command_can_write_json_repo_map(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            out = Path(tmp) / "reports" / "repo-map.json"
+            root.mkdir()
+            (root / "pyproject.toml").write_text("[project]\nname='x'\n", encoding="utf-8")
+            (root / "app.py").write_text("print('hello')\n", encoding="utf-8")
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["scan", str(root), "--format", "json", "--output-json", str(out)])
+
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(exit_code, 0)
+            self.assertTrue(out.exists())
+            self.assertIn("Wrote", stdout.getvalue())
+            self.assertEqual(payload["package_managers"], ["python/pyproject"])
+
     def test_check_command_can_emit_json_readiness(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp) / "repo"
@@ -199,6 +217,34 @@ class AgentWorkbenchTests(unittest.TestCase):
         self.assertEqual(payload["status"], "ready")
         self.assertTrue(payload["ready"])
         self.assertTrue(any(check["name"] == "AGENTS.md" for check in payload["checks"]))
+
+    def test_check_command_can_write_json_readiness(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            out = Path(tmp) / "reports" / "readiness.json"
+            root.mkdir()
+            (root / "pyproject.toml").write_text("[project]\nname='x'\n", encoding="utf-8")
+            write_workbench(root, root / ".agent-workbench", "demo")
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["check", str(root), "--format", "json", "--output-json", str(out)])
+
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(exit_code, 0)
+            self.assertTrue(out.exists())
+            self.assertIn("Wrote", stdout.getvalue())
+            self.assertEqual(payload["status"], "ready")
+
+    def test_output_json_requires_json_format(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+
+            with self.assertRaises(SystemExit) as raised:
+                main(["scan", str(root), "--output-json", str(root / "repo-map.json")])
+
+        self.assertEqual(raised.exception.code, 2)
 
     def test_check_command_returns_nonzero_for_missing_workbench(self):
         with tempfile.TemporaryDirectory() as tmp:
