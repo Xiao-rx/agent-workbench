@@ -95,7 +95,7 @@ Install directly from GitHub:
 
 ```powershell
 uv tool install git+https://github.com/Xiao-rx/agent-workbench.git
-agent-workbench demo
+agent-workbench demo --adapter claude --adapter cursor
 ```
 
 Try the no-secret demo first:
@@ -104,7 +104,7 @@ Try the no-secret demo first:
 $env:UV_CACHE_DIR='.uv-cache'
 $env:UV_PYTHON_INSTALL_DIR='.uv-python'
 $env:PYTHONPATH='src'
-uv run --python 3.12 python -m agent_workbench demo
+uv run --python 3.12 python -m agent_workbench demo --adapter claude --adapter cursor
 ```
 
 Generate files for your current repository:
@@ -149,13 +149,13 @@ The goal is not to be another agent. The goal is to make every repository easier
 ## Commands
 
 ```text
-agent-workbench demo [--output PATH]
+agent-workbench demo [--output PATH] [--adapter claude] [--adapter cursor]
 agent-workbench scan [ROOT]
 agent-workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude] [--adapter cursor]
 
 python -m agent_workbench scan [ROOT]
 python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude] [--adapter cursor]
-python -m agent_workbench demo [--output PATH]
+python -m agent_workbench demo [--output PATH] [--adapter claude] [--adapter cursor]
 ```
 
 ## Release

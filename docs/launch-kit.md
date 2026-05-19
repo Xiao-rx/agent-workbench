@@ -14,7 +14,7 @@ It works with Codex, Claude Code, Cursor, OpenCode, and other agent harnesses be
 
 ```powershell
 uv tool install git+https://github.com/Xiao-rx/agent-workbench.git
-agent-workbench demo
+agent-workbench demo --adapter claude --adapter cursor
 ```
 
 ## Share post
@@ -60,7 +60,7 @@ Install:
 uv tool install git+https://github.com/Xiao-rx/agent-workbench.git
 
 Demo:
-agent-workbench demo
+agent-workbench demo --adapter claude --adapter cursor
 
 I am using a daily GitHub trend/feedback loop to decide what to improve next.
 ```

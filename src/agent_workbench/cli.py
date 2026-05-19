@@ -31,6 +31,13 @@ def build_parser() -> argparse.ArgumentParser:
 
     demo = subparsers.add_parser("demo", help="Generate a no-secret demo workspace in a temporary repository.")
     demo.add_argument("--output", type=Path, help="Optional output directory. Defaults to a temporary directory.")
+    demo.add_argument(
+        "--adapter",
+        action="append",
+        choices=SUPPORTED_ADAPTERS,
+        default=[],
+        help="Also generate a thin adapter for a specific agent tool. Repeat for multiple adapters.",
+    )
 
     return parser
 
@@ -56,7 +63,7 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "demo":
         root, output = _prepare_demo_workspace(args.output)
-        paths = write_workbench(root, output, "agent-workbench-demo")
+        paths = write_workbench(root, output, "agent-workbench-demo", tuple(args.adapter))
         print(f"Demo repository: {root}")
         for path in paths:
             print(f"Wrote {path}")

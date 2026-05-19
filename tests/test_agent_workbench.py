@@ -155,6 +155,20 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertIn("python -m unittest discover -s tests", agents)
             self.assertIn("Agent Task Pack", tasks)
 
+    def test_demo_command_writes_requested_adapters(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "demo"
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["demo", "--output", str(output), "--adapter", "claude", "--adapter", "cursor"])
+
+            self.assertEqual(exit_code, 0)
+            self.assertTrue((output / ".agent-workbench" / "CLAUDE.md").exists())
+            self.assertTrue((output / ".agent-workbench" / ".cursor" / "rules" / "agent-workbench.md").exists())
+            self.assertIn("CLAUDE.md", stdout.getvalue())
+            self.assertIn("agent-workbench.md", stdout.getvalue())
+
     def test_init_command_writes_requested_adapter(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp) / "repo"
