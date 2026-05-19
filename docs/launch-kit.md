@@ -28,18 +28,21 @@ agent-workbench, ai-agents, claude-code, cli, codex, cursor, devtools, developer
 
 ```powershell
 uv tool install git+https://github.com/Xiao-rx/agent-workbench.git
-agent-workbench demo --adapter claude --adapter cursor --check
+agent-workbench demo --adapter all --check
 ```
 
-## Share post
+## Share Post Draft
 
-I shipped Agent Workbench v0.7.0: a tiny provider-neutral CLI that turns any repo into an AI-agent-ready workspace.
+After publishing v0.8.0:
+
+```text
+I shipped Agent Workbench v0.8.0: a tiny provider-neutral CLI that turns any repo into an AI-agent-ready workspace.
 
 One command generates:
 
 - `AGENTS.md`
 - `agent-task-pack.md`
-- optional Claude Code, Codex, and Cursor adapters with `--adapter claude --adapter codex --adapter cursor`
+- optional Claude Code, Codex, and Cursor adapters with `--adapter all`
 - `agent-workbench check` for a quick readiness gate before handing the repo to an agent
 - JSON artifacts with `--output-json` for CI and downstream agent harnesses
 
@@ -48,7 +51,8 @@ The output gives Codex, Claude Code, Cursor, OpenCode, and other coding agents a
 Examples include generated workbench output for both Python and TypeScript CLI repositories.
 
 Repo: https://github.com/Xiao-rx/agent-workbench
-Release: https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.7.0
+Release: https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.8.0
+```
 
 ## Show HN draft
 
@@ -80,7 +84,7 @@ Install:
 uv tool install git+https://github.com/Xiao-rx/agent-workbench.git
 
 Demo:
-agent-workbench demo --adapter claude --adapter codex --adapter cursor --check
+agent-workbench demo --adapter all --check
 
 Check:
 agent-workbench check . --format json

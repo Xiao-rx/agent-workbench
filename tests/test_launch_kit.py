@@ -9,8 +9,10 @@ class LaunchKitTests(unittest.TestCase):
 
         self.assertIn("Turn any repository into an AI-agent-ready workspace", launch)
         self.assertIn("Show HN", launch)
-        self.assertIn("--adapter claude --adapter codex --adapter cursor", launch)
-        self.assertIn("agent-workbench demo --adapter claude --adapter codex --adapter cursor --check", launch)
+        self.assertIn("Share Post Draft", launch)
+        self.assertIn("After publishing v0.8.0", launch)
+        self.assertIn("--adapter all", launch)
+        self.assertIn("agent-workbench demo --adapter all --check", launch)
         self.assertIn("Codex adapter", launch)
         self.assertIn("agent-workbench check . --format json", launch)
         self.assertIn("agent-workbench scan . --format json --output-json .agent-workbench/repo-map.json", launch)
@@ -21,7 +23,7 @@ class LaunchKitTests(unittest.TestCase):
         self.assertIn("Turn any repository into an AI-agent-ready workspace with AGENTS.md, task packs, adapters, and scan JSON.", launch)
         self.assertIn("developer-tools, llm, productivity", launch)
         self.assertIn("uv tool install git+https://github.com/Xiao-rx/agent-workbench.git", launch)
-        self.assertIn("https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.7.0", launch)
+        self.assertIn("https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.8.0", launch)
         self.assertIn("<svg", preview)
         self.assertIn("Agent Workbench", preview)
 

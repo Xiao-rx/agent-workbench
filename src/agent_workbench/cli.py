@@ -38,7 +38,7 @@ def build_parser() -> argparse.ArgumentParser:
         action="append",
         choices=SUPPORTED_ADAPTERS,
         default=[],
-        help="Also generate a thin adapter for a specific agent tool. Repeat for multiple adapters.",
+        help="Also generate thin adapter files. Use all for Claude Code, Codex, and Cursor.",
     )
 
     demo = subparsers.add_parser("demo", help="Generate a no-secret demo workspace in a temporary repository.")
@@ -49,7 +49,7 @@ def build_parser() -> argparse.ArgumentParser:
         action="append",
         choices=SUPPORTED_ADAPTERS,
         default=[],
-        help="Also generate a thin adapter for a specific agent tool. Repeat for multiple adapters.",
+        help="Also generate thin adapter files. Use all for Claude Code, Codex, and Cursor.",
     )
 
     return parser

@@ -5,7 +5,8 @@ from pathlib import Path
 
 from .models import RepoMap
 
-SUPPORTED_ADAPTERS = ("claude", "codex", "cursor")
+CONCRETE_ADAPTERS = ("claude", "codex", "cursor")
+SUPPORTED_ADAPTERS = (*CONCRETE_ADAPTERS, "all")
 
 
 def render_agents_md(repo: RepoMap, project_name: str | None = None) -> str:
@@ -105,6 +106,7 @@ def write_workbench(
     if invalid:
         raise ValueError(f"Unsupported adapter(s): {', '.join(invalid)}")
 
+    expanded_adapters = expand_adapters(adapters)
     repo = scan_repo(root)
     output.mkdir(parents=True, exist_ok=True)
     agents_path = output / "AGENTS.md"
@@ -112,9 +114,19 @@ def write_workbench(
     agents_path.write_text(render_agents_md(repo, project_name), encoding="utf-8")
     tasks_path.write_text(render_task_pack(repo, project_name), encoding="utf-8")
     written = [agents_path, tasks_path]
-    for adapter in adapters:
+    for adapter in expanded_adapters:
         written.append(_write_adapter(output, adapter))
     return tuple(written)
+
+
+def expand_adapters(adapters: tuple[str, ...]) -> tuple[str, ...]:
+    expanded: list[str] = []
+    for adapter in adapters:
+        choices = CONCRETE_ADAPTERS if adapter == "all" else (adapter,)
+        for choice in choices:
+            if choice not in expanded:
+                expanded.append(choice)
+    return tuple(expanded)
 
 
 def _counter_text(counter: Counter[str]) -> str:

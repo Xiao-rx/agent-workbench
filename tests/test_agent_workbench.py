@@ -68,6 +68,20 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertIn(".agent-workbench/agent-task-pack.md", (out / ".codex" / "AGENTS.md").read_text(encoding="utf-8"))
             self.assertIn(".agent-workbench/AGENTS.md", (out / ".cursor" / "rules" / "agent-workbench.md").read_text(encoding="utf-8"))
 
+    def test_write_workbench_expands_all_adapter_shortcut_once(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            out = Path(tmp) / "out"
+            root.mkdir()
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+
+            paths = write_workbench(root, out, "demo", ("all", "codex"))
+
+            self.assertEqual(len(paths), 5)
+            self.assertTrue((out / "CLAUDE.md").exists())
+            self.assertTrue((out / ".codex" / "AGENTS.md").exists())
+            self.assertTrue((out / ".cursor" / "rules" / "agent-workbench.md").exists())
+
     def test_check_workbench_reports_ready_workspace(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp) / "repo"
@@ -306,6 +320,20 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertIn(".codex", stdout.getvalue())
             self.assertIn("agent-workbench.md", stdout.getvalue())
 
+    def test_demo_command_writes_all_adapters(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "demo"
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["demo", "--output", str(output), "--adapter", "all", "--check"])
+
+            self.assertEqual(exit_code, 0)
+            self.assertTrue((output / ".agent-workbench" / "CLAUDE.md").exists())
+            self.assertTrue((output / ".agent-workbench" / ".codex" / "AGENTS.md").exists())
+            self.assertTrue((output / ".agent-workbench" / ".cursor" / "rules" / "agent-workbench.md").exists())
+            self.assertIn("status=ready", stdout.getvalue())
+
     def test_init_command_writes_requested_adapter(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp) / "repo"
@@ -320,6 +348,23 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertEqual(exit_code, 0)
             self.assertTrue((out / ".codex" / "AGENTS.md").exists())
             self.assertIn(".codex", stdout.getvalue())
+
+    def test_init_command_writes_all_adapters(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            out = Path(tmp) / "out"
+            root.mkdir()
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["init", str(root), "--output", str(out), "--adapter", "all", "--check"])
+
+            self.assertEqual(exit_code, 0)
+            self.assertTrue((out / "CLAUDE.md").exists())
+            self.assertTrue((out / ".codex" / "AGENTS.md").exists())
+            self.assertTrue((out / ".cursor" / "rules" / "agent-workbench.md").exists())
+            self.assertIn("status=ready", stdout.getvalue())
 
     def test_init_command_can_check_generated_workbench(self):
         with tempfile.TemporaryDirectory() as tmp:
