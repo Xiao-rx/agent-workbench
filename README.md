@@ -41,6 +41,14 @@ Example `AGENTS.md` output:
 
 The goal is boringly useful: give an agent enough local context to start small, verify changes, and avoid obvious mistakes.
 
+## Real Example
+
+See a tiny Python CLI before and after Agent Workbench:
+
+- Input repository: [`examples/python-cli/source`](examples/python-cli/source)
+- Generated `AGENTS.md`: [`examples/python-cli/agent-workbench/AGENTS.md`](examples/python-cli/agent-workbench/AGENTS.md)
+- Generated task pack: [`examples/python-cli/agent-workbench/agent-task-pack.md`](examples/python-cli/agent-workbench/agent-task-pack.md)
+
 Example `agent-task-pack.md` output:
 
 ```markdown

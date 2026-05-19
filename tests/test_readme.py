@@ -12,6 +12,8 @@ class ReadmeTests(unittest.TestCase):
         self.assertIn("agent-task-pack.md", readme)
         self.assertIn("## Kickoff Prompt", readme)
         self.assertIn("## Verification Commands", readme)
+        self.assertIn("examples/python-cli/source", readme)
+        self.assertIn("examples/python-cli/agent-workbench/AGENTS.md", readme)
         self.assertIn("provider-neutral", readme.lower())
 
 

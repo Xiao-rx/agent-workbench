@@ -6,9 +6,9 @@ Help AI coding agents make small, verifiable changes in this repository without 
 
 ## Repository Map
 
-- Files scanned: 58
-- Lines scanned: 5238
-- Main file kinds: python=32, other=10, config=9, docs=5, script=2
+- Files scanned: 67
+- Lines scanned: 5403
+- Main file kinds: python=37, other=10, config=10, docs=8, script=2
 - Package managers: python/pyproject
 
 ## Safe Commands
@@ -26,7 +26,7 @@ Help AI coding agents make small, verifiable changes in this repository without 
 - `reports/daily-brief.md` (docs, 193 lines)
 - `src/github_trend_lab/cli.py` (python, 185 lines)
 - `src/agent_workbench/scanner.py` (python, 184 lines)
-- `README.md` (docs, 174 lines)
+- `README.md` (docs, 182 lines)
 - `src/github_trend_lab/verification.py` (python, 159 lines)
 - `reports/product-direction-brief.md` (docs, 148 lines)
 

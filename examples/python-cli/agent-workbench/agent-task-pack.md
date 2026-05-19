@@ -1,9 +1,9 @@
-# Agent Task Pack: agent-workbench
+# Agent Task Pack: tiny-python-cli
 
 ## Kickoff Prompt
 
 ```text
-You are working in agent-workbench. Read AGENTS.md first, inspect `README.md`, make one small improvement, and verify it before summarizing the change.
+You are working in tiny-python-cli. Read AGENTS.md first, inspect `README.md`, make one small improvement, and verify it before summarizing the change.
 ```
 
 ## Verification Commands
@@ -12,12 +12,11 @@ You are working in agent-workbench. Read AGENTS.md first, inspect `README.md`, m
 
 ## High-Signal Files
 
-- `README.md` (docs, 182 lines)
-- `src/agent_workbench/scanner.py` (python, 184 lines)
-- `tests/test_agent_workbench.py` (python, 145 lines)
-- `src/agent_workbench/generator.py` (python, 122 lines)
-- `src/agent_workbench/cli.py` (python, 104 lines)
-- `src/agent_workbench/models.py` (python, 30 lines)
+- `README.md` (docs, 10 lines)
+- `tiny_cli/cli.py` (python, 15 lines)
+- `tests/test_cli.py` (python, 13 lines)
+- `pyproject.toml` (config, 5 lines)
+- `tiny_cli/__init__.py` (python, 2 lines)
 
 ## First Jobs
 
@@ -34,5 +33,4 @@ You are working in agent-workbench. Read AGENTS.md first, inspect `README.md`, m
 
 ## Guardrails
 
-- .env.local exists; keep it ignored and never paste secrets into issues.
-- .env.bak exists; keep it ignored and never paste secrets into issues.
+- No .gitignore found; create one before agent-driven edits.
