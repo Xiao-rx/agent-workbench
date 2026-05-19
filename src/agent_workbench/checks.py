@@ -19,9 +19,12 @@ class ReadinessReport:
     root: Path
     workbench: Path
     checks: tuple[ReadinessCheck, ...]
+    strict: bool = False
 
     @property
     def ready(self) -> bool:
+        if self.strict:
+            return all(check.status == "pass" for check in self.checks)
         return all(check.status != "fail" for check in self.checks)
 
     @property
@@ -61,7 +64,12 @@ OPTIONAL_ADAPTERS = {
 }
 
 
-def check_workbench(root: Path, workbench: Path | None = None, adapters: tuple[str, ...] = ()) -> ReadinessReport:
+def check_workbench(
+    root: Path,
+    workbench: Path | None = None,
+    adapters: tuple[str, ...] = (),
+    strict: bool = False,
+) -> ReadinessReport:
     root = root.resolve()
     workbench_path = _resolve_workbench(root, workbench)
     checks: list[ReadinessCheck] = []
@@ -108,7 +116,7 @@ def check_workbench(root: Path, workbench: Path | None = None, adapters: tuple[s
     else:
         checks.append(ReadinessCheck("risk notes", "pass", "No local risk notes detected"))
 
-    return ReadinessReport(root=root, workbench=workbench_path, checks=tuple(checks))
+    return ReadinessReport(root=root, workbench=workbench_path, checks=tuple(checks), strict=strict)
 
 
 def _check_optional_adapters(workbench: Path, adapters: tuple[str, ...]) -> tuple[ReadinessCheck, ...]:
@@ -137,6 +145,7 @@ def readiness_payload(report: ReadinessReport) -> dict[str, object]:
     return {
         "status": report.status,
         "ready": report.ready,
+        "strict": report.strict,
         "root": str(report.root),
         "workbench": str(report.workbench),
         "checks": [
@@ -155,8 +164,10 @@ def render_readiness_text(report: ReadinessReport) -> str:
         f"status={report.status}",
         f"root={report.root}",
         f"workbench={report.workbench}",
-        "",
     ]
+    if report.strict:
+        lines.append("strict=true")
+    lines.append("")
     lines.extend(f"{check.status.upper()} {check.name}: {check.detail}" for check in report.checks)
     if report.ready:
         lines.extend(["", "Next: open agent-task-pack.md and hand the kickoff prompt to your coding agent."])

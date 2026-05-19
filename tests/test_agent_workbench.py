@@ -114,6 +114,24 @@ class AgentWorkbenchTests(unittest.TestCase):
         self.assertEqual(payload["status"], "ready")
         self.assertTrue(any(check.name == "verification commands" and check.status == "pass" for check in report.checks))
 
+    def test_check_workbench_strict_treats_warnings_as_not_ready(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            out = root / ".agent-workbench"
+            root.mkdir()
+            (root / "pyproject.toml").write_text("[project]\nname='x'\n", encoding="utf-8")
+            write_workbench(root, out, "demo")
+
+            default_report = check_workbench(root)
+            strict_report = check_workbench(root, strict=True)
+            payload = readiness_payload(strict_report)
+
+        self.assertTrue(default_report.ready)
+        self.assertFalse(strict_report.ready)
+        self.assertEqual(payload["status"], "not_ready")
+        self.assertTrue(payload["strict"])
+        self.assertTrue(any(check.name == "risk note" and check.status == "warn" for check in strict_report.checks))
+
     def test_check_workbench_reports_adapter_handoffs(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp) / "repo"
@@ -330,6 +348,24 @@ class AgentWorkbenchTests(unittest.TestCase):
         self.assertIn(("Claude Code handoff", "pass"), checks)
         self.assertIn(("Codex handoff", "pass"), checks)
         self.assertIn(("Cursor handoff", "pass"), checks)
+
+    def test_check_command_strict_treats_warnings_as_not_ready(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            root.mkdir()
+            (root / "pyproject.toml").write_text("[project]\nname='x'\n", encoding="utf-8")
+            write_workbench(root, root / ".agent-workbench", "demo")
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["check", str(root), "--strict", "--format", "json"])
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "not_ready")
+        self.assertFalse(payload["ready"])
+        self.assertTrue(payload["strict"])
+        self.assertTrue(any(check["name"] == "risk note" and check["status"] == "warn" for check in payload["checks"]))
 
     def test_output_json_requires_json_format(self):
         with tempfile.TemporaryDirectory() as tmp:
