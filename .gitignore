@@ -20,6 +20,7 @@ data/snapshots/demo-*.json
 reports/demo-*.md
 reports/demo-*.json
 !reports/.gitkeep
+.agent-workbench-demo/
 
 .omx/
 .agents/

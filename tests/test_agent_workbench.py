@@ -1,7 +1,10 @@
 import tempfile
 import unittest
+from contextlib import redirect_stdout
+from io import StringIO
 from pathlib import Path
 
+from agent_workbench.cli import main
 from agent_workbench.generator import render_agents_md, write_workbench
 from agent_workbench.scanner import scan_repo
 
@@ -82,6 +85,23 @@ class AgentWorkbenchTests(unittest.TestCase):
         self.assertNotIn("reports/demo-decisions.json", scanned_paths)
         self.assertIn(".env.example", scanned_paths)
         self.assertIn("reports/daily-brief.md", scanned_paths)
+
+    def test_demo_command_writes_visible_workbench(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "demo"
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["demo", "--output", str(output)])
+
+            self.assertEqual(exit_code, 0)
+            self.assertTrue((output / "sample-repo" / "pyproject.toml").exists())
+            agents = (output / ".agent-workbench" / "AGENTS.md").read_text(encoding="utf-8")
+            tasks = (output / ".agent-workbench" / "agent-task-pack.md").read_text(encoding="utf-8")
+            self.assertIn("Demo repository:", stdout.getvalue())
+            self.assertIn("agent-workbench-demo", agents)
+            self.assertIn("python -m unittest discover -s tests", agents)
+            self.assertIn("Agent Task Pack", tasks)
 
 
 if __name__ == "__main__":

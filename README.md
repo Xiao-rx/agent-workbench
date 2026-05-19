@@ -18,6 +18,12 @@ $env:PYTHONPATH='src'
 uv run --python 3.12 python -m agent_workbench init . --output .agent-workbench --project-name agent-workbench
 ```
 
+See the value without touching your current repository:
+
+```powershell
+uv run --python 3.12 python -m agent_workbench demo
+```
+
 Inspect a repository before generating files:
 
 ```powershell
@@ -41,6 +47,7 @@ The goal is not to be another agent. The goal is to make every repository easier
 ```text
 python -m agent_workbench scan [ROOT]
 python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME
+python -m agent_workbench demo [--output PATH]
 ```
 
 The internal trend engine remains available for growth experiments:
