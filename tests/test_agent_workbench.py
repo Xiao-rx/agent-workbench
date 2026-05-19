@@ -4,6 +4,7 @@ from contextlib import redirect_stdout
 from io import StringIO
 from pathlib import Path
 
+from agent_workbench import __version__
 from agent_workbench.cli import main
 from agent_workbench.generator import render_agents_md, render_task_pack, write_workbench
 from agent_workbench.scanner import scan_repo
@@ -168,6 +169,15 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertEqual(exit_code, 0)
             self.assertTrue((out / "CLAUDE.md").exists())
             self.assertIn("CLAUDE.md", stdout.getvalue())
+
+    def test_version_flag_prints_package_version(self):
+        stdout = StringIO()
+        with self.assertRaises(SystemExit) as raised:
+            with redirect_stdout(stdout):
+                main(["--version"])
+
+        self.assertEqual(raised.exception.code, 0)
+        self.assertIn(f"agent-workbench {__version__}", stdout.getvalue())
 
 
 if __name__ == "__main__":

@@ -19,7 +19,7 @@ agent-workbench demo
 
 ## Share post
 
-I shipped Agent Workbench v0.1.0: a tiny provider-neutral CLI that turns any repo into an AI-agent-ready workspace.
+I shipped Agent Workbench v0.2.0: a tiny provider-neutral CLI that turns any repo into an AI-agent-ready workspace.
 
 One command generates:
 
@@ -30,7 +30,7 @@ One command generates:
 The output gives Codex, Claude Code, Cursor, OpenCode, and other coding agents a repo map, safe commands, high-signal files, a kickoff prompt, and guardrails before they touch code.
 
 Repo: https://github.com/Xiao-rx/agent-workbench
-Release: https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.1.0
+Release: https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.2.0
 
 ## Show HN draft
 

@@ -18,7 +18,7 @@ class ReadmeTests(unittest.TestCase):
         self.assertIn("examples/python-cli/source", readme)
         self.assertIn("examples/python-cli/agent-workbench/AGENTS.md", readme)
         self.assertIn("uv tool install git+https://github.com/Xiao-rx/agent-workbench.git", readme)
-        self.assertIn("docs/release-v0.1.0.md", readme)
+        self.assertIn("docs/release-v0.2.0.md", readme)
         self.assertIn("docs/launch-kit.md", readme)
         self.assertIn("provider-neutral", readme.lower())
 

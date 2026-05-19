@@ -147,7 +147,7 @@ python -m agent_workbench demo [--output PATH]
 
 ## Release
 
-- Current release notes: [`docs/release-v0.1.0.md`](docs/release-v0.1.0.md)
+- Current release notes: [`docs/release-v0.2.0.md`](docs/release-v0.2.0.md)
 - Launch kit: [`docs/launch-kit.md`](docs/launch-kit.md)
 - Install from GitHub: `uv tool install git+https://github.com/Xiao-rx/agent-workbench.git`
 

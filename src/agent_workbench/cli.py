@@ -4,12 +4,14 @@ import argparse
 from pathlib import Path
 import tempfile
 
+from . import __version__
 from .generator import SUPPORTED_ADAPTERS, write_workbench
 from .scanner import scan_repo
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="agent-workbench", description="Turn a repository into an AI-agent-ready workspace.")
+    parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     scan = subparsers.add_parser("scan", help="Print a compact repository map.")
