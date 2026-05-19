@@ -24,6 +24,7 @@ reports/demo-*.md
 reports/demo-*.json
 !reports/.gitkeep
 .agent-workbench-demo/
+.agent-workbench-demo-readme-proof/
 
 .omx/
 .agents/

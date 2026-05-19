@@ -7,6 +7,8 @@ class ReadmeTests(unittest.TestCase):
         readme = Path("README.md").read_text(encoding="utf-8")
 
         self.assertIn("python -m agent_workbench demo", readme)
+        self.assertIn("$ agent-workbench demo", readme)
+        self.assertIn("$ tree .agent-workbench", readme)
         self.assertIn(".agent-workbench/", readme)
         self.assertIn("AGENTS.md", readme)
         self.assertIn("agent-task-pack.md", readme)

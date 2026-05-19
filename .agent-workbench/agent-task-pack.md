@@ -12,7 +12,7 @@ You are working in agent-workbench. Read AGENTS.md first, inspect `README.md`, m
 
 ## High-Signal Files
 
-- `README.md` (docs, 198 lines)
+- `README.md` (docs, 210 lines)
 - `src/agent_workbench/scanner.py` (python, 184 lines)
 - `tests/test_agent_workbench.py` (python, 145 lines)
 - `src/agent_workbench/generator.py` (python, 122 lines)

@@ -6,6 +6,18 @@ Turn any repository into an AI-agent-ready workspace with one command.
 uv run --python 3.12 python -m agent_workbench init . --output .agent-workbench --project-name my-repo
 ```
 
+```text
+$ agent-workbench demo
+Demo repository: .../agent-workbench-demo/sample-repo
+Wrote .../agent-workbench-demo/.agent-workbench/AGENTS.md
+Wrote .../agent-workbench-demo/.agent-workbench/agent-task-pack.md
+
+$ tree .agent-workbench
+.agent-workbench
+|-- AGENTS.md
+`-- agent-task-pack.md
+```
+
 Agent Workbench scans a codebase and writes the two files a coding agent needs before it can work safely:
 
 - `AGENTS.md`: repository map, safe commands, high-signal files, and guardrails.
