@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 from agent_workbench import __version__
+from agent_workbench.checks import check_workbench, readiness_payload
 from agent_workbench.cli import main
 from agent_workbench.generator import render_agents_md, render_task_pack, write_workbench
 from agent_workbench.scanner import scan_repo
@@ -64,6 +65,32 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertTrue((out / ".cursor" / "rules" / "agent-workbench.md").exists())
             self.assertIn("Read `AGENTS.md` first", (out / "CLAUDE.md").read_text(encoding="utf-8"))
             self.assertIn(".agent-workbench/AGENTS.md", (out / ".cursor" / "rules" / "agent-workbench.md").read_text(encoding="utf-8"))
+
+    def test_check_workbench_reports_ready_workspace(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            out = root / ".agent-workbench"
+            root.mkdir()
+            (root / "pyproject.toml").write_text("[project]\nname='x'\n", encoding="utf-8")
+            write_workbench(root, out, "demo")
+
+            report = check_workbench(root)
+            payload = readiness_payload(report)
+
+        self.assertTrue(report.ready)
+        self.assertEqual(payload["status"], "ready")
+        self.assertTrue(any(check.name == "verification commands" and check.status == "pass" for check in report.checks))
+
+    def test_check_workbench_reports_missing_files(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+
+            report = check_workbench(root)
+
+        self.assertFalse(report.ready)
+        self.assertTrue(any(check.name == "AGENTS.md" and check.status == "fail" for check in report.checks))
+        self.assertTrue(any(check.name == "agent-task-pack.md" and check.status == "fail" for check in report.checks))
 
     def test_render_task_pack_contains_repo_specific_kickoff(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -155,6 +182,36 @@ class AgentWorkbenchTests(unittest.TestCase):
         self.assertEqual(payload["package_managers"], ["python/pyproject"])
         self.assertIn("python -m unittest discover -s tests", payload["test_commands"])
         self.assertEqual(payload["files"][0]["path"], "app.py")
+
+    def test_check_command_can_emit_json_readiness(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            root.mkdir()
+            (root / "pyproject.toml").write_text("[project]\nname='x'\n", encoding="utf-8")
+            write_workbench(root, root / ".agent-workbench", "demo")
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["check", str(root), "--format", "json"])
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(payload["status"], "ready")
+        self.assertTrue(payload["ready"])
+        self.assertTrue(any(check["name"] == "AGENTS.md" for check in payload["checks"]))
+
+    def test_check_command_returns_nonzero_for_missing_workbench(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["check", str(root)])
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn("status=not_ready", stdout.getvalue())
+        self.assertIn("Missing", stdout.getvalue())
 
     def test_demo_command_writes_visible_workbench(self):
         with tempfile.TemporaryDirectory() as tmp:

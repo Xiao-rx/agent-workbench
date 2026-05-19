@@ -6,6 +6,7 @@ from pathlib import Path
 import tempfile
 
 from . import __version__
+from .checks import check_workbench, readiness_payload, render_readiness_text
 from .generator import SUPPORTED_ADAPTERS, write_workbench
 from .models import RepoMap
 from .scanner import scan_repo
@@ -19,6 +20,11 @@ def build_parser() -> argparse.ArgumentParser:
     scan = subparsers.add_parser("scan", help="Print a compact repository map.")
     scan.add_argument("root", nargs="?", type=Path, default=Path("."))
     scan.add_argument("--format", choices=("text", "json"), default="text", help="Output format.")
+
+    check = subparsers.add_parser("check", help="Check whether a repository has an agent-ready workbench.")
+    check.add_argument("root", nargs="?", type=Path, default=Path("."))
+    check.add_argument("--workbench", type=Path, help="Workbench directory. Defaults to ROOT/.agent-workbench.")
+    check.add_argument("--format", choices=("text", "json"), default="text", help="Output format.")
 
     init = subparsers.add_parser("init", help="Generate AGENTS.md and an agent task pack.")
     init.add_argument("root", nargs="?", type=Path, default=Path("."))
@@ -66,6 +72,14 @@ def main(argv: list[str] | None = None) -> int:
         for path in paths:
             print(f"Wrote {path}")
         return 0
+
+    if args.command == "check":
+        report = check_workbench(args.root, args.workbench)
+        if args.format == "json":
+            print(json.dumps(readiness_payload(report), ensure_ascii=False, indent=2))
+        else:
+            print(render_readiness_text(report))
+        return 0 if report.ready else 1
 
     if args.command == "demo":
         root, output = _prepare_demo_workspace(args.output)

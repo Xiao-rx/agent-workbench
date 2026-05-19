@@ -33,20 +33,21 @@ agent-workbench demo --adapter claude --adapter cursor
 
 ## Share post
 
-I shipped Agent Workbench v0.3.0: a tiny provider-neutral CLI that turns any repo into an AI-agent-ready workspace.
+I shipped Agent Workbench v0.4.0: a tiny provider-neutral CLI that turns any repo into an AI-agent-ready workspace.
 
 One command generates:
 
 - `AGENTS.md`
 - `agent-task-pack.md`
 - optional Claude Code and Cursor adapters with `--adapter claude --adapter cursor`
+- `agent-workbench check` for a quick readiness gate before handing the repo to an agent
 
 The output gives Codex, Claude Code, Cursor, OpenCode, and other coding agents a repo map, safe commands, high-signal files, a kickoff prompt, and guardrails before they touch code.
 
 Examples include generated workbench output for both Python and TypeScript CLI repositories.
 
 Repo: https://github.com/Xiao-rx/agent-workbench
-Release: https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.3.0
+Release: https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.4.0
 
 ## Show HN draft
 
@@ -65,6 +66,7 @@ It scans the repo and writes:
 
 - AGENTS.md: repo map, safe commands, high-signal files, guardrails
 - agent-task-pack.md: kickoff prompt, first jobs, acceptance gates
+- readiness check: a pass/fail command for existing workbench files
 - scan JSON: machine-readable repo map with file signals, package managers, and safe commands
 
 It is provider-neutral and outputs plain Markdown, so it can be used with Codex, Claude Code, Cursor, OpenCode, or any coding agent workflow.
@@ -76,6 +78,9 @@ uv tool install git+https://github.com/Xiao-rx/agent-workbench.git
 
 Demo:
 agent-workbench demo --adapter claude --adapter cursor
+
+Check:
+agent-workbench check . --format json
 
 I am using a daily GitHub trend/feedback loop to decide what to improve next.
 ```
