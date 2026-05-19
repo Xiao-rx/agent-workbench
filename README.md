@@ -2,6 +2,15 @@
 
 Turn any repository into an AI-agent-ready workspace with one command.
 
+一句话：用一条命令把任意代码仓库变成 AI coding agent 可以安全接手的工作区。
+
+Agent Workbench 会扫描仓库结构、包管理器、测试命令和本地风险信号，然后生成两份可直接交给 coding agent 的 Markdown 文件：
+
+- `AGENTS.md`：仓库地图、安全命令、高信号文件和操作护栏。
+- `agent-task-pack.md`：首批任务、验收门槛和交付前检查清单。
+
+默认输出不绑定任何模型或工具；需要时也可以额外生成 Claude Code 和 Cursor 的轻量 handoff 文件。
+
 ```powershell
 uv run --python 3.12 python -m agent_workbench init . --output .agent-workbench --project-name my-repo
 ```

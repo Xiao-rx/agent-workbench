@@ -23,6 +23,8 @@ class ReadmeTests(unittest.TestCase):
         self.assertIn("docs/release-v0.2.0.md", readme)
         self.assertIn("docs/launch-kit.md", readme)
         self.assertIn("provider-neutral", readme.lower())
+        self.assertIn("用一条命令把任意代码仓库变成 AI coding agent 可以安全接手的工作区", readme)
+        self.assertIn("默认输出不绑定任何模型或工具", readme)
 
 
 if __name__ == "__main__":
