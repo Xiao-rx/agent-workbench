@@ -28,7 +28,7 @@ agent-workbench, ai-agents, claude-code, cli, codex, cursor, devtools, developer
 
 ```powershell
 uv tool install git+https://github.com/Xiao-rx/agent-workbench.git
-agent-workbench demo --adapter all --check
+agent-workbench demo --adapter all --check --print-kickoff
 ```
 
 ## Share Post Draft
@@ -44,6 +44,7 @@ One command generates:
 - `agent-task-pack.md`
 - optional Claude Code, Codex, and Cursor adapters with `--adapter all`
 - `agent-workbench check` for a quick readiness gate before handing the repo to an agent
+- `--print-kickoff` to copy the generated first prompt straight from the terminal
 - JSON artifacts with `--output-json` for CI and downstream agent harnesses
 
 The output gives Codex, Claude Code, Cursor, OpenCode, and other coding agents a repo map, safe commands, high-signal files, a kickoff prompt, and guardrails before they touch code.
@@ -84,7 +85,7 @@ Install:
 uv tool install git+https://github.com/Xiao-rx/agent-workbench.git
 
 Demo:
-agent-workbench demo --adapter all --check
+agent-workbench demo --adapter all --check --print-kickoff
 
 Check:
 agent-workbench check . --format json

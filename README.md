@@ -101,7 +101,7 @@ Install directly from GitHub:
 
 ```powershell
 uv tool install git+https://github.com/Xiao-rx/agent-workbench.git
-agent-workbench demo --adapter all --check
+agent-workbench demo --adapter all --check --print-kickoff
 ```
 
 Try the no-secret demo first:
@@ -110,7 +110,7 @@ Try the no-secret demo first:
 $env:UV_CACHE_DIR='.uv-cache'
 $env:UV_PYTHON_INSTALL_DIR='.uv-python'
 $env:PYTHONPATH='src'
-uv run --python 3.12 python -m agent_workbench demo --adapter all --check
+uv run --python 3.12 python -m agent_workbench demo --adapter all --check --print-kickoff
 ```
 
 Generate files for your current repository:
@@ -165,15 +165,15 @@ The goal is not to be another agent. The goal is to make every repository easier
 ## Commands
 
 ```text
-agent-workbench demo [--output PATH] [--adapter claude|codex|cursor|all] [--check]
+agent-workbench demo [--output PATH] [--adapter claude|codex|cursor|all] [--check] [--print-kickoff]
 agent-workbench scan [ROOT] [--format text|json] [--output-json PATH]
 agent-workbench check [ROOT] [--workbench PATH] [--format text|json] [--output-json PATH]
-agent-workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|all] [--check]
+agent-workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|all] [--check] [--print-kickoff]
 
 python -m agent_workbench scan [ROOT] [--format text|json] [--output-json PATH]
 python -m agent_workbench check [ROOT] [--workbench PATH] [--format text|json] [--output-json PATH]
-python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|all] [--check]
-python -m agent_workbench demo [--output PATH] [--adapter claude|codex|cursor|all] [--check]
+python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|all] [--check] [--print-kickoff]
+python -m agent_workbench demo [--output PATH] [--adapter claude|codex|cursor|all] [--check] [--print-kickoff]
 ```
 
 ## Release

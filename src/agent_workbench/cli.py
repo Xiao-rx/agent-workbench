@@ -33,6 +33,7 @@ def build_parser() -> argparse.ArgumentParser:
     init.add_argument("--output", type=Path, default=Path(".agent-workbench"))
     init.add_argument("--project-name")
     init.add_argument("--check", action="store_true", help="Run a readiness check after writing the workbench.")
+    init.add_argument("--print-kickoff", action="store_true", help="Print the generated kickoff prompt after writing files.")
     init.add_argument(
         "--adapter",
         action="append",
@@ -44,6 +45,7 @@ def build_parser() -> argparse.ArgumentParser:
     demo = subparsers.add_parser("demo", help="Generate a no-secret demo workspace in a temporary repository.")
     demo.add_argument("--output", type=Path, help="Optional output directory. Defaults to a temporary directory.")
     demo.add_argument("--check", action="store_true", help="Run a readiness check after writing the demo workbench.")
+    demo.add_argument("--print-kickoff", action="store_true", help="Print the generated kickoff prompt after writing files.")
     demo.add_argument(
         "--adapter",
         action="append",
@@ -82,6 +84,8 @@ def main(argv: list[str] | None = None) -> int:
         paths = write_workbench(args.root, args.output, args.project_name, tuple(args.adapter))
         for path in paths:
             print(f"Wrote {path}")
+        if args.print_kickoff:
+            _print_kickoff(args.output)
         if args.check:
             return _print_readiness(args.root, args.output, "text")
         return 0
@@ -97,6 +101,8 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Demo repository: {root}")
         for path in paths:
             print(f"Wrote {path}")
+        if args.print_kickoff:
+            _print_kickoff(output)
         if args.check:
             return _print_readiness(root, output, "text")
         print("Next: open AGENTS.md and hand the task pack to your coding agent.")
@@ -118,6 +124,24 @@ def _print_readiness(root: Path, workbench: Path | None, output_format: str, out
     else:
         print(render_readiness_text(report))
     return 0 if report.ready else 1
+
+
+def _print_kickoff(workbench: Path) -> None:
+    task_pack = workbench / "agent-task-pack.md"
+    text = task_pack.read_text(encoding="utf-8")
+    prompt = _extract_kickoff_prompt(text)
+    print("")
+    print("Kickoff prompt:")
+    print(prompt)
+
+
+def _extract_kickoff_prompt(text: str) -> str:
+    marker = "## Kickoff Prompt"
+    start = text.index(marker)
+    fenced = text.index("```", start)
+    line_start = text.index("\n", fenced) + 1
+    end = text.index("```", line_start)
+    return text[line_start:end].strip()
 
 
 def _write_json_file(path: Path, payload: dict[str, object]) -> None:

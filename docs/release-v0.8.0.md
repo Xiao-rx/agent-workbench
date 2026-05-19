@@ -6,12 +6,13 @@ Agent Workbench v0.8.0 makes the complete first-run path shorter with an `--adap
 
 ```powershell
 uv tool install git+https://github.com/Xiao-rx/agent-workbench.git
-agent-workbench demo --adapter all --check
+agent-workbench demo --adapter all --check --print-kickoff
 ```
 
 ## What Changed
 
 - `--adapter all`: generate Claude Code, Codex, and Cursor handoff files in one option.
+- `--print-kickoff`: print the generated kickoff prompt after writing files.
 - Duplicate adapter requests are deduplicated, so `--adapter all --adapter codex` still writes each adapter once.
 - Generated `AGENTS.md` and `agent-task-pack.md` now list the adapter handoff files when adapters are requested.
 - English and Chinese README paths now use the shorter all-adapter demo command.

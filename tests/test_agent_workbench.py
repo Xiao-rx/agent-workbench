@@ -351,6 +351,20 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertTrue((output / ".agent-workbench" / ".cursor" / "rules" / "agent-workbench.md").exists())
             self.assertIn("status=ready", stdout.getvalue())
 
+    def test_demo_command_can_print_kickoff_prompt(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "demo"
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["demo", "--output", str(output), "--print-kickoff"])
+
+            self.assertEqual(exit_code, 0)
+            text = stdout.getvalue()
+            self.assertIn("Kickoff prompt:", text)
+            self.assertIn("You are working in agent-workbench-demo.", text)
+            self.assertIn("Read AGENTS.md first", text)
+
     def test_init_command_writes_requested_adapter(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp) / "repo"
@@ -382,6 +396,23 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertTrue((out / ".codex" / "AGENTS.md").exists())
             self.assertTrue((out / ".cursor" / "rules" / "agent-workbench.md").exists())
             self.assertIn("status=ready", stdout.getvalue())
+
+    def test_init_command_can_print_kickoff_prompt(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            out = Path(tmp) / "out"
+            root.mkdir()
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["init", str(root), "--output", str(out), "--project-name", "demo", "--print-kickoff"])
+
+            self.assertEqual(exit_code, 0)
+            text = stdout.getvalue()
+            self.assertIn("Kickoff prompt:", text)
+            self.assertIn("You are working in demo.", text)
+            self.assertIn("inspect `README.md`", text)
 
     def test_init_command_can_check_generated_workbench(self):
         with tempfile.TemporaryDirectory() as tmp:
