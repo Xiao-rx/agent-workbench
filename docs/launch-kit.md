@@ -28,12 +28,12 @@ agent-workbench, ai-agents, claude-code, cli, codex, cursor, devtools, developer
 
 ```powershell
 uv tool install git+https://github.com/Xiao-rx/agent-workbench.git
-agent-workbench demo --adapter claude --adapter cursor
+agent-workbench demo --adapter claude --adapter cursor --check
 ```
 
 ## Share post
 
-I shipped Agent Workbench v0.4.0: a tiny provider-neutral CLI that turns any repo into an AI-agent-ready workspace.
+I shipped Agent Workbench v0.5.0: a tiny provider-neutral CLI that turns any repo into an AI-agent-ready workspace.
 
 One command generates:
 
@@ -47,7 +47,7 @@ The output gives Codex, Claude Code, Cursor, OpenCode, and other coding agents a
 Examples include generated workbench output for both Python and TypeScript CLI repositories.
 
 Repo: https://github.com/Xiao-rx/agent-workbench
-Release: https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.4.0
+Release: https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.5.0
 
 ## Show HN draft
 
@@ -77,7 +77,7 @@ Install:
 uv tool install git+https://github.com/Xiao-rx/agent-workbench.git
 
 Demo:
-agent-workbench demo --adapter claude --adapter cursor
+agent-workbench demo --adapter claude --adapter cursor --check
 
 Check:
 agent-workbench check . --format json

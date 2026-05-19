@@ -30,6 +30,7 @@ def build_parser() -> argparse.ArgumentParser:
     init.add_argument("root", nargs="?", type=Path, default=Path("."))
     init.add_argument("--output", type=Path, default=Path(".agent-workbench"))
     init.add_argument("--project-name")
+    init.add_argument("--check", action="store_true", help="Run a readiness check after writing the workbench.")
     init.add_argument(
         "--adapter",
         action="append",
@@ -40,6 +41,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     demo = subparsers.add_parser("demo", help="Generate a no-secret demo workspace in a temporary repository.")
     demo.add_argument("--output", type=Path, help="Optional output directory. Defaults to a temporary directory.")
+    demo.add_argument("--check", action="store_true", help="Run a readiness check after writing the demo workbench.")
     demo.add_argument(
         "--adapter",
         action="append",
@@ -71,15 +73,12 @@ def main(argv: list[str] | None = None) -> int:
         paths = write_workbench(args.root, args.output, args.project_name, tuple(args.adapter))
         for path in paths:
             print(f"Wrote {path}")
+        if args.check:
+            return _print_readiness(args.root, args.output, "text")
         return 0
 
     if args.command == "check":
-        report = check_workbench(args.root, args.workbench)
-        if args.format == "json":
-            print(json.dumps(readiness_payload(report), ensure_ascii=False, indent=2))
-        else:
-            print(render_readiness_text(report))
-        return 0 if report.ready else 1
+        return _print_readiness(args.root, args.workbench, args.format)
 
     if args.command == "demo":
         root, output = _prepare_demo_workspace(args.output)
@@ -87,11 +86,22 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Demo repository: {root}")
         for path in paths:
             print(f"Wrote {path}")
+        if args.check:
+            return _print_readiness(root, output, "text")
         print("Next: open AGENTS.md and hand the task pack to your coding agent.")
         return 0
 
     parser.error(f"Unknown command: {args.command}")
     return 2
+
+
+def _print_readiness(root: Path, workbench: Path | None, output_format: str) -> int:
+    report = check_workbench(root, workbench)
+    if output_format == "json":
+        print(json.dumps(readiness_payload(report), ensure_ascii=False, indent=2))
+    else:
+        print(render_readiness_text(report))
+    return 0 if report.ready else 1
 
 
 def _repo_map_payload(repo: RepoMap) -> dict[str, object]:

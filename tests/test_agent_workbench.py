@@ -230,6 +230,18 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertIn("python -m unittest discover -s tests", agents)
             self.assertIn("Agent Task Pack", tasks)
 
+    def test_demo_command_can_check_generated_workbench(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "demo"
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["demo", "--output", str(output), "--check"])
+
+            self.assertEqual(exit_code, 0)
+            self.assertIn("status=ready", stdout.getvalue())
+            self.assertIn("PASS AGENTS.md", stdout.getvalue())
+
     def test_demo_command_writes_requested_adapters(self):
         with tempfile.TemporaryDirectory() as tmp:
             output = Path(tmp) / "demo"
@@ -258,6 +270,22 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertEqual(exit_code, 0)
             self.assertTrue((out / "CLAUDE.md").exists())
             self.assertIn("CLAUDE.md", stdout.getvalue())
+
+    def test_init_command_can_check_generated_workbench(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            out = Path(tmp) / "out"
+            root.mkdir()
+            (root / "pyproject.toml").write_text("[project]\nname='x'\n", encoding="utf-8")
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["init", str(root), "--output", str(out), "--check"])
+
+            self.assertEqual(exit_code, 0)
+            self.assertTrue((out / "AGENTS.md").exists())
+            self.assertIn("status=ready", stdout.getvalue())
+            self.assertIn("PASS verification commands", stdout.getvalue())
 
     def test_version_flag_prints_package_version(self):
         stdout = StringIO()

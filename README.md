@@ -97,7 +97,7 @@ Install directly from GitHub:
 
 ```powershell
 uv tool install git+https://github.com/Xiao-rx/agent-workbench.git
-agent-workbench demo --adapter claude --adapter cursor
+agent-workbench demo --adapter claude --adapter cursor --check
 ```
 
 Try the no-secret demo first:
@@ -106,13 +106,13 @@ Try the no-secret demo first:
 $env:UV_CACHE_DIR='.uv-cache'
 $env:UV_PYTHON_INSTALL_DIR='.uv-python'
 $env:PYTHONPATH='src'
-uv run --python 3.12 python -m agent_workbench demo --adapter claude --adapter cursor
+uv run --python 3.12 python -m agent_workbench demo --adapter claude --adapter cursor --check
 ```
 
 Generate files for your current repository:
 
 ```powershell
-uv run --python 3.12 python -m agent_workbench init . --output .agent-workbench --project-name my-repo
+uv run --python 3.12 python -m agent_workbench init . --output .agent-workbench --project-name my-repo --check
 ```
 
 Generate optional Claude Code and Cursor adapters:
@@ -159,20 +159,20 @@ The goal is not to be another agent. The goal is to make every repository easier
 ## Commands
 
 ```text
-agent-workbench demo [--output PATH] [--adapter claude] [--adapter cursor]
+agent-workbench demo [--output PATH] [--adapter claude] [--adapter cursor] [--check]
 agent-workbench scan [ROOT] [--format text|json]
 agent-workbench check [ROOT] [--workbench PATH] [--format text|json]
-agent-workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude] [--adapter cursor]
+agent-workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude] [--adapter cursor] [--check]
 
 python -m agent_workbench scan [ROOT] [--format text|json]
 python -m agent_workbench check [ROOT] [--workbench PATH] [--format text|json]
-python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude] [--adapter cursor]
-python -m agent_workbench demo [--output PATH] [--adapter claude] [--adapter cursor]
+python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude] [--adapter cursor] [--check]
+python -m agent_workbench demo [--output PATH] [--adapter claude] [--adapter cursor] [--check]
 ```
 
 ## Release
 
-- Current release notes: [`docs/release-v0.4.0.md`](docs/release-v0.4.0.md)
+- Current release notes: [`docs/release-v0.5.0.md`](docs/release-v0.5.0.md)
 - Launch kit: [`docs/launch-kit.md`](docs/launch-kit.md)
 - Install from GitHub: `uv tool install git+https://github.com/Xiao-rx/agent-workbench.git`
 

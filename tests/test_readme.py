@@ -8,7 +8,8 @@ class ReadmeTests(unittest.TestCase):
 
         self.assertIn("python -m agent_workbench demo", readme)
         self.assertIn("[中文](README.zh-CN.md)", readme)
-        self.assertIn("agent-workbench demo --adapter claude --adapter cursor", readme)
+        self.assertIn("agent-workbench demo --adapter claude --adapter cursor --check", readme)
+        self.assertIn("python -m agent_workbench init . --output .agent-workbench --project-name my-repo --check", readme)
         self.assertIn("agent-workbench check . --format json", readme)
         self.assertIn("python -m agent_workbench scan . --format json", readme)
         self.assertIn("agent-workbench check [ROOT]", readme)
@@ -26,7 +27,7 @@ class ReadmeTests(unittest.TestCase):
         self.assertIn("examples/typescript-cli/source", readme)
         self.assertIn("examples/typescript-cli/agent-workbench/AGENTS.md", readme)
         self.assertIn("uv tool install git+https://github.com/Xiao-rx/agent-workbench.git", readme)
-        self.assertIn("docs/release-v0.4.0.md", readme)
+        self.assertIn("docs/release-v0.5.0.md", readme)
         self.assertIn("docs/launch-kit.md", readme)
         self.assertIn("provider-neutral", readme.lower())
         self.assertIn("用一条命令把任意代码仓库变成 AI coding agent 可以安全接手的工作区", readme)
@@ -37,7 +38,8 @@ class ReadmeTests(unittest.TestCase):
 
         self.assertIn("[English](README.md)", readme)
         self.assertIn("用一条命令把任意代码仓库变成 AI coding agent 可以安全接手的工作区", readme)
-        self.assertIn("agent-workbench demo --adapter claude --adapter cursor", readme)
+        self.assertIn("agent-workbench demo --adapter claude --adapter cursor --check", readme)
+        self.assertIn("agent-workbench init . --output .agent-workbench --project-name my-repo --check", readme)
         self.assertIn("agent-workbench check . --format json", readme)
         self.assertIn("agent-workbench scan . --format json", readme)
         self.assertIn("examples/typescript-cli/source", readme)
