@@ -6,10 +6,13 @@ from pathlib import Path
 import tempfile
 
 from . import __version__
-from .checks import check_workbench, readiness_payload, render_readiness_text
-from .generator import SUPPORTED_ADAPTERS, write_workbench
+from .checks import ReadinessReport, check_workbench, readiness_payload, render_readiness_text
+from .generator import CONCRETE_ADAPTERS, SUPPORTED_ADAPTERS, expand_adapters, write_workbench
 from .models import RepoMap
 from .scanner import scan_repo
+
+
+_DEFAULT_PROOF = object()
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -20,13 +23,13 @@ def build_parser() -> argparse.ArgumentParser:
     scan = subparsers.add_parser("scan", help="Print a compact repository map.")
     scan.add_argument("root", nargs="?", type=Path, default=Path("."))
     scan.add_argument("--format", choices=("text", "json"), default="text", help="Output format.")
-    scan.add_argument("--output-json", type=Path, help="Write the JSON repository map to a file.")
+    scan.add_argument("--output-json", type=Path, help="Write the JSON repository map to a file. Implies --format json.")
 
     check = subparsers.add_parser("check", help="Check whether a repository has an agent-ready workbench.")
     check.add_argument("root", nargs="?", type=Path, default=Path("."))
     check.add_argument("--workbench", type=Path, help="Workbench directory. Defaults to ROOT/.agent-workbench.")
     check.add_argument("--format", choices=("text", "json"), default="text", help="Output format.")
-    check.add_argument("--output-json", type=Path, help="Write the JSON readiness report to a file.")
+    check.add_argument("--output-json", type=Path, help="Write the JSON readiness report to a file. Implies --format json.")
     check.add_argument("--strict", action="store_true", help="Treat warnings as not ready.")
     check.add_argument(
         "--adapter",
@@ -41,9 +44,18 @@ def build_parser() -> argparse.ArgumentParser:
     init.add_argument("--output", type=Path, default=Path(".agent-workbench"))
     init.add_argument("--project-name")
     init.add_argument("--check", action="store_true", help="Run a readiness check after writing the workbench.")
+    init.add_argument("--strict", action="store_true", help="Run a readiness check and treat warnings as not ready.")
     init.add_argument("--print-kickoff", action="store_true", help="Print the generated kickoff prompt after writing files.")
     init.add_argument("--format", choices=("text", "json"), default="text", help="Output format.")
-    init.add_argument("--output-json", type=Path, help="Write the JSON init proof to a file.")
+    init.add_argument("--output-json", type=Path, help="Write the JSON init proof to a file. Implies --format json.")
+    init.add_argument(
+        "--proof",
+        nargs="?",
+        const=_DEFAULT_PROOF,
+        type=Path,
+        metavar="PATH",
+        help="Write a shareable JSON init proof. Optional PATH defaults to the generated workbench and implies --check and --format json.",
+    )
     init.add_argument(
         "--adapter",
         action="append",
@@ -55,9 +67,18 @@ def build_parser() -> argparse.ArgumentParser:
     demo = subparsers.add_parser("demo", help="Generate a no-secret demo workspace in a temporary repository.")
     demo.add_argument("--output", type=Path, help="Optional output directory. Defaults to a temporary directory.")
     demo.add_argument("--check", action="store_true", help="Run a readiness check after writing the demo workbench.")
+    demo.add_argument("--strict", action="store_true", help="Run a readiness check and treat warnings as not ready.")
     demo.add_argument("--print-kickoff", action="store_true", help="Print the generated kickoff prompt after writing files.")
     demo.add_argument("--format", choices=("text", "json"), default="text", help="Output format.")
-    demo.add_argument("--output-json", type=Path, help="Write the JSON demo proof to a file.")
+    demo.add_argument("--output-json", type=Path, help="Write the JSON demo proof to a file. Implies --format json.")
+    demo.add_argument(
+        "--proof",
+        nargs="?",
+        const=_DEFAULT_PROOF,
+        type=Path,
+        metavar="PATH",
+        help="Write a shareable strict all-adapter JSON demo proof. Optional PATH defaults to the generated workbench. Implies --adapter all, --strict, and --format json.",
+    )
     demo.add_argument(
         "--adapter",
         action="append",
@@ -74,10 +95,9 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     if args.command == "scan":
-        if args.output_json and args.format != "json":
-            parser.error("--output-json requires --format json")
+        output_format = _effective_format(args.format, args.output_json)
         repo = scan_repo(args.root)
-        if args.format == "json":
+        if output_format == "json":
             payload = _repo_map_payload(repo)
             if args.output_json:
                 _write_json_file(args.output_json, payload)
@@ -94,59 +114,167 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.command == "init":
-        if args.output_json and args.format != "json":
-            parser.error("--output-json requires --format json")
-        paths = write_workbench(args.root, args.output, args.project_name, tuple(args.adapter))
-        if args.format == "json":
-            payload = _workbench_payload(args.root.resolve(), args.output, paths)
-            if args.check:
-                report = check_workbench(args.root, args.output)
+        root = args.root.resolve()
+        workbench = _resolve_init_output(root, args.output)
+        output_json = _proof_output_json(parser, args.output_json, args.proof, workbench, "init-proof.json")
+        output_format = _effective_format(args.format, output_json)
+        proof_requested = args.proof is not None
+        check_requested = args.check or args.strict or proof_requested
+        proof_command = _init_proof_command(args.root, args.output, args.proof)
+        repo = scan_repo(root)
+        paths = write_workbench(root, workbench, args.project_name, tuple(args.adapter))
+        if output_format == "json":
+            report = check_workbench(root, workbench, tuple(args.adapter), args.strict) if check_requested else None
+            payload = _workbench_payload(
+                root,
+                workbench,
+                paths,
+                repo=repo,
+                adapters=tuple(args.adapter),
+                strict=args.strict,
+                show_readiness_command=check_requested or bool(args.adapter),
+                readiness_report=report,
+                proof_command=proof_command,
+            )
+            if check_requested:
                 payload["readiness"] = readiness_payload(report)
-                _write_or_print_json(args.output_json, payload)
+                _write_or_print_json(output_json, payload, print_proof=proof_requested)
                 return 0 if report.ready else 1
-            _write_or_print_json(args.output_json, payload)
+            _write_or_print_json(output_json, payload, print_proof=proof_requested)
             return 0
         for path in paths:
             print(f"Wrote {path}")
-        print(f"Proof: {_workbench_payload(args.root.resolve(), args.output, paths)['proof_summary']}")
+        report = check_workbench(root, workbench, tuple(args.adapter), args.strict) if check_requested else None
+        proof_payload = _workbench_payload(
+            root,
+            workbench,
+            paths,
+            repo=repo,
+            adapters=tuple(args.adapter),
+            strict=args.strict,
+            show_readiness_command=check_requested or bool(args.adapter),
+            readiness_report=report,
+            proof_command=proof_command,
+        )
+        print(f"Proof: {proof_payload['proof_summary']}")
         if args.print_kickoff:
-            _print_kickoff(args.output)
-        if args.check:
-            return _print_readiness(args.root, args.output, "text")
+            _print_kickoff(workbench)
+        if check_requested:
+            print(render_readiness_text(report))
+            return 0 if report.ready else 1
         return 0
 
     if args.command == "check":
-        if args.output_json and args.format != "json":
-            parser.error("--output-json requires --format json")
-        return _print_readiness(args.root, args.workbench, args.format, args.output_json, tuple(args.adapter), args.strict)
+        output_format = _effective_format(args.format, args.output_json)
+        return _print_readiness(args.root, args.workbench, output_format, args.output_json, tuple(args.adapter), args.strict)
 
     if args.command == "demo":
-        if args.output_json and args.format != "json":
-            parser.error("--output-json requires --format json")
+        proof_requested = args.proof is not None
+        demo_adapters = _demo_adapters(tuple(args.adapter), proof_requested)
+        strict = args.strict or proof_requested
+        check_requested = args.check or strict
         root, output = _prepare_demo_workspace(args.output)
-        paths = write_workbench(root, output, "agent-workbench-demo", tuple(args.adapter))
-        if args.format == "json":
-            payload = _workbench_payload(root, output, paths, demo_repository=root)
-            if args.check:
-                report = check_workbench(root, output)
+        output_json = _proof_output_json(parser, args.output_json, args.proof, output, "demo-proof.json")
+        output_format = _effective_format(args.format, output_json)
+        proof_command = _demo_proof_command(args.output, args.proof)
+        repo = scan_repo(root)
+        paths = write_workbench(root, output, "agent-workbench-demo", demo_adapters)
+        if output_format == "json":
+            report = check_workbench(root, output, demo_adapters, strict) if check_requested else None
+            payload = _workbench_payload(
+                root,
+                output,
+                paths,
+                demo_repository=root,
+                repo=repo,
+                adapters=demo_adapters,
+                strict=strict,
+                show_readiness_command=check_requested or bool(args.adapter),
+                readiness_report=report,
+                proof_command=proof_command,
+            )
+            if check_requested:
                 payload["readiness"] = readiness_payload(report)
-                _write_or_print_json(args.output_json, payload)
+                _write_or_print_json(output_json, payload, print_proof=proof_requested)
                 return 0 if report.ready else 1
-            _write_or_print_json(args.output_json, payload)
+            _write_or_print_json(output_json, payload, print_proof=proof_requested)
             return 0
         print(f"Demo repository: {root}")
         for path in paths:
             print(f"Wrote {path}")
-        print(f"Proof: {_workbench_payload(root, output, paths, demo_repository=root)['proof_summary']}")
+        report = check_workbench(root, output, demo_adapters, strict) if check_requested else None
+        proof_payload = _workbench_payload(
+            root,
+            output,
+            paths,
+            demo_repository=root,
+            repo=repo,
+            adapters=demo_adapters,
+            strict=strict,
+            show_readiness_command=check_requested or bool(args.adapter),
+            readiness_report=report,
+            proof_command=proof_command,
+        )
+        print(f"Proof: {proof_payload['proof_summary']}")
         if args.print_kickoff:
             _print_kickoff(output)
-        if args.check:
-            return _print_readiness(root, output, "text")
+        if check_requested:
+            print(render_readiness_text(report))
+            return 0 if report.ready else 1
         print("Next: open AGENTS.md and hand the task pack to your coding agent.")
         return 0
 
     parser.error(f"Unknown command: {args.command}")
     return 2
+
+
+def _effective_format(output_format: str, output_json: Path | None) -> str:
+    if output_json:
+        return "json"
+    return output_format
+
+
+def _proof_output_json(
+    parser: argparse.ArgumentParser,
+    output_json: Path | None,
+    proof: object | Path | None,
+    workbench: Path,
+    default_name: str,
+) -> Path | None:
+    if proof is _DEFAULT_PROOF:
+        return output_json or (workbench / default_name)
+    if output_json and proof and output_json != proof:
+        parser.error("--proof and --output-json cannot write to different paths")
+    if isinstance(proof, Path):
+        return proof
+    return output_json
+
+
+def _demo_adapters(adapters: tuple[str, ...], proof_requested: bool) -> tuple[str, ...]:
+    if proof_requested and "all" not in adapters:
+        return (*adapters, "all")
+    return adapters
+
+
+def _demo_proof_command(output: Path | None, proof: object | Path | None) -> str | None:
+    if proof is None:
+        return None
+    parts = ["agent-workbench", "demo"]
+    if output:
+        parts.extend(("--output", str(output)))
+    parts.append("--proof")
+    if isinstance(proof, Path):
+        parts.append(str(proof))
+    return _command_text(parts)
+
+
+def _init_proof_command(root: Path, output: Path, proof: object | Path | None) -> str | None:
+    if proof is None:
+        return None
+    parts = ["agent-workbench", "init", str(root), "--output", str(output), "--proof"]
+    if isinstance(proof, Path):
+        parts.append(str(proof))
+    return _command_text(parts)
 
 
 def _print_readiness(
@@ -168,6 +296,12 @@ def _print_readiness(
     else:
         print(render_readiness_text(report))
     return 0 if report.ready else 1
+
+
+def _resolve_init_output(root: Path, output: Path) -> Path:
+    if output.is_absolute():
+        return output.resolve()
+    return (root / output).resolve()
 
 
 def _print_kickoff(workbench: Path) -> None:
@@ -193,22 +327,57 @@ def _workbench_payload(
     workbench: Path,
     paths: tuple[Path, ...],
     demo_repository: Path | None = None,
+    repo: RepoMap | None = None,
+    adapters: tuple[str, ...] = (),
+    strict: bool = False,
+    show_readiness_command: bool = False,
+    readiness_report: ReadinessReport | None = None,
+    proof_command: str | None = None,
 ) -> dict[str, object]:
     task_pack = workbench / "agent-task-pack.md"
-    repo = scan_repo(root)
+    repo = repo or scan_repo(root)
     artifact_summary = _artifact_summary(workbench, paths)
     agent_assets = _agent_asset_payload(repo)
-    verification_command = repo.test_commands[0] if repo.test_commands else _verification_command(root, workbench)
+    readiness_args = _readiness_args(root, workbench, adapters, strict)
+    readiness_command = _command_text(readiness_args)
+    verification_command = repo.test_commands[0] if repo.test_commands else readiness_command
+    readiness_summary = _readiness_summary(readiness_report) if readiness_report else None
+    readiness_counts = _readiness_counts(readiness_report) if readiness_report else None
+    next_action = _proof_next_action(readiness_report)
     payload = {
+        "kind": "agent_workbench.proof",
+        "schema_version": 1,
         "root": str(root),
         "workbench": str(workbench),
         "written": [str(path) for path in paths],
         "artifact_summary": artifact_summary,
+        "handoff": {
+            "agents_md": str(workbench / "AGENTS.md"),
+            "task_pack": str(task_pack),
+            "next_action": next_action,
+        },
+        "next_action": next_action,
         "agent_assets": agent_assets,
+        "agent_assets_source": "pre_write_scan",
         "verification_command": verification_command,
-        "proof_summary": _proof_summary(artifact_summary, verification_command, agent_assets),
+        "readiness_command": readiness_command,
+        "readiness_args": readiness_args,
+        "proof_summary": _proof_summary(
+            artifact_summary,
+            verification_command,
+            agent_assets,
+            readiness_command,
+            show_readiness_command,
+            readiness_summary,
+        ),
         "kickoff_prompt": _extract_kickoff_prompt(task_pack.read_text(encoding="utf-8")),
     }
+    if readiness_summary:
+        payload["readiness_summary"] = readiness_summary
+    if readiness_counts:
+        payload["readiness_counts"] = readiness_counts
+    if proof_command:
+        payload["proof_command"] = proof_command
     if demo_repository is not None:
         payload["demo_repository"] = str(demo_repository)
     return payload
@@ -233,8 +402,35 @@ def _artifact_summary(workbench: Path, paths: tuple[Path, ...]) -> dict[str, obj
     }
 
 
-def _verification_command(root: Path, workbench: Path) -> str:
-    return f'agent-workbench check "{root}" --workbench "{workbench}" --format json'
+def _readiness_args(root: Path, workbench: Path, adapters: tuple[str, ...] = (), strict: bool = False) -> list[str]:
+    parts = ["agent-workbench", "check", str(root), "--workbench", str(workbench)]
+    parts.extend(_adapter_check_args(adapters))
+    if strict:
+        parts.append("--strict")
+    parts.extend(["--format", "json"])
+    return parts
+
+
+def _adapter_check_args(adapters: tuple[str, ...]) -> tuple[str, ...]:
+    expanded = expand_adapters(adapters)
+    if not expanded:
+        return ()
+    if expanded == CONCRETE_ADAPTERS:
+        return ("--adapter", "all")
+    parts: list[str] = []
+    for adapter in expanded:
+        parts.extend(("--adapter", adapter))
+    return tuple(parts)
+
+
+def _command_text(args: list[str]) -> str:
+    return " ".join(_quote_arg(arg) for arg in args)
+
+
+def _quote_arg(arg: str) -> str:
+    if not arg or any(char.isspace() for char in arg):
+        return '"' + arg.replace('"', '\\"') + '"'
+    return arg
 
 
 def _agent_asset_payload(repo: RepoMap) -> list[dict[str, str]]:
@@ -247,7 +443,14 @@ def _agent_asset_payload(repo: RepoMap) -> list[dict[str, str]]:
     ]
 
 
-def _proof_summary(artifact_summary: dict[str, object], verification_command: str, agent_assets: list[dict[str, str]]) -> str:
+def _proof_summary(
+    artifact_summary: dict[str, object],
+    verification_command: str,
+    agent_assets: list[dict[str, str]],
+    readiness_command: str,
+    show_readiness_command: bool = False,
+    readiness_summary: str | None = None,
+) -> str:
     core_files = artifact_summary["core_files"]
     adapter_files = artifact_summary["adapter_files"]
     core_text = ", ".join(str(item) for item in core_files)
@@ -255,7 +458,30 @@ def _proof_summary(artifact_summary: dict[str, object], verification_command: st
     adapter_text = f", {adapter_count} adapter handoff{'s' if adapter_count != 1 else ''}" if adapter_count else ""
     asset_count = len(agent_assets)
     asset_text = f", detected {asset_count} existing agent asset{'s' if asset_count != 1 else ''}" if asset_count else ""
-    return f"wrote {artifact_summary['written_total']} files: {core_text}{adapter_text}{asset_text}; verify with `{verification_command}`."
+    summary = f"wrote {artifact_summary['written_total']} files: {core_text}{adapter_text}{asset_text}; verify with `{verification_command}`."
+    if readiness_summary:
+        summary = f"{summary} Readiness: {readiness_summary}."
+    if show_readiness_command and readiness_command != verification_command:
+        summary = f"{summary} Readiness gate: `{readiness_command}`."
+    return summary
+
+
+def _readiness_summary(report: ReadinessReport) -> str:
+    counts = _readiness_counts(report)
+    return f"{report.status} ({counts['pass']} pass, {counts['warn']} warn, {counts['fail']} fail)"
+
+
+def _readiness_counts(report: ReadinessReport) -> dict[str, int]:
+    counts = {"pass": 0, "warn": 0, "fail": 0}
+    for check in report.checks:
+        counts[check.status] = counts.get(check.status, 0) + 1
+    return counts
+
+
+def _proof_next_action(report: ReadinessReport | None) -> str:
+    if report:
+        return report.next_action
+    return "run the readiness_command before handing the task pack to your coding agent."
 
 
 def _write_json_file(path: Path, payload: dict[str, object]) -> None:
@@ -263,16 +489,22 @@ def _write_json_file(path: Path, payload: dict[str, object]) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
-def _write_or_print_json(path: Path | None, payload: dict[str, object]) -> None:
+def _write_or_print_json(path: Path | None, payload: dict[str, object], print_proof: bool = False) -> None:
     if path:
         _write_json_file(path, payload)
         print(f"Wrote {path}")
+        if print_proof and isinstance(payload.get("proof_summary"), str):
+            print(f"Proof: {payload['proof_summary']}")
+        if print_proof and isinstance(payload.get("proof_command"), str):
+            print(f"Proof command: {payload['proof_command']}")
     else:
         print(json.dumps(payload, ensure_ascii=False, indent=2))
 
 
 def _repo_map_payload(repo: RepoMap) -> dict[str, object]:
     return {
+        "kind": "agent_workbench.repo_map",
+        "schema_version": 1,
         "root": str(repo.root),
         "total_files": repo.total_files,
         "total_lines": repo.total_lines,
@@ -314,6 +546,7 @@ def _prepare_demo_workspace(output: Path | None) -> tuple[Path, Path]:
         encoding="utf-8",
     )
     (root / "README.md").write_text("# Agent Workbench Demo\n\nA tiny repository for the demo command.\n", encoding="utf-8")
+    (root / ".gitignore").write_text(".env\n.env.*\n!.env.example\n__pycache__/\n.pytest_cache/\n", encoding="utf-8")
     github = root / ".github"
     github.mkdir(exist_ok=True)
     (github / "copilot-instructions.md").write_text(

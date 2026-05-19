@@ -20,6 +20,32 @@ jobs:
       - name: Verify installed CLI
         run: |
           python -m pip install .
-          agent-workbench demo --output /tmp/agent-workbench-demo
+          agent-workbench demo --output /tmp/agent-workbench-demo --proof /tmp/agent-workbench-demo/proof.json
           test -f /tmp/agent-workbench-demo/.agent-workbench/AGENTS.md
           test -f /tmp/agent-workbench-demo/.agent-workbench/agent-task-pack.md
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          proof = json.loads(Path("/tmp/agent-workbench-demo/proof.json").read_text(encoding="utf-8"))
+          if proof["kind"] != "agent_workbench.proof" or proof["schema_version"] != 1:
+              raise SystemExit((proof.get("kind"), proof.get("schema_version")))
+          if proof["readiness"]["status"] != "ready":
+              raise SystemExit(proof["readiness"])
+          if proof["readiness"]["counts"] != {"pass": 10, "warn": 0, "fail": 0}:
+              raise SystemExit(proof["readiness"])
+          if proof["handoff"]["next_action"] != proof["next_action"]:
+              raise SystemExit(proof["handoff"])
+          if not proof["handoff"]["agents_md"].endswith("AGENTS.md"):
+              raise SystemExit(proof["handoff"])
+          if not proof["handoff"]["task_pack"].endswith("agent-task-pack.md"):
+              raise SystemExit(proof["handoff"])
+          if len(proof["artifact_summary"]["adapter_files"]) != 4:
+              raise SystemExit(proof["artifact_summary"])
+          if "--adapter all --strict --format json" not in proof["readiness_command"]:
+              raise SystemExit(proof["readiness_command"])
+          if proof["readiness_args"][:2] != ["agent-workbench", "check"]:
+              raise SystemExit(proof["readiness_args"])
+          if proof["readiness_args"][-2:] != ["--format", "json"]:
+              raise SystemExit(proof["readiness_args"])
+          PY

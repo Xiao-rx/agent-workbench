@@ -74,7 +74,8 @@ def run_live_cycle(
             append_jsonl(history_path, sample.to_dict())
             history = tuple(read_star_history(history_path))
         except GitHubApiError:
-            history = ()
+            history_path = star_history_path(target_repo)
+            history = tuple(read_star_history(history_path))
 
     report, decisions = run_analysis(snapshot, target_repo, history)
     output.parent.mkdir(parents=True, exist_ok=True)

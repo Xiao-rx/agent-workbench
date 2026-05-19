@@ -51,7 +51,7 @@ def build_parser() -> argparse.ArgumentParser:
     insight = subparsers.add_parser("insight", help="Summarize the latest decision JSON for local product iteration.")
     insight.add_argument("--decisions", type=Path, default=Path("reports/daily-decisions.json"))
     insight.add_argument("--format", choices=("text", "json"), default="text")
-    insight.add_argument("--output-json", type=Path, help="Write the JSON insight payload to a file.")
+    insight.add_argument("--output-json", type=Path, help="Write the JSON insight payload to a file. Implies --format json.")
 
     orchestrate = subparsers.add_parser("orchestrate", help="Run collect, monitor, analyze, review, and git stewardship.")
     orchestrate.add_argument("--repo", help="Repository in OWNER/REPO form. Defaults to TARGET_REPO.")
@@ -141,10 +141,9 @@ def main(argv: list[str] | None = None) -> int:
             return 0
 
         if args.command == "insight":
-            if args.output_json and args.format != "json":
-                parser.error("--output-json requires --format json")
+            output_format = "json" if args.output_json else args.format
             insight_payload = build_insight(args.decisions)
-            if args.format == "json":
+            if output_format == "json":
                 if args.output_json:
                     write_json(args.output_json, insight_payload)
                     print(f"Wrote insight: {args.output_json}")
@@ -169,7 +168,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"Wrote snapshot: {result.snapshot_path}")
             print(f"Wrote report: {result.report_path}")
             if result.star_history_path:
-                print(f"Wrote star history: {result.star_history_path}")
+                print(f"Star history: {result.star_history_path}")
             return 0
 
         if args.command == "demo":

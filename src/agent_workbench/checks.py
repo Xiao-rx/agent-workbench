@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
-from .generator import expand_adapters
+from .generator import expand_adapters, workbench_reference
 from .scanner import scan_repo
 
 
@@ -61,22 +61,18 @@ OPTIONAL_ADAPTERS = {
     "claude": (
         "Claude Code handoff",
         Path("CLAUDE.md"),
-        ("AGENTS.md", "agent-task-pack.md"),
     ),
     "codex": (
         "Codex handoff",
         Path(".codex") / "AGENTS.md",
-        (".agent-workbench/AGENTS.md", ".agent-workbench/agent-task-pack.md"),
     ),
     "cursor": (
         "Cursor handoff",
         Path(".cursor") / "rules" / "agent-workbench.md",
-        (".agent-workbench/AGENTS.md", ".agent-workbench/agent-task-pack.md"),
     ),
     "opencode": (
         "OpenCode handoff",
         Path("opencode.json"),
-        ("AGENTS.md", "agent-task-pack.md"),
     ),
 }
 
@@ -114,7 +110,7 @@ def check_workbench(
         else:
             checks.append(ReadinessCheck(f"{filename} sections", "pass", "Required sections are present"))
 
-    checks.extend(_check_optional_adapters(workbench_path, adapters))
+    checks.extend(_check_optional_adapters(root, workbench_path, adapters))
 
     repo = scan_repo(root)
     if repo.test_commands:
@@ -136,10 +132,11 @@ def check_workbench(
     return ReadinessReport(root=root, workbench=workbench_path, checks=tuple(checks), strict=strict)
 
 
-def _check_optional_adapters(workbench: Path, adapters: tuple[str, ...]) -> tuple[ReadinessCheck, ...]:
+def _check_optional_adapters(root: Path, workbench: Path, adapters: tuple[str, ...]) -> tuple[ReadinessCheck, ...]:
     checks: list[ReadinessCheck] = []
     required_adapters = set(expand_adapters(adapters))
-    for adapter, (name, relative_path, required_text) in OPTIONAL_ADAPTERS.items():
+    workbench_ref = workbench_reference(root, workbench)
+    for adapter, (name, relative_path) in OPTIONAL_ADAPTERS.items():
         path = workbench / relative_path
         if not path.exists():
             if adapter in required_adapters:
@@ -150,7 +147,7 @@ def _check_optional_adapters(workbench: Path, adapters: tuple[str, ...]) -> tupl
             continue
 
         text = path.read_text(encoding="utf-8", errors="ignore")
-        missing = tuple(item for item in required_text if item not in text)
+        missing = tuple(item for item in _adapter_required_text(adapter, workbench_ref) if item not in text)
         if missing:
             checks.append(ReadinessCheck(name, "fail", f"Missing references: {', '.join(missing)}"))
         else:
@@ -158,11 +155,21 @@ def _check_optional_adapters(workbench: Path, adapters: tuple[str, ...]) -> tupl
     return tuple(checks)
 
 
+def _adapter_required_text(adapter: str, workbench_ref: str) -> tuple[str, ...]:
+    if adapter in {"codex", "cursor"}:
+        return (f"{workbench_ref}/AGENTS.md", f"{workbench_ref}/agent-task-pack.md")
+    return ("AGENTS.md", "agent-task-pack.md")
+
+
 def readiness_payload(report: ReadinessReport) -> dict[str, object]:
+    counts = _check_status_counts(report)
     return {
+        "kind": "agent_workbench.readiness",
+        "schema_version": 1,
         "status": report.status,
         "ready": report.ready,
         "strict": report.strict,
+        "counts": counts,
         "next_action": report.next_action,
         "root": str(report.root),
         "workbench": str(report.workbench),
@@ -198,3 +205,10 @@ def _resolve_workbench(root: Path, workbench: Path | None) -> Path:
     if workbench.is_absolute():
         return workbench.resolve()
     return (root / workbench).resolve()
+
+
+def _check_status_counts(report: ReadinessReport) -> dict[str, int]:
+    counts = {"pass": 0, "warn": 0, "fail": 0}
+    for check in report.checks:
+        counts[check.status] = counts.get(check.status, 0) + 1
+    return counts

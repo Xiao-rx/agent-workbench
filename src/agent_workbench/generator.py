@@ -123,6 +123,7 @@ def write_workbench(
 
     expanded_adapters = expand_adapters(adapters)
     repo = scan_repo(root)
+    workbench_ref = workbench_reference(root, output)
     output.mkdir(parents=True, exist_ok=True)
     agents_path = output / "AGENTS.md"
     tasks_path = output / "agent-task-pack.md"
@@ -130,8 +131,17 @@ def write_workbench(
     tasks_path.write_text(render_task_pack(repo, project_name, expanded_adapters), encoding="utf-8")
     written = [agents_path, tasks_path]
     for adapter in expanded_adapters:
-        written.append(_write_adapter(output, adapter))
+        written.append(_write_adapter(output, adapter, workbench_ref))
     return tuple(written)
+
+
+def workbench_reference(root: Path, output: Path) -> str:
+    root = root.resolve()
+    output = output.resolve()
+    try:
+        return output.relative_to(root).as_posix()
+    except ValueError:
+        return output.as_posix()
 
 
 def expand_adapters(adapters: tuple[str, ...]) -> tuple[str, ...]:
@@ -171,7 +181,7 @@ def _task_pack_files(repo: RepoMap):
     return tuple(sorted(repo.files, key=rank)[:6])
 
 
-def _write_adapter(output: Path, adapter: str) -> Path:
+def _write_adapter(output: Path, adapter: str, workbench_ref: str) -> Path:
     if adapter == "claude":
         path = output / "CLAUDE.md"
         path.write_text(
@@ -198,9 +208,9 @@ def _write_adapter(output: Path, adapter: str) -> Path:
                 [
                     "# Agent Workbench Cursor Rule",
                     "",
-                    "Read `.agent-workbench/AGENTS.md` before editing.",
+                    f"Read `{workbench_ref}/AGENTS.md` before editing.",
                     "",
-                    "Use `.agent-workbench/agent-task-pack.md` for the current kickoff prompt, verification commands, and acceptance gate.",
+                    f"Use `{workbench_ref}/agent-task-pack.md` for the current kickoff prompt, verification commands, and acceptance gate.",
                     "",
                     "Keep changes small and run the listed verification commands before summarizing work.",
                     "",
@@ -219,9 +229,9 @@ def _write_adapter(output: Path, adapter: str) -> Path:
                 [
                     "# Codex Instructions",
                     "",
-                    "Read `.agent-workbench/AGENTS.md` first for the repository map, safe commands, high-signal files, and guardrails.",
+                    f"Read `{workbench_ref}/AGENTS.md` first for the repository map, safe commands, high-signal files, and guardrails.",
                     "",
-                    "Use `.agent-workbench/agent-task-pack.md` for the kickoff prompt, first jobs, verification commands, and acceptance gate.",
+                    f"Use `{workbench_ref}/agent-task-pack.md` for the kickoff prompt, first jobs, verification commands, and acceptance gate.",
                     "",
                     "Keep generated caches, local environment files, and secrets out of commits.",
                     "",

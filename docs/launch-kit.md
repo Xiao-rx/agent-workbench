@@ -24,11 +24,17 @@ Topics:
 agent-workbench, ai-agents, claude-code, cli, codex, cursor, devtools, developer-tools, llm, productivity
 ```
 
+License:
+
+```text
+MIT
+```
+
 ## Demo command
 
 ```powershell
 uv tool install git+https://github.com/Xiao-rx/agent-workbench.git
-agent-workbench demo --adapter all --check --print-kickoff
+agent-workbench demo --adapter all --strict --print-kickoff
 ```
 
 ## Share Post Draft
@@ -44,12 +50,17 @@ One command generates:
 - `agent-task-pack.md`
 - optional Claude Code, Codex, Cursor, and OpenCode adapters with `--adapter all`
 - `agent-workbench check` for a quick readiness gate before handing the repo to an agent
+- `--strict` on `demo` and `init` when warnings should fail the proof; it automatically runs the readiness check
+- `demo --proof [PATH]` for a one-option strict all-adapter JSON proof command that also prints copyable `Proof:` and `Proof command:` lines and defaults the proof path inside the generated workbench
+- `init --proof [PATH]` for the same proof shape on the real repository bootstrap path
 - `--print-kickoff` to copy the generated first prompt straight from the terminal
 - the no-secret demo includes a safe `.github/copilot-instructions.md`, so the generated workbench visibly reports existing agent assets
-- text output prints a copyable `Proof:` line with adapter and existing agent asset counts for screenshots, issues, and release notes
-- scan JSON reports existing agent assets such as `AGENTS.md`, `CLAUDE.md`, Codex, Cursor, Copilot, Gemini, and OpenCode instruction files
-- `demo --format json` and `init --format json` for machine-readable proofs with written files, artifact summary, existing agent assets, copyable proof summary, verification command, kickoff prompt, and readiness
-- JSON artifacts with `--output-json` for CI and downstream agent harnesses
+- text output prints a copyable `Proof:` line with adapter and existing agent asset counts, readiness counts when checks run, plus the exact readiness gate command for screenshots, issues, and release notes
+- scan JSON reports `kind`, `schema_version`, and existing agent assets such as `AGENTS.md`, `CLAUDE.md`, Codex, Cursor, Copilot, Gemini, and OpenCode instruction files
+- `demo --format json` and `init --format json` for machine-readable proofs with `kind`, `schema_version`, written files, artifact summary, a handoff object with `AGENTS.md`, `agent-task-pack.md`, and `next_action`, pre-write existing agent assets, copyable proof summary, proof command for the shortcut path, verification command, readiness summary, readiness counts, readiness command, structured readiness args, kickoff prompt, and readiness
+- JSON artifacts with `--output-json` for CI and downstream agent harnesses; the option implies JSON output, so the proof command stays shorter
+- CI validates the installed CLI with the strict all-adapter JSON demo proof, so the launch command is continuously exercised from a fresh checkout
+- MIT license, so reuse rights are explicit before adoption
 
 The output gives Codex, Claude Code, Cursor, OpenCode, and other coding agents a repo map, safe commands, high-signal files, a kickoff prompt, and guardrails before they touch code.
 
@@ -79,11 +90,12 @@ It scans the repo and writes:
 - Codex adapter: .codex/AGENTS.md handoff that points to the generated workbench
 - OpenCode adapter: opencode.json instructions that point to the generated workbench
 - readiness check: a pass/fail command for existing workbench files
-- Proof line: a copyable summary in normal terminal output with adapter and existing agent asset counts
-- scan JSON: machine-readable repo map with file signals, package managers, safe commands, and existing agent assets
-- output JSON files: reusable artifacts for CI and agent harnesses, including artifact summaries, existing agent assets, copyable proof summaries, and verification commands
+- Proof line: a copyable summary in normal terminal output with adapter counts, existing agent asset counts, and readiness status when checks run
+- scan JSON: machine-readable repo map with schema metadata, file signals, package managers, safe commands, and existing agent assets
+- output JSON files: reusable artifacts for CI and agent harnesses, including schema metadata, artifact summaries, structured handoff paths, pre-write existing agent assets, copyable proof summaries, verification commands, readiness summaries, readiness counts, and structured readiness args
 
 It is provider-neutral and outputs plain Markdown, so it can be used with Codex, Claude Code, Cursor, OpenCode, or any coding agent workflow.
+It is MIT licensed.
 
 The repo includes generated examples for Python and TypeScript CLIs, so you can inspect the exact files before installing anything.
 
@@ -91,20 +103,21 @@ Install:
 uv tool install git+https://github.com/Xiao-rx/agent-workbench.git
 
 Demo:
-agent-workbench demo --adapter all --check --print-kickoff
+agent-workbench demo --adapter all --strict --print-kickoff
 
 JSON demo proof:
-agent-workbench demo --adapter all --check --format json --output-json .agent-workbench/demo-proof.json
+agent-workbench demo --proof
 
 JSON init proof:
-agent-workbench init . --output .agent-workbench --adapter all --check --format json --output-json .agent-workbench/init-proof.json
+agent-workbench init . --output .agent-workbench --proof
 
 Check:
 agent-workbench check . --format json
+agent-workbench demo --adapter all --strict
 
 Artifacts:
-agent-workbench scan . --format json --output-json .agent-workbench/repo-map.json
-agent-workbench check . --format json --output-json .agent-workbench/readiness.json
+agent-workbench scan . --output-json .agent-workbench/repo-map.json
+agent-workbench check . --output-json .agent-workbench/readiness.json
 
 I am using a daily GitHub trend/feedback loop to decide what to improve next.
 The local `trend-lab insight --decisions reports/daily-decisions.json` command summarizes the latest decision JSON before each product change.

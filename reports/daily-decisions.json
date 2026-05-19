@@ -1,20 +1,14 @@
 {
   "analysis": {
-    "headline": "9 learning candidates analyzed since 2026-05-12; 3 risky repositories excluded; top signal is topic:agent-skill.",
+    "headline": "8 learning candidates analyzed since 2026-05-13; 4 risky repositories excluded; top signal is topic:agent-skill.",
     "leading_repositories": [
       "vercel-labs/zero",
       "yetone/native-feel-skill",
       "facebookresearch/vggt-omega",
-      "ywnd1144/Gopay_plus_automatic",
-      "DenisSergeevitch/agents-best-practices"
+      "DenisSergeevitch/agents-best-practices",
+      "Kappaemme-git/codex-complexity-optimizer"
     ],
     "excluded_repositories": [
-      [
-        "Nightmare-Eclipse/YellowKey",
-        [
-          "bypass"
-        ]
-      ],
       [
         "DuskMosquito/Lossless-Scaling-Desktop-2026",
         [
@@ -25,12 +19,22 @@
         ]
       ],
       [
-        "TriangleFalcon/KMS-Tools-Portable-2026-Last-Version",
+        "cdanielc293/Jenny-Mod-All-Versions",
         [
-          "keygen",
-          "activator",
-          "activation",
-          "pre-activated"
+          "loader",
+          "mod"
+        ]
+      ],
+      [
+        "DARKHOLEUM/VoidStrap-For-Roblox",
+        [
+          "unlocker"
+        ]
+      ],
+      [
+        "0xdeadbeefnetwork/ssh-keysign-pwn",
+        [
+          "bypass"
         ]
       ]
     ],
@@ -42,8 +46,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "vercel-labs/zero is likely gaining attention because it combines C ecosystem fit.",
         "evidence": [
-          "2689 stars",
-          "166 forks corroborate reuse",
+          "2786 stars",
+          "172 forks corroborate reuse",
           "Apache-2.0 license",
           "recent push activity"
         ],
@@ -78,14 +82,13 @@
       },
       {
         "full_name": "facebookresearch/vggt-omega",
-        "trust_score": 77,
-        "trust_level": "high",
+        "trust_score": 72,
+        "trust_level": "medium",
         "adoption_hypothesis": "facebookresearch/vggt-omega is likely gaining attention because it combines Python ecosystem fit.",
         "evidence": [
-          "1158 stars",
+          "1170 stars",
           "32 forks corroborate reuse",
           "unclear license",
-          "10 open issues",
           "recent push activity"
         ],
         "emulate": [
@@ -97,33 +100,35 @@
         ]
       },
       {
-        "full_name": "ywnd1144/Gopay_plus_automatic",
-        "trust_score": 79,
-        "trust_level": "high",
-        "adoption_hypothesis": "ywnd1144/Gopay_plus_automatic is likely gaining attention because it combines Python ecosystem fit.",
-        "evidence": [
-          "950 stars",
-          "553 forks corroborate reuse",
-          "unclear license",
-          "5 open issues"
-        ],
-        "emulate": [
-          "Show active maintenance through recent commits."
-        ],
-        "avoid": [
-          "Avoid vague positioning with no clear first-use story."
-        ]
-      },
-      {
         "full_name": "DenisSergeevitch/agents-best-practices",
         "trust_score": 84,
         "trust_level": "high",
         "adoption_hypothesis": "DenisSergeevitch/agents-best-practices is likely gaining attention because it combines AI/agent positioning, clear topic packaging.",
         "evidence": [
-          "836 stars",
+          "838 stars",
           "75 forks corroborate reuse",
           "MIT license",
           "4 open issues"
+        ],
+        "emulate": [
+          "Use a concrete one-sentence value proposition.",
+          "Keep license and reuse rights explicit.",
+          "Show active maintenance through recent commits."
+        ],
+        "avoid": [
+          "Avoid copying surface topics without reproducing the proof path."
+        ]
+      },
+      {
+        "full_name": "Kappaemme-git/codex-complexity-optimizer",
+        "trust_score": 80,
+        "trust_level": "high",
+        "adoption_hypothesis": "Kappaemme-git/codex-complexity-optimizer is likely gaining attention because it combines Python ecosystem fit.",
+        "evidence": [
+          "781 stars",
+          "45 forks corroborate reuse",
+          "MIT license",
+          "0 open issues"
         ],
         "emulate": [
           "Use a concrete one-sentence value proposition.",
@@ -137,19 +142,19 @@
     ],
     "languages": [
       [
-        "Python",
-        4
-      ],
-      [
         "Unknown",
         2
       ],
       [
-        "C",
-        1
+        "Python",
+        2
       ],
       [
-        "Rust",
+        "JavaScript",
+        2
+      ],
+      [
+        "C",
         1
       ],
       [
@@ -210,24 +215,16 @@
     "description_terms": [
       [
         "agent",
-        4
+        3
       ],
       [
         "ai",
-        1
-      ],
-      [
-        "app",
-        1
-      ],
-      [
-        "local",
         1
       ]
     ],
     "reasons": [
       "Topic clustering is strong around agent-skill, agent-skills, agentic-workflows, which makes the value proposition easy to search and share.",
-      "Python leads the language mix, so examples and packaging should respect that ecosystem.",
+      "Unknown leads the language mix, so examples and packaging should respect that ecosystem.",
       "AI and agent language is still a strong discovery hook when paired with a concrete workflow."
     ]
   },
@@ -265,14 +262,6 @@
       "signal": "topic:agent"
     },
     {
-      "title": "Add a local insight view for trend comparisons",
-      "rationale": "Data and UI signals point to users wanting inspectable local output, not only a generated brief.",
-      "impact": "medium",
-      "effort": "medium",
-      "verification": "The report data can be opened locally and compared across at least two snapshots.",
-      "signal": "topic:data-ui"
-    },
-    {
       "title": "Create a public progress loop for Xiao-rx/agent-workbench",
       "rationale": "The target repository should show how trend data directly affects roadmap choices.",
       "impact": "medium",
@@ -285,17 +274,17 @@
     {
       "severity": "medium",
       "title": "Trend data contains risky repositories",
-      "detail": "3 repository entries look like piracy, credential abuse, or spam magnets and should not be used as product inspiration."
+      "detail": "4 repository entries look like piracy, credential abuse, or spam magnets and should not be used as product inspiration."
     }
   ],
   "git_observation": {
     "repo": "Xiao-rx/agent-workbench",
     "current_stars": 0,
     "star_delta": 0,
-    "samples_seen": 46,
-    "git_status": "## main...origin/main [ahead 22]\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl\n M reports/daily-brief.md\n M reports/daily-decisions.json",
+    "samples_seen": 47,
+    "git_status": "## main...origin/main [ahead 23]\n M .github/workflows/ci.yml\n M README.md\n M README.zh-CN.md\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl\n M docs/launch-kit.md\n M docs/release-v0.8.0.md\n M reports/daily-brief.md\n M reports/daily-decisions.json\n M src/agent_workbench/checks.py\n M src/agent_workbench/cli.py\n M src/agent_workbench/generator.py\n M src/agent_workbench/scanner.py\n M src/github_trend_lab/cli.py\n M src/github_trend_lab/pipeline.py\n M tests/test_agent_workbench.py\n M tests/test_launch_kit.py\n M tests/test_readme.py\n?? tests/test_ci_workflow.py\n?? tests/test_pipeline.py",
     "recommendation": "Commit small, explainable improvements and watch the next star sample for response.",
-    "recent_change": "Add local trend insight command",
-    "next_sample_gate": "After publishing Add local trend insight command, compare the next star sample with 0 stars and local delta 0."
+    "recent_change": "Record feedback for trend insight command",
+    "next_sample_gate": "After publishing Record feedback for trend insight command, compare the next star sample with 0 stars and local delta 0."
   }
 }

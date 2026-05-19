@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import fnmatch
+import json
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -176,14 +177,36 @@ def _package_managers(root: Path) -> tuple[str, ...]:
 def _test_commands(root: Path) -> tuple[str, ...]:
     commands = []
     if (root / "pyproject.toml").exists():
-        commands.append("python -m unittest discover -s tests")
+        python_command = _python_verification_command(root)
+        if python_command:
+            commands.append(python_command)
     if (root / "package.json").exists():
-        commands.append("npm test")
+        if _package_json_has_test_script(root / "package.json"):
+            commands.append("npm test")
     if (root / "Cargo.toml").exists():
         commands.append("cargo test")
     if (root / "go.mod").exists():
         commands.append("go test ./...")
     return tuple(commands)
+
+
+def _python_verification_command(root: Path) -> str | None:
+    if (root / "tests").is_dir():
+        return "python -m unittest discover -s tests"
+    if (root / "src").is_dir():
+        return "python -m compileall src"
+    if any(path.is_file() and path.suffix == ".py" for path in root.iterdir()):
+        return "python -m compileall ."
+    return None
+
+
+def _package_json_has_test_script(path: Path) -> bool:
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8", errors="ignore"))
+    except (OSError, json.JSONDecodeError):
+        return False
+    scripts = payload.get("scripts")
+    return isinstance(scripts, dict) and bool(scripts.get("test"))
 
 
 def _risk_notes(root: Path) -> tuple[str, ...]:

@@ -1,10 +1,14 @@
 # Agent Workbench
 
-[中文完整版](README.zh-CN.md) | [English introduction](#english-introduction)
+**中文**：用一条命令把任意代码仓库变成 AI coding agent 可以安全接手的工作区。
+
+**English**: Turn any repository into an AI-agent-ready workspace with one command.
+
+[完整中文 README](README.zh-CN.md) | [English introduction](#english-introduction)
 
 ## 中文介绍
 
-用一条命令把任意代码仓库变成 AI coding agent 可以安全接手的工作区。
+如果你习惯中文阅读，可以直接看 [README.zh-CN.md](README.zh-CN.md)。这个首页也保留中文介绍，方便中文用户先判断它是不是自己需要的工具。
 
 Agent Workbench 是一个 provider-neutral 的 Python CLI。它会扫描仓库结构、包管理器、测试命令和本地风险信号，然后生成两份可直接交给 coding agent 的 Markdown 文件：
 
@@ -106,7 +110,7 @@ Install directly from GitHub:
 
 ```powershell
 uv tool install git+https://github.com/Xiao-rx/agent-workbench.git
-agent-workbench demo --adapter all --check --print-kickoff
+agent-workbench demo --adapter all --strict --print-kickoff
 ```
 
 Try the no-secret demo first:
@@ -115,20 +119,23 @@ Try the no-secret demo first:
 $env:UV_CACHE_DIR='.uv-cache'
 $env:UV_PYTHON_INSTALL_DIR='.uv-python'
 $env:PYTHONPATH='src'
-uv run --python 3.12 python -m agent_workbench demo --adapter all --check --print-kickoff
+uv run --python 3.12 python -m agent_workbench demo --adapter all --strict --print-kickoff
 ```
 
-Text output prints a `Proof:` line with the same copyable summary as JSON, including adapter and existing agent asset counts, so the first run is easy to screenshot or paste into an issue.
+Text output prints a `Proof:` line with the same copyable summary as JSON, including adapter and existing agent asset counts, readiness counts when checks run, plus a readiness gate command when checks, adapters, or strict mode are requested.
 The demo repository includes a safe `.github/copilot-instructions.md`, so the generated workbench shows how existing agent assets are detected.
 
 Generate a machine-readable demo proof:
 
 ```powershell
-agent-workbench demo --adapter all --check --format json --output-json .agent-workbench/demo-proof.json
+agent-workbench demo --proof
 ```
 
-The JSON proof includes the written files, a compact artifact summary, existing `agent_assets`, a copyable `proof_summary`, the first verification command when available, the kickoff prompt, and optional readiness.
-Scan JSON also includes `agent_assets`, so downstream harnesses can tell whether a repository already carries Claude, Codex, Cursor, Copilot, Gemini, or OpenCode guidance.
+`demo --proof [PATH]` writes a strict all-adapter JSON proof for screenshots, CI, and downstream agent harnesses, and prints the same copyable `Proof:` summary and `Proof command:` line to stdout. When `PATH` is omitted, the proof is saved as `demo-proof.json` inside the generated workbench directory.
+The JSON proof includes `kind` and `schema_version`, the written files, a compact artifact summary, a `handoff` object with `AGENTS.md`, `agent-task-pack.md`, and `next_action`, pre-write existing `agent_assets`, a copyable `proof_summary`, the reproducible `proof_command` when the shortcut is used, the first verification command when available, a `readiness_summary` and `readiness_counts` when checks run, a `readiness_command` plus structured `readiness_args` that preserve adapter and strict gates, the kickoff prompt, and optional readiness.
+Scan JSON also includes `kind`, `schema_version`, and `agent_assets`, so downstream harnesses can tell which payload they are reading and whether a repository already carries Claude, Codex, Cursor, Copilot, Gemini, or OpenCode guidance.
+Python verification commands are only reported when the matching path exists: `tests/` uses unittest discovery, otherwise Python source falls back to `compileall`.
+Use `--strict` with `demo` or `init` when warnings should make the proof fail; it automatically runs the readiness check.
 
 Generate files for your current repository:
 
@@ -136,12 +143,16 @@ Generate files for your current repository:
 uv run --python 3.12 python -m agent_workbench init . --output .agent-workbench --project-name my-repo --check
 ```
 
+Relative `--output` paths are resolved inside the target repository root, so `agent-workbench init C:\path\to\repo --output .agent-workbench` writes `C:\path\to\repo\.agent-workbench`.
+Generated Codex and Cursor handoffs point back to the same resolved workbench path, even when the output directory is not the default `.agent-workbench`.
+
 Generate a machine-readable init proof:
 
 ```powershell
-agent-workbench init . --output .agent-workbench --adapter all --check --format json --output-json .agent-workbench/init-proof.json
+agent-workbench init . --output .agent-workbench --proof
 ```
 
+`init --proof [PATH]` writes a shareable JSON init proof, prints the same `Proof:` and `Proof command:` lines, and defaults the path inside the generated workbench when omitted.
 Generate optional Claude Code, Codex, Cursor, and OpenCode adapters:
 
 ```powershell
@@ -153,7 +164,7 @@ Inspect a repository before generating files:
 ```powershell
 uv run --python 3.12 python -m agent_workbench scan .
 uv run --python 3.12 python -m agent_workbench scan . --format json
-uv run --python 3.12 python -m agent_workbench scan . --format json --output-json .agent-workbench/repo-map.json
+uv run --python 3.12 python -m agent_workbench scan . --output-json .agent-workbench/repo-map.json
 ```
 
 Check whether a repository already has an agent-ready workbench:
@@ -163,12 +174,13 @@ agent-workbench check .
 agent-workbench check . --format json
 agent-workbench check . --strict --format json
 agent-workbench check . --adapter all --format json
-agent-workbench check . --format json --output-json .agent-workbench/readiness.json
+agent-workbench check . --output-json .agent-workbench/readiness.json
 ```
 
 `check` also validates optional Claude Code, Codex, Cursor, and OpenCode handoff files when they are present. Use `--adapter all` to require all four handoffs.
 Use `--strict` in CI when warnings, such as missing `.gitignore` or local secret-risk files, should make the repository `not_ready`.
-JSON readiness reports include `next_action`, so downstream agent harnesses can route ready, failed, and warning-only workspaces without parsing human text.
+JSON readiness reports include `kind`, `schema_version`, `counts`, and `next_action`, so downstream agent harnesses can route ready, failed, and warning-only workspaces without parsing human text.
+For all commands, `--output-json PATH` implies JSON output, so CI and scripts can save artifacts without also passing `--format json`.
 
 Run tests:
 
@@ -190,19 +202,20 @@ The goal is not to be another agent. The goal is to make every repository easier
 - Works before you choose an agent tool.
 - Shows Python and TypeScript proof paths.
 - Produces plain Markdown that humans can review.
+- MIT licensed, so reuse rights are explicit before adoption.
 
 ## Commands
 
 ```text
-agent-workbench demo [--output PATH] [--adapter claude|codex|cursor|opencode|all] [--check] [--print-kickoff] [--format text|json] [--output-json PATH]
+agent-workbench demo [--output PATH] [--adapter claude|codex|cursor|opencode|all] [--check] [--strict] [--print-kickoff] [--format text|json] [--output-json PATH] [--proof [PATH]]
 agent-workbench scan [ROOT] [--format text|json] [--output-json PATH]
 agent-workbench check [ROOT] [--workbench PATH] [--adapter claude|codex|cursor|opencode|all] [--strict] [--format text|json] [--output-json PATH]
-agent-workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|opencode|all] [--check] [--print-kickoff] [--format text|json] [--output-json PATH]
+agent-workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|opencode|all] [--check] [--strict] [--print-kickoff] [--format text|json] [--output-json PATH] [--proof [PATH]]
 
 python -m agent_workbench scan [ROOT] [--format text|json] [--output-json PATH]
 python -m agent_workbench check [ROOT] [--workbench PATH] [--adapter claude|codex|cursor|opencode|all] [--strict] [--format text|json] [--output-json PATH]
-python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|opencode|all] [--check] [--print-kickoff] [--format text|json] [--output-json PATH]
-python -m agent_workbench demo [--output PATH] [--adapter claude|codex|cursor|opencode|all] [--check] [--print-kickoff] [--format text|json] [--output-json PATH]
+python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|opencode|all] [--check] [--strict] [--print-kickoff] [--format text|json] [--output-json PATH] [--proof [PATH]]
+python -m agent_workbench demo [--output PATH] [--adapter claude|codex|cursor|opencode|all] [--check] [--strict] [--print-kickoff] [--format text|json] [--output-json PATH] [--proof [PATH]]
 ```
 
 ## Release
@@ -211,6 +224,7 @@ python -m agent_workbench demo [--output PATH] [--adapter claude|codex|cursor|op
 - Latest published release: [`v0.7.0`](https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.7.0)
 - Launch kit: [`docs/launch-kit.md`](docs/launch-kit.md)
 - Install from GitHub: `uv tool install git+https://github.com/Xiao-rx/agent-workbench.git`
+- License: [`MIT`](LICENSE)
 
 The internal trend engine remains available for growth experiments:
 

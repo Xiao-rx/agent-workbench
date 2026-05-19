@@ -55,22 +55,28 @@ class InsightTests(unittest.TestCase):
             stdout = StringIO()
 
             with redirect_stdout(stdout):
-                exit_code = main(["insight", "--decisions", str(decisions), "--format", "json", "--output-json", str(output)])
+                exit_code = main(["insight", "--decisions", str(decisions), "--output-json", str(output)])
 
             payload = json.loads(output.read_text(encoding="utf-8"))
         self.assertEqual(exit_code, 0)
         self.assertEqual(payload["next_product_move"]["verification"], "Run the demo.")
         self.assertIn("Wrote insight", stdout.getvalue())
 
-    def test_cli_insight_output_json_requires_json_format(self):
+    def test_cli_insight_output_json_implies_json_format(self):
         with tempfile.TemporaryDirectory() as tmp:
             decisions = Path(tmp) / "daily-decisions.json"
+            output = Path(tmp) / "insight.json"
             decisions.write_text(json.dumps(_decisions_payload()), encoding="utf-8")
+            stdout = StringIO()
 
-            with self.assertRaises(SystemExit) as raised:
-                main(["insight", "--decisions", str(decisions), "--output-json", str(Path(tmp) / "insight.json")])
+            with redirect_stdout(stdout):
+                exit_code = main(["insight", "--decisions", str(decisions), "--output-json", str(output)])
 
-        self.assertEqual(raised.exception.code, 2)
+            payload = json.loads(output.read_text(encoding="utf-8"))
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(payload["top_signal"], "topic:agent-skill (2)")
+        self.assertIn("Wrote insight", stdout.getvalue())
 
     def test_insight_accepts_utf8_bom_decision_json(self):
         with tempfile.TemporaryDirectory() as tmp:
