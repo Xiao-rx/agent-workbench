@@ -119,7 +119,7 @@ Generate a machine-readable demo proof:
 agent-workbench demo --adapter all --check --format json --output-json .agent-workbench/demo-proof.json
 ```
 
-The JSON proof includes the written files, a compact artifact summary, the first verification command when available, the kickoff prompt, and optional readiness.
+The JSON proof includes the written files, a compact artifact summary, a copyable `proof_summary`, the first verification command when available, the kickoff prompt, and optional readiness.
 
 Generate files for your current repository:
 

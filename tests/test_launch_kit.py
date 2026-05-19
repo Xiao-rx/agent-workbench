@@ -19,6 +19,7 @@ class LaunchKitTests(unittest.TestCase):
         self.assertIn("demo --format json", launch)
         self.assertIn("init --format json", launch)
         self.assertIn("artifact summary", launch)
+        self.assertIn("copyable proof summary", launch)
         self.assertIn("verification command", launch)
         self.assertIn("Codex adapter", launch)
         self.assertIn("agent-workbench check . --format json", launch)
