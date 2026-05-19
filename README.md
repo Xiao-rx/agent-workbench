@@ -53,13 +53,16 @@ Example `AGENTS.md` output:
 
 The goal is boringly useful: give an agent enough local context to start small, verify changes, and avoid obvious mistakes.
 
-## Real Example
+## Real Examples
 
-See a tiny Python CLI before and after Agent Workbench:
+See tiny repositories before and after Agent Workbench:
 
-- Input repository: [`examples/python-cli/source`](examples/python-cli/source)
-- Generated `AGENTS.md`: [`examples/python-cli/agent-workbench/AGENTS.md`](examples/python-cli/agent-workbench/AGENTS.md)
-- Generated task pack: [`examples/python-cli/agent-workbench/agent-task-pack.md`](examples/python-cli/agent-workbench/agent-task-pack.md)
+- Python input: [`examples/python-cli/source`](examples/python-cli/source)
+- Python `AGENTS.md`: [`examples/python-cli/agent-workbench/AGENTS.md`](examples/python-cli/agent-workbench/AGENTS.md)
+- Python task pack: [`examples/python-cli/agent-workbench/agent-task-pack.md`](examples/python-cli/agent-workbench/agent-task-pack.md)
+- TypeScript input: [`examples/typescript-cli/source`](examples/typescript-cli/source)
+- TypeScript `AGENTS.md`: [`examples/typescript-cli/agent-workbench/AGENTS.md`](examples/typescript-cli/agent-workbench/AGENTS.md)
+- TypeScript task pack: [`examples/typescript-cli/agent-workbench/agent-task-pack.md`](examples/typescript-cli/agent-workbench/agent-task-pack.md)
 
 Example `agent-task-pack.md` output:
 
@@ -131,6 +134,7 @@ The goal is not to be another agent. The goal is to make every repository easier
 - No model or provider lock-in.
 - No secrets required for the product CLI.
 - Works before you choose an agent tool.
+- Shows Python and TypeScript proof paths.
 - Produces plain Markdown that humans can review.
 
 ## Commands

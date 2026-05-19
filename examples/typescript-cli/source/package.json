@@ -1,0 +1,13 @@
+{
+  "name": "tiny-typescript-cli",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "bin": {
+    "tiny-ts": "dist/index.js"
+  },
+  "scripts": {
+    "test": "node --test tests/smoke.test.js"
+  },
+  "devDependencies": {}
+}

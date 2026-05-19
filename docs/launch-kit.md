@@ -29,6 +29,8 @@ One command generates:
 
 The output gives Codex, Claude Code, Cursor, OpenCode, and other coding agents a repo map, safe commands, high-signal files, a kickoff prompt, and guardrails before they touch code.
 
+Examples include generated workbench output for both Python and TypeScript CLI repositories.
+
 Repo: https://github.com/Xiao-rx/agent-workbench
 Release: https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.2.0
 
@@ -51,6 +53,8 @@ It scans the repo and writes:
 - agent-task-pack.md: kickoff prompt, first jobs, acceptance gates
 
 It is provider-neutral and outputs plain Markdown, so it can be used with Codex, Claude Code, Cursor, OpenCode, or any coding agent workflow.
+
+The repo includes generated examples for Python and TypeScript CLIs, so you can inspect the exact files before installing anything.
 
 Install:
 uv tool install git+https://github.com/Xiao-rx/agent-workbench.git
