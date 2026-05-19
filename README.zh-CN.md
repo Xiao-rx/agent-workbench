@@ -46,6 +46,12 @@ agent-workbench init . --output .agent-workbench --adapter all
 `--adapter all` 会一次生成 Claude Code、Codex 和 Cursor 的轻量适配文件。
 `--print-kickoff` 会把生成的 kickoff prompt 直接打印到终端，方便立刻交给 coding agent。
 
+如果想把 demo 结果交给脚本或下游 agent harness，可以输出 JSON：
+
+```powershell
+agent-workbench demo --adapter all --check --format json
+```
+
 只查看仓库扫描结果：
 
 ```powershell

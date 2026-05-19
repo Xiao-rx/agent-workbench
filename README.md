@@ -113,6 +113,12 @@ $env:PYTHONPATH='src'
 uv run --python 3.12 python -m agent_workbench demo --adapter all --check --print-kickoff
 ```
 
+Generate a machine-readable demo proof:
+
+```powershell
+agent-workbench demo --adapter all --check --format json
+```
+
 Generate files for your current repository:
 
 ```powershell
@@ -165,7 +171,7 @@ The goal is not to be another agent. The goal is to make every repository easier
 ## Commands
 
 ```text
-agent-workbench demo [--output PATH] [--adapter claude|codex|cursor|all] [--check] [--print-kickoff]
+agent-workbench demo [--output PATH] [--adapter claude|codex|cursor|all] [--check] [--print-kickoff] [--format text|json]
 agent-workbench scan [ROOT] [--format text|json] [--output-json PATH]
 agent-workbench check [ROOT] [--workbench PATH] [--format text|json] [--output-json PATH]
 agent-workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|all] [--check] [--print-kickoff]

@@ -365,6 +365,23 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertIn("You are working in agent-workbench-demo.", text)
             self.assertIn("Read AGENTS.md first", text)
 
+    def test_demo_command_can_emit_json_proof(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "demo"
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["demo", "--output", str(output), "--adapter", "all", "--check", "--format", "json"])
+
+            payload = json.loads(stdout.getvalue())
+            self.assertEqual(exit_code, 0)
+            self.assertEqual(payload["demo_repository"], str(output.resolve() / "sample-repo"))
+            self.assertEqual(payload["workbench"], str(output.resolve() / ".agent-workbench"))
+            self.assertIn("You are working in agent-workbench-demo.", payload["kickoff_prompt"])
+            self.assertEqual(payload["readiness"]["status"], "ready")
+            self.assertTrue(any(path.endswith("CLAUDE.md") for path in payload["written"]))
+            self.assertTrue(any(path.endswith(".codex\\AGENTS.md") or path.endswith(".codex/AGENTS.md") for path in payload["written"]))
+
     def test_init_command_writes_requested_adapter(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp) / "repo"
