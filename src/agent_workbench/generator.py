@@ -44,21 +44,48 @@ def render_agents_md(repo: RepoMap, project_name: str | None = None) -> str:
 
 def render_task_pack(repo: RepoMap, project_name: str | None = None) -> str:
     name = project_name or repo.root.name
+    safe_commands = repo.test_commands or ("Add and document a safe verification command before making risky edits.",)
+    high_signal_files = _task_pack_files(repo)
+    first_file = high_signal_files[0].path if high_signal_files else "README.md"
+    guardrails = repo.risk_notes or ("Keep changes small and run verification before committing.",)
     return "\n".join(
         [
             f"# Agent Task Pack: {name}",
             "",
+            "## Kickoff Prompt",
+            "",
+            "```text",
+            f"You are working in {name}. Read AGENTS.md first, inspect `{first_file}`, make one small improvement, and verify it before summarizing the change.",
+            "```",
+            "",
+            "## Verification Commands",
+            "",
+            *[f"- `{command}`" for command in safe_commands],
+            "",
+            "## High-Signal Files",
+            "",
+            *[
+                f"- `{file.path}` ({file.kind}, {file.lines} lines)"
+                for file in high_signal_files
+            ],
+            *(["- Add a README or primary source file before assigning agent work."] if not high_signal_files else []),
+            "",
             "## First Jobs",
             "",
-            "1. Run the safe commands from AGENTS.md and capture failures.",
-            "2. Improve the README first-run path so a new contributor gets a visible result in under five minutes.",
-            "3. Add or tighten tests around the highest-risk code path before feature work.",
+            "1. Run the verification commands and capture any existing failures.",
+            f"2. Inspect `{first_file}` and one adjacent test or documentation file.",
+            "3. Make the smallest useful change that improves the first-run path or reduces agent confusion.",
+            "4. Re-run verification and summarize the changed files, result, and any follow-up risk.",
             "",
             "## Acceptance Gate",
             "",
             "- Every change explains the problem, the touched files, and the verification command.",
             "- No secrets, generated caches, or local environment files are committed.",
             "- Large rewrites must be split into reviewable commits.",
+            "",
+            "## Guardrails",
+            "",
+            *[f"- {note}" for note in guardrails],
             "",
         ]
     )
@@ -80,3 +107,15 @@ def _counter_text(counter: Counter[str]) -> str:
     if not counter:
         return "none"
     return ", ".join(f"{kind}={count}" for kind, count in counter.most_common(6))
+
+
+def _task_pack_files(repo: RepoMap):
+    def rank(file):
+        priority = 2
+        if file.path == "README.md":
+            priority = 0
+        elif file.path.startswith(("src/agent_workbench/", "tests/test_agent_workbench")):
+            priority = 1
+        return (priority, -file.lines, file.path)
+
+    return tuple(sorted(repo.files, key=rank)[:6])

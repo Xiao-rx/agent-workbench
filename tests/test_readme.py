@@ -10,6 +10,8 @@ class ReadmeTests(unittest.TestCase):
         self.assertIn(".agent-workbench/", readme)
         self.assertIn("AGENTS.md", readme)
         self.assertIn("agent-task-pack.md", readme)
+        self.assertIn("## Kickoff Prompt", readme)
+        self.assertIn("## Verification Commands", readme)
         self.assertIn("provider-neutral", readme.lower())
 
 

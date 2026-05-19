@@ -5,7 +5,7 @@ from io import StringIO
 from pathlib import Path
 
 from agent_workbench.cli import main
-from agent_workbench.generator import render_agents_md, write_workbench
+from agent_workbench.generator import render_agents_md, render_task_pack, write_workbench
 from agent_workbench.scanner import scan_repo
 
 
@@ -47,6 +47,42 @@ class AgentWorkbenchTests(unittest.TestCase):
 
             self.assertTrue(agents_path.exists())
             self.assertTrue(tasks_path.exists())
+
+    def test_render_task_pack_contains_repo_specific_kickoff(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "pyproject.toml").write_text("[project]\nname='x'\n", encoding="utf-8")
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+            (root / "tests").mkdir()
+            (root / "tests" / "test_demo.py").write_text("def test_demo():\n    assert True\n", encoding="utf-8")
+            repo = scan_repo(root)
+
+        output = render_task_pack(repo, "demo")
+
+        self.assertIn("## Kickoff Prompt", output)
+        self.assertIn("## Verification Commands", output)
+        self.assertIn("python -m unittest discover -s tests", output)
+        self.assertIn("## High-Signal Files", output)
+        self.assertIn("tests/test_demo.py", output)
+        self.assertIn("Acceptance Gate", output)
+
+    def test_render_task_pack_prioritizes_product_entry_points(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "pyproject.toml").write_text("[project]\nname='x'\n", encoding="utf-8")
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+            product = root / "src" / "agent_workbench"
+            product.mkdir(parents=True)
+            (product / "cli.py").write_text("print('agent workbench')\n", encoding="utf-8")
+            internal = root / "src" / "github_trend_lab"
+            internal.mkdir(parents=True)
+            (internal / "agents.py").write_text("\n".join("x = 1" for _ in range(200)), encoding="utf-8")
+            repo = scan_repo(root)
+
+        output = render_task_pack(repo, "demo")
+
+        self.assertIn("inspect `README.md`", output)
+        self.assertLess(output.index("README.md"), output.index("src/github_trend_lab/agents.py"))
 
     def test_scan_repo_skips_local_agent_workbench_artifacts(self):
         with tempfile.TemporaryDirectory() as tmp:

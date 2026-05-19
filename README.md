@@ -41,6 +41,22 @@ Example `AGENTS.md` output:
 
 The goal is boringly useful: give an agent enough local context to start small, verify changes, and avoid obvious mistakes.
 
+Example `agent-task-pack.md` output:
+
+```markdown
+## Kickoff Prompt
+
+You are working in my-repo. Read AGENTS.md first, inspect `README.md`, make one small improvement, and verify it before summarizing the change.
+
+## Verification Commands
+
+- `python -m unittest discover -s tests`
+
+## High-Signal Files
+
+- `README.md` (docs, 40 lines)
+```
+
 ## Quick Start
 
 Try the no-secret demo first:
