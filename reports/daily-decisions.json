@@ -1,50 +1,25 @@
 {
   "analysis": {
-    "headline": "9 learning candidates analyzed since 2026-05-12; 3 risky repositories excluded; top signal is topic:agent-skill.",
+    "headline": "12 learning candidates analyzed since 2026-01-01; 0 risky repositories excluded; top signal is topic:llm.",
     "leading_repositories": [
-      "vercel-labs/zero",
-      "yetone/native-feel-skill",
-      "facebookresearch/vggt-omega",
-      "ywnd1144/Gopay_plus_automatic",
-      "DenisSergeevitch/agents-best-practices"
+      "ultraworkers/claw-code",
+      "affaan-m/ECC",
+      "multica-ai/andrej-karpathy-skills",
+      "garrytan/gstack",
+      "mattpocock/skills"
     ],
-    "excluded_repositories": [
-      [
-        "Nightmare-Eclipse/YellowKey",
-        [
-          "bypass"
-        ]
-      ],
-      [
-        "DuskMosquito/Lossless-Scaling-Desktop-2026",
-        [
-          "keygen",
-          "activator",
-          "license key",
-          "pre-activated"
-        ]
-      ],
-      [
-        "TriangleFalcon/KMS-Tools-Portable-2026-Last-Version",
-        [
-          "keygen",
-          "activator",
-          "activation",
-          "pre-activated"
-        ]
-      ]
-    ],
+    "excluded_repositories": [],
     "watched_repositories": [],
     "repo_lessons": [
       {
-        "full_name": "vercel-labs/zero",
-        "trust_score": 91,
+        "full_name": "ultraworkers/claw-code",
+        "trust_score": 100,
         "trust_level": "high",
-        "adoption_hypothesis": "vercel-labs/zero is likely gaining attention because it combines C ecosystem fit.",
+        "adoption_hypothesis": "ultraworkers/claw-code is likely gaining attention because it combines Rust ecosystem fit.",
         "evidence": [
-          "2433 stars",
-          "150 forks corroborate reuse",
-          "Apache-2.0 license",
+          "191956 stars",
+          "109945 forks corroborate reuse",
+          "MIT license",
           "recent push activity"
         ],
         "emulate": [
@@ -57,15 +32,16 @@
         ]
       },
       {
-        "full_name": "yetone/native-feel-skill",
-        "trust_score": 84,
+        "full_name": "affaan-m/ECC",
+        "trust_score": 100,
         "trust_level": "high",
-        "adoption_hypothesis": "yetone/native-feel-skill is likely gaining attention because it combines AI/agent positioning.",
+        "adoption_hypothesis": "affaan-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "1330 stars",
-          "61 forks corroborate reuse",
+          "186899 stars",
+          "28938 forks corroborate reuse",
           "MIT license",
-          "1 open issues"
+          "1 open issues",
+          "recent push activity"
         ],
         "emulate": [
           "Use a concrete one-sentence value proposition.",
@@ -77,16 +53,14 @@
         ]
       },
       {
-        "full_name": "facebookresearch/vggt-omega",
-        "trust_score": 77,
-        "trust_level": "high",
-        "adoption_hypothesis": "facebookresearch/vggt-omega is likely gaining attention because it combines Python ecosystem fit.",
+        "full_name": "multica-ai/andrej-karpathy-skills",
+        "trust_score": 70,
+        "trust_level": "medium",
+        "adoption_hypothesis": "multica-ai/andrej-karpathy-skills is likely gaining attention because it combines AI/agent positioning.",
         "evidence": [
-          "1090 stars",
-          "29 forks corroborate reuse",
-          "unclear license",
-          "9 open issues",
-          "recent push activity"
+          "136926 stars",
+          "14048 forks corroborate reuse",
+          "unclear license"
         ],
         "emulate": [
           "Use a concrete one-sentence value proposition.",
@@ -97,33 +71,35 @@
         ]
       },
       {
-        "full_name": "ywnd1144/Gopay_plus_automatic",
-        "trust_score": 78,
+        "full_name": "garrytan/gstack",
+        "trust_score": 99,
         "trust_level": "high",
-        "adoption_hypothesis": "ywnd1144/Gopay_plus_automatic is likely gaining attention because it combines Python ecosystem fit.",
+        "adoption_hypothesis": "garrytan/gstack is likely gaining attention because it combines TypeScript ecosystem fit.",
         "evidence": [
-          "945 stars",
-          "551 forks corroborate reuse",
-          "unclear license",
-          "5 open issues"
+          "99312 stars",
+          "14802 forks corroborate reuse",
+          "MIT license",
+          "recent push activity"
         ],
         "emulate": [
+          "Use a concrete one-sentence value proposition.",
+          "Keep license and reuse rights explicit.",
           "Show active maintenance through recent commits."
         ],
         "avoid": [
-          "Avoid vague positioning with no clear first-use story."
+          "Avoid copying surface topics without reproducing the proof path."
         ]
       },
       {
-        "full_name": "DenisSergeevitch/agents-best-practices",
-        "trust_score": 84,
+        "full_name": "mattpocock/skills",
+        "trust_score": 93,
         "trust_level": "high",
-        "adoption_hypothesis": "DenisSergeevitch/agents-best-practices is likely gaining attention because it combines AI/agent positioning, clear topic packaging.",
+        "adoption_hypothesis": "mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit.",
         "evidence": [
-          "828 stars",
-          "74 forks corroborate reuse",
+          "93135 stars",
+          "8185 forks corroborate reuse",
           "MIT license",
-          "4 open issues"
+          "recent push activity"
         ],
         "emulate": [
           "Use a concrete one-sentence value proposition.",
@@ -137,83 +113,99 @@
     ],
     "languages": [
       [
-        "Python",
-        4
+        "TypeScript",
+        3
+      ],
+      [
+        "Rust",
+        2
+      ],
+      [
+        "JavaScript",
+        2
       ],
       [
         "Unknown",
         2
       ],
       [
-        "C",
-        1
+        "Python",
+        2
       ],
       [
-        "Rust",
-        1
-      ],
-      [
-        "C++",
+        "Shell",
         1
       ]
     ],
     "topics": [
       [
-        "agent-skill",
-        1
+        "llm",
+        4
       ],
       [
-        "agent-skills",
-        1
+        "anthropic",
+        3
       ],
       [
-        "agentic-workflows",
-        1
+        "claude-code",
+        3
       ],
       [
-        "agents",
-        1
+        "ai",
+        3
+      ],
+      [
+        "claude",
+        2
+      ],
+      [
+        "developer-tools",
+        2
+      ],
+      [
+        "mcp",
+        2
+      ],
+      [
+        "productivity",
+        2
       ],
       [
         "ai-agents",
         1
       ],
       [
-        "anthropic",
+        "awesome-list",
         1
       ],
       [
-        "claude",
+        "design-md",
         1
       ],
       [
-        "claude-code",
-        1
-      ],
-      [
-        "codex",
-        1
-      ],
-      [
-        "codex-skill",
-        1
-      ],
-      [
-        "mcp",
-        1
-      ],
-      [
-        "prompt-engineering",
+        "design-system",
         1
       ]
     ],
     "description_terms": [
       [
-        "agent",
-        4
+        "ai",
+        3
       ],
       [
-        "ai",
+        "llm",
+        2
+      ],
+      [
+        "open",
+        2
+      ],
+      [
+        "agent",
+        1
+      ],
+      [
+        "ui",
         1
       ],
       [
@@ -221,32 +213,37 @@
         1
       ],
       [
-        "local",
+        "cli",
+        1
+      ],
+      [
+        "dev",
         1
       ]
     ],
     "reasons": [
-      "Topic clustering is strong around agent-skill, agent-skills, agentic-workflows, which makes the value proposition easy to search and share.",
-      "Python leads the language mix, so examples and packaging should respect that ecosystem.",
-      "AI and agent language is still a strong discovery hook when paired with a concrete workflow."
+      "Topic clustering is strong around llm, anthropic, claude-code, which makes the value proposition easy to search and share.",
+      "TypeScript leads the language mix, so examples and packaging should respect that ecosystem.",
+      "AI and agent language is still a strong discovery hook when paired with a concrete workflow.",
+      "Developer automation projects benefit from short setup, visible output, and repeatable commands."
     ]
   },
   "backlog": [
     {
       "title": "Ship a one-command demo loop",
-      "rationale": "topic:agent-skill (1) is the strongest analysis signal, so the first success path should make that value obvious.",
+      "rationale": "topic:llm (4) is the strongest analysis signal, so the first success path should make that value obvious.",
       "impact": "high",
       "effort": "medium",
       "verification": "A fresh clone can run the demo command and produce a report without secrets.",
-      "signal": "topic:agent-skill (1)"
+      "signal": "topic:llm (4)"
     },
     {
       "title": "Publish daily trend evidence",
-      "rationale": "The roadmap should show how current topic:agent-skill (1) evidence changes recommendations over time.",
+      "rationale": "The roadmap should show how current topic:llm (4) evidence changes recommendations over time.",
       "impact": "high",
       "effort": "low",
       "verification": "A scheduled run updates a snapshot, star history, and daily brief.",
-      "signal": "topic:agent-skill (1)"
+      "signal": "topic:llm (4)"
     },
     {
       "title": "Keep credentials optional and documented",
@@ -263,6 +260,14 @@
       "effort": "medium",
       "verification": "The daily run writes both Markdown and JSON decision artifacts.",
       "signal": "topic:agent"
+    },
+    {
+      "title": "Tighten the CLI around repeatable maintainer workflows",
+      "rationale": "Developer-tool projects win when routine jobs become short, memorable commands.",
+      "impact": "medium",
+      "effort": "medium",
+      "verification": "Collect, monitor, analyze, and orchestrate commands have examples and tests.",
+      "signal": "topic:automation"
     },
     {
       "title": "Add a local insight view for trend comparisons",
@@ -283,17 +288,17 @@
   ],
   "review_findings": [
     {
-      "severity": "medium",
-      "title": "Trend data contains risky repositories",
-      "detail": "3 repository entries look like piracy, credential abuse, or spam magnets and should not be used as product inspiration."
+      "severity": "low",
+      "title": "Backlog has testable gates",
+      "detail": "Every proposed item includes a verification statement and can be reviewed before release."
     }
   ],
   "git_observation": {
     "repo": "Xiao-rx/agent-workbench",
-    "current_stars": null,
-    "star_delta": null,
-    "samples_seen": 0,
-    "git_status": "## No commits yet on master\n?? .agent-workbench/\n?? .env.example\n?? .github/\n?? .gitignore\n?? .omx/\n?? CLAUDE.md\n?? README.md\n?? data/\n?? pyproject.toml\n?? reports/\n?? scripts/\n?? src/\n?? tests/\n?? uv.lock",
-    "recommendation": "Target repository has no star history yet; publish the repo, then capture the first sample."
+    "current_stars": 0,
+    "star_delta": 0,
+    "samples_seen": 2,
+    "git_status": "## main...origin/main\n M data/snapshots/trend-product-live.json\n?? data/star_history/Xiao-rx__agent-workbench.jsonl",
+    "recommendation": "Commit small, explainable improvements and watch the next star sample for response."
   }
 }

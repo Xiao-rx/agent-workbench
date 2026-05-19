@@ -1,117 +1,118 @@
 # GitHub Trend Lab Daily Brief
 
-Generated: 2026\-05\-19T08:58:34Z
-Search window: repositories created since 2026\-05\-12
-Query: `created:>=2026-05-12 stars:>=50 archived:false fork:false`
+Generated: 2026\-05\-19T10:16:17Z
+Search window: repositories created since 2026\-01\-01
+Query: `created:>=2026-01-01 stars:>=50 archived:false fork:false`
 
 ## Hotness Analyst
 
-9 learning candidates analyzed since 2026\-05\-12; 3 risky repositories excluded; top signal is topic:agent\-skill\.
+12 learning candidates analyzed since 2026\-01\-01; 0 risky repositories excluded; top signal is topic:llm\.
 
 Observed top repositories:
-- [Nightmare\-Eclipse/YellowKey](https://github.com/Nightmare-Eclipse/YellowKey) - 3498 stars - YellowKey Bitlocker Bypass Vulnerability
-- [vercel\-labs/zero](https://github.com/vercel-labs/zero) - 2433 stars - The programming language for agents
-- [yetone/native\-feel\-skill](https://github.com/yetone/native-feel-skill) - 1330 stars - An Agent Skill for designing cross\-platform desktop apps that feel native — distilled from Raycast's 2\.0 deep\-dive and reverse engineering of Raycast Beta\.app\. Eight architectural tenets, four\-layer architecture, WebKit/WebView2 survival guide, 75\-item ship audit\.
-- [facebookresearch/vggt\-omega](https://github.com/facebookresearch/vggt-omega) - 1090 stars - \[CVPR 2026 Oral\] VGGT Omega
-- [ywnd1144/Gopay\_plus\_automatic](https://github.com/ywnd1144/Gopay_plus_automatic) - 945 stars - No description
-- [DenisSergeevitch/agents\-best\-practices](https://github.com/DenisSergeevitch/agents-best-practices) - 828 stars - Provider\-neutral Agent Skill for Codex, Claude Code, and agentic harness design\.
-- [DuskMosquito/Lossless\-Scaling\-Desktop\-2026](https://github.com/DuskMosquito/Lossless-Scaling-Desktop-2026) - 777 stars - ⭐️ Lossless Scaling Desktop 2026 \| Setup Installer v1\.0 \| Patch Activator Keygen \| License Key Pre\-Activated \| Full Version Latest Build Pro \| Optimize Resolution Scaling \| Enhance Performance Graphics \| Get Desktop App Windows 10/11 PC \| Direct Genuine Original x64 \| Download Install Loader Mod ⭐️
-- [TriangleFalcon/KMS\-Tools\-Portable\-2026\-Last\-Version](https://github.com/TriangleFalcon/KMS-Tools-Portable-2026-Last-Version) - 777 stars - ⭐️ KMS\-Tools\-Portable \| Activation Tool Suite \| Keygen License Manager \| Patch Installer v4\.0 \| Full Version Setup \| Pre\-Activated Premium Build \| Mod Loader Utility \| Latest Windows 11 x64 \| Desktop Application for Software Activation \| Direct Download Genuine Original ⭐️
-- [Kappaemme\-git/codex\-complexity\-optimizer](https://github.com/Kappaemme-git/codex-complexity-optimizer) - 768 stars - Codex skill for safe codebase complexity analysis and performance optimization reports
-- [gi\-dellav/zerostack](https://github.com/gi-dellav/zerostack) - 766 stars - Minimalistic coding agent written in Rust, optimized for memory footprint and performance
+- [ultraworkers/claw\-code](https://github.com/ultraworkers/claw-code) - 191956 stars - The repo is finally unlocked\. enjoy the party\! The fastest repo in history to surpass 100K stars ⭐\. Join Discord: https://discord\.gg/5TUQKqFWd Built in Rust using oh\-my\-codex\.
+- [affaan\-m/ECC](https://github.com/affaan-m/ECC) - 186899 stars - The agent harness performance optimization system\. Skills, instincts, memory, security, and research\-first development for Claude Code, Codex, Opencode, Cursor and beyond\.
+- [multica\-ai/andrej\-karpathy\-skills](https://github.com/multica-ai/andrej-karpathy-skills) - 136926 stars - A single CLAUDE\.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls\.
+- [garrytan/gstack](https://github.com/garrytan/gstack) - 99312 stars - Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager, Doc Engineer, and QA
+- [mattpocock/skills](https://github.com/mattpocock/skills) - 93135 stars - Skills for Real Engineers\. Straight from my \.claude directory\.
+- [karpathy/autoresearch](https://github.com/karpathy/autoresearch) - 81851 stars - AI agents running research on single\-GPU nanochat training automatically
+- [VoltAgent/awesome\-design\-md](https://github.com/VoltAgent/awesome-design-md) - 81128 stars - A collection of DESIGN\.md files inspired by popular brand design systems\. Drop one into your project and let coding agents generate a matching UI\.
+- [paperclipai/paperclip](https://github.com/paperclipai/paperclip) - 66457 stars - The open\-source app everyone uses to manage agents at work
+- [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) - 62063 stars - 🪨 why use many token when few token do trick — Claude Code skill that cuts 65% of tokens by talking like caveman
+- [koala73/worldmonitor](https://github.com/koala73/worldmonitor) - 54433 stars - Real\-time global intelligence dashboard\. AI\-powered news aggregation, geopolitical monitoring, and infrastructure tracking in a unified situational awareness interface
 
 Learning candidate leaders:
-- vercel\-labs/zero
-- yetone/native\-feel\-skill
-- facebookresearch/vggt\-omega
-- ywnd1144/Gopay\_plus\_automatic
-- DenisSergeevitch/agents\-best\-practices
+- ultraworkers/claw\-code
+- affaan\-m/ECC
+- multica\-ai/andrej\-karpathy\-skills
+- garrytan/gstack
+- mattpocock/skills
 
 Pattern reasons:
-- Topic clustering is strong around agent\-skill, agent\-skills, agentic\-workflows, which makes the value proposition easy to search and share\.
-- Python leads the language mix, so examples and packaging should respect that ecosystem\.
+- Topic clustering is strong around llm, anthropic, claude\-code, which makes the value proposition easy to search and share\.
+- TypeScript leads the language mix, so examples and packaging should respect that ecosystem\.
 - AI and agent language is still a strong discovery hook when paired with a concrete workflow\.
-
-Risky repositories excluded from learning:
-- Nightmare\-Eclipse/YellowKey: bypass
-- DuskMosquito/Lossless\-Scaling\-Desktop\-2026: keygen, activator, license key, pre\-activated
-- TriangleFalcon/KMS\-Tools\-Portable\-2026\-Last\-Version: keygen, activator, activation, pre\-activated
+- Developer automation projects benefit from short setup, visible output, and repeatable commands\.
 
 Per-repository lessons:
-- vercel\-labs/zero
-  - Trust: high (91/100)
-  - Why popular: vercel\-labs/zero is likely gaining attention because it combines C ecosystem fit\.
-  - Evidence: 2433 stars; 150 forks corroborate reuse; Apache\-2\.0 license; recent push activity
+- ultraworkers/claw\-code
+  - Trust: high (100/100)
+  - Why popular: ultraworkers/claw\-code is likely gaining attention because it combines Rust ecosystem fit\.
+  - Evidence: 191956 stars; 109945 forks corroborate reuse; MIT license; recent push activity
   - Emulate: Use a concrete one\-sentence value proposition\.; Keep license and reuse rights explicit\.; Show active maintenance through recent commits\.
   - Avoid: Avoid copying surface topics without reproducing the proof path\.
-- yetone/native\-feel\-skill
-  - Trust: high (84/100)
-  - Why popular: yetone/native\-feel\-skill is likely gaining attention because it combines AI/agent positioning\.
-  - Evidence: 1330 stars; 61 forks corroborate reuse; MIT license; 1 open issues
+- affaan\-m/ECC
+  - Trust: high (100/100)
+  - Why popular: affaan\-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging\.
+  - Evidence: 186899 stars; 28938 forks corroborate reuse; MIT license; 1 open issues; recent push activity
   - Emulate: Use a concrete one\-sentence value proposition\.; Keep license and reuse rights explicit\.; Show active maintenance through recent commits\.
   - Avoid: Avoid copying surface topics without reproducing the proof path\.
-- facebookresearch/vggt\-omega
-  - Trust: high (77/100)
-  - Why popular: facebookresearch/vggt\-omega is likely gaining attention because it combines Python ecosystem fit\.
-  - Evidence: 1090 stars; 29 forks corroborate reuse; unclear license; 9 open issues; recent push activity
+- multica\-ai/andrej\-karpathy\-skills
+  - Trust: medium (70/100)
+  - Why popular: multica\-ai/andrej\-karpathy\-skills is likely gaining attention because it combines AI/agent positioning\.
+  - Evidence: 136926 stars; 14048 forks corroborate reuse; unclear license
   - Emulate: Use a concrete one\-sentence value proposition\.; Show active maintenance through recent commits\.
   - Avoid: Avoid copying surface topics without reproducing the proof path\.
-- ywnd1144/Gopay\_plus\_automatic
-  - Trust: high (78/100)
-  - Why popular: ywnd1144/Gopay\_plus\_automatic is likely gaining attention because it combines Python ecosystem fit\.
-  - Evidence: 945 stars; 551 forks corroborate reuse; unclear license; 5 open issues
-  - Emulate: Show active maintenance through recent commits\.
-  - Avoid: Avoid vague positioning with no clear first\-use story\.
-- DenisSergeevitch/agents\-best\-practices
-  - Trust: high (84/100)
-  - Why popular: DenisSergeevitch/agents\-best\-practices is likely gaining attention because it combines AI/agent positioning, clear topic packaging\.
-  - Evidence: 828 stars; 74 forks corroborate reuse; MIT license; 4 open issues
+- garrytan/gstack
+  - Trust: high (99/100)
+  - Why popular: garrytan/gstack is likely gaining attention because it combines TypeScript ecosystem fit\.
+  - Evidence: 99312 stars; 14802 forks corroborate reuse; MIT license; recent push activity
+  - Emulate: Use a concrete one\-sentence value proposition\.; Keep license and reuse rights explicit\.; Show active maintenance through recent commits\.
+  - Avoid: Avoid copying surface topics without reproducing the proof path\.
+- mattpocock/skills
+  - Trust: high (93/100)
+  - Why popular: mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit\.
+  - Evidence: 93135 stars; 8185 forks corroborate reuse; MIT license; recent push activity
   - Emulate: Use a concrete one\-sentence value proposition\.; Keep license and reuse rights explicit\.; Show active maintenance through recent commits\.
   - Avoid: Avoid copying surface topics without reproducing the proof path\.
 
 Top languages:
-- Python: 4
+- TypeScript: 3
+- Rust: 2
+- JavaScript: 2
 - Unknown: 2
-- C: 1
-- Rust: 1
-- C\+\+: 1
+- Python: 2
+- Shell: 1
 
 Top topics:
-- agent\-skill: 1
-- agent\-skills: 1
-- agentic\-workflows: 1
-- agents: 1
+- llm: 4
+- anthropic: 3
+- claude\-code: 3
+- ai: 3
+- claude: 2
+- developer\-tools: 2
+- mcp: 2
+- productivity: 2
 - ai\-agents: 1
-- anthropic: 1
-- claude: 1
-- claude\-code: 1
-- codex: 1
-- codex\-skill: 1
-- mcp: 1
-- prompt\-engineering: 1
+- awesome\-list: 1
+- design\-md: 1
+- design\-system: 1
 
 Description terms:
-- agent: 4
-- ai: 1
+- ai: 3
+- llm: 2
+- open: 2
+- agent: 1
+- ui: 1
 - app: 1
-- local: 1
+- cli: 1
+- dev: 1
 
 ## Builder Strategist
 
 ### Ship a one\-command demo loop
 
-- Rationale: topic:agent\-skill \(1\) is the strongest analysis signal, so the first success path should make that value obvious\.
+- Rationale: topic:llm \(4\) is the strongest analysis signal, so the first success path should make that value obvious\.
 - Impact: high
 - Effort: medium
-- Signal: topic:agent\-skill \(1\)
+- Signal: topic:llm \(4\)
 - Verification: A fresh clone can run the demo command and produce a report without secrets\.
 
 ### Publish daily trend evidence
 
-- Rationale: The roadmap should show how current topic:agent\-skill \(1\) evidence changes recommendations over time\.
+- Rationale: The roadmap should show how current topic:llm \(4\) evidence changes recommendations over time\.
 - Impact: high
 - Effort: low
-- Signal: topic:agent\-skill \(1\)
+- Signal: topic:llm \(4\)
 - Verification: A scheduled run updates a snapshot, star history, and daily brief\.
 
 ### Keep credentials optional and documented
@@ -130,6 +131,14 @@ Description terms:
 - Signal: topic:agent
 - Verification: The daily run writes both Markdown and JSON decision artifacts\.
 
+### Tighten the CLI around repeatable maintainer workflows
+
+- Rationale: Developer\-tool projects win when routine jobs become short, memorable commands\.
+- Impact: medium
+- Effort: medium
+- Signal: topic:automation
+- Verification: Collect, monitor, analyze, and orchestrate commands have examples and tests\.
+
 ### Add a local insight view for trend comparisons
 
 - Rationale: Data and UI signals point to users wanting inspectable local output, not only a generated brief\.
@@ -146,42 +155,38 @@ Description terms:
 - Signal: target\-repo
 - Verification: The daily brief includes a target repo star sample and next action\.
 
-### Start a measured feedback loop for Xiao\-rx/agent\-workbench
+### Tighten the next public proof for Xiao\-rx/agent\-workbench
 
-- Rationale: The target repository has no star delta yet, so recommendations need a baseline before claiming movement\.
-- Impact: medium
+- Rationale: Target repo feedback is flat or negative \(0\), so the next change should be small and measurable\.
+- Impact: high
 - Effort: low
-- Signal: target\-feedback:baseline
-- Verification: Capture at least two target repo star samples before changing the target\-specific roadmap\.
+- Signal: target\-feedback:flat
+- Verification: The next brief links one shipped improvement to the following target repo star sample\.
 
 ## Review Guardian
 
-- MEDIUM: Trend data contains risky repositories - 3 repository entries look like piracy, credential abuse, or spam magnets and should not be used as product inspiration\.
+- LOW: Backlog has testable gates - Every proposed item includes a verification statement and can be reviewed before release\.
+
+## Target Repository Signal
+
+- Repository: [Xiao\-rx/agent\-workbench](https://github.com/Xiao-rx/agent-workbench)
+- Stars: 0
+- Forks: 0
+- Open issues: 0
+- Sampled at: 2026\-05\-19T10:16:17Z
 
 ## Git Steward
 
 - Repository: Xiao\-rx/agent\-workbench
-- Current stars: unknown
-- Star delta in local history: unknown
-- Samples seen: 0
-- Recommendation: Target repository has no star history yet; publish the repo, then capture the first sample\.
+- Current stars: 0
+- Star delta in local history: 0
+- Samples seen: 2
+- Recommendation: Commit small, explainable improvements and watch the next star sample for response\.
 
 Git status:
 
 ```text
-## No commits yet on master
-?? .agent-workbench/
-?? .env.example
-?? .github/
-?? .gitignore
-?? .omx/
-?? CLAUDE.md
-?? README.md
-?? data/
-?? pyproject.toml
-?? reports/
-?? scripts/
-?? src/
-?? tests/
-?? uv.lock
+## main...origin/main
+ M data/snapshots/trend-product-live.json
+?? data/star_history/Xiao-rx__agent-workbench.jsonl
 ```
