@@ -42,8 +42,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "vercel-labs/zero is likely gaining attention because it combines C ecosystem fit.",
         "evidence": [
-          "2673 stars",
-          "165 forks corroborate reuse",
+          "2677 stars",
+          "166 forks corroborate reuse",
           "Apache-2.0 license",
           "recent push activity"
         ],
@@ -82,7 +82,7 @@
         "trust_level": "high",
         "adoption_hypothesis": "facebookresearch/vggt-omega is likely gaining attention because it combines Python ecosystem fit.",
         "evidence": [
-          "1153 stars",
+          "1154 stars",
           "32 forks corroborate reuse",
           "unclear license",
           "10 open issues",
@@ -292,10 +292,10 @@
     "repo": "Xiao-rx/agent-workbench",
     "current_stars": 0,
     "star_delta": 0,
-    "samples_seen": 43,
-    "git_status": "## main...origin/main [ahead 18]\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl",
+    "samples_seen": 44,
+    "git_status": "## main...origin/main [ahead 20]\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl",
     "recommendation": "Commit small, explainable improvements and watch the next star sample for response.",
-    "recent_change": "Show agent asset detection in demo",
-    "next_sample_gate": "After publishing Show agent asset detection in demo, compare the next star sample with 0 stars and local delta 0."
+    "recent_change": "Add agent asset counts to proof summary",
+    "next_sample_gate": "After publishing Add agent asset counts to proof summary, compare the next star sample with 0 stars and local delta 0."
   }
 }

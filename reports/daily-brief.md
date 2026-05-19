@@ -1,6 +1,6 @@
 # GitHub Trend Lab Daily Brief
 
-Generated: 2026\-05\-19T14:16:27Z
+Generated: 2026\-05\-19T14:21:07Z
 Search window: repositories created since 2026\-05\-12
 Query: `created:>=2026-05-12 stars:>=50 archived:false fork:false`
 
@@ -10,9 +10,9 @@ Query: `created:>=2026-05-12 stars:>=50 archived:false fork:false`
 
 Observed top repositories:
 - [Nightmare\-Eclipse/YellowKey](https://github.com/Nightmare-Eclipse/YellowKey) - 3556 stars - YellowKey Bitlocker Bypass Vulnerability
-- [vercel\-labs/zero](https://github.com/vercel-labs/zero) - 2673 stars - The programming language for agents
+- [vercel\-labs/zero](https://github.com/vercel-labs/zero) - 2677 stars - The programming language for agents
 - [yetone/native\-feel\-skill](https://github.com/yetone/native-feel-skill) - 1335 stars - An Agent Skill for designing cross\-platform desktop apps that feel native — distilled from Raycast's 2\.0 deep\-dive and reverse engineering of Raycast Beta\.app\. Eight architectural tenets, four\-layer architecture, WebKit/WebView2 survival guide, 75\-item ship audit\.
-- [facebookresearch/vggt\-omega](https://github.com/facebookresearch/vggt-omega) - 1153 stars - \[CVPR 2026 Oral\] VGGT Omega
+- [facebookresearch/vggt\-omega](https://github.com/facebookresearch/vggt-omega) - 1154 stars - \[CVPR 2026 Oral\] VGGT Omega
 - [ywnd1144/Gopay\_plus\_automatic](https://github.com/ywnd1144/Gopay_plus_automatic) - 950 stars - No description
 - [DenisSergeevitch/agents\-best\-practices](https://github.com/DenisSergeevitch/agents-best-practices) - 835 stars - Provider\-neutral Agent Skill for Codex, Claude Code, and agentic harness design\.
 - [gi\-dellav/zerostack](https://github.com/gi-dellav/zerostack) - 782 stars - Minimalistic coding agent written in Rust, optimized for memory footprint and performance
@@ -41,7 +41,7 @@ Per-repository lessons:
 - vercel\-labs/zero
   - Trust: high (91/100)
   - Why popular: vercel\-labs/zero is likely gaining attention because it combines C ecosystem fit\.
-  - Evidence: 2673 stars; 165 forks corroborate reuse; Apache\-2\.0 license; recent push activity
+  - Evidence: 2677 stars; 166 forks corroborate reuse; Apache\-2\.0 license; recent push activity
   - Emulate: Use a concrete one\-sentence value proposition\.; Keep license and reuse rights explicit\.; Show active maintenance through recent commits\.
   - Avoid: Avoid copying surface topics without reproducing the proof path\.
 - yetone/native\-feel\-skill
@@ -53,7 +53,7 @@ Per-repository lessons:
 - facebookresearch/vggt\-omega
   - Trust: high (77/100)
   - Why popular: facebookresearch/vggt\-omega is likely gaining attention because it combines Python ecosystem fit\.
-  - Evidence: 1153 stars; 32 forks corroborate reuse; unclear license; 10 open issues; recent push activity
+  - Evidence: 1154 stars; 32 forks corroborate reuse; unclear license; 10 open issues; recent push activity
   - Emulate: Use a concrete one\-sentence value proposition\.; Show active maintenance through recent commits\.
   - Avoid: Avoid copying surface topics without reproducing the proof path\.
 - ywnd1144/Gopay\_plus\_automatic
@@ -164,25 +164,25 @@ Description terms:
 - Stars: 0
 - Forks: 0
 - Open issues: 0
-- Sampled at: 2026\-05\-19T14:16:28Z
+- Sampled at: 2026\-05\-19T14:21:08Z
 
 ## Feedback Loop Evidence
 
-- Recent product change: Show agent asset detection in demo
-- Next sample gate: After publishing Show agent asset detection in demo, compare the next star sample with 0 stars and local delta 0\.
+- Recent product change: Add agent asset counts to proof summary
+- Next sample gate: After publishing Add agent asset counts to proof summary, compare the next star sample with 0 stars and local delta 0\.
 
 ## Git Steward
 
 - Repository: Xiao\-rx/agent\-workbench
 - Current stars: 0
 - Star delta in local history: 0
-- Samples seen: 43
+- Samples seen: 44
 - Recommendation: Commit small, explainable improvements and watch the next star sample for response\.
 
 Git status:
 
 ```text
-## main...origin/main [ahead 18]
+## main...origin/main [ahead 20]
  M data/snapshots/trend-product-live.json
  M data/star_history/Xiao-rx__agent-workbench.jsonl
 ```
