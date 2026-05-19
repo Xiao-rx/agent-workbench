@@ -481,6 +481,11 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertEqual(payload["root"], str(output.resolve() / "sample-repo"))
             self.assertEqual(payload["demo_repository"], str(output.resolve() / "sample-repo"))
             self.assertEqual(payload["workbench"], str(output.resolve() / ".agent-workbench"))
+            self.assertEqual(payload["artifact_summary"]["written_total"], len(payload["written"]))
+            self.assertIn("AGENTS.md", payload["artifact_summary"]["core_files"])
+            self.assertIn("agent-task-pack.md", payload["artifact_summary"]["core_files"])
+            self.assertTrue(any(item.endswith("CLAUDE.md") for item in payload["artifact_summary"]["adapter_files"]))
+            self.assertIn("python -m unittest discover -s tests", payload["verification_command"])
             self.assertIn("You are working in agent-workbench-demo.", payload["kickoff_prompt"])
             self.assertEqual(payload["readiness"]["status"], "ready")
             self.assertTrue(any(path.endswith("CLAUDE.md") for path in payload["written"]))
@@ -500,6 +505,8 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertTrue(proof.exists())
             self.assertIn("Wrote", stdout.getvalue())
             self.assertEqual(payload["readiness"]["status"], "ready")
+            self.assertEqual(payload["artifact_summary"]["written_total"], len(payload["written"]))
+            self.assertIn("python -m unittest discover -s tests", payload["verification_command"])
 
     def test_init_command_writes_requested_adapter(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -565,6 +572,10 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertEqual(exit_code, 0)
             self.assertEqual(payload["root"], str(root.resolve()))
             self.assertEqual(payload["workbench"], str(out))
+            self.assertEqual(payload["artifact_summary"]["written_total"], len(payload["written"]))
+            self.assertIn("AGENTS.md", payload["artifact_summary"]["core_files"])
+            self.assertIn("agent-task-pack.md", payload["artifact_summary"]["core_files"])
+            self.assertIn("agent-workbench check", payload["verification_command"])
             self.assertIn("You are working in demo.", payload["kickoff_prompt"])
             self.assertEqual(payload["readiness"]["status"], "ready")
             self.assertTrue(any(path.endswith("CLAUDE.md") for path in payload["written"]))
@@ -587,6 +598,8 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertTrue(proof.exists())
             self.assertIn("Wrote", stdout.getvalue())
             self.assertEqual(payload["readiness"]["status"], "ready")
+            self.assertEqual(payload["artifact_summary"]["written_total"], len(payload["written"]))
+            self.assertIn("agent-workbench check", payload["verification_command"])
 
     def test_init_command_can_check_generated_workbench(self):
         with tempfile.TemporaryDirectory() as tmp:

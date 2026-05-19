@@ -45,7 +45,7 @@ One command generates:
 - optional Claude Code, Codex, and Cursor adapters with `--adapter all`
 - `agent-workbench check` for a quick readiness gate before handing the repo to an agent
 - `--print-kickoff` to copy the generated first prompt straight from the terminal
-- `demo --format json` and `init --format json` for machine-readable proofs with written files, kickoff prompt, and readiness
+- `demo --format json` and `init --format json` for machine-readable proofs with written files, artifact summary, verification command, kickoff prompt, and readiness
 - JSON artifacts with `--output-json` for CI and downstream agent harnesses
 
 The output gives Codex, Claude Code, Cursor, OpenCode, and other coding agents a repo map, safe commands, high-signal files, a kickoff prompt, and guardrails before they touch code.
@@ -76,7 +76,7 @@ It scans the repo and writes:
 - Codex adapter: .codex/AGENTS.md handoff that points to the generated workbench
 - readiness check: a pass/fail command for existing workbench files
 - scan JSON: machine-readable repo map with file signals, package managers, and safe commands
-- output JSON files: reusable artifacts for CI and agent harnesses
+- output JSON files: reusable artifacts for CI and agent harnesses, including artifact summaries and verification commands
 
 It is provider-neutral and outputs plain Markdown, so it can be used with Codex, Claude Code, Cursor, OpenCode, or any coding agent workflow.
 

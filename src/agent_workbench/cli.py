@@ -192,15 +192,41 @@ def _workbench_payload(
     demo_repository: Path | None = None,
 ) -> dict[str, object]:
     task_pack = workbench / "agent-task-pack.md"
+    repo = scan_repo(root)
     payload = {
         "root": str(root),
         "workbench": str(workbench),
         "written": [str(path) for path in paths],
+        "artifact_summary": _artifact_summary(workbench, paths),
+        "verification_command": repo.test_commands[0] if repo.test_commands else _verification_command(root, workbench),
         "kickoff_prompt": _extract_kickoff_prompt(task_pack.read_text(encoding="utf-8")),
     }
     if demo_repository is not None:
         payload["demo_repository"] = str(demo_repository)
     return payload
+
+
+def _artifact_summary(workbench: Path, paths: tuple[Path, ...]) -> dict[str, object]:
+    core_files: list[str] = []
+    adapter_files: list[str] = []
+    for path in paths:
+        try:
+            relative = path.relative_to(workbench).as_posix()
+        except ValueError:
+            relative = path.as_posix()
+        if relative in {"AGENTS.md", "agent-task-pack.md"}:
+            core_files.append(relative)
+        else:
+            adapter_files.append(relative)
+    return {
+        "written_total": len(paths),
+        "core_files": core_files,
+        "adapter_files": adapter_files,
+    }
+
+
+def _verification_command(root: Path, workbench: Path) -> str:
+    return f'agent-workbench check "{root}" --workbench "{workbench}" --format json'
 
 
 def _write_json_file(path: Path, payload: dict[str, object]) -> None:

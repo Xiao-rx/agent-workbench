@@ -18,6 +18,8 @@ class LaunchKitTests(unittest.TestCase):
         self.assertIn("--print-kickoff", launch)
         self.assertIn("demo --format json", launch)
         self.assertIn("init --format json", launch)
+        self.assertIn("artifact summary", launch)
+        self.assertIn("verification command", launch)
         self.assertIn("Codex adapter", launch)
         self.assertIn("agent-workbench check . --format json", launch)
         self.assertIn("agent-workbench scan . --format json --output-json .agent-workbench/repo-map.json", launch)

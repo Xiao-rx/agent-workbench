@@ -53,6 +53,8 @@ agent-workbench demo --adapter all --check --format json --output-json .agent-wo
 agent-workbench init . --output .agent-workbench --adapter all --check --format json --output-json .agent-workbench/init-proof.json
 ```
 
+JSON proof 会包含写入文件列表、简要 artifact summary、首个 verification command（如果存在）、kickoff prompt，以及可选 readiness。
+
 只查看仓库扫描结果：
 
 ```powershell
