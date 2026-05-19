@@ -11,6 +11,19 @@ requires-python = ">=3.11"
 license = { text = "MIT" }
 authors = [{ name = "agent-workbench maintainers" }]
 dependencies = []
+keywords = ["agents", "ai", "cli", "devtools", "codex", "claude-code", "cursor"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Documentation",
+    "Topic :: Utilities",
+]
 
 [project.scripts]
 agent-workbench = "agent_workbench.cli:main"
