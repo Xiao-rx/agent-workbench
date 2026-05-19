@@ -383,6 +383,21 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertTrue(any(path.endswith("CLAUDE.md") for path in payload["written"]))
             self.assertTrue(any(path.endswith(".codex\\AGENTS.md") or path.endswith(".codex/AGENTS.md") for path in payload["written"]))
 
+    def test_demo_command_can_write_json_proof(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "demo"
+            proof = Path(tmp) / "reports" / "demo-proof.json"
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["demo", "--output", str(output), "--adapter", "all", "--check", "--format", "json", "--output-json", str(proof)])
+
+            payload = json.loads(proof.read_text(encoding="utf-8"))
+            self.assertEqual(exit_code, 0)
+            self.assertTrue(proof.exists())
+            self.assertIn("Wrote", stdout.getvalue())
+            self.assertEqual(payload["readiness"]["status"], "ready")
+
     def test_init_command_writes_requested_adapter(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp) / "repo"
@@ -451,6 +466,24 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertEqual(payload["readiness"]["status"], "ready")
             self.assertTrue(any(path.endswith("CLAUDE.md") for path in payload["written"]))
             self.assertTrue(any(path.endswith(".codex\\AGENTS.md") or path.endswith(".codex/AGENTS.md") for path in payload["written"]))
+
+    def test_init_command_can_write_json_proof(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            out = Path(tmp) / "out"
+            proof = Path(tmp) / "reports" / "init-proof.json"
+            root.mkdir()
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["init", str(root), "--output", str(out), "--adapter", "all", "--check", "--format", "json", "--output-json", str(proof)])
+
+            payload = json.loads(proof.read_text(encoding="utf-8"))
+            self.assertEqual(exit_code, 0)
+            self.assertTrue(proof.exists())
+            self.assertIn("Wrote", stdout.getvalue())
+            self.assertEqual(payload["readiness"]["status"], "ready")
 
     def test_init_command_can_check_generated_workbench(self):
         with tempfile.TemporaryDirectory() as tmp:

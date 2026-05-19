@@ -49,8 +49,8 @@ agent-workbench init . --output .agent-workbench --adapter all
 如果想把 demo 或 init 结果交给脚本或下游 agent harness，可以输出 JSON：
 
 ```powershell
-agent-workbench demo --adapter all --check --format json
-agent-workbench init . --output .agent-workbench --adapter all --check --format json
+agent-workbench demo --adapter all --check --format json --output-json .agent-workbench/demo-proof.json
+agent-workbench init . --output .agent-workbench --adapter all --check --format json --output-json .agent-workbench/init-proof.json
 ```
 
 只查看仓库扫描结果：

@@ -116,7 +116,7 @@ uv run --python 3.12 python -m agent_workbench demo --adapter all --check --prin
 Generate a machine-readable demo proof:
 
 ```powershell
-agent-workbench demo --adapter all --check --format json
+agent-workbench demo --adapter all --check --format json --output-json .agent-workbench/demo-proof.json
 ```
 
 Generate files for your current repository:
@@ -128,7 +128,7 @@ uv run --python 3.12 python -m agent_workbench init . --output .agent-workbench 
 Generate a machine-readable init proof:
 
 ```powershell
-agent-workbench init . --output .agent-workbench --adapter all --check --format json
+agent-workbench init . --output .agent-workbench --adapter all --check --format json --output-json .agent-workbench/init-proof.json
 ```
 
 Generate optional Claude Code, Codex, and Cursor adapters:
@@ -177,15 +177,15 @@ The goal is not to be another agent. The goal is to make every repository easier
 ## Commands
 
 ```text
-agent-workbench demo [--output PATH] [--adapter claude|codex|cursor|all] [--check] [--print-kickoff] [--format text|json]
+agent-workbench demo [--output PATH] [--adapter claude|codex|cursor|all] [--check] [--print-kickoff] [--format text|json] [--output-json PATH]
 agent-workbench scan [ROOT] [--format text|json] [--output-json PATH]
 agent-workbench check [ROOT] [--workbench PATH] [--format text|json] [--output-json PATH]
-agent-workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|all] [--check] [--print-kickoff] [--format text|json]
+agent-workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|all] [--check] [--print-kickoff] [--format text|json] [--output-json PATH]
 
 python -m agent_workbench scan [ROOT] [--format text|json] [--output-json PATH]
 python -m agent_workbench check [ROOT] [--workbench PATH] [--format text|json] [--output-json PATH]
-python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|all] [--check] [--print-kickoff] [--format text|json]
-python -m agent_workbench demo [--output PATH] [--adapter claude|codex|cursor|all] [--check] [--print-kickoff] [--format text|json]
+python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|all] [--check] [--print-kickoff] [--format text|json] [--output-json PATH]
+python -m agent_workbench demo [--output PATH] [--adapter claude|codex|cursor|all] [--check] [--print-kickoff] [--format text|json] [--output-json PATH]
 ```
 
 ## Release

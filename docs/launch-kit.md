@@ -89,10 +89,10 @@ Demo:
 agent-workbench demo --adapter all --check --print-kickoff
 
 JSON demo proof:
-agent-workbench demo --adapter all --check --format json
+agent-workbench demo --adapter all --check --format json --output-json .agent-workbench/demo-proof.json
 
 JSON init proof:
-agent-workbench init . --output .agent-workbench --adapter all --check --format json
+agent-workbench init . --output .agent-workbench --adapter all --check --format json --output-json .agent-workbench/init-proof.json
 
 Check:
 agent-workbench check . --format json
