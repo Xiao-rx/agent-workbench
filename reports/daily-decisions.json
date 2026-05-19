@@ -37,7 +37,7 @@
         "trust_level": "high",
         "adoption_hypothesis": "affaan-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "186926 stars",
+          "186928 stars",
           "28945 forks corroborate reuse",
           "MIT license",
           "0 open issues",
@@ -58,8 +58,8 @@
         "trust_level": "medium",
         "adoption_hypothesis": "multica-ai/andrej-karpathy-skills is likely gaining attention because it combines AI/agent positioning.",
         "evidence": [
-          "137036 stars",
-          "14055 forks corroborate reuse",
+          "137051 stars",
+          "14056 forks corroborate reuse",
           "unclear license"
         ],
         "emulate": [
@@ -76,7 +76,7 @@
         "trust_level": "high",
         "adoption_hypothesis": "garrytan/gstack is likely gaining attention because it combines TypeScript ecosystem fit.",
         "evidence": [
-          "99346 stars",
+          "99351 stars",
           "14809 forks corroborate reuse",
           "MIT license",
           "recent push activity"
@@ -96,8 +96,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit.",
         "evidence": [
-          "93289 stars",
-          "8198 forks corroborate reuse",
+          "93300 stars",
+          "8199 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -297,7 +297,7 @@
     "repo": "Xiao-rx/agent-workbench",
     "current_stars": 0,
     "star_delta": 0,
-    "samples_seen": 30,
+    "samples_seen": 32,
     "git_status": "## main...origin/main\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl",
     "recommendation": "Commit small, explainable improvements and watch the next star sample for response."
   }
