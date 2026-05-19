@@ -57,6 +57,8 @@ class ReadmeTests(unittest.TestCase):
         self.assertIn("Latest published release", readme)
         self.assertIn("releases/tag/v0.7.0", readme)
         self.assertIn("docs/launch-kit.md", readme)
+        self.assertIn("python -m github_trend_lab insight --decisions reports/daily-decisions.json", readme)
+        self.assertIn("`trend-lab insight` is a local shortcut", readme)
         self.assertIn("provider-neutral", readme.lower())
         self.assertIn("用一条命令把任意代码仓库变成 AI coding agent 可以安全接手的工作区", readme)
         self.assertIn("默认输出不绑定任何模型或工具", readme)
@@ -94,6 +96,8 @@ class ReadmeTests(unittest.TestCase):
         self.assertIn("JSON readiness 报告会包含 `next_action`", readme)
         self.assertIn("agent-workbench scan . --format json", readme)
         self.assertIn("examples/typescript-cli/source", readme)
+        self.assertIn("python -m github_trend_lab insight --decisions reports/daily-decisions.json", readme)
+        self.assertIn("快速查看最新决策摘要", readme)
         self.assertIn("趋势分析不是产品本体", readme)
 
 

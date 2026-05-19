@@ -219,10 +219,12 @@ python -m github_trend_lab collect
 python -m github_trend_lab history --start 2026-01-01 --end 2026-05-19 --top 5
 python -m github_trend_lab monitor --repo OWNER/REPO
 python -m github_trend_lab orchestrate --repo OWNER/REPO
+python -m github_trend_lab insight --decisions reports/daily-decisions.json
 python -m github_trend_lab verify
 ```
 
 The trend engine is not the product. It is the internal growth loop used to decide what Agent Workbench should improve next.
+`trend-lab insight` is a local shortcut for reading the latest decision JSON before choosing the next product change.
 
 ## Feedback Loop
 

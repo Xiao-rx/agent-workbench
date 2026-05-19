@@ -42,7 +42,7 @@ def write_json(path: Path, payload: Any) -> Path:
 
 
 def read_json(path: Path) -> Any:
-    return json.loads(path.read_text(encoding="utf-8"))
+    return json.loads(path.read_text(encoding="utf-8-sig"))
 
 
 def write_snapshot(snapshot: TrendSnapshot, path: Path | None = None) -> Path:

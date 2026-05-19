@@ -32,6 +32,7 @@ class LaunchKitTests(unittest.TestCase):
         self.assertIn("agent-workbench check . --format json", launch)
         self.assertIn("agent-workbench scan . --format json --output-json .agent-workbench/repo-map.json", launch)
         self.assertIn("agent-workbench check . --format json --output-json .agent-workbench/readiness.json", launch)
+        self.assertIn("trend-lab insight --decisions reports/daily-decisions.json", launch)
         self.assertIn("readiness check", launch)
         self.assertIn("scan JSON", launch)
         self.assertIn("Python and TypeScript", launch)

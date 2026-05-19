@@ -110,4 +110,6 @@ AI coding agent 最容易在缺少上下文时犯错。Agent Workbench 的目标
 
 这个仓库还包含一个内部 GitHub trend / feedback loop，用来观察热门项目、生成方向建议、记录 star history，并决定 Agent Workbench 下一轮应该改什么。
 
+本地可以用 `python -m github_trend_lab insight --decisions reports/daily-decisions.json` 快速查看最新决策摘要，再决定下一轮产品改动。
+
 趋势分析不是产品本体。产品本体是 Agent Workbench CLI。

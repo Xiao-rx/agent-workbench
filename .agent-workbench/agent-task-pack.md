@@ -23,7 +23,7 @@ You are working in agent-workbench. Read AGENTS.md first, inspect `README.md`, m
 
 ## High-Signal Files
 
-- `README.md` (docs, 278 lines)
+- `README.md` (docs, 280 lines)
 - `tests/test_agent_workbench.py` (python, 726 lines)
 - `src/agent_workbench/cli.py` (python, 344 lines)
 - `src/agent_workbench/generator.py` (python, 254 lines)

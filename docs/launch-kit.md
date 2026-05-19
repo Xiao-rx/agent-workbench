@@ -107,6 +107,7 @@ agent-workbench scan . --format json --output-json .agent-workbench/repo-map.jso
 agent-workbench check . --format json --output-json .agent-workbench/readiness.json
 
 I am using a daily GitHub trend/feedback loop to decide what to improve next.
+The local `trend-lab insight --decisions reports/daily-decisions.json` command summarizes the latest decision JSON before each product change.
 ```
 
 ## Social preview

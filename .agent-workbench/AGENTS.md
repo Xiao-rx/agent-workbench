@@ -6,9 +6,9 @@ Help AI coding agents make small, verifiable changes in this repository without 
 
 ## Repository Map
 
-- Files scanned: 87
-- Lines scanned: 7622
-- Main file kinds: python=39, docs=21, config=12, other=11, script=2, typescript=1
+- Files scanned: 89
+- Lines scanned: 7889
+- Main file kinds: python=41, docs=21, config=12, other=11, script=2, typescript=1
 - Package managers: python/pyproject
 
 ## Agent Tool Handoffs
@@ -34,12 +34,12 @@ Help AI coding agents make small, verifiable changes in this repository without 
 - `src/agent_workbench/cli.py` (python, 344 lines)
 - `reports/product-direction-decisions.json` (config, 308 lines)
 - `reports/daily-decisions.json` (config, 302 lines)
-- `README.md` (docs, 278 lines)
+- `README.md` (docs, 280 lines)
 - `src/agent_workbench/generator.py` (python, 254 lines)
 - `data/snapshots/trend-product-live.json` (config, 238 lines)
 - `src/agent_workbench/scanner.py` (python, 206 lines)
+- `src/github_trend_lab/cli.py` (python, 205 lines)
 - `src/github_trend_lab/reporting.py` (python, 204 lines)
-- `src/agent_workbench/checks.py` (python, 201 lines)
 
 ## Guardrails
 
