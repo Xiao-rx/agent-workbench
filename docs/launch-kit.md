@@ -10,6 +10,20 @@ Agent Workbench is a provider-neutral Python CLI that scans a repository and gen
 
 It works with Codex, Claude Code, Cursor, OpenCode, and other agent harnesses because the output is plain Markdown: repository map, safe commands, high-signal files, kickoff prompt, acceptance gates, and guardrails.
 
+## GitHub metadata
+
+Description:
+
+```text
+Turn any repository into an AI-agent-ready workspace with AGENTS.md, task packs, adapters, and scan JSON.
+```
+
+Topics:
+
+```text
+agent-workbench, ai-agents, claude-code, cli, codex, cursor, devtools, developer-tools, llm, productivity
+```
+
 ## Demo command
 
 ```powershell

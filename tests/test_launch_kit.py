@@ -13,6 +13,8 @@ class LaunchKitTests(unittest.TestCase):
         self.assertIn("agent-workbench demo --adapter claude --adapter cursor", launch)
         self.assertIn("scan JSON", launch)
         self.assertIn("Python and TypeScript", launch)
+        self.assertIn("Turn any repository into an AI-agent-ready workspace with AGENTS.md, task packs, adapters, and scan JSON.", launch)
+        self.assertIn("developer-tools, llm, productivity", launch)
         self.assertIn("uv tool install git+https://github.com/Xiao-rx/agent-workbench.git", launch)
         self.assertIn("https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.3.0", launch)
         self.assertIn("<svg", preview)
