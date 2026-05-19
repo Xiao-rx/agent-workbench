@@ -76,6 +76,8 @@ class GitObservation:
     samples_seen: int
     git_status: str
     recommendation: str
+    recent_change: str | None = None
+    next_sample_gate: str = ""
 
 
 class HotnessAnalyst:
@@ -279,7 +281,13 @@ class ReviewGuardian:
 class GitSteward:
     name = "git-steward"
 
-    def observe(self, target_repo: str, history: tuple[StarSample, ...], git_status: str) -> GitObservation:
+    def observe(
+        self,
+        target_repo: str,
+        history: tuple[StarSample, ...],
+        git_status: str,
+        recent_change: str | None = None,
+    ) -> GitObservation:
         current = history[-1].stars if history else None
         delta = None
         if len(history) >= 2:
@@ -301,6 +309,8 @@ class GitSteward:
             samples_seen=len(history),
             git_status=git_status.strip(),
             recommendation=recommendation,
+            recent_change=recent_change,
+            next_sample_gate=_next_sample_gate(target_repo, current, delta, recent_change),
         )
 
 
@@ -458,6 +468,15 @@ def target_feedback_backlog_item(feedback: GitObservation) -> BacklogItem:
         verification="Publish the winning workflow, before/after evidence, and the next star sample in the daily brief.",
         signal="target-feedback:growing",
     )
+
+
+def _next_sample_gate(repo: str, current_stars: int | None, star_delta: int | None, recent_change: str | None) -> str:
+    change = recent_change or "the next small product change"
+    if current_stars is None:
+        return f"After publishing {change}, capture the first star sample for {repo}."
+    if star_delta is None:
+        return f"After publishing {change}, compare the next star sample with the current {current_stars} stars."
+    return f"After publishing {change}, compare the next star sample with {current_stars} stars and local delta {star_delta}."
 
 
 def _top_label(topics: Counter[str], terms: Counter[str], languages: Counter[str]) -> str:

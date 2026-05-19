@@ -298,7 +298,9 @@
     "current_stars": 0,
     "star_delta": 0,
     "samples_seen": 40,
-    "git_status": "## main...origin/main\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl",
-    "recommendation": "Commit small, explainable improvements and watch the next star sample for response."
+    "git_status": "## main...origin/main [ahead 13]\n M reports/daily-brief.md\n M src/github_trend_lab/agents.py\n M src/github_trend_lab/git_ops.py\n M src/github_trend_lab/pipeline.py\n M src/github_trend_lab/reporting.py\n M tests/test_agents.py\n M tests/test_reporting.py",
+    "recommendation": "Commit small, explainable improvements and watch the next star sample for response.",
+    "recent_change": "Print proof summary in text output",
+    "next_sample_gate": "After publishing Print proof summary in text output, compare the next star sample with 0 stars and local delta 0."
   }
 }

@@ -36,6 +36,8 @@ class ReportingTests(unittest.TestCase):
             samples_seen=2,
             git_status="nothing to commit, working tree clean",
             recommendation="Working tree is clean; prefer collecting another data point before changing code.",
+            recent_change="Print proof summary in text output",
+            next_sample_gate="After publishing Print proof summary in text output, compare the next star sample with 43 stars and local delta 3.",
         )
 
         report = render_report(
@@ -49,6 +51,9 @@ class ReportingTests(unittest.TestCase):
         self.assertIn("Amplify the trend\\-backed momentum for owner/repo", report)
         self.assertIn("- Signal: target\\-feedback:growing", report)
         self.assertIn("Target repo feedback is positive \\(\\+3\\)", report)
+        self.assertIn("## Feedback Loop Evidence", report)
+        self.assertIn("Recent product change: Print proof summary in text output", report)
+        self.assertIn("Next sample gate:", report)
 
     def test_report_escapes_untrusted_markdown(self):
         repo = RepoSignal(

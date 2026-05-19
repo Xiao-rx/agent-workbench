@@ -115,6 +115,11 @@ def render_report(
         lines.extend(
             [
                 "",
+                "## Feedback Loop Evidence",
+                "",
+                f"- Recent product change: {_escape_text(git_observation.recent_change or 'unknown')}",
+                f"- Next sample gate: {_escape_text(git_observation.next_sample_gate or 'Capture the next target repository star sample.')}",
+                "",
                 "## Git Steward",
                 "",
                 f"- Repository: {_escape_text(git_observation.repo)}",

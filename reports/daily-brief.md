@@ -175,6 +175,11 @@ Description terms:
 - Open issues: 0
 - Sampled at: 2026\-05\-19T12:13:23Z
 
+## Feedback Loop Evidence
+
+- Recent product change: Print proof summary in text output
+- Next sample gate: After publishing Print proof summary in text output, compare the next star sample with 0 stars and local delta 0\.
+
 ## Git Steward
 
 - Repository: Xiao\-rx/agent\-workbench
@@ -186,7 +191,12 @@ Description terms:
 Git status:
 
 ```text
-## main...origin/main
- M data/snapshots/trend-product-live.json
- M data/star_history/Xiao-rx__agent-workbench.jsonl
+## main...origin/main [ahead 13]
+ M reports/daily-brief.md
+ M src/github_trend_lab/agents.py
+ M src/github_trend_lab/git_ops.py
+ M src/github_trend_lab/pipeline.py
+ M src/github_trend_lab/reporting.py
+ M tests/test_agents.py
+ M tests/test_reporting.py
 ```

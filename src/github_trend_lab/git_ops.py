@@ -19,3 +19,21 @@ def git_status(cwd: Path = Path(".")) -> str:
     if result.returncode != 0:
         return result.stderr.strip() or result.stdout.strip() or "git status failed"
     return result.stdout.strip()
+
+
+def latest_commit_subject(cwd: Path = Path(".")) -> str | None:
+    try:
+        result = subprocess.run(
+            ["git", "log", "-1", "--pretty=%s"],
+            cwd=cwd,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+    except OSError:
+        return None
+
+    if result.returncode != 0:
+        return None
+    subject = result.stdout.strip()
+    return subject or None

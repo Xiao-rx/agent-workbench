@@ -37,6 +37,8 @@ class AgentTests(unittest.TestCase):
             samples_seen=2,
             git_status="M src/github_trend_lab/agents.py",
             recommendation="Commit small, explainable improvements and watch the next star sample for response.",
+            recent_change="Print proof summary in text output",
+            next_sample_gate="After publishing Print proof summary in text output, compare the next star sample with 42 stars and local delta -1.",
         )
 
         backlog = BuilderStrategist().propose(analysis, "owner/repo", feedback)
@@ -45,14 +47,46 @@ class AgentTests(unittest.TestCase):
         self.assertEqual(feedback_item.signal, "target-feedback:flat")
         self.assertIn("flat or negative (-1)", feedback_item.rationale)
         self.assertIn("owner/repo", feedback_item.title)
+        self.assertIn("following target repo star sample", feedback_item.verification)
 
     def test_git_steward_handles_missing_history(self):
         from github_trend_lab.agents import GitSteward
 
-        observation = GitSteward().observe("owner/repo", (), "## main\n?? README.md")
+        observation = GitSteward().observe("owner/repo", (), "## main\n?? README.md", "Add launch proof")
 
         self.assertIsNone(observation.current_stars)
         self.assertIn("publish the repo", observation.recommendation)
+        self.assertEqual(observation.recent_change, "Add launch proof")
+        self.assertIn("capture the first star sample", observation.next_sample_gate)
+
+    def test_git_steward_links_recent_change_to_next_sample(self):
+        from github_trend_lab.agents import GitSteward
+        from github_trend_lab.models import StarSample
+
+        history = (
+            StarSample(
+                timestamp="2026-01-01T00:00:00Z",
+                full_name="owner/repo",
+                stars=2,
+                forks=0,
+                open_issues=0,
+                html_url="https://github.com/owner/repo",
+            ),
+            StarSample(
+                timestamp="2026-01-02T00:00:00Z",
+                full_name="owner/repo",
+                stars=3,
+                forks=0,
+                open_issues=0,
+                html_url="https://github.com/owner/repo",
+            ),
+        )
+
+        observation = GitSteward().observe("owner/repo", history, "## main", "Print proof summary in text output")
+
+        self.assertEqual(observation.star_delta, 1)
+        self.assertIn("Print proof summary in text output", observation.next_sample_gate)
+        self.assertIn("3 stars", observation.next_sample_gate)
 
     def test_review_guardian_flags_empty_snapshot(self):
         snapshot = sample_snapshot()

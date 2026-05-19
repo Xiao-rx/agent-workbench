@@ -6,7 +6,7 @@ from pathlib import Path
 from .agents import BuilderStrategist, GitSteward, HotnessAnalyst, ReviewGuardian
 from .demo_data import sample_snapshot
 from .github_api import GitHubApiError, GitHubClient
-from .git_ops import git_status
+from .git_ops import git_status, latest_commit_subject
 from .models import StarSample, TrendSnapshot
 from .reporting import render_report
 from .storage import append_jsonl, read_star_history, star_history_path, write_json, write_snapshot
@@ -31,7 +31,7 @@ def run_analysis(snapshot: TrendSnapshot, target_repo: str | None = None, histor
 
     git_observation = None
     if target_repo:
-        git_observation = GitSteward().observe(target_repo, history, git_status())
+        git_observation = GitSteward().observe(target_repo, history, git_status(), latest_commit_subject())
 
     report = render_report(
         snapshot=snapshot,
