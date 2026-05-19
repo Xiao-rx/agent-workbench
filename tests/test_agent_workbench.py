@@ -58,12 +58,14 @@ class AgentWorkbenchTests(unittest.TestCase):
             root.mkdir()
             (root / "README.md").write_text("# Demo\n", encoding="utf-8")
 
-            paths = write_workbench(root, out, "demo", ("claude", "cursor"))
+            paths = write_workbench(root, out, "demo", ("claude", "codex", "cursor"))
 
-            self.assertEqual(len(paths), 4)
+            self.assertEqual(len(paths), 5)
             self.assertTrue((out / "CLAUDE.md").exists())
+            self.assertTrue((out / ".codex" / "AGENTS.md").exists())
             self.assertTrue((out / ".cursor" / "rules" / "agent-workbench.md").exists())
             self.assertIn("Read `AGENTS.md` first", (out / "CLAUDE.md").read_text(encoding="utf-8"))
+            self.assertIn(".agent-workbench/agent-task-pack.md", (out / ".codex" / "AGENTS.md").read_text(encoding="utf-8"))
             self.assertIn(".agent-workbench/AGENTS.md", (out / ".cursor" / "rules" / "agent-workbench.md").read_text(encoding="utf-8"))
 
     def test_check_workbench_reports_ready_workspace(self):
@@ -294,12 +296,14 @@ class AgentWorkbenchTests(unittest.TestCase):
 
             stdout = StringIO()
             with redirect_stdout(stdout):
-                exit_code = main(["demo", "--output", str(output), "--adapter", "claude", "--adapter", "cursor"])
+                exit_code = main(["demo", "--output", str(output), "--adapter", "claude", "--adapter", "codex", "--adapter", "cursor"])
 
             self.assertEqual(exit_code, 0)
             self.assertTrue((output / ".agent-workbench" / "CLAUDE.md").exists())
+            self.assertTrue((output / ".agent-workbench" / ".codex" / "AGENTS.md").exists())
             self.assertTrue((output / ".agent-workbench" / ".cursor" / "rules" / "agent-workbench.md").exists())
             self.assertIn("CLAUDE.md", stdout.getvalue())
+            self.assertIn(".codex", stdout.getvalue())
             self.assertIn("agent-workbench.md", stdout.getvalue())
 
     def test_init_command_writes_requested_adapter(self):
@@ -311,11 +315,11 @@ class AgentWorkbenchTests(unittest.TestCase):
 
             stdout = StringIO()
             with redirect_stdout(stdout):
-                exit_code = main(["init", str(root), "--output", str(out), "--adapter", "claude"])
+                exit_code = main(["init", str(root), "--output", str(out), "--adapter", "codex"])
 
             self.assertEqual(exit_code, 0)
-            self.assertTrue((out / "CLAUDE.md").exists())
-            self.assertIn("CLAUDE.md", stdout.getvalue())
+            self.assertTrue((out / ".codex" / "AGENTS.md").exists())
+            self.assertIn(".codex", stdout.getvalue())
 
     def test_init_command_can_check_generated_workbench(self):
         with tempfile.TemporaryDirectory() as tmp:

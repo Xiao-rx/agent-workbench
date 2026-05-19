@@ -5,7 +5,7 @@ from pathlib import Path
 
 from .models import RepoMap
 
-SUPPORTED_ADAPTERS = ("claude", "cursor")
+SUPPORTED_ADAPTERS = ("claude", "codex", "cursor")
 
 
 def render_agents_md(repo: RepoMap, project_name: str | None = None) -> str:
@@ -167,6 +167,27 @@ def _write_adapter(output: Path, adapter: str) -> Path:
                     "Use `.agent-workbench/agent-task-pack.md` for the current kickoff prompt, verification commands, and acceptance gate.",
                     "",
                     "Keep changes small and run the listed verification commands before summarizing work.",
+                    "",
+                ]
+            ),
+            encoding="utf-8",
+        )
+        return path
+
+    if adapter == "codex":
+        codex_dir = output / ".codex"
+        codex_dir.mkdir(parents=True, exist_ok=True)
+        path = codex_dir / "AGENTS.md"
+        path.write_text(
+            "\n".join(
+                [
+                    "# Codex Instructions",
+                    "",
+                    "Read `.agent-workbench/AGENTS.md` first for the repository map, safe commands, high-signal files, and guardrails.",
+                    "",
+                    "Use `.agent-workbench/agent-task-pack.md` for the kickoff prompt, first jobs, verification commands, and acceptance gate.",
+                    "",
+                    "Keep generated caches, local environment files, and secrets out of commits.",
                     "",
                 ]
             ),
