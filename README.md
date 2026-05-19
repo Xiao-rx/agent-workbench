@@ -67,6 +67,13 @@ You are working in my-repo. Read AGENTS.md first, inspect `README.md`, make one 
 
 ## Quick Start
 
+Install directly from GitHub:
+
+```powershell
+uv tool install git+https://github.com/Xiao-rx/agent-workbench.git
+agent-workbench demo
+```
+
 Try the no-secret demo first:
 
 ```powershell
@@ -111,10 +118,19 @@ The goal is not to be another agent. The goal is to make every repository easier
 ## Commands
 
 ```text
+agent-workbench demo [--output PATH]
+agent-workbench scan [ROOT]
+agent-workbench init [ROOT] --output .agent-workbench --project-name NAME
+
 python -m agent_workbench scan [ROOT]
 python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME
 python -m agent_workbench demo [--output PATH]
 ```
+
+## Release
+
+- Current release notes: [`docs/release-v0.1.0.md`](docs/release-v0.1.0.md)
+- Install from GitHub: `uv tool install git+https://github.com/Xiao-rx/agent-workbench.git`
 
 The internal trend engine remains available for growth experiments:
 

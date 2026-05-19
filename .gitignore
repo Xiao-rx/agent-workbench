@@ -5,6 +5,7 @@
 __pycache__/
 *.py[cod]
 *.egg-info/
+*.dist-info/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
@@ -15,6 +16,8 @@ htmlcov/
 venv/
 .uv-cache/
 .uv-python/
+build/
+dist/
 
 data/snapshots/demo-*.json
 reports/demo-*.md
