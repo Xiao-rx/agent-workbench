@@ -9,6 +9,7 @@ class ReadmeTests(unittest.TestCase):
         self.assertIn("python -m agent_workbench demo", readme)
         self.assertIn("$ agent-workbench demo", readme)
         self.assertIn("$ tree .agent-workbench", readme)
+        self.assertIn("--adapter claude --adapter cursor", readme)
         self.assertIn(".agent-workbench/", readme)
         self.assertIn("AGENTS.md", readme)
         self.assertIn("agent-task-pack.md", readme)

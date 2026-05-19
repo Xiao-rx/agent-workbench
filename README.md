@@ -23,7 +23,7 @@ Agent Workbench scans a codebase and writes the two files a coding agent needs b
 - `AGENTS.md`: repository map, safe commands, high-signal files, and guardrails.
 - `agent-task-pack.md`: first jobs and acceptance gates for agent-driven edits.
 
-It is provider-neutral: use the generated files with Codex, Claude Code, Cursor, OpenCode, or any agent harness that benefits from a compact repository map.
+It is provider-neutral by default. Optional adapters can also generate thin handoff files for Claude Code and Cursor without changing the core Markdown output.
 
 ## What You Get
 
@@ -101,6 +101,12 @@ Generate files for your current repository:
 uv run --python 3.12 python -m agent_workbench init . --output .agent-workbench --project-name my-repo
 ```
 
+Generate optional Claude Code and Cursor adapters:
+
+```powershell
+uv run --python 3.12 python -m agent_workbench init . --output .agent-workbench --adapter claude --adapter cursor
+```
+
 Inspect a repository before generating files:
 
 ```powershell
@@ -132,10 +138,10 @@ The goal is not to be another agent. The goal is to make every repository easier
 ```text
 agent-workbench demo [--output PATH]
 agent-workbench scan [ROOT]
-agent-workbench init [ROOT] --output .agent-workbench --project-name NAME
+agent-workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude] [--adapter cursor]
 
 python -m agent_workbench scan [ROOT]
-python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME
+python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude] [--adapter cursor]
 python -m agent_workbench demo [--output PATH]
 ```
 

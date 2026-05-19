@@ -25,6 +25,7 @@ One command generates:
 
 - `AGENTS.md`
 - `agent-task-pack.md`
+- optional Claude Code and Cursor adapters with `--adapter claude --adapter cursor`
 
 The output gives Codex, Claude Code, Cursor, OpenCode, and other coding agents a repo map, safe commands, high-signal files, a kickoff prompt, and guardrails before they touch code.
 

@@ -5,6 +5,8 @@ from pathlib import Path
 
 from .models import RepoMap
 
+SUPPORTED_ADAPTERS = ("claude", "cursor")
+
 
 def render_agents_md(repo: RepoMap, project_name: str | None = None) -> str:
     name = project_name or repo.root.name
@@ -91,8 +93,17 @@ def render_task_pack(repo: RepoMap, project_name: str | None = None) -> str:
     )
 
 
-def write_workbench(root: Path, output: Path, project_name: str | None = None) -> tuple[Path, Path]:
+def write_workbench(
+    root: Path,
+    output: Path,
+    project_name: str | None = None,
+    adapters: tuple[str, ...] = (),
+) -> tuple[Path, ...]:
     from .scanner import scan_repo
+
+    invalid = tuple(adapter for adapter in adapters if adapter not in SUPPORTED_ADAPTERS)
+    if invalid:
+        raise ValueError(f"Unsupported adapter(s): {', '.join(invalid)}")
 
     repo = scan_repo(root)
     output.mkdir(parents=True, exist_ok=True)
@@ -100,7 +111,10 @@ def write_workbench(root: Path, output: Path, project_name: str | None = None) -
     tasks_path = output / "agent-task-pack.md"
     agents_path.write_text(render_agents_md(repo, project_name), encoding="utf-8")
     tasks_path.write_text(render_task_pack(repo, project_name), encoding="utf-8")
-    return agents_path, tasks_path
+    written = [agents_path, tasks_path]
+    for adapter in adapters:
+        written.append(_write_adapter(output, adapter))
+    return tuple(written)
 
 
 def _counter_text(counter: Counter[str]) -> str:
@@ -119,3 +133,45 @@ def _task_pack_files(repo: RepoMap):
         return (priority, -file.lines, file.path)
 
     return tuple(sorted(repo.files, key=rank)[:6])
+
+
+def _write_adapter(output: Path, adapter: str) -> Path:
+    if adapter == "claude":
+        path = output / "CLAUDE.md"
+        path.write_text(
+            "\n".join(
+                [
+                    "# Claude Code Instructions",
+                    "",
+                    "Read `AGENTS.md` first for the repository map, safe commands, high-signal files, and guardrails.",
+                    "",
+                    "Use `agent-task-pack.md` for the kickoff prompt, first jobs, verification commands, and acceptance gate.",
+                    "",
+                ]
+            ),
+            encoding="utf-8",
+        )
+        return path
+
+    if adapter == "cursor":
+        rules_dir = output / ".cursor" / "rules"
+        rules_dir.mkdir(parents=True, exist_ok=True)
+        path = rules_dir / "agent-workbench.md"
+        path.write_text(
+            "\n".join(
+                [
+                    "# Agent Workbench Cursor Rule",
+                    "",
+                    "Read `.agent-workbench/AGENTS.md` before editing.",
+                    "",
+                    "Use `.agent-workbench/agent-task-pack.md` for the current kickoff prompt, verification commands, and acceptance gate.",
+                    "",
+                    "Keep changes small and run the listed verification commands before summarizing work.",
+                    "",
+                ]
+            ),
+            encoding="utf-8",
+        )
+        return path
+
+    raise ValueError(f"Unsupported adapter: {adapter}")

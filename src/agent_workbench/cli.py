@@ -4,7 +4,7 @@ import argparse
 from pathlib import Path
 import tempfile
 
-from .generator import write_workbench
+from .generator import SUPPORTED_ADAPTERS, write_workbench
 from .scanner import scan_repo
 
 
@@ -19,6 +19,13 @@ def build_parser() -> argparse.ArgumentParser:
     init.add_argument("root", nargs="?", type=Path, default=Path("."))
     init.add_argument("--output", type=Path, default=Path(".agent-workbench"))
     init.add_argument("--project-name")
+    init.add_argument(
+        "--adapter",
+        action="append",
+        choices=SUPPORTED_ADAPTERS,
+        default=[],
+        help="Also generate a thin adapter for a specific agent tool. Repeat for multiple adapters.",
+    )
 
     demo = subparsers.add_parser("demo", help="Generate a no-secret demo workspace in a temporary repository.")
     demo.add_argument("--output", type=Path, help="Optional output directory. Defaults to a temporary directory.")
@@ -40,17 +47,17 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.command == "init":
-        agents_path, tasks_path = write_workbench(args.root, args.output, args.project_name)
-        print(f"Wrote {agents_path}")
-        print(f"Wrote {tasks_path}")
+        paths = write_workbench(args.root, args.output, args.project_name, tuple(args.adapter))
+        for path in paths:
+            print(f"Wrote {path}")
         return 0
 
     if args.command == "demo":
         root, output = _prepare_demo_workspace(args.output)
-        agents_path, tasks_path = write_workbench(root, output, "agent-workbench-demo")
+        paths = write_workbench(root, output, "agent-workbench-demo")
         print(f"Demo repository: {root}")
-        print(f"Wrote {agents_path}")
-        print(f"Wrote {tasks_path}")
+        for path in paths:
+            print(f"Wrote {path}")
         print("Next: open AGENTS.md and hand the task pack to your coding agent.")
         return 0
 

@@ -12,11 +12,11 @@ You are working in agent-workbench. Read AGENTS.md first, inspect `README.md`, m
 
 ## High-Signal Files
 
-- `README.md` (docs, 211 lines)
+- `README.md` (docs, 217 lines)
 - `src/agent_workbench/scanner.py` (python, 184 lines)
-- `tests/test_agent_workbench.py` (python, 145 lines)
-- `src/agent_workbench/generator.py` (python, 122 lines)
-- `src/agent_workbench/cli.py` (python, 104 lines)
+- `src/agent_workbench/generator.py` (python, 178 lines)
+- `tests/test_agent_workbench.py` (python, 175 lines)
+- `src/agent_workbench/cli.py` (python, 111 lines)
 - `src/agent_workbench/models.py` (python, 30 lines)
 
 ## First Jobs

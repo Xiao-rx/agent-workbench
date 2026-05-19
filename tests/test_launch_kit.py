@@ -9,6 +9,7 @@ class LaunchKitTests(unittest.TestCase):
 
         self.assertIn("Turn any repository into an AI-agent-ready workspace", launch)
         self.assertIn("Show HN", launch)
+        self.assertIn("--adapter claude --adapter cursor", launch)
         self.assertIn("uv tool install git+https://github.com/Xiao-rx/agent-workbench.git", launch)
         self.assertIn("https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.1.0", launch)
         self.assertIn("<svg", preview)

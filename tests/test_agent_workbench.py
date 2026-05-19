@@ -48,6 +48,21 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertTrue(agents_path.exists())
             self.assertTrue(tasks_path.exists())
 
+    def test_write_workbench_outputs_optional_adapters(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            out = Path(tmp) / "out"
+            root.mkdir()
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+
+            paths = write_workbench(root, out, "demo", ("claude", "cursor"))
+
+            self.assertEqual(len(paths), 4)
+            self.assertTrue((out / "CLAUDE.md").exists())
+            self.assertTrue((out / ".cursor" / "rules" / "agent-workbench.md").exists())
+            self.assertIn("Read `AGENTS.md` first", (out / "CLAUDE.md").read_text(encoding="utf-8"))
+            self.assertIn(".agent-workbench/AGENTS.md", (out / ".cursor" / "rules" / "agent-workbench.md").read_text(encoding="utf-8"))
+
     def test_render_task_pack_contains_repo_specific_kickoff(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -138,6 +153,21 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertIn("agent-workbench-demo", agents)
             self.assertIn("python -m unittest discover -s tests", agents)
             self.assertIn("Agent Task Pack", tasks)
+
+    def test_init_command_writes_requested_adapter(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            out = Path(tmp) / "out"
+            root.mkdir()
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["init", str(root), "--output", str(out), "--adapter", "claude"])
+
+            self.assertEqual(exit_code, 0)
+            self.assertTrue((out / "CLAUDE.md").exists())
+            self.assertIn("CLAUDE.md", stdout.getvalue())
 
 
 if __name__ == "__main__":
