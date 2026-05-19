@@ -31,6 +31,18 @@ class ReadinessReport:
     def status(self) -> str:
         return "ready" if self.ready else "not_ready"
 
+    @property
+    def has_failures(self) -> bool:
+        return any(check.status == "fail" for check in self.checks)
+
+    @property
+    def next_action(self) -> str:
+        if self.ready:
+            return "open agent-task-pack.md and hand the kickoff prompt to your coding agent."
+        if self.has_failures:
+            return "run `agent-workbench init` to generate or refresh the missing workbench files."
+        return "resolve the warning checks before using this readiness report as a strict gate."
+
 
 REQUIRED_DOCUMENTS = {
     "AGENTS.md": (
@@ -146,6 +158,7 @@ def readiness_payload(report: ReadinessReport) -> dict[str, object]:
         "status": report.status,
         "ready": report.ready,
         "strict": report.strict,
+        "next_action": report.next_action,
         "root": str(report.root),
         "workbench": str(report.workbench),
         "checks": [
@@ -167,12 +180,10 @@ def render_readiness_text(report: ReadinessReport) -> str:
     ]
     if report.strict:
         lines.append("strict=true")
+    lines.append(f"next_action={report.next_action}")
     lines.append("")
     lines.extend(f"{check.status.upper()} {check.name}: {check.detail}" for check in report.checks)
-    if report.ready:
-        lines.extend(["", "Next: open agent-task-pack.md and hand the kickoff prompt to your coding agent."])
-    else:
-        lines.extend(["", "Next: run `agent-workbench init` to generate or refresh the missing workbench files."])
+    lines.extend(["", f"Next: {report.next_action}"])
     return "\n".join(lines)
 
 

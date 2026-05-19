@@ -157,6 +157,7 @@ agent-workbench check . --format json --output-json .agent-workbench/readiness.j
 
 `check` also validates optional Claude Code, Codex, and Cursor handoff files when they are present. Use `--adapter all` to require all three handoffs.
 Use `--strict` in CI when warnings, such as missing `.gitignore` or local secret-risk files, should make the repository `not_ready`.
+JSON readiness reports include `next_action`, so downstream agent harnesses can route ready, failed, and warning-only workspaces without parsing human text.
 
 Run tests:
 

@@ -112,6 +112,7 @@ class AgentWorkbenchTests(unittest.TestCase):
 
         self.assertTrue(report.ready)
         self.assertEqual(payload["status"], "ready")
+        self.assertIn("kickoff prompt", payload["next_action"])
         self.assertTrue(any(check.name == "verification commands" and check.status == "pass" for check in report.checks))
 
     def test_check_workbench_strict_treats_warnings_as_not_ready(self):
@@ -130,6 +131,7 @@ class AgentWorkbenchTests(unittest.TestCase):
         self.assertFalse(strict_report.ready)
         self.assertEqual(payload["status"], "not_ready")
         self.assertTrue(payload["strict"])
+        self.assertIn("resolve the warning checks", payload["next_action"])
         self.assertTrue(any(check.name == "risk note" and check.status == "warn" for check in strict_report.checks))
 
     def test_check_workbench_reports_adapter_handoffs(self):
@@ -311,6 +313,7 @@ class AgentWorkbenchTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertEqual(payload["status"], "ready")
         self.assertTrue(payload["ready"])
+        self.assertIn("kickoff prompt", payload["next_action"])
         self.assertTrue(any(check["name"] == "AGENTS.md" for check in payload["checks"]))
 
     def test_check_command_can_write_json_readiness(self):
@@ -365,6 +368,7 @@ class AgentWorkbenchTests(unittest.TestCase):
         self.assertEqual(payload["status"], "not_ready")
         self.assertFalse(payload["ready"])
         self.assertTrue(payload["strict"])
+        self.assertIn("resolve the warning checks", payload["next_action"])
         self.assertTrue(any(check["name"] == "risk note" and check["status"] == "warn" for check in payload["checks"]))
 
     def test_output_json_requires_json_format(self):
@@ -388,6 +392,7 @@ class AgentWorkbenchTests(unittest.TestCase):
 
         self.assertEqual(exit_code, 1)
         self.assertIn("status=not_ready", stdout.getvalue())
+        self.assertIn("next_action=run `agent-workbench init`", stdout.getvalue())
         self.assertIn("Missing", stdout.getvalue())
 
     def test_demo_command_writes_visible_workbench(self):

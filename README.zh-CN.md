@@ -73,6 +73,7 @@ agent-workbench check . --format json --output-json .agent-workbench/readiness.j
 
 如果存在 Claude Code、Codex 或 Cursor handoff 文件，`check` 也会一起验证这些适配文件是否指向核心 workbench；用 `--adapter all` 可以要求三类 handoff 都必须存在。
 在 CI 里可以加 `--strict`，让 warning 也把仓库判为 `not_ready`，例如缺少 `.gitignore` 或存在本地 secret 风险文件时硬拦。
+JSON readiness 报告会包含 `next_action`，下游 agent harness 可以不用解析人类文本，就知道下一步是交给 agent、刷新 workbench，还是先处理 warning。
 
 ## 真实示例
 

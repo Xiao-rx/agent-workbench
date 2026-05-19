@@ -18,6 +18,7 @@ agent-workbench demo --adapter all --check --print-kickoff
 - Duplicate adapter requests are deduplicated, so `--adapter all --adapter codex` still writes each adapter once.
 - `check --adapter all`: require Claude Code, Codex, and Cursor handoff files in the readiness gate.
 - `check --strict`: treat warnings as `not_ready` for CI gates that should block on local risk notes.
+- Readiness JSON now includes `next_action` so downstream agent harnesses can route ready, failed, and warning-only states.
 - Generated `AGENTS.md` and `agent-task-pack.md` now list the adapter handoff files when adapters are requested.
 - English and Chinese README paths now use the shorter all-adapter demo command.
 - Launch assets now describe the v0.8.0 first-run path.
