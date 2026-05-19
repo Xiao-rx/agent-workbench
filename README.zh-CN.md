@@ -34,6 +34,7 @@ agent-workbench demo --adapter all --check --print-kickoff
 ```
 
 普通文本输出也会打印 `Proof:` 行，内容和 JSON 里的 `proof_summary` 对齐，方便截图或粘贴到 issue。
+demo 仓库内置一个安全的 `.github/copilot-instructions.md`，生成结果会直接展示现有 agent 资产探测效果。
 
 ## 在当前仓库生成工作区
 
@@ -57,7 +58,7 @@ agent-workbench demo --adapter all --check --format json --output-json .agent-wo
 agent-workbench init . --output .agent-workbench --adapter all --check --format json --output-json .agent-workbench/init-proof.json
 ```
 
-JSON proof 会包含写入文件列表、简要 artifact summary、可复制的 `proof_summary`、首个 verification command（如果存在）、kickoff prompt，以及可选 readiness。
+JSON proof 会包含写入文件列表、简要 artifact summary、现有 `agent_assets`、可复制的 `proof_summary`、首个 verification command（如果存在）、kickoff prompt，以及可选 readiness。
 scan JSON 也会包含 `agent_assets`，方便下游 agent harness 判断仓库里是否已经有 Claude、Codex、Cursor、Copilot、Gemini 或 OpenCode 指令资产。
 
 只查看仓库扫描结果：

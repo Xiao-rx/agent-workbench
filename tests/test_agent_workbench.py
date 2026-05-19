@@ -468,14 +468,18 @@ class AgentWorkbenchTests(unittest.TestCase):
 
             self.assertEqual(exit_code, 0)
             self.assertTrue((output / "sample-repo" / "pyproject.toml").exists())
+            self.assertTrue((output / "sample-repo" / ".github" / "copilot-instructions.md").exists())
             agents = (output / ".agent-workbench" / "AGENTS.md").read_text(encoding="utf-8")
             tasks = (output / ".agent-workbench" / "agent-task-pack.md").read_text(encoding="utf-8")
             self.assertIn("Demo repository:", stdout.getvalue())
             self.assertIn("Proof: wrote 2 files", stdout.getvalue())
             self.assertIn("verify with `python -m unittest discover -s tests`", stdout.getvalue())
             self.assertIn("agent-workbench-demo", agents)
+            self.assertIn("Existing Agent Assets", agents)
+            self.assertIn(".github/copilot-instructions.md", agents)
             self.assertIn("python -m unittest discover -s tests", agents)
             self.assertIn("Agent Task Pack", tasks)
+            self.assertIn(".github/copilot-instructions.md", tasks)
 
     def test_demo_command_can_check_generated_workbench(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -561,6 +565,7 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertIn("4 adapter handoffs", payload["proof_summary"])
             self.assertIn("python -m unittest discover -s tests", payload["proof_summary"])
             self.assertIn("You are working in agent-workbench-demo.", payload["kickoff_prompt"])
+            self.assertIn(".github/copilot-instructions.md", payload["agent_assets"][0]["path"])
             self.assertEqual(payload["readiness"]["status"], "ready")
             self.assertTrue(any(path.endswith("CLAUDE.md") for path in payload["written"]))
             self.assertTrue(any(path.endswith(".codex\\AGENTS.md") or path.endswith(".codex/AGENTS.md") for path in payload["written"]))

@@ -119,6 +119,7 @@ uv run --python 3.12 python -m agent_workbench demo --adapter all --check --prin
 ```
 
 Text output prints a `Proof:` line with the same copyable summary as JSON, so the first run is easy to screenshot or paste into an issue.
+The demo repository includes a safe `.github/copilot-instructions.md`, so the generated workbench shows how existing agent assets are detected.
 
 Generate a machine-readable demo proof:
 
@@ -126,7 +127,7 @@ Generate a machine-readable demo proof:
 agent-workbench demo --adapter all --check --format json --output-json .agent-workbench/demo-proof.json
 ```
 
-The JSON proof includes the written files, a compact artifact summary, a copyable `proof_summary`, the first verification command when available, the kickoff prompt, and optional readiness.
+The JSON proof includes the written files, a compact artifact summary, existing `agent_assets`, a copyable `proof_summary`, the first verification command when available, the kickoff prompt, and optional readiness.
 Scan JSON also includes `agent_assets`, so downstream harnesses can tell whether a repository already carries Claude, Codex, Cursor, Copilot, Gemini, or OpenCode guidance.
 
 Generate files for your current repository:

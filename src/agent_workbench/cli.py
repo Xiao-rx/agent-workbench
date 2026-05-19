@@ -203,6 +203,13 @@ def _workbench_payload(
         "workbench": str(workbench),
         "written": [str(path) for path in paths],
         "artifact_summary": artifact_summary,
+        "agent_assets": [
+            {
+                "path": asset.path,
+                "label": asset.label,
+            }
+            for asset in repo.agent_assets
+        ],
         "verification_command": verification_command,
         "proof_summary": _proof_summary(artifact_summary, verification_command),
         "kickoff_prompt": _extract_kickoff_prompt(task_pack.read_text(encoding="utf-8")),
@@ -306,6 +313,12 @@ def _prepare_demo_workspace(output: Path | None) -> tuple[Path, Path]:
         encoding="utf-8",
     )
     (root / "README.md").write_text("# Agent Workbench Demo\n\nA tiny repository for the demo command.\n", encoding="utf-8")
+    github = root / ".github"
+    github.mkdir(exist_ok=True)
+    (github / "copilot-instructions.md").write_text(
+        "Keep changes small, run `python -m unittest discover -s tests`, and avoid committing secrets.\n",
+        encoding="utf-8",
+    )
     tests = root / "tests"
     tests.mkdir(exist_ok=True)
     (tests / "test_demo.py").write_text(

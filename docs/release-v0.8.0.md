@@ -17,6 +17,7 @@ agent-workbench demo --adapter all --check --print-kickoff
 - `demo --format json` and `init --format json`: emit machine-readable proofs with written files, kickoff prompt, and optional readiness.
 - `--output-json`: save demo and init proof payloads for CI and downstream agent harnesses.
 - JSON proof payloads now include an artifact summary, a copyable proof summary, and a verification command for easier sharing and routing.
+- JSON proof payloads now include existing `agent_assets`, and the no-secret demo includes a safe Copilot instructions file so the first run visibly exercises asset detection.
 - `scan --format json` now reports existing agent instruction assets such as `AGENTS.md`, `CLAUDE.md`, `.codex/AGENTS.md`, `.cursor/rules/*.md`, `.github/copilot-instructions.md`, `GEMINI.md`, and `opencode.json`.
 - Duplicate adapter requests are deduplicated, so `--adapter all --adapter codex` still writes each adapter once.
 - `check --adapter all`: require Claude Code, Codex, Cursor, and OpenCode handoff files in the readiness gate.

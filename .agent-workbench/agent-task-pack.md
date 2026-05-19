@@ -23,9 +23,9 @@ You are working in agent-workbench. Read AGENTS.md first, inspect `README.md`, m
 
 ## High-Signal Files
 
-- `README.md` (docs, 277 lines)
-- `tests/test_agent_workbench.py` (python, 718 lines)
-- `src/agent_workbench/cli.py` (python, 330 lines)
+- `README.md` (docs, 278 lines)
+- `tests/test_agent_workbench.py` (python, 723 lines)
+- `src/agent_workbench/cli.py` (python, 343 lines)
 - `src/agent_workbench/generator.py` (python, 254 lines)
 - `src/agent_workbench/scanner.py` (python, 206 lines)
 - `src/agent_workbench/checks.py` (python, 201 lines)

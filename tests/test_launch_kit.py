@@ -23,6 +23,7 @@ class LaunchKitTests(unittest.TestCase):
         self.assertIn("copyable proof summary", launch)
         self.assertIn("verification command", launch)
         self.assertIn("existing agent assets", launch)
+        self.assertIn("no-secret demo includes a safe `.github/copilot-instructions.md`", launch)
         self.assertIn("Copilot, Gemini, and OpenCode instruction files", launch)
         self.assertIn("Codex adapter", launch)
         self.assertIn("OpenCode adapter", launch)
