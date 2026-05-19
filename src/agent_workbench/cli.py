@@ -34,6 +34,7 @@ def build_parser() -> argparse.ArgumentParser:
     init.add_argument("--project-name")
     init.add_argument("--check", action="store_true", help="Run a readiness check after writing the workbench.")
     init.add_argument("--print-kickoff", action="store_true", help="Print the generated kickoff prompt after writing files.")
+    init.add_argument("--format", choices=("text", "json"), default="text", help="Output format.")
     init.add_argument(
         "--adapter",
         action="append",
@@ -83,6 +84,15 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "init":
         paths = write_workbench(args.root, args.output, args.project_name, tuple(args.adapter))
+        if args.format == "json":
+            payload = _workbench_payload(args.root.resolve(), args.output, paths)
+            if args.check:
+                report = check_workbench(args.root, args.output)
+                payload["readiness"] = readiness_payload(report)
+                print(json.dumps(payload, ensure_ascii=False, indent=2))
+                return 0 if report.ready else 1
+            print(json.dumps(payload, ensure_ascii=False, indent=2))
+            return 0
         for path in paths:
             print(f"Wrote {path}")
         if args.print_kickoff:
@@ -100,7 +110,7 @@ def main(argv: list[str] | None = None) -> int:
         root, output = _prepare_demo_workspace(args.output)
         paths = write_workbench(root, output, "agent-workbench-demo", tuple(args.adapter))
         if args.format == "json":
-            payload = _demo_payload(root, output, paths)
+            payload = _workbench_payload(root, output, paths, demo_repository=root)
             if args.check:
                 report = check_workbench(root, output)
                 payload["readiness"] = readiness_payload(report)
@@ -154,14 +164,22 @@ def _extract_kickoff_prompt(text: str) -> str:
     return text[line_start:end].strip()
 
 
-def _demo_payload(root: Path, workbench: Path, paths: tuple[Path, ...]) -> dict[str, object]:
+def _workbench_payload(
+    root: Path,
+    workbench: Path,
+    paths: tuple[Path, ...],
+    demo_repository: Path | None = None,
+) -> dict[str, object]:
     task_pack = workbench / "agent-task-pack.md"
-    return {
-        "demo_repository": str(root),
+    payload = {
+        "root": str(root),
         "workbench": str(workbench),
         "written": [str(path) for path in paths],
         "kickoff_prompt": _extract_kickoff_prompt(task_pack.read_text(encoding="utf-8")),
     }
+    if demo_repository is not None:
+        payload["demo_repository"] = str(demo_repository)
+    return payload
 
 
 def _write_json_file(path: Path, payload: dict[str, object]) -> None:

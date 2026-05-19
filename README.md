@@ -125,6 +125,12 @@ Generate files for your current repository:
 uv run --python 3.12 python -m agent_workbench init . --output .agent-workbench --project-name my-repo --check
 ```
 
+Generate a machine-readable init proof:
+
+```powershell
+agent-workbench init . --output .agent-workbench --adapter all --check --format json
+```
+
 Generate optional Claude Code, Codex, and Cursor adapters:
 
 ```powershell
@@ -174,12 +180,12 @@ The goal is not to be another agent. The goal is to make every repository easier
 agent-workbench demo [--output PATH] [--adapter claude|codex|cursor|all] [--check] [--print-kickoff] [--format text|json]
 agent-workbench scan [ROOT] [--format text|json] [--output-json PATH]
 agent-workbench check [ROOT] [--workbench PATH] [--format text|json] [--output-json PATH]
-agent-workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|all] [--check] [--print-kickoff]
+agent-workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|all] [--check] [--print-kickoff] [--format text|json]
 
 python -m agent_workbench scan [ROOT] [--format text|json] [--output-json PATH]
 python -m agent_workbench check [ROOT] [--workbench PATH] [--format text|json] [--output-json PATH]
-python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|all] [--check] [--print-kickoff]
-python -m agent_workbench demo [--output PATH] [--adapter claude|codex|cursor|all] [--check] [--print-kickoff]
+python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|all] [--check] [--print-kickoff] [--format text|json]
+python -m agent_workbench demo [--output PATH] [--adapter claude|codex|cursor|all] [--check] [--print-kickoff] [--format text|json]
 ```
 
 ## Release

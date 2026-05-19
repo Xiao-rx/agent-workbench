@@ -45,7 +45,7 @@ One command generates:
 - optional Claude Code, Codex, and Cursor adapters with `--adapter all`
 - `agent-workbench check` for a quick readiness gate before handing the repo to an agent
 - `--print-kickoff` to copy the generated first prompt straight from the terminal
-- `demo --format json` for a machine-readable proof with written files, kickoff prompt, and readiness
+- `demo --format json` and `init --format json` for machine-readable proofs with written files, kickoff prompt, and readiness
 - JSON artifacts with `--output-json` for CI and downstream agent harnesses
 
 The output gives Codex, Claude Code, Cursor, OpenCode, and other coding agents a repo map, safe commands, high-signal files, a kickoff prompt, and guardrails before they touch code.
@@ -90,6 +90,9 @@ agent-workbench demo --adapter all --check --print-kickoff
 
 JSON demo proof:
 agent-workbench demo --adapter all --check --format json
+
+JSON init proof:
+agent-workbench init . --output .agent-workbench --adapter all --check --format json
 
 Check:
 agent-workbench check . --format json

@@ -375,6 +375,7 @@ class AgentWorkbenchTests(unittest.TestCase):
 
             payload = json.loads(stdout.getvalue())
             self.assertEqual(exit_code, 0)
+            self.assertEqual(payload["root"], str(output.resolve() / "sample-repo"))
             self.assertEqual(payload["demo_repository"], str(output.resolve() / "sample-repo"))
             self.assertEqual(payload["workbench"], str(output.resolve() / ".agent-workbench"))
             self.assertIn("You are working in agent-workbench-demo.", payload["kickoff_prompt"])
@@ -430,6 +431,26 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertIn("Kickoff prompt:", text)
             self.assertIn("You are working in demo.", text)
             self.assertIn("inspect `README.md`", text)
+
+    def test_init_command_can_emit_json_proof(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            out = Path(tmp) / "out"
+            root.mkdir()
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["init", str(root), "--output", str(out), "--project-name", "demo", "--adapter", "all", "--check", "--format", "json"])
+
+            payload = json.loads(stdout.getvalue())
+            self.assertEqual(exit_code, 0)
+            self.assertEqual(payload["root"], str(root.resolve()))
+            self.assertEqual(payload["workbench"], str(out))
+            self.assertIn("You are working in demo.", payload["kickoff_prompt"])
+            self.assertEqual(payload["readiness"]["status"], "ready")
+            self.assertTrue(any(path.endswith("CLAUDE.md") for path in payload["written"]))
+            self.assertTrue(any(path.endswith(".codex\\AGENTS.md") or path.endswith(".codex/AGENTS.md") for path in payload["written"]))
 
     def test_init_command_can_check_generated_workbench(self):
         with tempfile.TemporaryDirectory() as tmp:
