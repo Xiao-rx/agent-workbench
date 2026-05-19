@@ -1,0 +1,42 @@
+name: Daily Trend Loop
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "35 23 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-trend-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  trend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run growth loop
+        env:
+          PYTHONPATH: src
+          GITHUB_TOKEN: ${{ github.token }}
+          TARGET_REPO: ${{ github.repository }}
+        run: python -m github_trend_lab growth-loop --repo "$TARGET_REPO" --top 12 --min-stars 50
+      - name: Commit generated trend data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/daily-brief.md reports/daily-decisions.json
+          find data/snapshots -name 'trend-*.json' -print0 | xargs -0 -r git add
+          find data/star_history -name '*.jsonl' -print0 | xargs -0 -r git add
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit."
+          else
+            git commit -m "Update daily trend brief"
+            git pull --rebase --autostash
+            git push
+          fi
