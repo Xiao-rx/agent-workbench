@@ -26,6 +26,27 @@ class AgentWorkbenchTests(unittest.TestCase):
         self.assertIn("python -m unittest discover -s tests", repo.test_commands)
         self.assertTrue(any(".env.local exists" in note for note in repo.risk_notes))
 
+    def test_scan_repo_detects_existing_agent_assets(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+            (root / "AGENTS.md").write_text("# Instructions\n", encoding="utf-8")
+            github = root / ".github"
+            github.mkdir()
+            (github / "copilot-instructions.md").write_text("Use tests.\n", encoding="utf-8")
+            cursor = root / ".cursor" / "rules"
+            cursor.mkdir(parents=True)
+            (cursor / "project.md").write_text("Follow local rules.\n", encoding="utf-8")
+            (root / "opencode.json").write_text('{"instructions":["AGENTS.md"]}\n', encoding="utf-8")
+
+            repo = scan_repo(root)
+
+        assets = {(asset.label, asset.path) for asset in repo.agent_assets}
+        self.assertIn(("Agent instructions", "AGENTS.md"), assets)
+        self.assertIn(("GitHub Copilot instructions", ".github/copilot-instructions.md"), assets)
+        self.assertIn(("Cursor rule", ".cursor/rules/project.md"), assets)
+        self.assertIn(("OpenCode config", "opencode.json"), assets)
+
     def test_render_agents_md_contains_safe_commands(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -38,6 +59,21 @@ class AgentWorkbenchTests(unittest.TestCase):
         self.assertIn("# AGENTS.md for demo", output)
         self.assertIn("python -m unittest discover -s tests", output)
         self.assertIn("High-Signal Files", output)
+
+    def test_render_agents_md_lists_existing_agent_assets(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+            (root / "GEMINI.md").write_text("# Gemini\n", encoding="utf-8")
+            repo = scan_repo(root)
+
+        output = render_agents_md(repo, "demo")
+        tasks = render_task_pack(repo, "demo")
+
+        self.assertIn("## Existing Agent Assets", output)
+        self.assertIn("- Gemini instructions: `GEMINI.md`", output)
+        self.assertIn("## Existing Agent Assets", tasks)
+        self.assertIn("- Gemini instructions: `GEMINI.md`", tasks)
 
     def test_write_workbench_outputs_files(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -279,12 +315,32 @@ class AgentWorkbenchTests(unittest.TestCase):
             with redirect_stdout(stdout):
                 exit_code = main(["scan", str(root), "--format", "json"])
 
-        payload = json.loads(stdout.getvalue())
+            payload = json.loads(stdout.getvalue())
         self.assertEqual(exit_code, 0)
         self.assertEqual(payload["total_files"], 2)
         self.assertEqual(payload["package_managers"], ["python/pyproject"])
         self.assertIn("python -m unittest discover -s tests", payload["test_commands"])
+        self.assertEqual(payload["agent_assets"], [])
         self.assertEqual(payload["files"][0]["path"], "app.py")
+
+    def test_scan_command_json_includes_agent_assets(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+            codex = root / ".codex"
+            codex.mkdir()
+            (codex / "AGENTS.md").write_text("# Codex\n", encoding="utf-8")
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["scan", str(root), "--format", "json"])
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(
+            payload["agent_assets"],
+            [{"path": ".codex/AGENTS.md", "label": "Codex instructions"}],
+        )
 
     def test_scan_command_can_write_json_repo_map(self):
         with tempfile.TemporaryDirectory() as tmp:

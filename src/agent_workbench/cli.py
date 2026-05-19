@@ -90,6 +90,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"lines={repo.total_lines}")
         print(f"package_managers={','.join(repo.package_managers) if repo.package_managers else 'none'}")
         print(f"test_commands={','.join(repo.test_commands) if repo.test_commands else 'none'}")
+        print(f"agent_assets={','.join(asset.path for asset in repo.agent_assets) if repo.agent_assets else 'none'}")
         return 0
 
     if args.command == "init":
@@ -264,6 +265,13 @@ def _repo_map_payload(repo: RepoMap) -> dict[str, object]:
         "package_managers": list(repo.package_managers),
         "test_commands": list(repo.test_commands),
         "risk_notes": list(repo.risk_notes),
+        "agent_assets": [
+            {
+                "path": asset.path,
+                "label": asset.label,
+            }
+            for asset in repo.agent_assets
+        ],
         "files": [
             {
                 "path": file.path,

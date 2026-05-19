@@ -37,6 +37,9 @@ def render_agents_md(repo: RepoMap, project_name: str | None = None, adapters: t
     if handoffs:
         lines.extend(["## Agent Tool Handoffs", "", *handoffs, ""])
 
+    if repo.agent_assets:
+        lines.extend(["## Existing Agent Assets", "", *_agent_asset_lines(repo), ""])
+
     lines.extend(["## Safe Commands", ""])
     if repo.test_commands:
         lines.extend(f"- `{command}`" for command in repo.test_commands)
@@ -72,6 +75,7 @@ def render_task_pack(repo: RepoMap, project_name: str | None = None, adapters: t
             "```",
             "",
             *(["## Agent Tool Handoffs", "", *handoffs, ""] if handoffs else []),
+            *(["## Existing Agent Assets", "", *_agent_asset_lines(repo), ""] if repo.agent_assets else []),
             "## Verification Commands",
             "",
             *[f"- `{command}`" for command in safe_commands],
@@ -143,6 +147,10 @@ def expand_adapters(adapters: tuple[str, ...]) -> tuple[str, ...]:
 def _adapter_handoff_lines(adapters: tuple[str, ...]) -> tuple[str, ...]:
     expanded = expand_adapters(adapters)
     return tuple(f"- {label}: `{path}`" for label, path in (ADAPTER_HANDOFFS[adapter] for adapter in expanded))
+
+
+def _agent_asset_lines(repo: RepoMap) -> tuple[str, ...]:
+    return tuple(f"- {asset.label}: `{asset.path}`" for asset in repo.agent_assets)
 
 
 def _counter_text(counter: Counter[str]) -> str:

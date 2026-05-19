@@ -37,6 +37,7 @@ Agent Workbench scans a codebase and writes the two files a coding agent needs b
 
 - `AGENTS.md`: repository map, safe commands, high-signal files, and guardrails.
 - `agent-task-pack.md`: first jobs and acceptance gates for agent-driven edits.
+- Existing agent assets: detects files like `AGENTS.md`, `CLAUDE.md`, `.codex/AGENTS.md`, `.cursor/rules/*.md`, `.github/copilot-instructions.md`, `GEMINI.md`, and `opencode.json`.
 
 It is provider-neutral by default. Optional adapters can also generate thin handoff files for Claude Code, Codex, Cursor, and OpenCode without changing the core Markdown output.
 
@@ -56,6 +57,10 @@ Example `AGENTS.md` output:
 - Files scanned: 56
 - Main file kinds: python=31, config=9, docs=5
 - Package managers: python/pyproject
+
+## Existing Agent Assets
+
+- GitHub Copilot instructions: `.github/copilot-instructions.md`
 
 ## Safe Commands
 
@@ -122,6 +127,7 @@ agent-workbench demo --adapter all --check --format json --output-json .agent-wo
 ```
 
 The JSON proof includes the written files, a compact artifact summary, a copyable `proof_summary`, the first verification command when available, the kickoff prompt, and optional readiness.
+Scan JSON also includes `agent_assets`, so downstream harnesses can tell whether a repository already carries Claude, Codex, Cursor, Copilot, Gemini, or OpenCode guidance.
 
 Generate files for your current repository:
 

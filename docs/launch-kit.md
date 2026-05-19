@@ -46,6 +46,7 @@ One command generates:
 - `agent-workbench check` for a quick readiness gate before handing the repo to an agent
 - `--print-kickoff` to copy the generated first prompt straight from the terminal
 - text output prints a copyable `Proof:` line for screenshots, issues, and release notes
+- scan JSON reports existing agent assets such as `AGENTS.md`, `CLAUDE.md`, Codex, Cursor, Copilot, Gemini, and OpenCode instruction files
 - `demo --format json` and `init --format json` for machine-readable proofs with written files, artifact summary, copyable proof summary, verification command, kickoff prompt, and readiness
 - JSON artifacts with `--output-json` for CI and downstream agent harnesses
 
@@ -78,7 +79,7 @@ It scans the repo and writes:
 - OpenCode adapter: opencode.json instructions that point to the generated workbench
 - readiness check: a pass/fail command for existing workbench files
 - Proof line: a copyable summary in normal terminal output
-- scan JSON: machine-readable repo map with file signals, package managers, and safe commands
+- scan JSON: machine-readable repo map with file signals, package managers, safe commands, and existing agent assets
 - output JSON files: reusable artifacts for CI and agent harnesses, including artifact summaries, copyable proof summaries, and verification commands
 
 It is provider-neutral and outputs plain Markdown, so it can be used with Codex, Claude Code, Cursor, OpenCode, or any coding agent workflow.

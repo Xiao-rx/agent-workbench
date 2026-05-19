@@ -6,10 +6,21 @@ Help AI coding agents make small, verifiable changes in this repository without 
 
 ## Repository Map
 
-- Files scanned: 71
-- Lines scanned: 5684
-- Main file kinds: python=38, other=11, config=10, docs=10, script=2
+- Files scanned: 87
+- Lines scanned: 7586
+- Main file kinds: python=39, docs=21, config=12, other=11, script=2, typescript=1
 - Package managers: python/pyproject
+
+## Agent Tool Handoffs
+
+- Claude Code: `CLAUDE.md`
+- Codex: `.codex/AGENTS.md`
+- Cursor: `.cursor/rules/agent-workbench.md`
+- OpenCode: `opencode.json`
+
+## Existing Agent Assets
+
+- Claude Code instructions: `CLAUDE.md`
 
 ## Safe Commands
 
@@ -17,18 +28,18 @@ Help AI coding agents make small, verifiable changes in this repository without 
 
 ## High-Signal Files
 
-- `src/github_trend_lab/agents.py` (python, 471 lines)
+- `tests/test_agent_workbench.py` (python, 718 lines)
+- `src/github_trend_lab/agents.py` (python, 490 lines)
 - `data/snapshots/product-direction-live.json` (config, 470 lines)
+- `src/agent_workbench/cli.py` (python, 330 lines)
 - `reports/product-direction-decisions.json` (config, 308 lines)
-- `reports/daily-decisions.json` (config, 305 lines)
-- `data/snapshots/trend-product-live.json` (config, 249 lines)
-- `README.md` (docs, 217 lines)
-- `src/github_trend_lab/reporting.py` (python, 199 lines)
-- `reports/daily-brief.md` (docs, 193 lines)
-- `src/github_trend_lab/cli.py` (python, 185 lines)
-- `src/agent_workbench/scanner.py` (python, 184 lines)
-- `src/agent_workbench/generator.py` (python, 178 lines)
-- `tests/test_agent_workbench.py` (python, 175 lines)
+- `reports/daily-decisions.json` (config, 302 lines)
+- `README.md` (docs, 277 lines)
+- `src/agent_workbench/generator.py` (python, 254 lines)
+- `data/snapshots/trend-product-live.json` (config, 238 lines)
+- `src/agent_workbench/scanner.py` (python, 206 lines)
+- `src/github_trend_lab/reporting.py` (python, 204 lines)
+- `src/agent_workbench/checks.py` (python, 201 lines)
 
 ## Guardrails
 

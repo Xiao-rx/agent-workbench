@@ -6,18 +6,29 @@
 You are working in agent-workbench. Read AGENTS.md first, inspect `README.md`, make one small improvement, and verify it before summarizing the change.
 ```
 
+## Agent Tool Handoffs
+
+- Claude Code: `CLAUDE.md`
+- Codex: `.codex/AGENTS.md`
+- Cursor: `.cursor/rules/agent-workbench.md`
+- OpenCode: `opencode.json`
+
+## Existing Agent Assets
+
+- Claude Code instructions: `CLAUDE.md`
+
 ## Verification Commands
 
 - `python -m unittest discover -s tests`
 
 ## High-Signal Files
 
-- `README.md` (docs, 217 lines)
-- `src/agent_workbench/scanner.py` (python, 184 lines)
-- `src/agent_workbench/generator.py` (python, 178 lines)
-- `tests/test_agent_workbench.py` (python, 175 lines)
-- `src/agent_workbench/cli.py` (python, 111 lines)
-- `src/agent_workbench/models.py` (python, 30 lines)
+- `README.md` (docs, 277 lines)
+- `tests/test_agent_workbench.py` (python, 718 lines)
+- `src/agent_workbench/cli.py` (python, 330 lines)
+- `src/agent_workbench/generator.py` (python, 254 lines)
+- `src/agent_workbench/scanner.py` (python, 206 lines)
+- `src/agent_workbench/checks.py` (python, 201 lines)
 
 ## First Jobs
 

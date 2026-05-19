@@ -13,12 +13,19 @@ class FileSignal:
 
 
 @dataclass(frozen=True)
+class AgentAsset:
+    path: str
+    label: str
+
+
+@dataclass(frozen=True)
 class RepoMap:
     root: Path
     files: tuple[FileSignal, ...]
     package_managers: tuple[str, ...]
     test_commands: tuple[str, ...]
     risk_notes: tuple[str, ...]
+    agent_assets: tuple[AgentAsset, ...] = ()
 
     @property
     def total_files(self) -> int:

@@ -4,7 +4,7 @@ import fnmatch
 from dataclasses import dataclass
 from pathlib import Path
 
-from .models import FileSignal, RepoMap
+from .models import AgentAsset, FileSignal, RepoMap
 
 
 IGNORE_DIRS = {
@@ -45,6 +45,18 @@ KIND_BY_SUFFIX = {
     ".sh": "script",
 }
 
+AGENT_ASSET_PATTERNS = (
+    ("AGENTS.md", "Agent instructions"),
+    ("CLAUDE.md", "Claude Code instructions"),
+    ("GEMINI.md", "Gemini instructions"),
+    ("opencode.json", "OpenCode config"),
+    (".codex/AGENTS.md", "Codex instructions"),
+    (".cursor/rules/*.md", "Cursor rule"),
+    (".github/copilot-instructions.md", "GitHub Copilot instructions"),
+    (".github/instructions/*.instructions.md", "GitHub Copilot instructions"),
+    (".github/prompts/*.prompt.md", "GitHub Copilot prompt"),
+)
+
 
 def scan_repo(root: Path, *, max_files: int = 300) -> RepoMap:
     root = root.resolve()
@@ -65,6 +77,7 @@ def scan_repo(root: Path, *, max_files: int = 300) -> RepoMap:
         package_managers=_package_managers(root),
         test_commands=_test_commands(root),
         risk_notes=_risk_notes(root),
+        agent_assets=_agent_assets(root),
     )
 
 
@@ -181,3 +194,12 @@ def _risk_notes(root: Path) -> tuple[str, ...]:
     if not (root / ".gitignore").exists():
         notes.append("No .gitignore found; create one before agent-driven edits.")
     return tuple(notes)
+
+
+def _agent_assets(root: Path) -> tuple[AgentAsset, ...]:
+    assets: list[AgentAsset] = []
+    for pattern, label in AGENT_ASSET_PATTERNS:
+        for path in sorted(root.glob(pattern)):
+            if path.is_file():
+                assets.append(AgentAsset(path=path.relative_to(root).as_posix(), label=label))
+    return tuple(dict.fromkeys(assets))

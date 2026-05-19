@@ -22,6 +22,8 @@ class LaunchKitTests(unittest.TestCase):
         self.assertIn("artifact summary", launch)
         self.assertIn("copyable proof summary", launch)
         self.assertIn("verification command", launch)
+        self.assertIn("existing agent assets", launch)
+        self.assertIn("Copilot, Gemini, and OpenCode instruction files", launch)
         self.assertIn("Codex adapter", launch)
         self.assertIn("OpenCode adapter", launch)
         self.assertIn("opencode.json", launch)
