@@ -73,8 +73,8 @@ if (-not $exists) {
     }
 }
 
-git remote get-url origin 2>$null | Out-Null
-if ($LASTEXITCODE -ne 0) {
+$originUrl = git remote get-url origin 2>$null
+if (-not $originUrl) {
     git remote add origin "https://github.com/$fullName.git"
 }
 
