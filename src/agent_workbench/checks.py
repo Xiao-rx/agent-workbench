@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
+from .generator import expand_adapters
 from .scanner import scan_repo
 
 
@@ -42,22 +43,25 @@ REQUIRED_DOCUMENTS = {
 }
 
 OPTIONAL_ADAPTERS = {
-    "Claude Code handoff": (
+    "claude": (
+        "Claude Code handoff",
         Path("CLAUDE.md"),
         ("AGENTS.md", "agent-task-pack.md"),
     ),
-    "Codex handoff": (
+    "codex": (
+        "Codex handoff",
         Path(".codex") / "AGENTS.md",
         (".agent-workbench/AGENTS.md", ".agent-workbench/agent-task-pack.md"),
     ),
-    "Cursor handoff": (
+    "cursor": (
+        "Cursor handoff",
         Path(".cursor") / "rules" / "agent-workbench.md",
         (".agent-workbench/AGENTS.md", ".agent-workbench/agent-task-pack.md"),
     ),
 }
 
 
-def check_workbench(root: Path, workbench: Path | None = None) -> ReadinessReport:
+def check_workbench(root: Path, workbench: Path | None = None, adapters: tuple[str, ...] = ()) -> ReadinessReport:
     root = root.resolve()
     workbench_path = _resolve_workbench(root, workbench)
     checks: list[ReadinessCheck] = []
@@ -85,7 +89,7 @@ def check_workbench(root: Path, workbench: Path | None = None) -> ReadinessRepor
         else:
             checks.append(ReadinessCheck(f"{filename} sections", "pass", "Required sections are present"))
 
-    checks.extend(_check_optional_adapters(workbench_path))
+    checks.extend(_check_optional_adapters(workbench_path, adapters))
 
     repo = scan_repo(root)
     if repo.test_commands:
@@ -107,11 +111,14 @@ def check_workbench(root: Path, workbench: Path | None = None) -> ReadinessRepor
     return ReadinessReport(root=root, workbench=workbench_path, checks=tuple(checks))
 
 
-def _check_optional_adapters(workbench: Path) -> tuple[ReadinessCheck, ...]:
+def _check_optional_adapters(workbench: Path, adapters: tuple[str, ...]) -> tuple[ReadinessCheck, ...]:
     checks: list[ReadinessCheck] = []
-    for name, (relative_path, required_text) in OPTIONAL_ADAPTERS.items():
+    required_adapters = set(expand_adapters(adapters))
+    for adapter, (name, relative_path, required_text) in OPTIONAL_ADAPTERS.items():
         path = workbench / relative_path
         if not path.exists():
+            if adapter in required_adapters:
+                checks.append(ReadinessCheck(name, "fail", f"Missing {path}"))
             continue
         if not path.is_file():
             checks.append(ReadinessCheck(name, "fail", f"{path} is not a file"))

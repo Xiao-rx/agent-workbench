@@ -27,6 +27,13 @@ def build_parser() -> argparse.ArgumentParser:
     check.add_argument("--workbench", type=Path, help="Workbench directory. Defaults to ROOT/.agent-workbench.")
     check.add_argument("--format", choices=("text", "json"), default="text", help="Output format.")
     check.add_argument("--output-json", type=Path, help="Write the JSON readiness report to a file.")
+    check.add_argument(
+        "--adapter",
+        action="append",
+        choices=SUPPORTED_ADAPTERS,
+        default=[],
+        help="Require a generated adapter handoff. Use all for Claude Code, Codex, and Cursor.",
+    )
 
     init = subparsers.add_parser("init", help="Generate AGENTS.md and an agent task pack.")
     init.add_argument("root", nargs="?", type=Path, default=Path("."))
@@ -108,7 +115,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "check":
         if args.output_json and args.format != "json":
             parser.error("--output-json requires --format json")
-        return _print_readiness(args.root, args.workbench, args.format, args.output_json)
+        return _print_readiness(args.root, args.workbench, args.format, args.output_json, tuple(args.adapter))
 
     if args.command == "demo":
         if args.output_json and args.format != "json":
@@ -138,8 +145,14 @@ def main(argv: list[str] | None = None) -> int:
     return 2
 
 
-def _print_readiness(root: Path, workbench: Path | None, output_format: str, output_json: Path | None = None) -> int:
-    report = check_workbench(root, workbench)
+def _print_readiness(
+    root: Path,
+    workbench: Path | None,
+    output_format: str,
+    output_json: Path | None = None,
+    adapters: tuple[str, ...] = (),
+) -> int:
+    report = check_workbench(root, workbench, adapters)
     if output_format == "json":
         payload = readiness_payload(report)
         if output_json:

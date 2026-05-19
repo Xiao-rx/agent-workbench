@@ -143,6 +143,21 @@ class AgentWorkbenchTests(unittest.TestCase):
         self.assertFalse(report.ready)
         self.assertTrue(any(check.name == "Codex handoff" and check.status == "fail" for check in report.checks))
 
+    def test_check_workbench_can_require_adapter_handoffs(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            out = root / ".agent-workbench"
+            root.mkdir()
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+            write_workbench(root, out, "demo")
+
+            report = check_workbench(root, adapters=("all",))
+
+        self.assertFalse(report.ready)
+        self.assertTrue(any(check.name == "Claude Code handoff" and check.status == "fail" for check in report.checks))
+        self.assertTrue(any(check.name == "Codex handoff" and check.status == "fail" for check in report.checks))
+        self.assertTrue(any(check.name == "Cursor handoff" and check.status == "fail" for check in report.checks))
+
     def test_check_workbench_reports_missing_files(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -297,6 +312,24 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertTrue(out.exists())
             self.assertIn("Wrote", stdout.getvalue())
             self.assertEqual(payload["status"], "ready")
+
+    def test_check_command_can_require_all_adapters(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            root.mkdir()
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+            write_workbench(root, root / ".agent-workbench", "demo", ("all",))
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["check", str(root), "--adapter", "all", "--format", "json"])
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 0)
+        checks = {(check["name"], check["status"]) for check in payload["checks"]}
+        self.assertIn(("Claude Code handoff", "pass"), checks)
+        self.assertIn(("Codex handoff", "pass"), checks)
+        self.assertIn(("Cursor handoff", "pass"), checks)
 
     def test_output_json_requires_json_format(self):
         with tempfile.TemporaryDirectory() as tmp:

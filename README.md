@@ -150,10 +150,11 @@ Check whether a repository already has an agent-ready workbench:
 ```powershell
 agent-workbench check .
 agent-workbench check . --format json
+agent-workbench check . --adapter all --format json
 agent-workbench check . --format json --output-json .agent-workbench/readiness.json
 ```
 
-`check` also validates optional Claude Code, Codex, and Cursor handoff files when they are present.
+`check` also validates optional Claude Code, Codex, and Cursor handoff files when they are present. Use `--adapter all` to require all three handoffs.
 
 Run tests:
 
@@ -181,11 +182,11 @@ The goal is not to be another agent. The goal is to make every repository easier
 ```text
 agent-workbench demo [--output PATH] [--adapter claude|codex|cursor|all] [--check] [--print-kickoff] [--format text|json] [--output-json PATH]
 agent-workbench scan [ROOT] [--format text|json] [--output-json PATH]
-agent-workbench check [ROOT] [--workbench PATH] [--format text|json] [--output-json PATH]
+agent-workbench check [ROOT] [--workbench PATH] [--adapter claude|codex|cursor|all] [--format text|json] [--output-json PATH]
 agent-workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|all] [--check] [--print-kickoff] [--format text|json] [--output-json PATH]
 
 python -m agent_workbench scan [ROOT] [--format text|json] [--output-json PATH]
-python -m agent_workbench check [ROOT] [--workbench PATH] [--format text|json] [--output-json PATH]
+python -m agent_workbench check [ROOT] [--workbench PATH] [--adapter claude|codex|cursor|all] [--format text|json] [--output-json PATH]
 python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|all] [--check] [--print-kickoff] [--format text|json] [--output-json PATH]
 python -m agent_workbench demo [--output PATH] [--adapter claude|codex|cursor|all] [--check] [--print-kickoff] [--format text|json] [--output-json PATH]
 ```
