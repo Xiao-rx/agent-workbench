@@ -6,9 +6,9 @@ Help AI coding agents make small, verifiable changes in this repository without 
 
 ## Repository Map
 
-- Files scanned: 68
-- Lines scanned: 5478
-- Main file kinds: python=37, other=10, config=10, docs=9, script=2
+- Files scanned: 71
+- Lines scanned: 5582
+- Main file kinds: python=38, other=11, config=10, docs=10, script=2
 - Package managers: python/pyproject
 
 ## Safe Commands
@@ -22,7 +22,7 @@ Help AI coding agents make small, verifiable changes in this repository without 
 - `reports/product-direction-decisions.json` (config, 308 lines)
 - `reports/daily-decisions.json` (config, 305 lines)
 - `data/snapshots/trend-product-live.json` (config, 249 lines)
-- `README.md` (docs, 210 lines)
+- `README.md` (docs, 211 lines)
 - `src/github_trend_lab/reporting.py` (python, 199 lines)
 - `reports/daily-brief.md` (docs, 193 lines)
 - `src/github_trend_lab/cli.py` (python, 185 lines)

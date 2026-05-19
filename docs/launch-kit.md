@@ -1,0 +1,65 @@
+# Agent Workbench Launch Kit
+
+## One-line pitch
+
+Turn any repository into an AI-agent-ready workspace with one command.
+
+## Short pitch
+
+Agent Workbench is a provider-neutral Python CLI that scans a repository and generates the two Markdown files a coding agent needs before it starts work: `AGENTS.md` and `agent-task-pack.md`.
+
+It works with Codex, Claude Code, Cursor, OpenCode, and other agent harnesses because the output is plain Markdown: repository map, safe commands, high-signal files, kickoff prompt, acceptance gates, and guardrails.
+
+## Demo command
+
+```powershell
+uv tool install git+https://github.com/Xiao-rx/agent-workbench.git
+agent-workbench demo
+```
+
+## Share post
+
+I shipped Agent Workbench v0.1.0: a tiny provider-neutral CLI that turns any repo into an AI-agent-ready workspace.
+
+One command generates:
+
+- `AGENTS.md`
+- `agent-task-pack.md`
+
+The output gives Codex, Claude Code, Cursor, OpenCode, and other coding agents a repo map, safe commands, high-signal files, a kickoff prompt, and guardrails before they touch code.
+
+Repo: https://github.com/Xiao-rx/agent-workbench
+Release: https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.1.0
+
+## Show HN draft
+
+Title:
+
+```text
+Show HN: Agent Workbench - Generate AGENTS.md and task packs for coding agents
+```
+
+Body:
+
+```text
+I built Agent Workbench, a small Python CLI that turns a repository into an AI-agent-ready workspace.
+
+It scans the repo and writes:
+
+- AGENTS.md: repo map, safe commands, high-signal files, guardrails
+- agent-task-pack.md: kickoff prompt, first jobs, acceptance gates
+
+It is provider-neutral and outputs plain Markdown, so it can be used with Codex, Claude Code, Cursor, OpenCode, or any coding agent workflow.
+
+Install:
+uv tool install git+https://github.com/Xiao-rx/agent-workbench.git
+
+Demo:
+agent-workbench demo
+
+I am using a daily GitHub trend/feedback loop to decide what to improve next.
+```
+
+## Social preview
+
+Use [`assets/social-preview.svg`](../assets/social-preview.svg) as the GitHub Social preview image if the repository settings UI allows upload.

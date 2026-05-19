@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
+  <title id="title">Agent Workbench social preview</title>
+  <desc id="desc">Turn any repository into an AI-agent-ready workspace with one command.</desc>
+  <rect width="1280" height="640" fill="#0f172a"/>
+  <rect x="64" y="64" width="1152" height="512" rx="24" fill="#111827" stroke="#38bdf8" stroke-width="2"/>
+  <text x="112" y="156" fill="#e5e7eb" font-family="Segoe UI, Arial, sans-serif" font-size="64" font-weight="700">Agent Workbench</text>
+  <text x="112" y="220" fill="#93c5fd" font-family="Segoe UI, Arial, sans-serif" font-size="34">Turn any repo into an AI-agent-ready workspace.</text>
+  <rect x="112" y="280" width="1056" height="208" rx="16" fill="#020617" stroke="#334155" stroke-width="2"/>
+  <text x="152" y="344" fill="#22c55e" font-family="Consolas, monospace" font-size="30">$ agent-workbench demo</text>
+  <text x="152" y="392" fill="#cbd5e1" font-family="Consolas, monospace" font-size="26">Wrote .agent-workbench/AGENTS.md</text>
+  <text x="152" y="432" fill="#cbd5e1" font-family="Consolas, monospace" font-size="26">Wrote .agent-workbench/agent-task-pack.md</text>
+  <text x="112" y="536" fill="#e5e7eb" font-family="Segoe UI, Arial, sans-serif" font-size="26">Provider-neutral docs for Codex, Claude Code, Cursor, OpenCode, and more.</text>
+</svg>
