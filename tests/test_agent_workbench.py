@@ -58,15 +58,17 @@ class AgentWorkbenchTests(unittest.TestCase):
             root.mkdir()
             (root / "README.md").write_text("# Demo\n", encoding="utf-8")
 
-            paths = write_workbench(root, out, "demo", ("claude", "codex", "cursor"))
+            paths = write_workbench(root, out, "demo", ("claude", "codex", "cursor", "opencode"))
 
-            self.assertEqual(len(paths), 5)
+            self.assertEqual(len(paths), 6)
             self.assertTrue((out / "CLAUDE.md").exists())
             self.assertTrue((out / ".codex" / "AGENTS.md").exists())
             self.assertTrue((out / ".cursor" / "rules" / "agent-workbench.md").exists())
+            self.assertTrue((out / "opencode.json").exists())
             self.assertIn("Read `AGENTS.md` first", (out / "CLAUDE.md").read_text(encoding="utf-8"))
             self.assertIn(".agent-workbench/agent-task-pack.md", (out / ".codex" / "AGENTS.md").read_text(encoding="utf-8"))
             self.assertIn(".agent-workbench/AGENTS.md", (out / ".cursor" / "rules" / "agent-workbench.md").read_text(encoding="utf-8"))
+            self.assertIn("agent-task-pack.md", (out / "opencode.json").read_text(encoding="utf-8"))
 
     def test_write_workbench_records_adapter_handoffs_in_core_docs(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -84,6 +86,7 @@ class AgentWorkbenchTests(unittest.TestCase):
                 self.assertIn("- Claude Code: `CLAUDE.md`", text)
                 self.assertIn("- Codex: `.codex/AGENTS.md`", text)
                 self.assertIn("- Cursor: `.cursor/rules/agent-workbench.md`", text)
+                self.assertIn("- OpenCode: `opencode.json`", text)
 
     def test_write_workbench_expands_all_adapter_shortcut_once(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -94,10 +97,11 @@ class AgentWorkbenchTests(unittest.TestCase):
 
             paths = write_workbench(root, out, "demo", ("all", "codex"))
 
-            self.assertEqual(len(paths), 5)
+            self.assertEqual(len(paths), 6)
             self.assertTrue((out / "CLAUDE.md").exists())
             self.assertTrue((out / ".codex" / "AGENTS.md").exists())
             self.assertTrue((out / ".cursor" / "rules" / "agent-workbench.md").exists())
+            self.assertTrue((out / "opencode.json").exists())
 
     def test_check_workbench_reports_ready_workspace(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -148,6 +152,7 @@ class AgentWorkbenchTests(unittest.TestCase):
         self.assertIn(("Claude Code handoff", "pass"), checks)
         self.assertIn(("Codex handoff", "pass"), checks)
         self.assertIn(("Cursor handoff", "pass"), checks)
+        self.assertIn(("OpenCode handoff", "pass"), checks)
 
     def test_check_workbench_fails_broken_adapter_handoff(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -177,6 +182,7 @@ class AgentWorkbenchTests(unittest.TestCase):
         self.assertTrue(any(check.name == "Claude Code handoff" and check.status == "fail" for check in report.checks))
         self.assertTrue(any(check.name == "Codex handoff" and check.status == "fail" for check in report.checks))
         self.assertTrue(any(check.name == "Cursor handoff" and check.status == "fail" for check in report.checks))
+        self.assertTrue(any(check.name == "OpenCode handoff" and check.status == "fail" for check in report.checks))
 
     def test_check_workbench_reports_missing_files(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -351,6 +357,7 @@ class AgentWorkbenchTests(unittest.TestCase):
         self.assertIn(("Claude Code handoff", "pass"), checks)
         self.assertIn(("Codex handoff", "pass"), checks)
         self.assertIn(("Cursor handoff", "pass"), checks)
+        self.assertIn(("OpenCode handoff", "pass"), checks)
 
     def test_check_command_strict_treats_warnings_as_not_ready(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -432,15 +439,17 @@ class AgentWorkbenchTests(unittest.TestCase):
 
             stdout = StringIO()
             with redirect_stdout(stdout):
-                exit_code = main(["demo", "--output", str(output), "--adapter", "claude", "--adapter", "codex", "--adapter", "cursor"])
+                exit_code = main(["demo", "--output", str(output), "--adapter", "claude", "--adapter", "codex", "--adapter", "cursor", "--adapter", "opencode"])
 
             self.assertEqual(exit_code, 0)
             self.assertTrue((output / ".agent-workbench" / "CLAUDE.md").exists())
             self.assertTrue((output / ".agent-workbench" / ".codex" / "AGENTS.md").exists())
             self.assertTrue((output / ".agent-workbench" / ".cursor" / "rules" / "agent-workbench.md").exists())
+            self.assertTrue((output / ".agent-workbench" / "opencode.json").exists())
             self.assertIn("CLAUDE.md", stdout.getvalue())
             self.assertIn(".codex", stdout.getvalue())
             self.assertIn("agent-workbench.md", stdout.getvalue())
+            self.assertIn("opencode.json", stdout.getvalue())
 
     def test_demo_command_writes_all_adapters(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -454,8 +463,9 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertTrue((output / ".agent-workbench" / "CLAUDE.md").exists())
             self.assertTrue((output / ".agent-workbench" / ".codex" / "AGENTS.md").exists())
             self.assertTrue((output / ".agent-workbench" / ".cursor" / "rules" / "agent-workbench.md").exists())
-            self.assertIn("Proof: wrote 5 files", stdout.getvalue())
-            self.assertIn("3 adapter handoffs", stdout.getvalue())
+            self.assertTrue((output / ".agent-workbench" / "opencode.json").exists())
+            self.assertIn("Proof: wrote 6 files", stdout.getvalue())
+            self.assertIn("4 adapter handoffs", stdout.getvalue())
             self.assertIn("status=ready", stdout.getvalue())
 
     def test_demo_command_can_print_kickoff_prompt(self):
@@ -489,9 +499,10 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertIn("AGENTS.md", payload["artifact_summary"]["core_files"])
             self.assertIn("agent-task-pack.md", payload["artifact_summary"]["core_files"])
             self.assertTrue(any(item.endswith("CLAUDE.md") for item in payload["artifact_summary"]["adapter_files"]))
+            self.assertIn("opencode.json", payload["artifact_summary"]["adapter_files"])
             self.assertIn("python -m unittest discover -s tests", payload["verification_command"])
-            self.assertIn("wrote 5 files", payload["proof_summary"])
-            self.assertIn("3 adapter handoffs", payload["proof_summary"])
+            self.assertIn("wrote 6 files", payload["proof_summary"])
+            self.assertIn("4 adapter handoffs", payload["proof_summary"])
             self.assertIn("python -m unittest discover -s tests", payload["proof_summary"])
             self.assertIn("You are working in agent-workbench-demo.", payload["kickoff_prompt"])
             self.assertEqual(payload["readiness"]["status"], "ready")
@@ -514,8 +525,8 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertEqual(payload["readiness"]["status"], "ready")
             self.assertEqual(payload["artifact_summary"]["written_total"], len(payload["written"]))
             self.assertIn("python -m unittest discover -s tests", payload["verification_command"])
-            self.assertIn("wrote 5 files", payload["proof_summary"])
-            self.assertIn("3 adapter handoffs", payload["proof_summary"])
+            self.assertIn("wrote 6 files", payload["proof_summary"])
+            self.assertIn("4 adapter handoffs", payload["proof_summary"])
 
     def test_init_command_writes_requested_adapter(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -549,8 +560,9 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertTrue((out / "CLAUDE.md").exists())
             self.assertTrue((out / ".codex" / "AGENTS.md").exists())
             self.assertTrue((out / ".cursor" / "rules" / "agent-workbench.md").exists())
-            self.assertIn("Proof: wrote 5 files", stdout.getvalue())
-            self.assertIn("3 adapter handoffs", stdout.getvalue())
+            self.assertTrue((out / "opencode.json").exists())
+            self.assertIn("Proof: wrote 6 files", stdout.getvalue())
+            self.assertIn("4 adapter handoffs", stdout.getvalue())
             self.assertIn("status=ready", stdout.getvalue())
 
     def test_init_command_can_print_kickoff_prompt(self):
@@ -589,8 +601,8 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertIn("AGENTS.md", payload["artifact_summary"]["core_files"])
             self.assertIn("agent-task-pack.md", payload["artifact_summary"]["core_files"])
             self.assertIn("agent-workbench check", payload["verification_command"])
-            self.assertIn("wrote 5 files", payload["proof_summary"])
-            self.assertIn("3 adapter handoffs", payload["proof_summary"])
+            self.assertIn("wrote 6 files", payload["proof_summary"])
+            self.assertIn("4 adapter handoffs", payload["proof_summary"])
             self.assertIn("agent-workbench check", payload["proof_summary"])
             self.assertIn("You are working in demo.", payload["kickoff_prompt"])
             self.assertEqual(payload["readiness"]["status"], "ready")
@@ -616,8 +628,8 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertEqual(payload["readiness"]["status"], "ready")
             self.assertEqual(payload["artifact_summary"]["written_total"], len(payload["written"]))
             self.assertIn("agent-workbench check", payload["verification_command"])
-            self.assertIn("wrote 5 files", payload["proof_summary"])
-            self.assertIn("3 adapter handoffs", payload["proof_summary"])
+            self.assertIn("wrote 6 files", payload["proof_summary"])
+            self.assertIn("4 adapter handoffs", payload["proof_summary"])
 
     def test_init_command_can_check_generated_workbench(self):
         with tempfile.TemporaryDirectory() as tmp:

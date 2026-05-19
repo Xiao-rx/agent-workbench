@@ -5,12 +5,13 @@ from pathlib import Path
 
 from .models import RepoMap
 
-CONCRETE_ADAPTERS = ("claude", "codex", "cursor")
+CONCRETE_ADAPTERS = ("claude", "codex", "cursor", "opencode")
 SUPPORTED_ADAPTERS = (*CONCRETE_ADAPTERS, "all")
 ADAPTER_HANDOFFS = {
     "claude": ("Claude Code", "CLAUDE.md"),
     "codex": ("Codex", ".codex/AGENTS.md"),
     "cursor": ("Cursor", ".cursor/rules/agent-workbench.md"),
+    "opencode": ("OpenCode", "opencode.json"),
 }
 
 
@@ -215,6 +216,25 @@ def _write_adapter(output: Path, adapter: str) -> Path:
                     "Use `.agent-workbench/agent-task-pack.md` for the kickoff prompt, first jobs, verification commands, and acceptance gate.",
                     "",
                     "Keep generated caches, local environment files, and secrets out of commits.",
+                    "",
+                ]
+            ),
+            encoding="utf-8",
+        )
+        return path
+
+    if adapter == "opencode":
+        path = output / "opencode.json"
+        path.write_text(
+            "\n".join(
+                [
+                    "{",
+                    '  "$schema": "https://opencode.ai/config.json",',
+                    '  "instructions": [',
+                    '    "AGENTS.md",',
+                    '    "agent-task-pack.md"',
+                    "  ]",
+                    "}",
                     "",
                 ]
             ),

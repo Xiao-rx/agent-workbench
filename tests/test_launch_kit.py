@@ -23,6 +23,8 @@ class LaunchKitTests(unittest.TestCase):
         self.assertIn("copyable proof summary", launch)
         self.assertIn("verification command", launch)
         self.assertIn("Codex adapter", launch)
+        self.assertIn("OpenCode adapter", launch)
+        self.assertIn("opencode.json", launch)
         self.assertIn("agent-workbench check . --format json", launch)
         self.assertIn("agent-workbench scan . --format json --output-json .agent-workbench/repo-map.json", launch)
         self.assertIn("agent-workbench check . --format json --output-json .agent-workbench/readiness.json", launch)

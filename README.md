@@ -11,7 +11,7 @@ Agent Workbench 是一个 provider-neutral 的 Python CLI。它会扫描仓库�
 - `AGENTS.md`：仓库地图、安全命令、高信号文件和操作护栏。
 - `agent-task-pack.md`：首批任务、验收门槛和交付前检查清单。
 
-默认输出不绑定任何模型或工具；需要时也可以额外生成 Claude Code、Codex 和 Cursor 的轻量 handoff 文件。
+默认输出不绑定任何模型或工具；需要时也可以额外生成 Claude Code、Codex、Cursor 和 OpenCode 的轻量 handoff 文件。
 
 ```powershell
 uv run --python 3.12 python -m agent_workbench init . --output .agent-workbench --project-name my-repo
@@ -38,7 +38,7 @@ Agent Workbench scans a codebase and writes the two files a coding agent needs b
 - `AGENTS.md`: repository map, safe commands, high-signal files, and guardrails.
 - `agent-task-pack.md`: first jobs and acceptance gates for agent-driven edits.
 
-It is provider-neutral by default. Optional adapters can also generate thin handoff files for Claude Code, Codex, and Cursor without changing the core Markdown output.
+It is provider-neutral by default. Optional adapters can also generate thin handoff files for Claude Code, Codex, Cursor, and OpenCode without changing the core Markdown output.
 
 ## What You Get
 
@@ -135,7 +135,7 @@ Generate a machine-readable init proof:
 agent-workbench init . --output .agent-workbench --adapter all --check --format json --output-json .agent-workbench/init-proof.json
 ```
 
-Generate optional Claude Code, Codex, and Cursor adapters:
+Generate optional Claude Code, Codex, Cursor, and OpenCode adapters:
 
 ```powershell
 uv run --python 3.12 python -m agent_workbench init . --output .agent-workbench --adapter all
@@ -159,7 +159,7 @@ agent-workbench check . --adapter all --format json
 agent-workbench check . --format json --output-json .agent-workbench/readiness.json
 ```
 
-`check` also validates optional Claude Code, Codex, and Cursor handoff files when they are present. Use `--adapter all` to require all three handoffs.
+`check` also validates optional Claude Code, Codex, Cursor, and OpenCode handoff files when they are present. Use `--adapter all` to require all four handoffs.
 Use `--strict` in CI when warnings, such as missing `.gitignore` or local secret-risk files, should make the repository `not_ready`.
 JSON readiness reports include `next_action`, so downstream agent harnesses can route ready, failed, and warning-only workspaces without parsing human text.
 
@@ -187,15 +187,15 @@ The goal is not to be another agent. The goal is to make every repository easier
 ## Commands
 
 ```text
-agent-workbench demo [--output PATH] [--adapter claude|codex|cursor|all] [--check] [--print-kickoff] [--format text|json] [--output-json PATH]
+agent-workbench demo [--output PATH] [--adapter claude|codex|cursor|opencode|all] [--check] [--print-kickoff] [--format text|json] [--output-json PATH]
 agent-workbench scan [ROOT] [--format text|json] [--output-json PATH]
-agent-workbench check [ROOT] [--workbench PATH] [--adapter claude|codex|cursor|all] [--strict] [--format text|json] [--output-json PATH]
-agent-workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|all] [--check] [--print-kickoff] [--format text|json] [--output-json PATH]
+agent-workbench check [ROOT] [--workbench PATH] [--adapter claude|codex|cursor|opencode|all] [--strict] [--format text|json] [--output-json PATH]
+agent-workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|opencode|all] [--check] [--print-kickoff] [--format text|json] [--output-json PATH]
 
 python -m agent_workbench scan [ROOT] [--format text|json] [--output-json PATH]
-python -m agent_workbench check [ROOT] [--workbench PATH] [--adapter claude|codex|cursor|all] [--strict] [--format text|json] [--output-json PATH]
-python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|all] [--check] [--print-kickoff] [--format text|json] [--output-json PATH]
-python -m agent_workbench demo [--output PATH] [--adapter claude|codex|cursor|all] [--check] [--print-kickoff] [--format text|json] [--output-json PATH]
+python -m agent_workbench check [ROOT] [--workbench PATH] [--adapter claude|codex|cursor|opencode|all] [--strict] [--format text|json] [--output-json PATH]
+python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|opencode|all] [--check] [--print-kickoff] [--format text|json] [--output-json PATH]
+python -m agent_workbench demo [--output PATH] [--adapter claude|codex|cursor|opencode|all] [--check] [--print-kickoff] [--format text|json] [--output-json PATH]
 ```
 
 ## Release

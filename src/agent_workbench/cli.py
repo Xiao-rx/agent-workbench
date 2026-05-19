@@ -33,7 +33,7 @@ def build_parser() -> argparse.ArgumentParser:
         action="append",
         choices=SUPPORTED_ADAPTERS,
         default=[],
-        help="Require a generated adapter handoff. Use all for Claude Code, Codex, and Cursor.",
+        help="Require a generated adapter handoff. Use all for Claude Code, Codex, Cursor, and OpenCode.",
     )
 
     init = subparsers.add_parser("init", help="Generate AGENTS.md and an agent task pack.")
@@ -49,7 +49,7 @@ def build_parser() -> argparse.ArgumentParser:
         action="append",
         choices=SUPPORTED_ADAPTERS,
         default=[],
-        help="Also generate thin adapter files. Use all for Claude Code, Codex, and Cursor.",
+        help="Also generate thin adapter files. Use all for Claude Code, Codex, Cursor, and OpenCode.",
     )
 
     demo = subparsers.add_parser("demo", help="Generate a no-secret demo workspace in a temporary repository.")
@@ -63,7 +63,7 @@ def build_parser() -> argparse.ArgumentParser:
         action="append",
         choices=SUPPORTED_ADAPTERS,
         default=[],
-        help="Also generate thin adapter files. Use all for Claude Code, Codex, and Cursor.",
+        help="Also generate thin adapter files. Use all for Claude Code, Codex, Cursor, and OpenCode.",
     )
 
     return parser

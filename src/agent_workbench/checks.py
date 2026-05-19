@@ -73,6 +73,11 @@ OPTIONAL_ADAPTERS = {
         Path(".cursor") / "rules" / "agent-workbench.md",
         (".agent-workbench/AGENTS.md", ".agent-workbench/agent-task-pack.md"),
     ),
+    "opencode": (
+        "OpenCode handoff",
+        Path("opencode.json"),
+        ("AGENTS.md", "agent-task-pack.md"),
+    ),
 }
 
 
