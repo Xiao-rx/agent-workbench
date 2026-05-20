@@ -762,6 +762,68 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertEqual(len(payload["artifact_summary"]["adapter_files"]), 4)
             self.assertEqual(payload["proof_command"], f"agent-workbench demo --output {output} --proof")
 
+    def test_demo_command_report_shortcut_writes_shareable_markdown(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "demo"
+            report = Path(tmp) / "reports" / "demo-report.md"
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["demo", "--output", str(output), "--report", str(report)])
+
+            text = report.read_text(encoding="utf-8")
+            self.assertEqual(exit_code, 0)
+            self.assertTrue(report.exists())
+            self.assertIn(f"Wrote {report}", stdout.getvalue())
+            self.assertIn("Report: wrote 6 files", stdout.getvalue())
+            self.assertIn("# Agent Workbench Demo Report", text)
+            self.assertIn("A no-secret proof", text)
+            self.assertIn(f"`agent-workbench demo --output {output} --report {report}`", text)
+            self.assertIn("`AGENTS.md`", text)
+            self.assertIn("`.codex/AGENTS.md`", text)
+            self.assertIn("Status: ready (10 pass, 0 warn, 0 fail)", text)
+            self.assertIn("Counts: 10 pass, 0 warn, 0 fail", text)
+            self.assertIn("`agent-workbench check", text)
+            self.assertIn("--adapter all --strict --format json", text)
+            self.assertIn("`.github/copilot-instructions.md`", text)
+            self.assertIn("You are working in agent-workbench-demo.", text)
+
+    def test_demo_command_report_shortcut_defaults_path_inside_workbench(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "demo"
+            report = output / ".agent-workbench" / "demo-report.md"
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["demo", "--output", str(output), "--report"])
+
+            text = report.read_text(encoding="utf-8")
+            self.assertEqual(exit_code, 0)
+            self.assertTrue(report.exists())
+            self.assertIn(f"Wrote {report}", stdout.getvalue())
+            self.assertIn("Report command: `agent-workbench demo --output", text)
+            self.assertIn("--report`", text)
+            self.assertIn("Status: ready (10 pass, 0 warn, 0 fail)", text)
+            self.assertTrue((output / ".agent-workbench" / "CLAUDE.md").exists())
+            self.assertTrue((output / ".agent-workbench" / ".cursor" / "rules" / "agent-workbench.md").exists())
+
+    def test_demo_command_report_keeps_json_stdout_machine_readable(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "demo"
+            report = Path(tmp) / "reports" / "demo-report.md"
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["demo", "--output", str(output), "--report", str(report), "--format", "json"])
+
+            payload = json.loads(stdout.getvalue())
+            self.assertEqual(exit_code, 0)
+            self.assertTrue(report.exists())
+            self.assertEqual(payload["kind"], "agent_workbench.proof")
+            self.assertEqual(payload["report"], str(report))
+            self.assertIn("--report", payload["report_command"])
+            self.assertEqual(payload["readiness"]["status"], "ready")
+
     def test_init_command_writes_requested_adapter(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp) / "repo"

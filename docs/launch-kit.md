@@ -52,6 +52,7 @@ One command generates:
 - `agent-workbench check` for a quick readiness gate before handing the repo to an agent
 - `--strict` on `demo` and `init` when warnings should fail the proof; it automatically runs the readiness check
 - `demo --proof [PATH]` for a one-option strict all-adapter JSON proof command that also prints copyable `Proof:` and `Proof command:` lines and defaults the proof path inside the generated workbench
+- `demo --report [PATH]` for a shareable no-secret Markdown report with generated files, readiness status, existing agent assets, and the kickoff prompt
 - `init --proof [PATH]` for the same proof shape on the real repository bootstrap path
 - `--print-kickoff` to copy the generated first prompt straight from the terminal
 - the no-secret demo includes a safe `.github/copilot-instructions.md`, so the generated workbench visibly reports existing agent assets
@@ -59,7 +60,7 @@ One command generates:
 - scan JSON reports `kind`, `schema_version`, and existing agent assets such as `AGENTS.md`, `CLAUDE.md`, Codex, Cursor, Copilot, Gemini, and OpenCode instruction files
 - `demo --format json` and `init --format json` for machine-readable proofs with `kind`, `schema_version`, written files, artifact summary, a handoff object with `AGENTS.md`, `agent-task-pack.md`, and `next_action`, pre-write existing agent assets, copyable proof summary, proof command for the shortcut path, verification command, readiness summary, readiness counts, readiness command, structured readiness args, kickoff prompt, and readiness
 - JSON artifacts with `--output-json` for CI and downstream agent harnesses; the option implies JSON output, so the proof command stays shorter
-- CI validates the installed CLI with the strict all-adapter JSON demo proof, so the launch command is continuously exercised from a fresh checkout
+- CI validates the installed CLI with the strict all-adapter JSON demo proof and Markdown demo report, so the launch command is continuously exercised from a fresh checkout
 - MIT license, so reuse rights are explicit before adoption
 
 The output gives Codex, Claude Code, Cursor, OpenCode, and other coding agents a repo map, safe commands, high-signal files, a kickoff prompt, and guardrails before they touch code.
@@ -91,6 +92,7 @@ It scans the repo and writes:
 - OpenCode adapter: opencode.json instructions that point to the generated workbench
 - readiness check: a pass/fail command for existing workbench files
 - Proof line: a copyable summary in normal terminal output with adapter counts, existing agent asset counts, and readiness status when checks run
+- Demo report: a shareable Markdown artifact with generated files, readiness status, existing agent assets, and the kickoff prompt
 - scan JSON: machine-readable repo map with schema metadata, file signals, package managers, safe commands, and existing agent assets
 - output JSON files: reusable artifacts for CI and agent harnesses, including schema metadata, artifact summaries, structured handoff paths, pre-write existing agent assets, copyable proof summaries, verification commands, readiness summaries, readiness counts, and structured readiness args
 
@@ -107,6 +109,9 @@ agent-workbench demo --adapter all --strict --print-kickoff
 
 JSON demo proof:
 agent-workbench demo --proof
+
+Markdown demo report:
+agent-workbench demo --report
 
 JSON init proof:
 agent-workbench init . --output .agent-workbench --proof
