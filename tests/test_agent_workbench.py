@@ -786,6 +786,9 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertIn("`agent-workbench check", text)
             self.assertIn("--adapter all --strict --format json", text)
             self.assertIn("`.github/copilot-instructions.md`", text)
+            self.assertIn("## Share Feedback", text)
+            self.assertIn("https://github.com/Xiao-rx/agent-workbench/issues/new?template=agent-workbench-report.yml", text)
+            self.assertIn("Paste only sanitized output", text)
             self.assertIn("You are working in agent-workbench-demo.", text)
 
     def test_demo_command_report_shortcut_defaults_path_inside_workbench(self):
@@ -822,6 +825,11 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertEqual(payload["kind"], "agent_workbench.proof")
             self.assertEqual(payload["report"], str(report))
             self.assertIn("--report", payload["report_command"])
+            self.assertEqual(
+                payload["feedback"]["url"],
+                "https://github.com/Xiao-rx/agent-workbench/issues/new?template=agent-workbench-report.yml",
+            )
+            self.assertIn("Do not include tokens", payload["feedback"]["safety_note"])
             self.assertEqual(payload["readiness"]["status"], "ready")
 
     def test_init_command_writes_requested_adapter(self):
@@ -1093,6 +1101,9 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertIn("`agent-workbench check", text)
             self.assertIn("--adapter all --format json", text)
             self.assertIn("None detected before generation.", text)
+            self.assertIn("## Share Feedback", text)
+            self.assertIn("https://github.com/Xiao-rx/agent-workbench/issues/new?template=agent-workbench-report.yml", text)
+            self.assertIn("Do not include tokens", text)
             self.assertIn("You are working in repo.", text)
 
     def test_init_command_report_shortcut_defaults_path_inside_workbench(self):
@@ -1135,6 +1146,11 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertEqual(payload["kind"], "agent_workbench.proof")
             self.assertEqual(payload["report"], str(report))
             self.assertIn("--report", payload["report_command"])
+            self.assertEqual(
+                payload["feedback"]["url"],
+                "https://github.com/Xiao-rx/agent-workbench/issues/new?template=agent-workbench-report.yml",
+            )
+            self.assertIn("Do not include tokens", payload["feedback"]["safety_note"])
             self.assertEqual(payload["readiness"]["status"], "ready")
 
     def test_init_command_can_check_generated_workbench(self):

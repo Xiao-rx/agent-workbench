@@ -66,10 +66,10 @@ agent-workbench init . --output .agent-workbench --report
 ```
 
 `demo --proof [PATH]` 会写出 strict all-adapter JSON proof，适合截图、CI 和下游 agent harness 复用，并且会在 stdout 打印同一份可复制的 `Proof:` 摘要和 `Proof command:` 复现命令。省略 `PATH` 时，proof 会保存到生成 workbench 目录里的 `demo-proof.json`。
-`demo --report [PATH]` 会写出无 secret 的 Markdown demo report，包含生成文件、readiness 状态、readiness gate、现有 agent 资产和 kickoff prompt；它默认走和 `--proof` 一样的 strict all-adapter demo 路径，省略 `PATH` 时会保存到生成 workbench 目录里的 `demo-report.md`。
+`demo --report [PATH]` 会写出无 secret 的 Markdown demo report，包含生成文件、readiness 状态、readiness gate、现有 agent 资产、kickoff prompt 和清理后反馈链接；它默认走和 `--proof` 一样的 strict all-adapter demo 路径，省略 `PATH` 时会保存到生成 workbench 目录里的 `demo-report.md`。
 `init --proof [PATH]` 也会写出可分享的 JSON init proof，并默认把文件保存到生成 workbench 目录里。
-`init --report [PATH]` 会为真实仓库写出 Markdown init report，包含生成文件、readiness 状态、readiness gate、现有 agent 资产和 kickoff prompt；省略 `PATH` 时会保存到生成 workbench 目录里的 `init-report.md`。
-JSON proof 会包含 `kind`、`schema_version`、写入文件列表、简要 artifact summary、带有 `AGENTS.md`、`agent-task-pack.md` 和 `next_action` 的 `handoff` 对象、写入前已经存在的 `agent_assets`、可复制的 `proof_summary`、使用快捷参数时可复现的 `proof_command`、首个 verification command（如果存在）、check 运行后的 `readiness_summary` 和 `readiness_counts`、会保留 adapter 和 strict 门槛的 `readiness_command` 与结构化 `readiness_args`、kickoff prompt，以及可选 readiness。
+`init --report [PATH]` 会为真实仓库写出 Markdown init report，包含生成文件、readiness 状态、readiness gate、现有 agent 资产、kickoff prompt 和清理后反馈链接；省略 `PATH` 时会保存到生成 workbench 目录里的 `init-report.md`。
+JSON proof 会包含 `kind`、`schema_version`、写入文件列表、简要 artifact summary、带有 `AGENTS.md`、`agent-task-pack.md` 和 `next_action` 的 `handoff` 对象、写入前已经存在的 `agent_assets`、可复制的 `proof_summary`、使用快捷参数时可复现的 `proof_command`、首个 verification command（如果存在）、check 运行后的 `readiness_summary` 和 `readiness_counts`、会保留 adapter 和 strict 门槛的 `readiness_command` 与结构化 `readiness_args`、带 report issue URL 和安全提醒的 `feedback` 对象、kickoff prompt，以及可选 readiness。
 scan JSON 也会包含 `kind`、`schema_version` 和 `agent_assets`，方便下游 agent harness 判断当前 payload 类型，以及仓库里是否已经有 Claude、Codex、Cursor、Copilot、Gemini 或 OpenCode 指令资产。
 Python verification command 只会在匹配路径存在时报告：有 `tests/` 时使用 unittest discovery，否则有 Python 源码时退到 `compileall`。
 如果希望 warning 也让 demo/init proof 失败，可以使用 `--strict`；它会自动运行 readiness check。
@@ -139,6 +139,6 @@ Copy-Item .env.example .env.local
 
 本地可以用 `python -m github_trend_lab insight --decisions reports/daily-decisions.json` 快速查看最新决策摘要，再决定下一轮产品改动。
 
-跑完 `agent-workbench demo --report` 或 `agent-workbench init --report` 后，可以打开 Agent Workbench report issue，粘贴清理过的摘要。请不要包含 token、`.env.local`、`.env.bak`、私有仓库名或专有源码片段。
+跑完 `agent-workbench demo --report` 或 `agent-workbench init --report` 后，可以使用报告里的 **Share Feedback** 链接打开 Agent Workbench report issue，粘贴清理过的摘要。请不要包含 token、`.env.local`、`.env.bak`、私有仓库名或专有源码片段。
 
 趋势分析不是产品本体。产品本体是 Agent Workbench CLI。

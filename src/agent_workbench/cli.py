@@ -14,6 +14,11 @@ from .scanner import scan_repo
 
 _DEFAULT_PROOF = object()
 _DEFAULT_REPORT = object()
+_FEEDBACK_URL = "https://github.com/Xiao-rx/agent-workbench/issues/new?template=agent-workbench-report.yml"
+_FEEDBACK_SAFETY_NOTE = (
+    "Paste only sanitized output. Do not include tokens, `.env.local`, `.env.bak`, "
+    "private repository names, or proprietary source snippets."
+)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -449,6 +454,10 @@ def _workbench_payload(
             show_readiness_command,
             readiness_summary,
         ),
+        "feedback": {
+            "url": _FEEDBACK_URL,
+            "safety_note": _FEEDBACK_SAFETY_NOTE,
+        },
         "kickoff_prompt": _extract_kickoff_prompt(task_pack.read_text(encoding="utf-8")),
     }
     if readiness_summary:
@@ -644,6 +653,13 @@ def _render_workbench_report(payload: dict[str, object]) -> str:
         lines.append("- None detected before generation.")
     lines.extend(
         [
+            "",
+            "## Share Feedback",
+            "",
+            "Open an Agent Workbench report issue after removing local/private details:",
+            "",
+            f"- Feedback form: {_FEEDBACK_URL}",
+            f"- Safety: {_FEEDBACK_SAFETY_NOTE}",
             "",
             "## Kickoff Prompt",
             "",

@@ -27,6 +27,7 @@ jobs:
           test -f /tmp/agent-workbench-demo-report/demo-report.md
           grep -q "Agent Workbench Demo Report" /tmp/agent-workbench-demo-report/demo-report.md
           grep -q "Status: ready (10 pass, 0 warn, 0 fail)" /tmp/agent-workbench-demo-report/demo-report.md
+          grep -q "Share Feedback" /tmp/agent-workbench-demo-report/demo-report.md
           python - <<'PY'
           import json
           from pathlib import Path
@@ -46,6 +47,10 @@ jobs:
               raise SystemExit(proof["handoff"])
           if len(proof["artifact_summary"]["adapter_files"]) != 4:
               raise SystemExit(proof["artifact_summary"])
+          if "issues/new?template=agent-workbench-report.yml" not in proof["feedback"]["url"]:
+              raise SystemExit(proof["feedback"])
+          if "Do not include tokens" not in proof["feedback"]["safety_note"]:
+              raise SystemExit(proof["feedback"])
           if "--adapter all --strict --format json" not in proof["readiness_command"]:
               raise SystemExit(proof["readiness_command"])
           if proof["readiness_args"][:2] != ["agent-workbench", "check"]:
