@@ -14,11 +14,17 @@ class CiWorkflowTests(unittest.TestCase):
             "agent-workbench demo --output /tmp/agent-workbench-demo-report --report /tmp/agent-workbench-demo-report/demo-report.md",
             workflow,
         )
+        self.assertIn(
+            "agent-workbench demo --template typescript --output /tmp/agent-workbench-demo-ts --report /tmp/agent-workbench-demo-ts/demo-report.md",
+            workflow,
+        )
         self.assertIn("test -f /tmp/agent-workbench-demo-report/demo-report.md", workflow)
+        self.assertIn("test -f /tmp/agent-workbench-demo-ts/demo-report.md", workflow)
         self.assertIn("grep -q \"Agent Workbench Demo Report\" /tmp/agent-workbench-demo-report/demo-report.md", workflow)
         self.assertIn("grep -q \"Status: ready (10 pass, 0 warn, 0 fail)\" /tmp/agent-workbench-demo-report/demo-report.md", workflow)
         self.assertIn("grep -q \"Share Feedback\" /tmp/agent-workbench-demo-report/demo-report.md", workflow)
         self.assertIn("grep -q \"Copy/paste summary\" /tmp/agent-workbench-demo-report/demo-report.md", workflow)
+        self.assertIn("grep -q \"npm test\" /tmp/agent-workbench-demo-ts/demo-report.md", workflow)
         self.assertIn('proof["kind"] != "agent_workbench.proof" or proof["schema_version"] != 1', workflow)
         self.assertIn('proof["readiness"]["status"] != "ready"', workflow)
         self.assertIn('proof["readiness"]["counts"] != {"pass": 10, "warn": 0, "fail": 0}', workflow)

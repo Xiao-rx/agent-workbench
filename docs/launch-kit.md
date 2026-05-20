@@ -53,6 +53,7 @@ One command generates:
 - `--strict` on `demo` and `init` when warnings should fail the proof; it automatically runs the readiness check
 - `demo --proof [PATH]` for a one-option strict all-adapter JSON proof command that also prints copyable `Proof:` and `Proof command:` lines and defaults the proof path inside the generated workbench
 - `demo --report [PATH]` for a shareable no-secret Markdown report with generated files, readiness status, existing agent assets, the kickoff prompt, a copy/paste share summary, and a sanitized feedback link
+- `demo --template typescript --report` for the same first-run proof on a tiny Node/npm TypeScript repository, verifying with `npm test`
 - `init --proof [PATH]` for the same proof shape on the real repository bootstrap path
 - `init --report [PATH]` for the same shareable Markdown report shape on a real repository, including the same share summary and feedback link
 - `--print-kickoff` to copy the generated first prompt straight from the terminal
@@ -115,6 +116,9 @@ agent-workbench demo --proof
 
 Markdown demo report:
 agent-workbench demo --report
+
+TypeScript demo report:
+agent-workbench demo --template typescript --report
 
 JSON init proof:
 agent-workbench init . --output .agent-workbench --proof

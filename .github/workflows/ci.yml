@@ -22,13 +22,16 @@ jobs:
           python -m pip install .
           agent-workbench demo --output /tmp/agent-workbench-demo --proof /tmp/agent-workbench-demo/proof.json
           agent-workbench demo --output /tmp/agent-workbench-demo-report --report /tmp/agent-workbench-demo-report/demo-report.md
+          agent-workbench demo --template typescript --output /tmp/agent-workbench-demo-ts --report /tmp/agent-workbench-demo-ts/demo-report.md
           test -f /tmp/agent-workbench-demo/.agent-workbench/AGENTS.md
           test -f /tmp/agent-workbench-demo/.agent-workbench/agent-task-pack.md
           test -f /tmp/agent-workbench-demo-report/demo-report.md
+          test -f /tmp/agent-workbench-demo-ts/demo-report.md
           grep -q "Agent Workbench Demo Report" /tmp/agent-workbench-demo-report/demo-report.md
           grep -q "Status: ready (10 pass, 0 warn, 0 fail)" /tmp/agent-workbench-demo-report/demo-report.md
           grep -q "Share Feedback" /tmp/agent-workbench-demo-report/demo-report.md
           grep -q "Copy/paste summary" /tmp/agent-workbench-demo-report/demo-report.md
+          grep -q "npm test" /tmp/agent-workbench-demo-ts/demo-report.md
           python - <<'PY'
           import json
           from pathlib import Path

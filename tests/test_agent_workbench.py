@@ -567,6 +567,28 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertIn("Agent Task Pack", tasks)
             self.assertIn(".github/copilot-instructions.md", tasks)
 
+    def test_demo_command_writes_typescript_template(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "demo"
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["demo", "--output", str(output), "--template", "typescript", "--check", "--format", "json"])
+
+            payload = json.loads(stdout.getvalue())
+            agents = (output / ".agent-workbench" / "AGENTS.md").read_text(encoding="utf-8")
+            tasks = (output / ".agent-workbench" / "agent-task-pack.md").read_text(encoding="utf-8")
+            self.assertEqual(exit_code, 0)
+            self.assertTrue((output / "sample-repo" / "package.json").exists())
+            self.assertTrue((output / "sample-repo" / "src" / "index.ts").exists())
+            self.assertIn("npm test", payload["proof_summary"])
+            self.assertEqual(payload["verification_command"], "npm test")
+            self.assertIn("npm test", payload["share_snippet"])
+            self.assertIn("Package managers: node/npm", agents)
+            self.assertIn("typescript=1", agents)
+            self.assertIn("npm test", agents)
+            self.assertIn("src/index.ts", tasks)
+
     def test_demo_command_can_check_generated_workbench(self):
         with tempfile.TemporaryDirectory() as tmp:
             output = Path(tmp) / "demo"

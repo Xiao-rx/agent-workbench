@@ -80,6 +80,12 @@ def build_parser() -> argparse.ArgumentParser:
 
     demo = subparsers.add_parser("demo", help="Generate a no-secret demo workspace in a temporary repository.")
     demo.add_argument("--output", type=Path, help="Optional output directory. Defaults to a temporary directory.")
+    demo.add_argument(
+        "--template",
+        choices=("python", "typescript"),
+        default="python",
+        help="Demo repository template. Use typescript to exercise the Node/npm proof path.",
+    )
     demo.add_argument("--check", action="store_true", help="Run a readiness check after writing the demo workbench.")
     demo.add_argument("--strict", action="store_true", help="Run a readiness check and treat warnings as not ready.")
     demo.add_argument("--print-kickoff", action="store_true", help="Print the generated kickoff prompt after writing files.")
@@ -212,7 +218,7 @@ def main(argv: list[str] | None = None) -> int:
         demo_adapters = _demo_adapters(tuple(args.adapter), shareable_demo_requested)
         strict = args.strict or shareable_demo_requested
         check_requested = args.check or strict
-        root, output = _prepare_demo_workspace(args.output)
+        root, output = _prepare_demo_workspace(args.output, args.template)
         output_json = _proof_output_json(parser, args.output_json, args.proof, output, "demo-proof.json")
         report_path = _report_output_path(args.report, output, "demo-report.md")
         if output_json and report_path and output_json == report_path:
@@ -732,7 +738,7 @@ def _repo_map_payload(repo: RepoMap) -> dict[str, object]:
     }
 
 
-def _prepare_demo_workspace(output: Path | None) -> tuple[Path, Path]:
+def _prepare_demo_workspace(output: Path | None, template: str = "python") -> tuple[Path, Path]:
     if output:
         base = output.resolve()
         base.mkdir(parents=True, exist_ok=True)
@@ -742,6 +748,14 @@ def _prepare_demo_workspace(output: Path | None) -> tuple[Path, Path]:
     root = base / "sample-repo"
     workbench = base / ".agent-workbench"
     root.mkdir(parents=True, exist_ok=True)
+    if template == "typescript":
+        _write_typescript_demo(root)
+    else:
+        _write_python_demo(root)
+    return root, workbench
+
+
+def _write_python_demo(root: Path) -> None:
     (root / "pyproject.toml").write_text(
         "\n".join(
             [
@@ -781,4 +795,75 @@ def _prepare_demo_workspace(output: Path | None) -> tuple[Path, Path]:
         ),
         encoding="utf-8",
     )
-    return root, workbench
+
+
+def _write_typescript_demo(root: Path) -> None:
+    (root / "package.json").write_text(
+        "\n".join(
+            [
+                "{",
+                '  "name": "agent-workbench-demo-ts",',
+                '  "version": "0.1.0",',
+                '  "type": "module",',
+                '  "private": true,',
+                '  "scripts": {',
+                '    "test": "node --test tests/smoke.test.js"',
+                "  }",
+                "}",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    (root / "tsconfig.json").write_text(
+        "\n".join(
+            [
+                "{",
+                '  "compilerOptions": {',
+                '    "target": "ES2022",',
+                '    "module": "ES2022",',
+                '    "moduleResolution": "Node"',
+                "  }",
+                "}",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    (root / "README.md").write_text("# Agent Workbench TypeScript Demo\n\nA tiny TypeScript repository for the demo command.\n", encoding="utf-8")
+    (root / ".gitignore").write_text("node_modules/\ndist/\n.env\n.env.*\n!.env.example\n", encoding="utf-8")
+    github = root / ".github"
+    github.mkdir(exist_ok=True)
+    (github / "copilot-instructions.md").write_text(
+        "Keep changes small, run `npm test`, and avoid committing secrets.\n",
+        encoding="utf-8",
+    )
+    src = root / "src"
+    src.mkdir(exist_ok=True)
+    (src / "index.ts").write_text(
+        "\n".join(
+            [
+                "export function greeting(name: string): string {",
+                "  return `hello, ${name}`;",
+                "}",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    tests = root / "tests"
+    tests.mkdir(exist_ok=True)
+    (tests / "smoke.test.js").write_text(
+        "\n".join(
+            [
+                "import test from 'node:test';",
+                "import assert from 'node:assert/strict';",
+                "",
+                "test('demo repository is testable without dependencies', () => {",
+                "  assert.equal('hello, agent', `hello, ${'agent'}`);",
+                "});",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )

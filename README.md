@@ -139,6 +139,7 @@ agent-workbench demo --report
 ```
 
 `demo --report [PATH]` writes a Markdown report with the generated files, readiness status, readiness gate, existing agent assets, kickoff prompt, a copy/paste share summary, and a sanitized feedback link. It implies the same strict all-adapter demo path as `--proof`, and defaults to `demo-report.md` inside the generated workbench when `PATH` is omitted.
+Use `demo --template typescript --report` to exercise the same proof/report path on a tiny Node/npm TypeScript repository; the generated proof verifies with `npm test`.
 The JSON proof includes `kind` and `schema_version`, the written files, a compact artifact summary, a `handoff` object with `AGENTS.md`, `agent-task-pack.md`, and `next_action`, pre-write existing `agent_assets`, a copyable `proof_summary`, a `share_snippet` for issues/social posts, the reproducible `proof_command` when the shortcut is used, the first verification command when available, a `readiness_summary` and `readiness_counts` when checks run, a `readiness_command` plus structured `readiness_args` that preserve adapter and strict gates, a `feedback` object with the report issue URL and safety note, the kickoff prompt, and optional readiness.
 Scan JSON also includes `kind`, `schema_version`, and `agent_assets`, so downstream harnesses can tell which payload they are reading and whether a repository already carries Claude, Codex, Cursor, Copilot, Gemini, or OpenCode guidance.
 Python verification commands are only reported when the matching path exists: `tests/` uses unittest discovery, otherwise Python source falls back to `compileall`.
@@ -221,7 +222,7 @@ The goal is not to be another agent. The goal is to make every repository easier
 ## Commands
 
 ```text
-agent-workbench demo [--output PATH] [--adapter claude|codex|cursor|opencode|all] [--check] [--strict] [--print-kickoff] [--format text|json] [--output-json PATH] [--proof [PATH]] [--report [PATH]]
+agent-workbench demo [--output PATH] [--template python|typescript] [--adapter claude|codex|cursor|opencode|all] [--check] [--strict] [--print-kickoff] [--format text|json] [--output-json PATH] [--proof [PATH]] [--report [PATH]]
 agent-workbench scan [ROOT] [--format text|json] [--output-json PATH]
 agent-workbench check [ROOT] [--workbench PATH] [--adapter claude|codex|cursor|opencode|all] [--strict] [--format text|json] [--output-json PATH]
 agent-workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|opencode|all] [--check] [--strict] [--print-kickoff] [--format text|json] [--output-json PATH] [--proof [PATH]] [--report [PATH]]
@@ -229,7 +230,7 @@ agent-workbench init [ROOT] --output .agent-workbench --project-name NAME [--ada
 python -m agent_workbench scan [ROOT] [--format text|json] [--output-json PATH]
 python -m agent_workbench check [ROOT] [--workbench PATH] [--adapter claude|codex|cursor|opencode|all] [--strict] [--format text|json] [--output-json PATH]
 python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|opencode|all] [--check] [--strict] [--print-kickoff] [--format text|json] [--output-json PATH] [--proof [PATH]] [--report [PATH]]
-python -m agent_workbench demo [--output PATH] [--adapter claude|codex|cursor|opencode|all] [--check] [--strict] [--print-kickoff] [--format text|json] [--output-json PATH] [--proof [PATH]] [--report [PATH]]
+python -m agent_workbench demo [--output PATH] [--template python|typescript] [--adapter claude|codex|cursor|opencode|all] [--check] [--strict] [--print-kickoff] [--format text|json] [--output-json PATH] [--proof [PATH]] [--report [PATH]]
 ```
 
 ## Release
