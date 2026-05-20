@@ -58,6 +58,14 @@ def build_parser() -> argparse.ArgumentParser:
         help="Write a shareable JSON init proof. Optional PATH defaults to the generated workbench and implies --check and --format json.",
     )
     init.add_argument(
+        "--report",
+        nargs="?",
+        const=_DEFAULT_REPORT,
+        type=Path,
+        metavar="PATH",
+        help="Write a shareable Markdown init report. Optional PATH defaults to the generated workbench and implies --check.",
+    )
+    init.add_argument(
         "--adapter",
         action="append",
         choices=SUPPORTED_ADAPTERS,
@@ -126,10 +134,16 @@ def main(argv: list[str] | None = None) -> int:
         root = args.root.resolve()
         workbench = _resolve_init_output(root, args.output)
         output_json = _proof_output_json(parser, args.output_json, args.proof, workbench, "init-proof.json")
+        report_path = _report_output_path(args.report, workbench, "init-report.md")
+        if output_json and report_path and output_json == report_path:
+            parser.error("--report and --proof/--output-json cannot write to the same path")
         output_format = _effective_format(args.format, output_json)
         proof_requested = args.proof is not None
-        check_requested = args.check or args.strict or proof_requested
+        report_requested = args.report is not None
+        check_requested = args.check or args.strict or proof_requested or report_requested
+        announce_report = output_format != "json" or output_json is not None
         proof_command = _init_proof_command(args.root, args.output, args.proof)
+        report_command = _init_report_command(args.root, args.output, args.report)
         repo = scan_repo(root)
         paths = write_workbench(root, workbench, args.project_name, tuple(args.adapter))
         if output_format == "json":
@@ -144,11 +158,15 @@ def main(argv: list[str] | None = None) -> int:
                 show_readiness_command=check_requested or bool(args.adapter),
                 readiness_report=report,
                 proof_command=proof_command,
+                report_path=report_path,
+                report_command=report_command,
             )
             if check_requested:
                 payload["readiness"] = readiness_payload(report)
+                _write_workbench_report(report_path, payload, announce=announce_report)
                 _write_or_print_json(output_json, payload, print_proof=proof_requested)
                 return 0 if report.ready else 1
+            _write_workbench_report(report_path, payload, announce=announce_report)
             _write_or_print_json(output_json, payload, print_proof=proof_requested)
             return 0
         for path in paths:
@@ -164,8 +182,13 @@ def main(argv: list[str] | None = None) -> int:
             show_readiness_command=check_requested or bool(args.adapter),
             readiness_report=report,
             proof_command=proof_command,
+            report_path=report_path,
+            report_command=report_command,
         )
+        _write_workbench_report(report_path, proof_payload)
         print(f"Proof: {proof_payload['proof_summary']}")
+        if report_path:
+            print(f"Report: {proof_payload['proof_summary']}")
         if args.print_kickoff:
             _print_kickoff(workbench)
         if check_requested:
@@ -213,10 +236,10 @@ def main(argv: list[str] | None = None) -> int:
             )
             if check_requested:
                 payload["readiness"] = readiness_payload(report)
-                _write_demo_report(report_path, payload, announce=announce_report)
+                _write_workbench_report(report_path, payload, announce=announce_report)
                 _write_or_print_json(output_json, payload, print_proof=proof_requested)
                 return 0 if report.ready else 1
-            _write_demo_report(report_path, payload, announce=announce_report)
+            _write_workbench_report(report_path, payload, announce=announce_report)
             _write_or_print_json(output_json, payload, print_proof=proof_requested)
             return 0
         print(f"Demo repository: {root}")
@@ -237,7 +260,7 @@ def main(argv: list[str] | None = None) -> int:
             report_path=report_path,
             report_command=report_command,
         )
-        _write_demo_report(report_path, proof_payload)
+        _write_workbench_report(report_path, proof_payload)
         print(f"Proof: {proof_payload['proof_summary']}")
         if report_path:
             print(f"Report: {proof_payload['proof_summary']}")
@@ -308,6 +331,15 @@ def _demo_report_command(output: Path | None, report: object | Path | None) -> s
     if output:
         parts.extend(("--output", str(output)))
     parts.append("--report")
+    if isinstance(report, Path):
+        parts.append(str(report))
+    return _command_text(parts)
+
+
+def _init_report_command(root: Path, output: Path, report: object | Path | None) -> str | None:
+    if report is None:
+        return None
+    parts = ["agent-workbench", "init", str(root), "--output", str(output), "--report"]
     if isinstance(report, Path):
         parts.append(str(report))
     return _command_text(parts)
@@ -552,30 +584,33 @@ def _write_or_print_json(path: Path | None, payload: dict[str, object], print_pr
         print(json.dumps(payload, ensure_ascii=False, indent=2))
 
 
-def _write_demo_report(path: Path | None, payload: dict[str, object], *, announce: bool = True) -> None:
+def _write_workbench_report(path: Path | None, payload: dict[str, object], *, announce: bool = True) -> None:
     if not path:
         return
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(_render_demo_report(payload), encoding="utf-8")
+    path.write_text(_render_workbench_report(payload), encoding="utf-8")
     if announce:
         print(f"Wrote {path}")
 
 
-def _render_demo_report(payload: dict[str, object]) -> str:
+def _render_workbench_report(payload: dict[str, object]) -> str:
     artifact_summary = payload.get("artifact_summary", {})
     core_files = _string_list_from_mapping(artifact_summary, "core_files")
     adapter_files = _string_list_from_mapping(artifact_summary, "adapter_files")
     agent_assets = payload.get("agent_assets")
     readiness_counts = payload.get("readiness_counts")
+    is_demo = bool(payload.get("demo_repository"))
 
     lines = [
-        "# Agent Workbench Demo Report",
+        "# Agent Workbench Demo Report" if is_demo else "# Agent Workbench Init Report",
         "",
-        "A no-secret proof that Agent Workbench can turn a fresh repository into an AI-agent-ready workspace.",
+        "A no-secret proof that Agent Workbench can turn a fresh repository into an AI-agent-ready workspace."
+        if is_demo
+        else "A shareable proof that Agent Workbench turned this repository into an AI-agent-ready workspace.",
         "",
-        f"- Demo repository: `{payload.get('demo_repository', payload.get('root', ''))}`",
+        f"- Repository: `{payload.get('demo_repository', payload.get('root', ''))}`",
         f"- Workbench: `{payload.get('workbench', '')}`",
-        f"- Report command: `{payload.get('report_command', 'agent-workbench demo --report')}`",
+        f"- Report command: `{payload.get('report_command', 'agent-workbench init . --report')}`",
     ]
     if payload.get("proof_command"):
         lines.append(f"- Proof command: `{payload['proof_command']}`")

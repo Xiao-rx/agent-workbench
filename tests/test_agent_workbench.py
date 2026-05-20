@@ -1065,6 +1065,78 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertFalse(payload["readiness"]["strict"])
             self.assertEqual(payload["artifact_summary"]["written_total"], len(payload["written"]))
 
+    def test_init_command_report_shortcut_writes_shareable_markdown(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            out = Path(tmp) / "out"
+            report = Path(tmp) / "reports" / "init-report.md"
+            root.mkdir()
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+            (root / ".gitignore").write_text(".env\n", encoding="utf-8")
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["init", str(root), "--output", str(out), "--adapter", "all", "--report", str(report)])
+
+            text = report.read_text(encoding="utf-8")
+            self.assertEqual(exit_code, 0)
+            self.assertTrue(report.exists())
+            self.assertIn(f"Wrote {report}", stdout.getvalue())
+            self.assertIn("Report: wrote 6 files", stdout.getvalue())
+            self.assertIn("# Agent Workbench Init Report", text)
+            self.assertIn("A shareable proof", text)
+            self.assertIn(f"`agent-workbench init {root} --output {out} --report {report}`", text)
+            self.assertIn("`AGENTS.md`", text)
+            self.assertIn("`.codex/AGENTS.md`", text)
+            self.assertIn("Status: ready (9 pass, 1 warn, 0 fail)", text)
+            self.assertIn("Counts: 9 pass, 1 warn, 0 fail", text)
+            self.assertIn("`agent-workbench check", text)
+            self.assertIn("--adapter all --format json", text)
+            self.assertIn("None detected before generation.", text)
+            self.assertIn("You are working in repo.", text)
+
+    def test_init_command_report_shortcut_defaults_path_inside_workbench(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            out = Path(tmp) / "out"
+            root.mkdir()
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+            (root / ".gitignore").write_text(".env\n", encoding="utf-8")
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["init", str(root), "--output", str(out), "--report"])
+
+            report = out / "init-report.md"
+            text = report.read_text(encoding="utf-8")
+            self.assertEqual(exit_code, 0)
+            self.assertTrue(report.exists())
+            self.assertIn(f"Wrote {report}", stdout.getvalue())
+            self.assertIn("Report command: `agent-workbench init", text)
+            self.assertIn("--report`", text)
+            self.assertIn("Status: ready", text)
+
+    def test_init_command_report_keeps_json_stdout_machine_readable(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            out = Path(tmp) / "out"
+            report = Path(tmp) / "reports" / "init-report.md"
+            root.mkdir()
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+            (root / ".gitignore").write_text(".env\n", encoding="utf-8")
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(["init", str(root), "--output", str(out), "--report", str(report), "--format", "json"])
+
+            payload = json.loads(stdout.getvalue())
+            self.assertEqual(exit_code, 0)
+            self.assertTrue(report.exists())
+            self.assertEqual(payload["kind"], "agent_workbench.proof")
+            self.assertEqual(payload["report"], str(report))
+            self.assertIn("--report", payload["report_command"])
+            self.assertEqual(payload["readiness"]["status"], "ready")
+
     def test_init_command_can_check_generated_workbench(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp) / "repo"

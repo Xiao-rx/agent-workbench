@@ -54,6 +54,7 @@ One command generates:
 - `demo --proof [PATH]` for a one-option strict all-adapter JSON proof command that also prints copyable `Proof:` and `Proof command:` lines and defaults the proof path inside the generated workbench
 - `demo --report [PATH]` for a shareable no-secret Markdown report with generated files, readiness status, existing agent assets, and the kickoff prompt
 - `init --proof [PATH]` for the same proof shape on the real repository bootstrap path
+- `init --report [PATH]` for the same shareable Markdown report shape on a real repository
 - `--print-kickoff` to copy the generated first prompt straight from the terminal
 - the no-secret demo includes a safe `.github/copilot-instructions.md`, so the generated workbench visibly reports existing agent assets
 - Agent Workbench does not need credentials; `.env.example` is a placeholder-only template for optional trend/monitor runs, while `.env.local` stays ignored
@@ -116,6 +117,9 @@ agent-workbench demo --report
 
 JSON init proof:
 agent-workbench init . --output .agent-workbench --proof
+
+Markdown init report:
+agent-workbench init . --output .agent-workbench --report
 
 Check:
 agent-workbench check . --format json

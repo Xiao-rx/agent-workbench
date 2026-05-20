@@ -160,6 +160,13 @@ agent-workbench init . --output .agent-workbench --proof
 ```
 
 `init --proof [PATH]` writes a shareable JSON init proof, prints the same `Proof:` and `Proof command:` lines, and defaults the path inside the generated workbench when omitted.
+Generate a shareable Markdown init report for the current repository:
+
+```powershell
+agent-workbench init . --output .agent-workbench --report
+```
+
+`init --report [PATH]` writes a Markdown report with the generated files, readiness status, readiness gate, existing agent assets, and kickoff prompt. It defaults to `init-report.md` inside the generated workbench when `PATH` is omitted.
 Generate optional Claude Code, Codex, Cursor, and OpenCode adapters:
 
 ```powershell
@@ -217,11 +224,11 @@ The goal is not to be another agent. The goal is to make every repository easier
 agent-workbench demo [--output PATH] [--adapter claude|codex|cursor|opencode|all] [--check] [--strict] [--print-kickoff] [--format text|json] [--output-json PATH] [--proof [PATH]] [--report [PATH]]
 agent-workbench scan [ROOT] [--format text|json] [--output-json PATH]
 agent-workbench check [ROOT] [--workbench PATH] [--adapter claude|codex|cursor|opencode|all] [--strict] [--format text|json] [--output-json PATH]
-agent-workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|opencode|all] [--check] [--strict] [--print-kickoff] [--format text|json] [--output-json PATH] [--proof [PATH]]
+agent-workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|opencode|all] [--check] [--strict] [--print-kickoff] [--format text|json] [--output-json PATH] [--proof [PATH]] [--report [PATH]]
 
 python -m agent_workbench scan [ROOT] [--format text|json] [--output-json PATH]
 python -m agent_workbench check [ROOT] [--workbench PATH] [--adapter claude|codex|cursor|opencode|all] [--strict] [--format text|json] [--output-json PATH]
-python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|opencode|all] [--check] [--strict] [--print-kickoff] [--format text|json] [--output-json PATH] [--proof [PATH]]
+python -m agent_workbench init [ROOT] --output .agent-workbench --project-name NAME [--adapter claude|codex|cursor|opencode|all] [--check] [--strict] [--print-kickoff] [--format text|json] [--output-json PATH] [--proof [PATH]] [--report [PATH]]
 python -m agent_workbench demo [--output PATH] [--adapter claude|codex|cursor|opencode|all] [--check] [--strict] [--print-kickoff] [--format text|json] [--output-json PATH] [--proof [PATH]] [--report [PATH]]
 ```
 
