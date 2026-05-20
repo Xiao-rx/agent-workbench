@@ -139,6 +139,7 @@ agent-workbench demo --report
 ```
 
 `demo --report [PATH]` writes a Markdown report with the generated files, readiness status, readiness gate, existing agent assets, kickoff prompt, a copy/paste share summary, and a sanitized feedback link. It implies the same strict all-adapter demo path as `--proof`, and defaults to `demo-report.md` inside the generated workbench when `PATH` is omitted.
+Markdown reports redact local filesystem paths to placeholders such as `<repo>`, `<workbench>`, `<report>`, and `<demo-workspace>` before rendering; JSON proofs still keep exact paths for CI and downstream agent harnesses.
 Use `demo --template typescript --report` to exercise the same proof/report path on a tiny Node/npm TypeScript repository; the generated proof verifies with `npm test`.
 The JSON proof includes `kind` and `schema_version`, the written files, a compact artifact summary, a `handoff` object with `AGENTS.md`, `agent-task-pack.md`, and `next_action`, pre-write existing `agent_assets`, a copyable `proof_summary`, a `share_snippet` for issues/social posts, the reproducible `proof_command` when the shortcut is used, the first verification command when available, a `readiness_summary` and `readiness_counts` when checks run, a `readiness_command` plus structured `readiness_args` that preserve adapter and strict gates, a `feedback` object with the report issue URL and safety note, the kickoff prompt, and optional readiness.
 Scan JSON also includes `kind`, `schema_version`, and `agent_assets`, so downstream harnesses can tell which payload they are reading and whether a repository already carries Claude, Codex, Cursor, Copilot, Gemini, or OpenCode guidance.
@@ -168,6 +169,7 @@ agent-workbench init . --output .agent-workbench --report
 ```
 
 `init --report [PATH]` writes a Markdown report with the generated files, readiness status, readiness gate, existing agent assets, kickoff prompt, a copy/paste share summary, and a sanitized feedback link. It defaults to `init-report.md` inside the generated workbench when `PATH` is omitted.
+The Markdown init report uses the same local path placeholders, so it is safe to paste into feedback after removing repository names or proprietary snippets.
 Generate optional Claude Code, Codex, Cursor, and OpenCode adapters:
 
 ```powershell

@@ -56,6 +56,7 @@ One command generates:
 - `demo --template typescript --report` for the same first-run proof on a tiny Node/npm TypeScript repository, verifying with `npm test`
 - `init --proof [PATH]` for the same proof shape on the real repository bootstrap path
 - `init --report [PATH]` for the same shareable Markdown report shape on a real repository, including the same share summary and feedback link
+- Markdown reports redact local filesystem paths to `<repo>`, `<workbench>`, `<report>`, and `<demo-workspace>` placeholders, while JSON proofs keep exact paths for automation
 - `--print-kickoff` to copy the generated first prompt straight from the terminal
 - the no-secret demo includes a safe `.github/copilot-instructions.md`, so the generated workbench visibly reports existing agent assets
 - Agent Workbench does not need credentials; `.env.example` is a placeholder-only template for optional trend/monitor runs, while `.env.local` stays ignored
@@ -96,7 +97,7 @@ It scans the repo and writes:
 - OpenCode adapter: opencode.json instructions that point to the generated workbench
 - readiness check: a pass/fail command for existing workbench files
 - Proof line: a copyable summary in normal terminal output with adapter counts, existing agent asset counts, and readiness status when checks run
-- Demo report: a shareable Markdown artifact with generated files, readiness status, existing agent assets, the kickoff prompt, a copy/paste share summary, and a Share Feedback link
+- Demo report: a shareable Markdown artifact with generated files, readiness status, existing agent assets, the kickoff prompt, local path placeholders, a copy/paste share summary, and a Share Feedback link
 - scan JSON: machine-readable repo map with schema metadata, file signals, package managers, safe commands, and existing agent assets
 - output JSON files: reusable artifacts for CI and agent harnesses, including schema metadata, artifact summaries, structured handoff paths, pre-write existing agent assets, copyable proof summaries, share snippets, verification commands, readiness summaries, readiness counts, structured readiness args, and report feedback metadata
 

@@ -31,6 +31,11 @@ jobs:
           grep -q "Status: ready (10 pass, 0 warn, 0 fail)" /tmp/agent-workbench-demo-report/demo-report.md
           grep -q "Share Feedback" /tmp/agent-workbench-demo-report/demo-report.md
           grep -q "Copy/paste summary" /tmp/agent-workbench-demo-report/demo-report.md
+          grep -q "<repo>" /tmp/agent-workbench-demo-report/demo-report.md
+          grep -q "<workbench>" /tmp/agent-workbench-demo-report/demo-report.md
+          grep -q "<demo-workspace>" /tmp/agent-workbench-demo-report/demo-report.md
+          grep -q "<report>" /tmp/agent-workbench-demo-report/demo-report.md
+          ! grep -q "/tmp/agent-workbench-demo-report" /tmp/agent-workbench-demo-report/demo-report.md
           grep -q "npm test" /tmp/agent-workbench-demo-ts/demo-report.md
           python - <<'PY'
           import json

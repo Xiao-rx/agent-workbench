@@ -67,9 +67,11 @@ agent-workbench init . --output .agent-workbench --report
 
 `demo --proof [PATH]` 会写出 strict all-adapter JSON proof，适合截图、CI 和下游 agent harness 复用，并且会在 stdout 打印同一份可复制的 `Proof:` 摘要和 `Proof command:` 复现命令。省略 `PATH` 时，proof 会保存到生成 workbench 目录里的 `demo-proof.json`。
 `demo --report [PATH]` 会写出无 secret 的 Markdown demo report，包含生成文件、readiness 状态、readiness gate、现有 agent 资产、kickoff prompt、可复制分享摘要和清理后反馈链接；它默认走和 `--proof` 一样的 strict all-adapter demo 路径，省略 `PATH` 时会保存到生成 workbench 目录里的 `demo-report.md`。
+Markdown report 会在渲染前把本地文件系统路径替换成 `<repo>`、`<workbench>`、`<report>` 和 `<demo-workspace>` 这类占位符；JSON proof 仍然保留真实路径，方便 CI 和下游 agent harness 复用。
 `demo --template typescript --report` 会在一个极小的 Node/npm TypeScript 仓库上跑同样的 proof/report 路径，生成的 proof 会用 `npm test` 验证。
 `init --proof [PATH]` 也会写出可分享的 JSON init proof，并默认把文件保存到生成 workbench 目录里。
 `init --report [PATH]` 会为真实仓库写出 Markdown init report，包含生成文件、readiness 状态、readiness gate、现有 agent 资产、kickoff prompt、可复制分享摘要和清理后反馈链接；省略 `PATH` 时会保存到生成 workbench 目录里的 `init-report.md`。
+Markdown init report 也会使用同样的本地路径占位符；提交反馈前仍应移除私有仓库名或专有源码片段。
 JSON proof 会包含 `kind`、`schema_version`、写入文件列表、简要 artifact summary、带有 `AGENTS.md`、`agent-task-pack.md` 和 `next_action` 的 `handoff` 对象、写入前已经存在的 `agent_assets`、可复制的 `proof_summary`、用于 issue 或社交帖的 `share_snippet`、使用快捷参数时可复现的 `proof_command`、首个 verification command（如果存在）、check 运行后的 `readiness_summary` 和 `readiness_counts`、会保留 adapter 和 strict 门槛的 `readiness_command` 与结构化 `readiness_args`、带 report issue URL 和安全提醒的 `feedback` 对象、kickoff prompt，以及可选 readiness。
 scan JSON 也会包含 `kind`、`schema_version` 和 `agent_assets`，方便下游 agent harness 判断当前 payload 类型，以及仓库里是否已经有 Claude、Codex、Cursor、Copilot、Gemini 或 OpenCode 指令资产。
 Python verification command 只会在匹配路径存在时报告：有 `tests/` 时使用 unittest discovery，否则有 Python 源码时退到 `compileall`。

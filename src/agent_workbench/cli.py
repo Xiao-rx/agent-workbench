@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
 import tempfile
 
@@ -637,6 +638,7 @@ def _render_workbench_report(payload: dict[str, object]) -> str:
     agent_assets = payload.get("agent_assets")
     readiness_counts = payload.get("readiness_counts")
     is_demo = bool(payload.get("demo_repository"))
+    display = _ReportDisplay(payload)
 
     lines = [
         "# Agent Workbench Demo Report" if is_demo else "# Agent Workbench Init Report",
@@ -645,15 +647,15 @@ def _render_workbench_report(payload: dict[str, object]) -> str:
         if is_demo
         else "A shareable proof that Agent Workbench turned this repository into an AI-agent-ready workspace.",
         "",
-        f"- Repository: `{payload.get('demo_repository', payload.get('root', ''))}`",
-        f"- Workbench: `{payload.get('workbench', '')}`",
-        f"- Report command: `{payload.get('report_command', 'agent-workbench init . --report')}`",
+        f"- Repository: `{display.value(payload.get('demo_repository', payload.get('root', '')))}`",
+        f"- Workbench: `{display.value(payload.get('workbench', ''))}`",
+        f"- Report command: `{display.value(payload.get('report_command', 'agent-workbench init . --report'))}`",
     ]
     if payload.get("proof_command"):
-        lines.append(f"- Proof command: `{payload['proof_command']}`")
+        lines.append(f"- Proof command: `{display.value(payload['proof_command'])}`")
     lines.extend(
         [
-            f"- Proof: {payload.get('proof_summary', '')}",
+            f"- Proof: {display.value(payload.get('proof_summary', ''))}",
             f"- Next action: {payload.get('next_action', '')}",
             "",
             "## Files Written",
@@ -671,7 +673,7 @@ def _render_workbench_report(payload: dict[str, object]) -> str:
         lines.append(
             f"- Counts: {readiness_counts.get('pass', 0)} pass, {readiness_counts.get('warn', 0)} warn, {readiness_counts.get('fail', 0)} fail"
         )
-    lines.append(f"- Gate: `{payload.get('readiness_command', '')}`")
+    lines.append(f"- Gate: `{display.value(payload.get('readiness_command', ''))}`")
     lines.extend(["", "## Existing Agent Assets", ""])
     if isinstance(agent_assets, list) and agent_assets:
         for asset in agent_assets:
@@ -687,7 +689,7 @@ def _render_workbench_report(payload: dict[str, object]) -> str:
             "Copy/paste summary:",
             "",
             "```text",
-            str(payload.get("share_snippet", "")),
+            display.value(payload.get("share_snippet", "")),
             "```",
             "",
             "Open an Agent Workbench report issue after removing local/private details:",
@@ -704,6 +706,56 @@ def _render_workbench_report(payload: dict[str, object]) -> str:
         ]
     )
     return "\n".join(lines)
+
+
+class _ReportDisplay:
+    def __init__(self, payload: dict[str, object]):
+        replacements: list[tuple[str, str]] = []
+        replacements.extend(self._path_replacements(payload.get("report"), "<report>"))
+        replacements.extend(self._path_replacements(payload.get("workbench"), "<workbench>"))
+        replacements.extend(self._path_replacements(payload.get("demo_repository", payload.get("root")), "<repo>"))
+        if payload.get("demo_repository"):
+            try:
+                demo_base = Path(str(payload["demo_repository"])).parent
+                replacements.extend(self._path_replacements(demo_base, "<demo-workspace>"))
+            except (OSError, ValueError):
+                pass
+        replacements.extend(self._home_replacements())
+        replacements.sort(key=lambda item: len(item[0]), reverse=True)
+        self._replacements = tuple(replacements)
+
+    def value(self, value: object) -> str:
+        text = str(value)
+        for raw, label in self._replacements:
+            text = text.replace(raw, label)
+        return text
+
+    @staticmethod
+    def _path_replacements(value: object, label: str) -> list[tuple[str, str]]:
+        if not value:
+            return []
+        try:
+            path = Path(str(value))
+        except (OSError, ValueError):
+            return []
+        variants = {str(path), path.as_posix()}
+        try:
+            resolved = path.resolve()
+        except (OSError, ValueError):
+            resolved = None
+        if resolved:
+            variants.update((str(resolved), resolved.as_posix()))
+        return [(variant, label) for variant in variants if variant]
+
+    @staticmethod
+    def _home_replacements() -> list[tuple[str, str]]:
+        replacements: list[tuple[str, str]] = []
+        home = Path.home()
+        home_label = "$HOME" if os.name != "nt" else "%USERPROFILE%"
+        for variant in {str(home), home.as_posix()}:
+            if variant:
+                replacements.append((variant, home_label))
+        return replacements
 
 
 def _string_list_from_mapping(mapping: object, key: str) -> list[str]:
