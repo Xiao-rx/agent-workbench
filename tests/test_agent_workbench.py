@@ -787,6 +787,9 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertIn("--adapter all --strict --format json", text)
             self.assertIn("`.github/copilot-instructions.md`", text)
             self.assertIn("## Share Feedback", text)
+            self.assertIn("Copy/paste summary:", text)
+            self.assertIn("Agent Workbench turned this repo into an AI-agent-ready workspace", text)
+            self.assertIn("4 adapter handoffs, 1 existing agent asset detected", text)
             self.assertIn("https://github.com/Xiao-rx/agent-workbench/issues/new?template=agent-workbench-report.yml", text)
             self.assertIn("Paste only sanitized output", text)
             self.assertIn("You are working in agent-workbench-demo.", text)
@@ -825,6 +828,9 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertEqual(payload["kind"], "agent_workbench.proof")
             self.assertEqual(payload["report"], str(report))
             self.assertIn("--report", payload["report_command"])
+            self.assertIn("Agent Workbench turned this repo into an AI-agent-ready workspace", payload["share_snippet"])
+            self.assertIn("4 adapter handoffs", payload["share_snippet"])
+            self.assertIn("Readiness: ready (10 pass, 0 warn, 0 fail)", payload["share_snippet"])
             self.assertEqual(
                 payload["feedback"]["url"],
                 "https://github.com/Xiao-rx/agent-workbench/issues/new?template=agent-workbench-report.yml",
@@ -1102,6 +1108,9 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertIn("--adapter all --format json", text)
             self.assertIn("None detected before generation.", text)
             self.assertIn("## Share Feedback", text)
+            self.assertIn("Copy/paste summary:", text)
+            self.assertIn("Agent Workbench turned this repo into an AI-agent-ready workspace", text)
+            self.assertIn("4 adapter handoffs, 0 existing agent assets detected", text)
             self.assertIn("https://github.com/Xiao-rx/agent-workbench/issues/new?template=agent-workbench-report.yml", text)
             self.assertIn("Do not include tokens", text)
             self.assertIn("You are working in repo.", text)
@@ -1146,6 +1155,9 @@ class AgentWorkbenchTests(unittest.TestCase):
             self.assertEqual(payload["kind"], "agent_workbench.proof")
             self.assertEqual(payload["report"], str(report))
             self.assertIn("--report", payload["report_command"])
+            self.assertIn("Agent Workbench turned this repo into an AI-agent-ready workspace", payload["share_snippet"])
+            self.assertIn("0 adapter handoffs", payload["share_snippet"])
+            self.assertIn("Readiness: ready", payload["share_snippet"])
             self.assertEqual(
                 payload["feedback"]["url"],
                 "https://github.com/Xiao-rx/agent-workbench/issues/new?template=agent-workbench-report.yml",

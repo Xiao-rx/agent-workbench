@@ -428,6 +428,15 @@ def _workbench_payload(
     readiness_summary = _readiness_summary(readiness_report) if readiness_report else None
     readiness_counts = _readiness_counts(readiness_report) if readiness_report else None
     next_action = _proof_next_action(readiness_report)
+    proof_summary = _proof_summary(
+        artifact_summary,
+        verification_command,
+        agent_assets,
+        readiness_command,
+        show_readiness_command,
+        readiness_summary,
+    )
+    share_snippet = _share_snippet(artifact_summary, agent_assets, verification_command, readiness_summary)
     payload = {
         "kind": "agent_workbench.proof",
         "schema_version": 1,
@@ -446,14 +455,8 @@ def _workbench_payload(
         "verification_command": verification_command,
         "readiness_command": readiness_command,
         "readiness_args": readiness_args,
-        "proof_summary": _proof_summary(
-            artifact_summary,
-            verification_command,
-            agent_assets,
-            readiness_command,
-            show_readiness_command,
-            readiness_summary,
-        ),
+        "proof_summary": proof_summary,
+        "share_snippet": share_snippet,
         "feedback": {
             "url": _FEEDBACK_URL,
             "safety_note": _FEEDBACK_SAFETY_NOTE,
@@ -558,6 +561,25 @@ def _proof_summary(
     return summary
 
 
+def _share_snippet(
+    artifact_summary: dict[str, object],
+    agent_assets: list[dict[str, str]],
+    verification_command: str,
+    readiness_summary: str | None = None,
+) -> str:
+    adapter_files = artifact_summary.get("adapter_files")
+    adapter_count = len(adapter_files) if isinstance(adapter_files, list) else 0
+    asset_count = len(agent_assets)
+    readiness_text = f" Readiness: {readiness_summary}." if readiness_summary else ""
+    return (
+        "Agent Workbench turned this repo into an AI-agent-ready workspace: "
+        f"AGENTS.md + agent-task-pack.md, {adapter_count} adapter handoff"
+        f"{'s' if adapter_count != 1 else ''}, {asset_count} existing agent asset"
+        f"{'s' if asset_count != 1 else ''} detected. Verify with `{verification_command}`."
+        f"{readiness_text}"
+    )
+
+
 def _readiness_summary(report: ReadinessReport) -> str:
     counts = _readiness_counts(report)
     return f"{report.status} ({counts['pass']} pass, {counts['warn']} warn, {counts['fail']} fail)"
@@ -655,6 +677,12 @@ def _render_workbench_report(payload: dict[str, object]) -> str:
         [
             "",
             "## Share Feedback",
+            "",
+            "Copy/paste summary:",
+            "",
+            "```text",
+            str(payload.get("share_snippet", "")),
+            "```",
             "",
             "Open an Agent Workbench report issue after removing local/private details:",
             "",
