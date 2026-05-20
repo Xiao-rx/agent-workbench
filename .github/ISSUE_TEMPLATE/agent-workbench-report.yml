@@ -1,0 +1,60 @@
+name: Agent Workbench report
+description: Share a sanitized demo or init report from Agent Workbench.
+title: "[report] "
+labels: ["feedback", "agent-workbench"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for trying Agent Workbench. Paste only sanitized output. Do not include tokens, `.env.local`, `.env.bak`, private repository names, or proprietary source snippets.
+  - type: dropdown
+    id: command
+    attributes:
+      label: Command
+      description: Which report command did you run?
+      options:
+        - agent-workbench demo --report
+        - agent-workbench init --report
+    validations:
+      required: true
+  - type: textarea
+    id: report-summary
+    attributes:
+      label: Report summary
+      description: Paste the status, counts, generated files, and next action from the Markdown report. Remove local user names and private paths first.
+      placeholder: |
+        Status: ready (10 pass, 0 warn, 0 fail)
+        Files: AGENTS.md, agent-task-pack.md
+        Next action: open agent-task-pack.md and hand the kickoff prompt to your coding agent.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Share the OS, Python version, install command, and agent tool you planned to use.
+      placeholder: |
+        OS:
+        Python:
+        Install command:
+        Agent tool:
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Outcome
+      description: What worked, what was confusing, and what would make the first run more useful?
+      placeholder: |
+        Worked:
+        Confusing:
+        Wanted next:
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed tokens, `.env.local`, `.env.bak`, private repository names, and proprietary source snippets.
+          required: true

@@ -20,6 +20,7 @@ agent-workbench demo --adapter all --strict --print-kickoff
 - `demo --report [PATH]`: write a shareable no-secret Markdown demo report with generated files, readiness status/counts, the readiness gate, existing agent assets, and the kickoff prompt; the shortcut uses the same strict all-adapter demo path and defaults the path inside the generated workbench when omitted.
 - `init --proof [PATH]`: write the same proof shape for a real repository bootstrap path, with the proof file defaulting inside the generated workbench when omitted.
 - `init --report [PATH]`: write the same shareable Markdown report shape for a real repository bootstrap path, with the report defaulting inside the generated workbench when omitted.
+- GitHub issue form for sanitized `demo --report` and `init --report` feedback, so real first-run reports can feed the growth loop without exposing secrets.
 - JSON outputs include `kind` and `schema_version` so downstream tools can route scan, readiness, and proof payloads without guessing.
 - JSON proof payloads include a structured `handoff` object with the generated `AGENTS.md`, `agent-task-pack.md`, and the recommended `next_action`.
 - JSON proof payloads now include an artifact summary, a copyable proof summary with adapter and existing agent asset counts, readiness status/counts when checks run, a verification command, and both string and structured readiness commands that preserve adapter and strict gates for easier sharing and routing.

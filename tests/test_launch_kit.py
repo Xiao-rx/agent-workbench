@@ -47,6 +47,7 @@ class LaunchKitTests(unittest.TestCase):
         self.assertIn("Agent Workbench does not need credentials", launch)
         self.assertIn("`.env.example` is a placeholder-only template", launch)
         self.assertIn("`.env.local` stays ignored", launch)
+        self.assertIn("GitHub issue form for sanitized `demo --report` and `init --report` feedback", launch)
         self.assertIn("Copilot, Gemini, and OpenCode instruction files", launch)
         self.assertIn("Codex adapter", launch)
         self.assertIn("OpenCode adapter", launch)

@@ -139,4 +139,6 @@ Copy-Item .env.example .env.local
 
 本地可以用 `python -m github_trend_lab insight --decisions reports/daily-decisions.json` 快速查看最新决策摘要，再决定下一轮产品改动。
 
+跑完 `agent-workbench demo --report` 或 `agent-workbench init --report` 后，可以打开 Agent Workbench report issue，粘贴清理过的摘要。请不要包含 token、`.env.local`、`.env.bak`、私有仓库名或专有源码片段。
+
 趋势分析不是产品本体。产品本体是 Agent Workbench CLI。

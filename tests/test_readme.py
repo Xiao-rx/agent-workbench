@@ -92,6 +92,9 @@ class ReadmeTests(unittest.TestCase):
         self.assertIn("Copy-Item .env.example .env.local", readme)
         self.assertIn("`.env.example` contains placeholders only and is safe to commit", readme)
         self.assertIn("`.env.local` and `.env.bak` are ignored by git", readme)
+        self.assertIn("After running `agent-workbench demo --report` or `agent-workbench init --report`", readme)
+        self.assertIn("open an Agent Workbench report issue", readme)
+        self.assertIn("private repository names, or proprietary source snippets", readme)
         self.assertIn("python -m github_trend_lab insight --decisions reports/daily-decisions.json", readme)
         self.assertIn("`trend-lab insight` is a local shortcut", readme)
         self.assertIn("provider-neutral", readme.lower())
@@ -161,6 +164,9 @@ class ReadmeTests(unittest.TestCase):
         self.assertIn("Copy-Item .env.example .env.local", readme)
         self.assertIn("`.env.example` 只包含占位符，可以提交", readme)
         self.assertIn("`.env.local` 和 `.env.bak` 都会被 git 忽略", readme)
+        self.assertIn("跑完 `agent-workbench demo --report` 或 `agent-workbench init --report` 后", readme)
+        self.assertIn("Agent Workbench report issue", readme)
+        self.assertIn("私有仓库名或专有源码片段", readme)
         self.assertIn("趋势分析不是产品本体", readme)
 
 

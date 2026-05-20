@@ -277,6 +277,10 @@ The current bet is provider-neutral agent enablement:
 
 The trend engine is deliberately kept in this repository so the product can keep changing as GitHub daily winners shift.
 
+## Feedback
+
+After running `agent-workbench demo --report` or `agent-workbench init --report`, open an Agent Workbench report issue and paste a sanitized summary. The issue form asks for the command, readiness status, generated files, environment, and what was confusing, while reminding you not to include tokens, `.env.local`, `.env.bak`, private repository names, or proprietary source snippets.
+
 ## Credentials
 
 Do not paste tokens into chat or commit them to git.
