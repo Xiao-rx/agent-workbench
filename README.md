@@ -274,16 +274,24 @@ The trend engine is deliberately kept in this repository so the product can keep
 
 Do not paste tokens into chat or commit them to git.
 
-For local trend runs, put a fine-grained token in `.env.local`:
+Agent Workbench does not need credentials. The product CLI works offline on local repositories, including `scan`, `init`, `check`, `demo --proof`, and `demo --report`.
+
+Only the internal trend and monitor commands use GitHub credentials. For higher API limits or target-repo monitoring, copy the safe template and put a fine-grained token in `.env.local`:
+
+```powershell
+Copy-Item .env.example .env.local
+```
 
 ```env
 GITHUB_TOKEN=<your-token>
+GH_TOKEN=<optional-alias>
 GITHUB_OWNER=your-user
 GITHUB_REPO=agent-workbench
 TARGET_REPO=your-user/agent-workbench
+GITHUB_API_VERSION=2026-03-10
 ```
 
-`.env.local` is ignored by git.
+`.env.example` contains placeholders only and is safe to commit. `.env.local` and `.env.bak` are ignored by git and checked by local verification before publishing.
 
 ## Publishing
 

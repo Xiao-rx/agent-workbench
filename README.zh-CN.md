@@ -119,6 +119,18 @@ AI coding agent 最容易在缺少上下文时犯错。Agent Workbench 的目标
 - 当前已发布 release: <https://github.com/Xiao-rx/agent-workbench/releases/tag/v0.7.0>
 - 许可证：[`MIT`](LICENSE)，复用权利明确。
 
+## 凭据与 secret
+
+Agent Workbench 产品 CLI 不需要任何 token；`scan`、`init`、`check`、`demo --proof` 和 `demo --report` 都只处理本地文件。
+
+只有内部 trend / monitor 命令为了提高 GitHub API 限额或采样目标仓库时才需要可选凭据。需要时复制安全样板：
+
+```powershell
+Copy-Item .env.example .env.local
+```
+
+`.env.example` 只包含占位符，可以提交；真实 token 只放进 `.env.local`。`.env.local` 和 `.env.bak` 都会被 git 忽略，本地 verification 会在发布前检查这些文件仍然被忽略。
+
 ## 内部增长闭环
 
 这个仓库还包含一个内部 GitHub trend / feedback loop，用来观察热门项目、生成方向建议、记录 star history，并决定 Agent Workbench 下一轮应该改什么。

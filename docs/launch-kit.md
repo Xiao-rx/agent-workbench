@@ -56,6 +56,7 @@ One command generates:
 - `init --proof [PATH]` for the same proof shape on the real repository bootstrap path
 - `--print-kickoff` to copy the generated first prompt straight from the terminal
 - the no-secret demo includes a safe `.github/copilot-instructions.md`, so the generated workbench visibly reports existing agent assets
+- Agent Workbench does not need credentials; `.env.example` is a placeholder-only template for optional trend/monitor runs, while `.env.local` stays ignored
 - text output prints a copyable `Proof:` line with adapter and existing agent asset counts, readiness counts when checks run, plus the exact readiness gate command for screenshots, issues, and release notes
 - scan JSON reports `kind`, `schema_version`, and existing agent assets such as `AGENTS.md`, `CLAUDE.md`, Codex, Cursor, Copilot, Gemini, and OpenCode instruction files
 - `demo --format json` and `init --format json` for machine-readable proofs with `kind`, `schema_version`, written files, artifact summary, a handoff object with `AGENTS.md`, `agent-task-pack.md`, and `next_action`, pre-write existing agent assets, copyable proof summary, proof command for the shortcut path, verification command, readiness summary, readiness counts, readiness command, structured readiness args, kickoff prompt, and readiness

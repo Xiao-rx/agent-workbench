@@ -23,6 +23,7 @@ agent-workbench demo --adapter all --strict --print-kickoff
 - JSON proof payloads include a structured `handoff` object with the generated `AGENTS.md`, `agent-task-pack.md`, and the recommended `next_action`.
 - JSON proof payloads now include an artifact summary, a copyable proof summary with adapter and existing agent asset counts, readiness status/counts when checks run, a verification command, and both string and structured readiness commands that preserve adapter and strict gates for easier sharing and routing.
 - JSON proof payloads now include pre-write existing `agent_assets`, and the no-secret demo includes a safe Copilot instructions file so the first run visibly exercises asset detection without counting newly generated handoffs as prior project context.
+- `.env.example` now documents placeholder-only optional trend/monitor credentials, while README and Chinese README make clear that Agent Workbench itself does not need a token and `.env.local` stays ignored.
 - `scan --format json` now reports existing agent instruction assets such as `AGENTS.md`, `CLAUDE.md`, `.codex/AGENTS.md`, `.cursor/rules/*.md`, `.github/copilot-instructions.md`, `GEMINI.md`, and `opencode.json`.
 - Duplicate adapter requests are deduplicated, so `--adapter all --adapter codex` still writes each adapter once.
 - `check --adapter all`: require Claude Code, Codex, Cursor, and OpenCode handoff files in the readiness gate.

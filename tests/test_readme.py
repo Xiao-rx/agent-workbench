@@ -86,6 +86,10 @@ class ReadmeTests(unittest.TestCase):
         self.assertIn("docs/launch-kit.md", readme)
         self.assertIn("MIT licensed, so reuse rights are explicit before adoption", readme)
         self.assertIn("License: [`MIT`](LICENSE)", readme)
+        self.assertIn("Agent Workbench does not need credentials", readme)
+        self.assertIn("Copy-Item .env.example .env.local", readme)
+        self.assertIn("`.env.example` contains placeholders only and is safe to commit", readme)
+        self.assertIn("`.env.local` and `.env.bak` are ignored by git", readme)
         self.assertIn("python -m github_trend_lab insight --decisions reports/daily-decisions.json", readme)
         self.assertIn("`trend-lab insight` is a local shortcut", readme)
         self.assertIn("provider-neutral", readme.lower())
@@ -149,6 +153,10 @@ class ReadmeTests(unittest.TestCase):
         self.assertIn("python -m github_trend_lab insight --decisions reports/daily-decisions.json", readme)
         self.assertIn("快速查看最新决策摘要", readme)
         self.assertIn("许可证：[`MIT`](LICENSE)，复用权利明确", readme)
+        self.assertIn("Agent Workbench 产品 CLI 不需要任何 token", readme)
+        self.assertIn("Copy-Item .env.example .env.local", readme)
+        self.assertIn("`.env.example` 只包含占位符，可以提交", readme)
+        self.assertIn("`.env.local` 和 `.env.bak` 都会被 git 忽略", readme)
         self.assertIn("趋势分析不是产品本体", readme)
 
 
