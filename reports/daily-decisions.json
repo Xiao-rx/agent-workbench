@@ -5,8 +5,8 @@
       "ultraworkers/claw-code",
       "affaan-m/ECC",
       "multica-ai/andrej-karpathy-skills",
-      "garrytan/gstack",
-      "mattpocock/skills"
+      "mattpocock/skills",
+      "garrytan/gstack"
     ],
     "excluded_repositories": [],
     "watched_repositories": [],
@@ -17,8 +17,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "ultraworkers/claw-code is likely gaining attention because it combines Rust ecosystem fit.",
         "evidence": [
-          "192174 stars",
-          "109960 forks corroborate reuse",
+          "192254 stars",
+          "109959 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -37,8 +37,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "affaan-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "188173 stars",
-          "29127 forks corroborate reuse",
+          "188539 stars",
+          "29177 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -57,8 +57,8 @@
         "trust_level": "medium",
         "adoption_hypothesis": "multica-ai/andrej-karpathy-skills is likely gaining attention because it combines AI/agent positioning.",
         "evidence": [
-          "143248 stars",
-          "14686 forks corroborate reuse",
+          "146879 stars",
+          "15025 forks corroborate reuse",
           "unclear license"
         ],
         "emulate": [
@@ -70,13 +70,13 @@
         ]
       },
       {
-        "full_name": "garrytan/gstack",
-        "trust_score": 99,
+        "full_name": "mattpocock/skills",
+        "trust_score": 93,
         "trust_level": "high",
-        "adoption_hypothesis": "garrytan/gstack is likely gaining attention because it combines TypeScript ecosystem fit.",
+        "adoption_hypothesis": "mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit.",
         "evidence": [
-          "100484 stars",
-          "14970 forks corroborate reuse",
+          "101062 stars",
+          "8938 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -90,13 +90,13 @@
         ]
       },
       {
-        "full_name": "mattpocock/skills",
-        "trust_score": 93,
+        "full_name": "garrytan/gstack",
+        "trust_score": 99,
         "trust_level": "high",
-        "adoption_hypothesis": "mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit.",
+        "adoption_hypothesis": "garrytan/gstack is likely gaining attention because it combines TypeScript ecosystem fit.",
         "evidence": [
-          "99127 stars",
-          "8767 forks corroborate reuse",
+          "100902 stars",
+          "15025 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -296,7 +296,7 @@
     "repo": "Xiao-rx/agent-workbench",
     "current_stars": 0,
     "star_delta": 0,
-    "samples_seen": 52,
+    "samples_seen": 53,
     "git_status": "## main...origin/main\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl",
     "recommendation": "Commit small, explainable improvements and watch the next star sample for response.",
     "recent_change": "Update daily trend brief",
