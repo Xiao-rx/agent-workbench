@@ -17,8 +17,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "affaan-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "194429 stars",
-          "29974 forks corroborate reuse",
+          "196056 stars",
+          "30163 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -37,8 +37,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "ultraworkers/claw-code is likely gaining attention because it combines Rust ecosystem fit.",
         "evidence": [
-          "192594 stars",
-          "109951 forks corroborate reuse",
+          "192659 stars",
+          "109968 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -57,8 +57,8 @@
         "trust_level": "medium",
         "adoption_hypothesis": "multica-ai/andrej-karpathy-skills is likely gaining attention because it combines AI/agent positioning.",
         "evidence": [
-          "157203 stars",
-          "16098 forks corroborate reuse",
+          "159033 stars",
+          "16312 forks corroborate reuse",
           "unclear license"
         ],
         "emulate": [
@@ -71,13 +71,14 @@
       },
       {
         "full_name": "mattpocock/skills",
-        "trust_score": 83,
+        "trust_score": 93,
         "trust_level": "high",
         "adoption_hypothesis": "mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit.",
         "evidence": [
-          "106965 stars",
-          "9447 forks corroborate reuse",
-          "MIT license"
+          "108570 stars",
+          "9561 forks corroborate reuse",
+          "MIT license",
+          "recent push activity"
         ],
         "emulate": [
           "Use a concrete one-sentence value proposition.",
@@ -94,8 +95,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "garrytan/gstack is likely gaining attention because it combines TypeScript ecosystem fit.",
         "evidence": [
-          "103261 stars",
-          "15393 forks corroborate reuse",
+          "103667 stars",
+          "15453 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -295,7 +296,7 @@
     "repo": "Xiao-rx/agent-workbench",
     "current_stars": 0,
     "star_delta": 0,
-    "samples_seen": 57,
+    "samples_seen": 58,
     "git_status": "## main...origin/main\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl",
     "recommendation": "Commit small, explainable improvements and watch the next star sample for response.",
     "recent_change": "Update daily trend brief",
