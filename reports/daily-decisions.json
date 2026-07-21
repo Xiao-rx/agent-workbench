@@ -1,6 +1,6 @@
 {
   "analysis": {
-    "headline": "12 learning candidates analyzed since 2026-01-01; 0 risky repositories excluded; top signal is topic:claude-code.",
+    "headline": "12 learning candidates analyzed since 2026-01-01; 0 risky repositories excluded; top signal is topic:ai-agents.",
     "leading_repositories": [
       "affaan-m/ECC",
       "ultraworkers/claw-code",
@@ -17,8 +17,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "affaan-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "230945 stars",
-          "35237 forks corroborate reuse",
+          "231575 stars",
+          "35335 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -37,8 +37,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "ultraworkers/claw-code is likely gaining attention because it combines AI/agent positioning, Rust ecosystem fit.",
         "evidence": [
-          "194809 stars",
-          "109610 forks corroborate reuse",
+          "194843 stars",
+          "109580 forks corroborate reuse",
           "MIT license"
         ],
         "emulate": [
@@ -56,8 +56,8 @@
         "trust_level": "medium",
         "adoption_hypothesis": "multica-ai/andrej-karpathy-skills is likely gaining attention because it combines AI/agent positioning.",
         "evidence": [
-          "193944 stars",
-          "19952 forks corroborate reuse",
+          "194718 stars",
+          "20046 forks corroborate reuse",
           "unclear license"
         ],
         "emulate": [
@@ -70,14 +70,13 @@
       },
       {
         "full_name": "mattpocock/skills",
-        "trust_score": 93,
+        "trust_score": 83,
         "trust_level": "high",
         "adoption_hypothesis": "mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit.",
         "evidence": [
-          "176578 stars",
-          "15131 forks corroborate reuse",
-          "MIT license",
-          "recent push activity"
+          "178922 stars",
+          "15299 forks corroborate reuse",
+          "MIT license"
         ],
         "emulate": [
           "Use a concrete one-sentence value proposition.",
@@ -94,8 +93,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "garrytan/gstack is likely gaining attention because it combines TypeScript ecosystem fit.",
         "evidence": [
-          "122705 stars",
-          "18349 forks corroborate reuse",
+          "123224 stars",
+          "18450 forks corroborate reuse",
           "MIT license"
         ],
         "emulate": [
@@ -136,19 +135,23 @@
     ],
     "topics": [
       [
+        "ai-agents",
+        4
+      ],
+      [
         "claude-code",
         4
       ],
       [
-        "ai-agents",
-        3
+        "llm",
+        4
       ],
       [
         "claude",
         3
       ],
       [
-        "llm",
+        "developer-tools",
         3
       ],
       [
@@ -156,7 +159,7 @@
         2
       ],
       [
-        "developer-tools",
+        "mcp",
         2
       ],
       [
@@ -170,10 +173,6 @@
       [
         "agent-skills",
         2
-      ],
-      [
-        "mcp",
-        1
       ],
       [
         "productivity",
@@ -191,10 +190,10 @@
       ],
       [
         "ai",
-        4
+        3
       ],
       [
-        "app",
+        "local",
         2
       ],
       [
@@ -218,12 +217,12 @@
         1
       ],
       [
-        "local",
+        "app",
         1
       ]
     ],
     "reasons": [
-      "Topic clustering is strong around claude-code, ai-agents, claude, which makes the value proposition easy to search and share.",
+      "Topic clustering is strong around ai-agents, claude-code, llm, which makes the value proposition easy to search and share.",
       "JavaScript leads the language mix, so examples and packaging should respect that ecosystem.",
       "AI and agent language is still a strong discovery hook when paired with a concrete workflow.",
       "Developer automation projects benefit from short setup, visible output, and repeatable commands."
@@ -232,19 +231,19 @@
   "backlog": [
     {
       "title": "Ship a one-command demo loop",
-      "rationale": "topic:claude-code (4) is the strongest analysis signal, so the first success path should make that value obvious.",
+      "rationale": "topic:ai-agents (4) is the strongest analysis signal, so the first success path should make that value obvious.",
       "impact": "high",
       "effort": "medium",
       "verification": "A fresh clone can run the demo command and produce a report without secrets.",
-      "signal": "topic:claude-code (4)"
+      "signal": "topic:ai-agents (4)"
     },
     {
       "title": "Publish daily trend evidence",
-      "rationale": "The roadmap should show how current topic:claude-code (4) evidence changes recommendations over time.",
+      "rationale": "The roadmap should show how current topic:ai-agents (4) evidence changes recommendations over time.",
       "impact": "high",
       "effort": "low",
       "verification": "A scheduled run updates a snapshot, star history, and daily brief.",
-      "signal": "topic:claude-code (4)"
+      "signal": "topic:ai-agents (4)"
     },
     {
       "title": "Keep credentials optional and documented",
@@ -298,7 +297,7 @@
     "repo": "Xiao-rx/agent-workbench",
     "current_stars": 0,
     "star_delta": 0,
-    "samples_seen": 110,
+    "samples_seen": 111,
     "git_status": "## main...origin/main\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl",
     "recommendation": "Commit small, explainable improvements and watch the next star sample for response.",
     "recent_change": "Update daily trend brief",
