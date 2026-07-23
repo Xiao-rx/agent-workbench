@@ -1,33 +1,250 @@
 {
   "analysis": {
-    "headline": "0 learning candidates analyzed since 2026-01-01; 0 risky repositories excluded; top signal is insufficient data.",
-    "leading_repositories": [],
+    "headline": "12 learning candidates analyzed since 2026-01-01; 0 risky repositories excluded; top signal is topic:ai-agents.",
+    "leading_repositories": [
+      "affaan-m/ECC",
+      "multica-ai/andrej-karpathy-skills",
+      "ultraworkers/claw-code",
+      "mattpocock/skills",
+      "garrytan/gstack"
+    ],
     "excluded_repositories": [],
     "watched_repositories": [],
-    "repo_lessons": [],
-    "languages": [],
-    "topics": [],
-    "description_terms": [],
+    "repo_lessons": [
+      {
+        "full_name": "affaan-m/ECC",
+        "trust_score": 100,
+        "trust_level": "high",
+        "adoption_hypothesis": "affaan-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging.",
+        "evidence": [
+          "232231 stars",
+          "35410 forks corroborate reuse",
+          "MIT license",
+          "recent push activity"
+        ],
+        "emulate": [
+          "Use a concrete one-sentence value proposition.",
+          "Keep license and reuse rights explicit.",
+          "Show active maintenance through recent commits."
+        ],
+        "avoid": [
+          "Avoid copying surface topics without reproducing the proof path."
+        ]
+      },
+      {
+        "full_name": "multica-ai/andrej-karpathy-skills",
+        "trust_score": 70,
+        "trust_level": "medium",
+        "adoption_hypothesis": "multica-ai/andrej-karpathy-skills is likely gaining attention because it combines AI/agent positioning.",
+        "evidence": [
+          "195423 stars",
+          "20113 forks corroborate reuse",
+          "unclear license"
+        ],
+        "emulate": [
+          "Use a concrete one-sentence value proposition.",
+          "Show active maintenance through recent commits."
+        ],
+        "avoid": [
+          "Avoid copying surface topics without reproducing the proof path."
+        ]
+      },
+      {
+        "full_name": "ultraworkers/claw-code",
+        "trust_score": 90,
+        "trust_level": "high",
+        "adoption_hypothesis": "ultraworkers/claw-code is likely gaining attention because it combines AI/agent positioning, Rust ecosystem fit.",
+        "evidence": [
+          "194851 stars",
+          "109537 forks corroborate reuse",
+          "MIT license"
+        ],
+        "emulate": [
+          "Use a concrete one-sentence value proposition.",
+          "Keep license and reuse rights explicit.",
+          "Show active maintenance through recent commits."
+        ],
+        "avoid": [
+          "Avoid copying surface topics without reproducing the proof path."
+        ]
+      },
+      {
+        "full_name": "mattpocock/skills",
+        "trust_score": 93,
+        "trust_level": "high",
+        "adoption_hypothesis": "mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit.",
+        "evidence": [
+          "182372 stars",
+          "15580 forks corroborate reuse",
+          "MIT license",
+          "recent push activity"
+        ],
+        "emulate": [
+          "Use a concrete one-sentence value proposition.",
+          "Keep license and reuse rights explicit.",
+          "Show active maintenance through recent commits."
+        ],
+        "avoid": [
+          "Avoid copying surface topics without reproducing the proof path."
+        ]
+      },
+      {
+        "full_name": "garrytan/gstack",
+        "trust_score": 89,
+        "trust_level": "high",
+        "adoption_hypothesis": "garrytan/gstack is likely gaining attention because it combines TypeScript ecosystem fit.",
+        "evidence": [
+          "123733 stars",
+          "18536 forks corroborate reuse",
+          "MIT license"
+        ],
+        "emulate": [
+          "Use a concrete one-sentence value proposition.",
+          "Keep license and reuse rights explicit.",
+          "Show active maintenance through recent commits."
+        ],
+        "avoid": [
+          "Avoid copying surface topics without reproducing the proof path."
+        ]
+      }
+    ],
+    "languages": [
+      [
+        "JavaScript",
+        3
+      ],
+      [
+        "Python",
+        3
+      ],
+      [
+        "Unknown",
+        2
+      ],
+      [
+        "TypeScript",
+        2
+      ],
+      [
+        "Rust",
+        1
+      ],
+      [
+        "Shell",
+        1
+      ]
+    ],
+    "topics": [
+      [
+        "ai-agents",
+        4
+      ],
+      [
+        "claude-code",
+        4
+      ],
+      [
+        "llm",
+        4
+      ],
+      [
+        "claude",
+        3
+      ],
+      [
+        "developer-tools",
+        3
+      ],
+      [
+        "anthropic",
+        2
+      ],
+      [
+        "mcp",
+        2
+      ],
+      [
+        "vibe-coding",
+        2
+      ],
+      [
+        "prompt-engineering",
+        2
+      ],
+      [
+        "agent-skills",
+        2
+      ],
+      [
+        "productivity",
+        1
+      ],
+      [
+        "awesome-list",
+        1
+      ]
+    ],
+    "description_terms": [
+      [
+        "agent",
+        4
+      ],
+      [
+        "ai",
+        3
+      ],
+      [
+        "local",
+        2
+      ],
+      [
+        "llm",
+        1
+      ],
+      [
+        "ui",
+        1
+      ],
+      [
+        "cli",
+        1
+      ],
+      [
+        "dev",
+        1
+      ],
+      [
+        "open",
+        1
+      ],
+      [
+        "app",
+        1
+      ]
+    ],
     "reasons": [
-      "The strongest projects combine a specific audience, obvious first run, and visible maintenance activity."
+      "Topic clustering is strong around ai-agents, claude-code, llm, which makes the value proposition easy to search and share.",
+      "JavaScript leads the language mix, so examples and packaging should respect that ecosystem.",
+      "AI and agent language is still a strong discovery hook when paired with a concrete workflow.",
+      "Developer automation projects benefit from short setup, visible output, and repeatable commands."
     ]
   },
   "backlog": [
     {
       "title": "Ship a one-command demo loop",
-      "rationale": "insufficient data is the strongest analysis signal, so the first success path should make that value obvious.",
+      "rationale": "topic:ai-agents (4) is the strongest analysis signal, so the first success path should make that value obvious.",
       "impact": "high",
       "effort": "medium",
       "verification": "A fresh clone can run the demo command and produce a report without secrets.",
-      "signal": "insufficient data"
+      "signal": "topic:ai-agents (4)"
     },
     {
       "title": "Publish daily trend evidence",
-      "rationale": "The roadmap should show how current insufficient data evidence changes recommendations over time.",
+      "rationale": "The roadmap should show how current topic:ai-agents (4) evidence changes recommendations over time.",
       "impact": "high",
       "effort": "low",
       "verification": "A scheduled run updates a snapshot, star history, and daily brief.",
-      "signal": "insufficient data"
+      "signal": "topic:ai-agents (4)"
     },
     {
       "title": "Keep credentials optional and documented",
@@ -36,6 +253,30 @@
       "effort": "low",
       "verification": ".env.local is ignored, `.env.example` is safe, and CI uses scoped tokens.",
       "signal": "operational-safety"
+    },
+    {
+      "title": "Expose the agent decisions as machine-readable JSON",
+      "rationale": "Agent-oriented projects spread faster when downstream tools can reuse their decisions.",
+      "impact": "medium",
+      "effort": "medium",
+      "verification": "The daily run writes both Markdown and JSON decision artifacts.",
+      "signal": "topic:agent"
+    },
+    {
+      "title": "Tighten the CLI around repeatable maintainer workflows",
+      "rationale": "Developer-tool projects win when routine jobs become short, memorable commands.",
+      "impact": "medium",
+      "effort": "medium",
+      "verification": "Collect, monitor, analyze, and orchestrate commands have examples and tests.",
+      "signal": "topic:automation"
+    },
+    {
+      "title": "Add a local insight view for trend comparisons",
+      "rationale": "Data and UI signals point to users wanting inspectable local output, not only a generated brief.",
+      "impact": "medium",
+      "effort": "medium",
+      "verification": "The report data can be opened locally and compared across at least two snapshots.",
+      "signal": "topic:data-ui"
     },
     {
       "title": "Create a public progress loop for Xiao-rx/agent-workbench",
@@ -48,16 +289,16 @@
   ],
   "review_findings": [
     {
-      "severity": "high",
-      "title": "No trend data available",
-      "detail": "Recommendations are weak without a live or sample snapshot. Run collect with network access or demo for a seeded sample."
+      "severity": "low",
+      "title": "Backlog has testable gates",
+      "detail": "Every proposed item includes a verification statement and can be reviewed before release."
     }
   ],
   "git_observation": {
     "repo": "Xiao-rx/agent-workbench",
     "current_stars": 0,
     "star_delta": 0,
-    "samples_seen": 112,
+    "samples_seen": 113,
     "git_status": "## main...origin/main\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl",
     "recommendation": "Commit small, explainable improvements and watch the next star sample for response.",
     "recent_change": "Update daily trend brief",
