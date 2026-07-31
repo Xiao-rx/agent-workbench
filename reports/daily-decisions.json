@@ -4,8 +4,8 @@
     "leading_repositories": [
       "affaan-m/ECC",
       "multica-ai/andrej-karpathy-skills",
-      "ultraworkers/claw-code",
       "mattpocock/skills",
+      "ultraworkers/claw-code",
       "garrytan/gstack"
     ],
     "excluded_repositories": [],
@@ -17,8 +17,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "affaan-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "235573 stars",
-          "35875 forks corroborate reuse",
+          "236225 stars",
+          "35926 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -37,31 +37,12 @@
         "trust_level": "medium",
         "adoption_hypothesis": "multica-ai/andrej-karpathy-skills is likely gaining attention because it combines AI/agent positioning.",
         "evidence": [
-          "197641 stars",
-          "20325 forks corroborate reuse",
+          "197935 stars",
+          "20359 forks corroborate reuse",
           "unclear license"
         ],
         "emulate": [
           "Use a concrete one-sentence value proposition.",
-          "Show active maintenance through recent commits."
-        ],
-        "avoid": [
-          "Avoid copying surface topics without reproducing the proof path."
-        ]
-      },
-      {
-        "full_name": "ultraworkers/claw-code",
-        "trust_score": 90,
-        "trust_level": "high",
-        "adoption_hypothesis": "ultraworkers/claw-code is likely gaining attention because it combines AI/agent positioning, Rust ecosystem fit.",
-        "evidence": [
-          "194943 stars",
-          "109419 forks corroborate reuse",
-          "MIT license"
-        ],
-        "emulate": [
-          "Use a concrete one-sentence value proposition.",
-          "Keep license and reuse rights explicit.",
           "Show active maintenance through recent commits."
         ],
         "avoid": [
@@ -74,10 +55,29 @@
         "trust_level": "high",
         "adoption_hypothesis": "mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit.",
         "evidence": [
-          "194572 stars",
-          "16756 forks corroborate reuse",
+          "196283 stars",
+          "16918 forks corroborate reuse",
           "MIT license",
           "recent push activity"
+        ],
+        "emulate": [
+          "Use a concrete one-sentence value proposition.",
+          "Keep license and reuse rights explicit.",
+          "Show active maintenance through recent commits."
+        ],
+        "avoid": [
+          "Avoid copying surface topics without reproducing the proof path."
+        ]
+      },
+      {
+        "full_name": "ultraworkers/claw-code",
+        "trust_score": 90,
+        "trust_level": "high",
+        "adoption_hypothesis": "ultraworkers/claw-code is likely gaining attention because it combines AI/agent positioning, Rust ecosystem fit.",
+        "evidence": [
+          "194949 stars",
+          "109405 forks corroborate reuse",
+          "MIT license"
         ],
         "emulate": [
           "Use a concrete one-sentence value proposition.",
@@ -94,8 +94,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "garrytan/gstack is likely gaining attention because it combines TypeScript ecosystem fit.",
         "evidence": [
-          "125168 stars",
-          "18761 forks corroborate reuse",
+          "125334 stars",
+          "18796 forks corroborate reuse",
           "MIT license"
         ],
         "emulate": [
@@ -126,11 +126,11 @@
         2
       ],
       [
-        "Rust",
+        "Shell",
         1
       ],
       [
-        "Shell",
+        "Rust",
         1
       ]
     ],
@@ -298,7 +298,7 @@
     "repo": "Xiao-rx/agent-workbench",
     "current_stars": 0,
     "star_delta": 0,
-    "samples_seen": 120,
+    "samples_seen": 121,
     "git_status": "## main...origin/main\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl",
     "recommendation": "Commit small, explainable improvements and watch the next star sample for response.",
     "recent_change": "Update daily trend brief",
