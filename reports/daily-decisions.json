@@ -3,8 +3,8 @@
     "headline": "12 learning candidates analyzed since 2026-01-01; 0 risky repositories excluded; top signal is topic:ai-agents.",
     "leading_repositories": [
       "affaan-m/ECC",
-      "multica-ai/andrej-karpathy-skills",
       "mattpocock/skills",
+      "multica-ai/andrej-karpathy-skills",
       "ultraworkers/claw-code",
       "garrytan/gstack"
     ],
@@ -13,12 +13,31 @@
     "repo_lessons": [
       {
         "full_name": "affaan-m/ECC",
-        "trust_score": 100,
+        "trust_score": 90,
         "trust_level": "high",
         "adoption_hypothesis": "affaan-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "236644 stars",
-          "35984 forks corroborate reuse",
+          "236842 stars",
+          "36010 forks corroborate reuse",
+          "MIT license"
+        ],
+        "emulate": [
+          "Use a concrete one-sentence value proposition.",
+          "Keep license and reuse rights explicit.",
+          "Show active maintenance through recent commits."
+        ],
+        "avoid": [
+          "Avoid copying surface topics without reproducing the proof path."
+        ]
+      },
+      {
+        "full_name": "mattpocock/skills",
+        "trust_score": 93,
+        "trust_level": "high",
+        "adoption_hypothesis": "mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit.",
+        "evidence": [
+          "198984 stars",
+          "17143 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -37,32 +56,12 @@
         "trust_level": "medium",
         "adoption_hypothesis": "multica-ai/andrej-karpathy-skills is likely gaining attention because it combines AI/agent positioning.",
         "evidence": [
-          "198231 stars",
-          "20386 forks corroborate reuse",
+          "198520 stars",
+          "20414 forks corroborate reuse",
           "unclear license"
         ],
         "emulate": [
           "Use a concrete one-sentence value proposition.",
-          "Show active maintenance through recent commits."
-        ],
-        "avoid": [
-          "Avoid copying surface topics without reproducing the proof path."
-        ]
-      },
-      {
-        "full_name": "mattpocock/skills",
-        "trust_score": 93,
-        "trust_level": "high",
-        "adoption_hypothesis": "mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit.",
-        "evidence": [
-          "197841 stars",
-          "17031 forks corroborate reuse",
-          "MIT license",
-          "recent push activity"
-        ],
-        "emulate": [
-          "Use a concrete one-sentence value proposition.",
-          "Keep license and reuse rights explicit.",
           "Show active maintenance through recent commits."
         ],
         "avoid": [
@@ -75,8 +74,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "ultraworkers/claw-code is likely gaining attention because it combines AI/agent positioning, Rust ecosystem fit.",
         "evidence": [
-          "194961 stars",
-          "109379 forks corroborate reuse",
+          "194955 stars",
+          "109371 forks corroborate reuse",
           "MIT license"
         ],
         "emulate": [
@@ -94,8 +93,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "garrytan/gstack is likely gaining attention because it combines TypeScript ecosystem fit.",
         "evidence": [
-          "125537 stars",
-          "18830 forks corroborate reuse",
+          "125752 stars",
+          "18857 forks corroborate reuse",
           "MIT license"
         ],
         "emulate": [
@@ -298,7 +297,7 @@
     "repo": "Xiao-rx/agent-workbench",
     "current_stars": 0,
     "star_delta": 0,
-    "samples_seen": 122,
+    "samples_seen": 123,
     "git_status": "## main...origin/main\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl",
     "recommendation": "Commit small, explainable improvements and watch the next star sample for response.",
     "recent_change": "Update daily trend brief",
