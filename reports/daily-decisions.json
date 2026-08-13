@@ -17,8 +17,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "affaan-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "239480 stars",
-          "36358 forks corroborate reuse",
+          "239752 stars",
+          "36390 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -37,8 +37,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit.",
         "evidence": [
-          "213802 stars",
-          "18454 forks corroborate reuse",
+          "215041 stars",
+          "18558 forks corroborate reuse",
           "MIT license"
         ],
         "emulate": [
@@ -56,8 +56,8 @@
         "trust_level": "medium",
         "adoption_hypothesis": "multica-ai/andrej-karpathy-skills is likely gaining attention because it combines AI/agent positioning.",
         "evidence": [
-          "201597 stars",
-          "20692 forks corroborate reuse",
+          "201890 stars",
+          "20712 forks corroborate reuse",
           "unclear license"
         ],
         "emulate": [
@@ -74,8 +74,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "ultraworkers/claw-code is likely gaining attention because it combines AI/agent positioning, Rust ecosystem fit.",
         "evidence": [
-          "195046 stars",
-          "109200 forks corroborate reuse",
+          "195068 stars",
+          "109182 forks corroborate reuse",
           "MIT license"
         ],
         "emulate": [
@@ -89,13 +89,14 @@
       },
       {
         "full_name": "garrytan/gstack",
-        "trust_score": 90,
+        "trust_score": 100,
         "trust_level": "high",
         "adoption_hypothesis": "garrytan/gstack is likely gaining attention because it combines TypeScript ecosystem fit.",
         "evidence": [
-          "127585 stars",
-          "19214 forks corroborate reuse",
-          "MIT license"
+          "127709 stars",
+          "19232 forks corroborate reuse",
+          "MIT license",
+          "recent push activity"
         ],
         "emulate": [
           "Use a concrete one-sentence value proposition.",
@@ -113,11 +114,15 @@
         3
       ],
       [
-        "Python",
-        3
+        "Unknown",
+        2
       ],
       [
-        "Unknown",
+        "TypeScript",
+        2
+      ],
+      [
+        "Python",
         2
       ],
       [
@@ -126,10 +131,6 @@
       ],
       [
         "Rust",
-        1
-      ],
-      [
-        "TypeScript",
         1
       ],
       [
@@ -143,12 +144,12 @@
         5
       ],
       [
-        "llm",
+        "ai-agents",
         4
       ],
       [
-        "ai-agents",
-        3
+        "llm",
+        4
       ],
       [
         "claude",
@@ -159,11 +160,19 @@
         3
       ],
       [
+        "agent-skills",
+        3
+      ],
+      [
         "anthropic",
         2
       ],
       [
         "mcp",
+        2
+      ],
+      [
+        "vibe-coding",
         2
       ],
       [
@@ -177,24 +186,20 @@
       [
         "cursor",
         2
-      ],
-      [
-        "skills",
-        2
-      ],
-      [
-        "agent-skills",
-        2
       ]
     ],
     "description_terms": [
       [
-        "ai",
+        "agent",
         4
       ],
       [
-        "agent",
+        "ai",
         3
+      ],
+      [
+        "local",
+        2
       ],
       [
         "llm",
@@ -209,16 +214,20 @@
         1
       ],
       [
-        "local",
+        "dev",
         1
       ],
       [
-        "dev",
+        "open",
+        1
+      ],
+      [
+        "app",
         1
       ]
     ],
     "reasons": [
-      "Topic clustering is strong around claude-code, llm, ai-agents, which makes the value proposition easy to search and share.",
+      "Topic clustering is strong around claude-code, ai-agents, llm, which makes the value proposition easy to search and share.",
       "JavaScript leads the language mix, so examples and packaging should respect that ecosystem.",
       "AI and agent language is still a strong discovery hook when paired with a concrete workflow.",
       "Developer automation projects benefit from short setup, visible output, and repeatable commands."
@@ -293,7 +302,7 @@
     "repo": "Xiao-rx/agent-workbench",
     "current_stars": 0,
     "star_delta": 0,
-    "samples_seen": 133,
+    "samples_seen": 134,
     "git_status": "## main...origin/main\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl",
     "recommendation": "Commit small, explainable improvements and watch the next star sample for response.",
     "recent_change": "Update daily trend brief",
