@@ -6,7 +6,7 @@
       "mattpocock/skills",
       "multica-ai/andrej-karpathy-skills",
       "ultraworkers/claw-code",
-      "garrytan/gstack"
+      "deepseek-ai/deepseek-harness"
     ],
     "excluded_repositories": [],
     "watched_repositories": [],
@@ -17,8 +17,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "affaan-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "240296 stars",
-          "36463 forks corroborate reuse",
+          "240489 stars",
+          "36485 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -37,8 +37,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit.",
         "evidence": [
-          "218362 stars",
-          "18810 forks corroborate reuse",
+          "219273 stars",
+          "18876 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -57,8 +57,8 @@
         "trust_level": "medium",
         "adoption_hypothesis": "multica-ai/andrej-karpathy-skills is likely gaining attention because it combines AI/agent positioning.",
         "evidence": [
-          "202765 stars",
-          "20806 forks corroborate reuse",
+          "203080 stars",
+          "20834 forks corroborate reuse",
           "unclear license"
         ],
         "emulate": [
@@ -71,13 +71,14 @@
       },
       {
         "full_name": "ultraworkers/claw-code",
-        "trust_score": 90,
+        "trust_score": 100,
         "trust_level": "high",
         "adoption_hypothesis": "ultraworkers/claw-code is likely gaining attention because it combines AI/agent positioning, Rust ecosystem fit.",
         "evidence": [
-          "195053 stars",
-          "109112 forks corroborate reuse",
-          "MIT license"
+          "195069 stars",
+          "109092 forks corroborate reuse",
+          "MIT license",
+          "recent push activity"
         ],
         "emulate": [
           "Use a concrete one-sentence value proposition.",
@@ -89,15 +90,15 @@
         ]
       },
       {
-        "full_name": "garrytan/gstack",
-        "trust_score": 100,
+        "full_name": "deepseek-ai/deepseek-harness",
+        "trust_score": 90,
         "trust_level": "high",
-        "adoption_hypothesis": "garrytan/gstack is likely gaining attention because it combines TypeScript ecosystem fit.",
+        "adoption_hypothesis": "deepseek-ai/deepseek-harness is likely gaining attention because it combines TypeScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "128150 stars",
-          "19283 forks corroborate reuse",
+          "131075 stars",
+          "13127 forks corroborate reuse",
           "MIT license",
-          "recent push activity"
+          "0 open issues"
         ],
         "emulate": [
           "Use a concrete one-sentence value proposition.",
@@ -295,7 +296,7 @@
     "repo": "Xiao-rx/agent-workbench",
     "current_stars": 0,
     "star_delta": 0,
-    "samples_seen": 137,
+    "samples_seen": 138,
     "git_status": "## main...origin/main\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl",
     "recommendation": "Commit small, explainable improvements and watch the next star sample for response.",
     "recent_change": "Update daily trend brief",
