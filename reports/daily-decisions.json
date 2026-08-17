@@ -1,6 +1,6 @@
 {
   "analysis": {
-    "headline": "12 learning candidates analyzed since 2026-01-01; 0 risky repositories excluded; top signal is topic:claude-code.",
+    "headline": "12 learning candidates analyzed since 2026-01-01; 0 risky repositories excluded; top signal is topic:ai-agents.",
     "leading_repositories": [
       "affaan-m/ECC",
       "mattpocock/skills",
@@ -17,8 +17,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "affaan-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "240489 stars",
-          "36485 forks corroborate reuse",
+          "240697 stars",
+          "36508 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -37,8 +37,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit.",
         "evidence": [
-          "219273 stars",
-          "18876 forks corroborate reuse",
+          "220307 stars",
+          "18988 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -57,8 +57,8 @@
         "trust_level": "medium",
         "adoption_hypothesis": "multica-ai/andrej-karpathy-skills is likely gaining attention because it combines AI/agent positioning.",
         "evidence": [
-          "203080 stars",
-          "20834 forks corroborate reuse",
+          "203380 stars",
+          "20864 forks corroborate reuse",
           "unclear license"
         ],
         "emulate": [
@@ -75,8 +75,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "ultraworkers/claw-code is likely gaining attention because it combines AI/agent positioning, Rust ecosystem fit.",
         "evidence": [
-          "195069 stars",
-          "109092 forks corroborate reuse",
+          "195066 stars",
+          "109077 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -91,14 +91,15 @@
       },
       {
         "full_name": "deepseek-ai/deepseek-harness",
-        "trust_score": 90,
+        "trust_score": 100,
         "trust_level": "high",
         "adoption_hypothesis": "deepseek-ai/deepseek-harness is likely gaining attention because it combines TypeScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "131075 stars",
-          "13127 forks corroborate reuse",
+          "149749 stars",
+          "15349 forks corroborate reuse",
           "MIT license",
-          "0 open issues"
+          "0 open issues",
+          "recent push activity"
         ],
         "emulate": [
           "Use a concrete one-sentence value proposition.",
@@ -112,15 +113,15 @@
     ],
     "languages": [
       [
-        "JavaScript",
+        "TypeScript",
         3
       ],
       [
-        "Unknown",
+        "JavaScript",
         2
       ],
       [
-        "TypeScript",
+        "Unknown",
         2
       ],
       [
@@ -142,11 +143,11 @@
     ],
     "topics": [
       [
-        "claude-code",
-        5
+        "ai-agents",
+        4
       ],
       [
-        "ai-agents",
+        "claude-code",
         4
       ],
       [
@@ -170,34 +171,38 @@
         2
       ],
       [
-        "antigravity",
+        "dsh",
         2
       ],
       [
-        "codex",
+        "dsh-plugin",
         2
       ],
       [
-        "cursor",
-        2
-      ],
-      [
-        "skills",
+        "vibe-coding",
         2
       ],
       [
         "agent-skills",
+        2
+      ],
+      [
+        "prompt-engineering",
         2
       ]
     ],
     "description_terms": [
       [
         "agent",
-        3
+        4
+      ],
+      [
+        "local",
+        2
       ],
       [
         "ai",
-        3
+        2
       ],
       [
         "llm",
@@ -212,17 +217,21 @@
         1
       ],
       [
-        "local",
+        "dev",
         1
       ],
       [
-        "dev",
+        "open",
+        1
+      ],
+      [
+        "app",
         1
       ]
     ],
     "reasons": [
-      "Topic clustering is strong around claude-code, ai-agents, llm, which makes the value proposition easy to search and share.",
-      "JavaScript leads the language mix, so examples and packaging should respect that ecosystem.",
+      "Topic clustering is strong around ai-agents, claude-code, llm, which makes the value proposition easy to search and share.",
+      "TypeScript leads the language mix, so examples and packaging should respect that ecosystem.",
       "AI and agent language is still a strong discovery hook when paired with a concrete workflow.",
       "Developer automation projects benefit from short setup, visible output, and repeatable commands."
     ]
@@ -230,19 +239,19 @@
   "backlog": [
     {
       "title": "Ship a one-command demo loop",
-      "rationale": "topic:claude-code (5) is the strongest analysis signal, so the first success path should make that value obvious.",
+      "rationale": "topic:ai-agents (4) is the strongest analysis signal, so the first success path should make that value obvious.",
       "impact": "high",
       "effort": "medium",
       "verification": "A fresh clone can run the demo command and produce a report without secrets.",
-      "signal": "topic:claude-code (5)"
+      "signal": "topic:ai-agents (4)"
     },
     {
       "title": "Publish daily trend evidence",
-      "rationale": "The roadmap should show how current topic:claude-code (5) evidence changes recommendations over time.",
+      "rationale": "The roadmap should show how current topic:ai-agents (4) evidence changes recommendations over time.",
       "impact": "high",
       "effort": "low",
       "verification": "A scheduled run updates a snapshot, star history, and daily brief.",
-      "signal": "topic:claude-code (5)"
+      "signal": "topic:ai-agents (4)"
     },
     {
       "title": "Keep credentials optional and documented",
@@ -296,7 +305,7 @@
     "repo": "Xiao-rx/agent-workbench",
     "current_stars": 0,
     "star_delta": 0,
-    "samples_seen": 138,
+    "samples_seen": 139,
     "git_status": "## main...origin/main\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl",
     "recommendation": "Commit small, explainable improvements and watch the next star sample for response.",
     "recent_change": "Update daily trend brief",
