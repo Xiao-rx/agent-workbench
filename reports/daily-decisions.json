@@ -17,8 +17,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "affaan-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "240961 stars",
-          "36544 forks corroborate reuse",
+          "241187 stars",
+          "36574 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -37,8 +37,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit.",
         "evidence": [
-          "221468 stars",
-          "19077 forks corroborate reuse",
+          "223747 stars",
+          "19253 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -57,8 +57,8 @@
         "trust_level": "medium",
         "adoption_hypothesis": "multica-ai/andrej-karpathy-skills is likely gaining attention because it combines AI/agent positioning.",
         "evidence": [
-          "203622 stars",
-          "20881 forks corroborate reuse",
+          "203950 stars",
+          "20909 forks corroborate reuse",
           "unclear license"
         ],
         "emulate": [
@@ -71,14 +71,13 @@
       },
       {
         "full_name": "ultraworkers/claw-code",
-        "trust_score": 100,
+        "trust_score": 90,
         "trust_level": "high",
         "adoption_hypothesis": "ultraworkers/claw-code is likely gaining attention because it combines AI/agent positioning, Rust ecosystem fit.",
         "evidence": [
-          "195089 stars",
-          "109057 forks corroborate reuse",
-          "MIT license",
-          "recent push activity"
+          "195086 stars",
+          "109038 forks corroborate reuse",
+          "MIT license"
         ],
         "emulate": [
           "Use a concrete one-sentence value proposition.",
@@ -95,8 +94,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "deepseek-ai/deepseek-harness is likely gaining attention because it combines TypeScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "160266 stars",
-          "16777 forks corroborate reuse",
+          "167093 stars",
+          "17843 forks corroborate reuse",
           "MIT license",
           "0 open issues",
           "recent push activity"
@@ -305,7 +304,7 @@
     "repo": "Xiao-rx/agent-workbench",
     "current_stars": 0,
     "star_delta": 0,
-    "samples_seen": 140,
+    "samples_seen": 141,
     "git_status": "## main...origin/main\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl",
     "recommendation": "Commit small, explainable improvements and watch the next star sample for response.",
     "recent_change": "Update daily trend brief",
