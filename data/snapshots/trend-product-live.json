@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-22T23:46:26Z",
+  "generated_at": "2026-08-23T23:46:17Z",
   "since": "2026-01-01",
   "query": "created:>=2026-01-01 stars:>=50 archived:false fork:false",
   "repos": [
@@ -7,9 +7,9 @@
       "full_name": "affaan-m/ECC",
       "html_url": "https://github.com/affaan-m/ECC",
       "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-      "stars": 242165,
-      "forks": 36701,
-      "open_issues": 148,
+      "stars": 242542,
+      "forks": 36718,
+      "open_issues": 149,
       "language": "JavaScript",
       "topics": [
         "ai-agents",
@@ -22,7 +22,7 @@
         "productivity"
       ],
       "created_at": "2026-01-18T00:51:51Z",
-      "updated_at": "2026-08-22T23:41:23Z",
+      "updated_at": "2026-08-23T23:39:21Z",
       "pushed_at": "2026-08-21T03:02:03Z",
       "owner_type": "User",
       "license_name": "MIT"
@@ -31,13 +31,13 @@
       "full_name": "mattpocock/skills",
       "html_url": "https://github.com/mattpocock/skills",
       "description": "Skills for Real Engineers. Straight from my .agents directory.",
-      "stars": 231976,
-      "forks": 19805,
-      "open_issues": 385,
+      "stars": 233808,
+      "forks": 19942,
+      "open_issues": 389,
       "language": "Shell",
       "topics": [],
       "created_at": "2026-02-03T11:15:53Z",
-      "updated_at": "2026-08-22T23:45:50Z",
+      "updated_at": "2026-08-23T23:44:46Z",
       "pushed_at": "2026-08-21T10:56:48Z",
       "owner_type": "User",
       "license_name": "MIT"
@@ -46,13 +46,13 @@
       "full_name": "multica-ai/andrej-karpathy-skills",
       "html_url": "https://github.com/multica-ai/andrej-karpathy-skills",
       "description": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.",
-      "stars": 205288,
-      "forks": 21006,
-      "open_issues": 126,
+      "stars": 205750,
+      "forks": 21038,
+      "open_issues": 127,
       "language": null,
       "topics": [],
       "created_at": "2026-01-27T03:53:13Z",
-      "updated_at": "2026-08-22T23:26:52Z",
+      "updated_at": "2026-08-23T23:39:09Z",
       "pushed_at": "2026-04-20T10:05:04Z",
       "owner_type": "Organization",
       "license_name": null
@@ -62,12 +62,12 @@
       "html_url": "https://github.com/ultraworkers/claw-code",
       "description": "An agent-managed museum exhibit, built in Rust with Gajae-Code / LazyCodex — developed and maintained with no human intervention.",
       "stars": 195111,
-      "forks": 109002,
-      "open_issues": 41,
+      "forks": 108976,
+      "open_issues": 43,
       "language": "Rust",
       "topics": [],
       "created_at": "2026-03-31T08:58:08Z",
-      "updated_at": "2026-08-22T23:09:45Z",
+      "updated_at": "2026-08-23T23:36:25Z",
       "pushed_at": "2026-08-16T06:18:45Z",
       "owner_type": "Organization",
       "license_name": "MIT"
@@ -76,8 +76,8 @@
       "full_name": "deepseek-ai/deepseek-harness",
       "html_url": "https://github.com/deepseek-ai/deepseek-harness",
       "description": "DeepSeek Harness: Everything is a Plugin.",
-      "stars": 185002,
-      "forks": 20453,
+      "stars": 187913,
+      "forks": 20911,
       "open_issues": 0,
       "language": "TypeScript",
       "topics": [
@@ -87,7 +87,7 @@
         "dsh-plugin"
       ],
       "created_at": "2026-08-13T11:56:32Z",
-      "updated_at": "2026-08-22T23:44:31Z",
+      "updated_at": "2026-08-23T23:44:46Z",
       "pushed_at": "2026-08-21T12:35:08Z",
       "owner_type": "Organization",
       "license_name": "MIT"
@@ -96,13 +96,13 @@
       "full_name": "garrytan/gstack",
       "html_url": "https://github.com/garrytan/gstack",
       "description": "Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager, Doc Engineer, and QA",
-      "stars": 129211,
-      "forks": 19446,
-      "open_issues": 796,
+      "stars": 129333,
+      "forks": 19475,
+      "open_issues": 798,
       "language": "TypeScript",
       "topics": [],
       "created_at": "2026-03-11T21:22:45Z",
-      "updated_at": "2026-08-22T23:13:00Z",
+      "updated_at": "2026-08-23T23:41:35Z",
       "pushed_at": "2026-08-22T02:22:16Z",
       "owner_type": "User",
       "license_name": "MIT"
@@ -111,8 +111,8 @@
       "full_name": "VoltAgent/awesome-design-md",
       "html_url": "https://github.com/VoltAgent/awesome-design-md",
       "description": "A collection of DESIGN.md files analysis by popular brand design systems. Drop one into your project and let coding agents generate a matching UI.",
-      "stars": 109711,
-      "forks": 12518,
+      "stars": 109865,
+      "forks": 12531,
       "open_issues": 318,
       "language": null,
       "topics": [
@@ -128,7 +128,7 @@
         "vibecoding"
       ],
       "created_at": "2026-03-31T16:37:01Z",
-      "updated_at": "2026-08-22T23:40:33Z",
+      "updated_at": "2026-08-23T23:40:33Z",
       "pushed_at": "2026-07-31T12:32:42Z",
       "owner_type": "Organization",
       "license_name": "MIT"
@@ -137,9 +137,9 @@
       "full_name": "Graphify-Labs/graphify",
       "html_url": "https://github.com/Graphify-Labs/graphify",
       "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
-      "stars": 109560,
-      "forks": 10650,
-      "open_issues": 1044,
+      "stars": 109826,
+      "forks": 10676,
+      "open_issues": 1071,
       "language": "Python",
       "topics": [
         "ai-agents",
@@ -163,7 +163,7 @@
         "tree-sitter"
       ],
       "created_at": "2026-04-03T15:49:07Z",
-      "updated_at": "2026-08-22T23:41:43Z",
+      "updated_at": "2026-08-23T23:45:48Z",
       "pushed_at": "2026-08-20T16:39:37Z",
       "owner_type": "Organization",
       "license_name": "Apache-2.0"
@@ -172,9 +172,9 @@
       "full_name": "DietrichGebert/ponytail",
       "html_url": "https://github.com/DietrichGebert/ponytail",
       "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
-      "stars": 108186,
-      "forks": 5972,
-      "open_issues": 158,
+      "stars": 108786,
+      "forks": 6009,
+      "open_issues": 160,
       "language": "JavaScript",
       "topics": [
         "agent-skills",
@@ -189,7 +189,7 @@
         "yagni"
       ],
       "created_at": "2026-06-12T00:52:37Z",
-      "updated_at": "2026-08-22T23:44:03Z",
+      "updated_at": "2026-08-23T23:45:40Z",
       "pushed_at": "2026-08-07T21:44:01Z",
       "owner_type": "User",
       "license_name": "MIT"
@@ -198,9 +198,9 @@
       "full_name": "JuliusBrussee/caveman",
       "html_url": "https://github.com/JuliusBrussee/caveman",
       "description": "🪨 why use many token when few token do trick — Claude Code skill that cuts 65% of tokens by talking like caveman",
-      "stars": 100333,
-      "forks": 5826,
-      "open_issues": 362,
+      "stars": 100511,
+      "forks": 5839,
+      "open_issues": 366,
       "language": "Go",
       "topics": [
         "ai",
@@ -215,8 +215,8 @@
         "tokens"
       ],
       "created_at": "2026-04-04T10:03:00Z",
-      "updated_at": "2026-08-22T23:42:39Z",
-      "pushed_at": "2026-08-21T03:28:58Z",
+      "updated_at": "2026-08-23T22:30:29Z",
+      "pushed_at": "2026-08-23T23:35:02Z",
       "owner_type": "User",
       "license_name": "NOASSERTION"
     },
@@ -224,13 +224,13 @@
       "full_name": "karpathy/autoresearch",
       "html_url": "https://github.com/karpathy/autoresearch",
       "description": "AI agents running research on single-GPU nanochat training automatically",
-      "stars": 94458,
-      "forks": 13335,
+      "stars": 94520,
+      "forks": 13336,
       "open_issues": 196,
       "language": "Python",
       "topics": [],
       "created_at": "2026-03-06T22:00:43Z",
-      "updated_at": "2026-08-22T23:34:16Z",
+      "updated_at": "2026-08-23T23:30:23Z",
       "pushed_at": "2026-03-26T00:07:37Z",
       "owner_type": "User",
       "license_name": null
@@ -239,9 +239,9 @@
       "full_name": "nexu-io/open-design",
       "html_url": "https://github.com/nexu-io/open-design",
       "description": "🎨 Best DeepSeek Harness Design Plugin. The open-source Claude Design alternative. 🖥️ Local-first desktop app. 🖼️ Your coding agent becomes the design engine: prototypes, landing pages, dashboards, slides, images & video — real files, HTML/PDF/PPTX/MP4 export. 🤖 Claude Code / Codex / Cursor / DeepSeek Harness / OpenCode & 20+ CLIs via BYOK.",
-      "stars": 90433,
-      "forks": 10432,
-      "open_issues": 834,
+      "stars": 90740,
+      "forks": 10453,
+      "open_issues": 842,
       "language": "TypeScript",
       "topics": [
         "agent-skills",
@@ -266,8 +266,8 @@
         "vibe-coding"
       ],
       "created_at": "2026-04-28T04:25:20Z",
-      "updated_at": "2026-08-22T23:35:53Z",
-      "pushed_at": "2026-08-22T19:01:07Z",
+      "updated_at": "2026-08-23T23:43:33Z",
+      "pushed_at": "2026-08-23T18:27:28Z",
       "owner_type": "Organization",
       "license_name": "Apache-2.0"
     }

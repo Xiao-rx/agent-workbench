@@ -17,8 +17,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "affaan-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "242165 stars",
-          "36701 forks corroborate reuse",
+          "242542 stars",
+          "36718 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -37,8 +37,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit.",
         "evidence": [
-          "231976 stars",
-          "19805 forks corroborate reuse",
+          "233808 stars",
+          "19942 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -57,8 +57,8 @@
         "trust_level": "medium",
         "adoption_hypothesis": "multica-ai/andrej-karpathy-skills is likely gaining attention because it combines AI/agent positioning.",
         "evidence": [
-          "205288 stars",
-          "21006 forks corroborate reuse",
+          "205750 stars",
+          "21038 forks corroborate reuse",
           "unclear license"
         ],
         "emulate": [
@@ -76,7 +76,7 @@
         "adoption_hypothesis": "ultraworkers/claw-code is likely gaining attention because it combines AI/agent positioning, Rust ecosystem fit.",
         "evidence": [
           "195111 stars",
-          "109002 forks corroborate reuse",
+          "108976 forks corroborate reuse",
           "MIT license"
         ],
         "emulate": [
@@ -94,8 +94,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "deepseek-ai/deepseek-harness is likely gaining attention because it combines TypeScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "185002 stars",
-          "20453 forks corroborate reuse",
+          "187913 stars",
+          "20911 forks corroborate reuse",
           "MIT license",
           "0 open issues",
           "recent push activity"
@@ -304,7 +304,7 @@
     "repo": "Xiao-rx/agent-workbench",
     "current_stars": 0,
     "star_delta": 0,
-    "samples_seen": 144,
+    "samples_seen": 145,
     "git_status": "## main...origin/main\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl",
     "recommendation": "Commit small, explainable improvements and watch the next star sample for response.",
     "recent_change": "Update daily trend brief",
