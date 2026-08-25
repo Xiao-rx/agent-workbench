@@ -5,8 +5,8 @@
       "affaan-m/ECC",
       "mattpocock/skills",
       "multica-ai/andrej-karpathy-skills",
-      "ultraworkers/claw-code",
-      "deepseek-ai/deepseek-harness"
+      "deepseek-ai/deepseek-harness",
+      "ultraworkers/claw-code"
     ],
     "excluded_repositories": [],
     "watched_repositories": [],
@@ -17,8 +17,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "affaan-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "242922 stars",
-          "36761 forks corroborate reuse",
+          "243199 stars",
+          "36790 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -37,8 +37,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit.",
         "evidence": [
-          "235352 stars",
-          "20052 forks corroborate reuse",
+          "236688 stars",
+          "20145 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -57,31 +57,12 @@
         "trust_level": "medium",
         "adoption_hypothesis": "multica-ai/andrej-karpathy-skills is likely gaining attention because it combines AI/agent positioning.",
         "evidence": [
-          "206479 stars",
-          "21083 forks corroborate reuse",
+          "207178 stars",
+          "21141 forks corroborate reuse",
           "unclear license"
         ],
         "emulate": [
           "Use a concrete one-sentence value proposition.",
-          "Show active maintenance through recent commits."
-        ],
-        "avoid": [
-          "Avoid copying surface topics without reproducing the proof path."
-        ]
-      },
-      {
-        "full_name": "ultraworkers/claw-code",
-        "trust_score": 90,
-        "trust_level": "high",
-        "adoption_hypothesis": "ultraworkers/claw-code is likely gaining attention because it combines AI/agent positioning, Rust ecosystem fit.",
-        "evidence": [
-          "195111 stars",
-          "108952 forks corroborate reuse",
-          "MIT license"
-        ],
-        "emulate": [
-          "Use a concrete one-sentence value proposition.",
-          "Keep license and reuse rights explicit.",
           "Show active maintenance through recent commits."
         ],
         "avoid": [
@@ -94,10 +75,29 @@
         "trust_level": "high",
         "adoption_hypothesis": "deepseek-ai/deepseek-harness is likely gaining attention because it combines TypeScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "191901 stars",
-          "21507 forks corroborate reuse",
+          "195200 stars",
+          "22049 forks corroborate reuse",
           "MIT license",
           "0 open issues"
+        ],
+        "emulate": [
+          "Use a concrete one-sentence value proposition.",
+          "Keep license and reuse rights explicit.",
+          "Show active maintenance through recent commits."
+        ],
+        "avoid": [
+          "Avoid copying surface topics without reproducing the proof path."
+        ]
+      },
+      {
+        "full_name": "ultraworkers/claw-code",
+        "trust_score": 90,
+        "trust_level": "high",
+        "adoption_hypothesis": "ultraworkers/claw-code is likely gaining attention because it combines AI/agent positioning, Rust ecosystem fit.",
+        "evidence": [
+          "195112 stars",
+          "108920 forks corroborate reuse",
+          "MIT license"
         ],
         "emulate": [
           "Use a concrete one-sentence value proposition.",
@@ -177,15 +177,15 @@
         2
       ],
       [
-        "vibe-coding",
-        2
-      ],
-      [
         "agent-skills",
         2
       ],
       [
         "prompt-engineering",
+        2
+      ],
+      [
+        "vibe-coding",
         2
       ]
     ],
@@ -195,11 +195,11 @@
         4
       ],
       [
-        "local",
+        "ai",
         2
       ],
       [
-        "ai",
+        "local",
         2
       ],
       [
@@ -207,7 +207,7 @@
         1
       ],
       [
-        "ui",
+        "dev",
         1
       ],
       [
@@ -215,7 +215,7 @@
         1
       ],
       [
-        "dev",
+        "ui",
         1
       ],
       [
@@ -303,7 +303,7 @@
     "repo": "Xiao-rx/agent-workbench",
     "current_stars": 0,
     "star_delta": 0,
-    "samples_seen": 146,
+    "samples_seen": 147,
     "git_status": "## main...origin/main\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl",
     "recommendation": "Commit small, explainable improvements and watch the next star sample for response.",
     "recent_change": "Update daily trend brief",
