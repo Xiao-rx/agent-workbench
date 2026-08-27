@@ -17,8 +17,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "affaan-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "243199 stars",
-          "36790 forks corroborate reuse",
+          "243561 stars",
+          "36837 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -37,8 +37,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit.",
         "evidence": [
-          "236688 stars",
-          "20145 forks corroborate reuse",
+          "238127 stars",
+          "20259 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -57,8 +57,8 @@
         "trust_level": "medium",
         "adoption_hypothesis": "multica-ai/andrej-karpathy-skills is likely gaining attention because it combines AI/agent positioning.",
         "evidence": [
-          "207178 stars",
-          "21141 forks corroborate reuse",
+          "207770 stars",
+          "21182 forks corroborate reuse",
           "unclear license"
         ],
         "emulate": [
@@ -75,8 +75,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "deepseek-ai/deepseek-harness is likely gaining attention because it combines TypeScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "195200 stars",
-          "22049 forks corroborate reuse",
+          "198459 stars",
+          "22591 forks corroborate reuse",
           "MIT license",
           "0 open issues"
         ],
@@ -95,8 +95,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "ultraworkers/claw-code is likely gaining attention because it combines AI/agent positioning, Rust ecosystem fit.",
         "evidence": [
-          "195112 stars",
-          "108920 forks corroborate reuse",
+          "195116 stars",
+          "108897 forks corroborate reuse",
           "MIT license"
         ],
         "emulate": [
@@ -111,7 +111,7 @@
     ],
     "languages": [
       [
-        "TypeScript",
+        "Unknown",
         3
       ],
       [
@@ -119,7 +119,7 @@
         2
       ],
       [
-        "Unknown",
+        "TypeScript",
         2
       ],
       [
@@ -229,7 +229,7 @@
     ],
     "reasons": [
       "Topic clustering is strong around ai-agents, claude-code, llm, which makes the value proposition easy to search and share.",
-      "TypeScript leads the language mix, so examples and packaging should respect that ecosystem.",
+      "Unknown leads the language mix, so examples and packaging should respect that ecosystem.",
       "AI and agent language is still a strong discovery hook when paired with a concrete workflow.",
       "Developer automation projects benefit from short setup, visible output, and repeatable commands."
     ]
@@ -303,7 +303,7 @@
     "repo": "Xiao-rx/agent-workbench",
     "current_stars": 0,
     "star_delta": 0,
-    "samples_seen": 147,
+    "samples_seen": 148,
     "git_status": "## main...origin/main\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl",
     "recommendation": "Commit small, explainable improvements and watch the next star sample for response.",
     "recent_change": "Update daily trend brief",
