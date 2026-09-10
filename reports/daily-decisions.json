@@ -17,8 +17,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit.",
         "evidence": [
-          "256981 stars",
-          "21647 forks corroborate reuse",
+          "257880 stars",
+          "21724 forks corroborate reuse",
           "MIT license"
         ],
         "emulate": [
@@ -36,8 +36,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "affaan-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "254320 stars",
-          "38112 forks corroborate reuse",
+          "255187 stars",
+          "38227 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -56,8 +56,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "deepseek-ai/deepseek-harness is likely gaining attention because it combines TypeScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "216285 stars",
-          "25544 forks corroborate reuse",
+          "217477 stars",
+          "25729 forks corroborate reuse",
           "MIT license",
           "0 open issues",
           "recent push activity"
@@ -77,8 +77,8 @@
         "trust_level": "medium",
         "adoption_hypothesis": "multica-ai/andrej-karpathy-skills is likely gaining attention because it combines AI/agent positioning.",
         "evidence": [
-          "211467 stars",
-          "21473 forks corroborate reuse",
+          "211886 stars",
+          "21494 forks corroborate reuse",
           "unclear license"
         ],
         "emulate": [
@@ -95,8 +95,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "ultraworkers/claw-code is likely gaining attention because it combines AI/agent positioning, Rust ecosystem fit.",
         "evidence": [
-          "195198 stars",
-          "108635 forks corroborate reuse",
+          "195197 stars",
+          "108622 forks corroborate reuse",
           "MIT license"
         ],
         "emulate": [
@@ -303,7 +303,7 @@
     "repo": "Xiao-rx/agent-workbench",
     "current_stars": 0,
     "star_delta": 0,
-    "samples_seen": 161,
+    "samples_seen": 162,
     "git_status": "## main...origin/main\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl",
     "recommendation": "Commit small, explainable improvements and watch the next star sample for response.",
     "recent_change": "Update daily trend brief",
