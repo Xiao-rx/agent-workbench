@@ -13,13 +13,14 @@
     "repo_lessons": [
       {
         "full_name": "mattpocock/skills",
-        "trust_score": 83,
+        "trust_score": 93,
         "trust_level": "high",
         "adoption_hypothesis": "mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit.",
         "evidence": [
-          "268510 stars",
-          "22640 forks corroborate reuse",
-          "MIT license"
+          "269147 stars",
+          "22691 forks corroborate reuse",
+          "MIT license",
+          "recent push activity"
         ],
         "emulate": [
           "Use a concrete one-sentence value proposition.",
@@ -36,8 +37,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "affaan-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "266201 stars",
-          "39782 forks corroborate reuse",
+          "266935 stars",
+          "39888 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -56,8 +57,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "deepseek-ai/deepseek-harness is likely gaining attention because it combines TypeScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "234349 stars",
-          "28166 forks corroborate reuse",
+          "235191 stars",
+          "28294 forks corroborate reuse",
           "MIT license",
           "0 open issues",
           "recent push activity"
@@ -77,8 +78,8 @@
         "trust_level": "medium",
         "adoption_hypothesis": "multica-ai/andrej-karpathy-skills is likely gaining attention because it combines AI/agent positioning.",
         "evidence": [
-          "214834 stars",
-          "21707 forks corroborate reuse",
+          "215013 stars",
+          "21725 forks corroborate reuse",
           "unclear license"
         ],
         "emulate": [
@@ -95,8 +96,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "ultraworkers/claw-code is likely gaining attention because it combines AI/agent positioning, Rust ecosystem fit.",
         "evidence": [
-          "195283 stars",
-          "108420 forks corroborate reuse",
+          "195282 stars",
+          "108393 forks corroborate reuse",
           "MIT license"
         ],
         "emulate": [
@@ -303,7 +304,7 @@
     "repo": "Xiao-rx/agent-workbench",
     "current_stars": 0,
     "star_delta": 0,
-    "samples_seen": 176,
+    "samples_seen": 177,
     "git_status": "## main...origin/main\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl",
     "recommendation": "Commit small, explainable improvements and watch the next star sample for response.",
     "recent_change": "Update daily trend brief",
