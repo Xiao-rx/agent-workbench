@@ -3,8 +3,8 @@
     "headline": "12 learning candidates analyzed since 2026-01-01; 0 risky repositories excluded; top signal is topic:claude-code.",
     "leading_repositories": [
       "mattpocock/skills",
-      "affaan-m/ECC",
       "morluto/rea",
+      "affaan-m/ECC",
       "deepseek-ai/deepseek-harness",
       "multica-ai/andrej-karpathy-skills"
     ],
@@ -13,12 +13,31 @@
     "repo_lessons": [
       {
         "full_name": "mattpocock/skills",
-        "trust_score": 93,
+        "trust_score": 83,
         "trust_level": "high",
         "adoption_hypothesis": "mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit.",
         "evidence": [
-          "292902 stars",
-          "24554 forks corroborate reuse",
+          "294108 stars",
+          "24656 forks corroborate reuse",
+          "MIT license"
+        ],
+        "emulate": [
+          "Use a concrete one-sentence value proposition.",
+          "Keep license and reuse rights explicit.",
+          "Show active maintenance through recent commits."
+        ],
+        "avoid": [
+          "Avoid copying surface topics without reproducing the proof path."
+        ]
+      },
+      {
+        "full_name": "morluto/rea",
+        "trust_score": 100,
+        "trust_level": "high",
+        "adoption_hypothesis": "morluto/rea is likely gaining attention because it combines AI/agent positioning, TypeScript ecosystem fit, clear topic packaging.",
+        "evidence": [
+          "291468 stars",
+          "73363 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -37,28 +56,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "affaan-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "280422 stars",
-          "41707 forks corroborate reuse",
-          "MIT license",
-          "recent push activity"
-        ],
-        "emulate": [
-          "Use a concrete one-sentence value proposition.",
-          "Keep license and reuse rights explicit.",
-          "Show active maintenance through recent commits."
-        ],
-        "avoid": [
-          "Avoid copying surface topics without reproducing the proof path."
-        ]
-      },
-      {
-        "full_name": "morluto/rea",
-        "trust_score": 100,
-        "trust_level": "high",
-        "adoption_hypothesis": "morluto/rea is likely gaining attention because it combines AI/agent positioning, TypeScript ecosystem fit, clear topic packaging.",
-        "evidence": [
-          "271157 stars",
-          "68097 forks corroborate reuse",
+          "281533 stars",
+          "41856 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -77,8 +76,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "deepseek-ai/deepseek-harness is likely gaining attention because it combines TypeScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "250473 stars",
-          "30109 forks corroborate reuse",
+          "251179 stars",
+          "30205 forks corroborate reuse",
           "MIT license",
           "0 open issues",
           "recent push activity"
@@ -98,8 +97,8 @@
         "trust_level": "medium",
         "adoption_hypothesis": "multica-ai/andrej-karpathy-skills is likely gaining attention because it combines AI/agent positioning.",
         "evidence": [
-          "220107 stars",
-          "22126 forks corroborate reuse",
+          "220371 stars",
+          "22146 forks corroborate reuse",
           "unclear license"
         ],
         "emulate": [
@@ -113,11 +112,11 @@
     ],
     "languages": [
       [
-        "JavaScript",
+        "TypeScript",
         3
       ],
       [
-        "TypeScript",
+        "JavaScript",
         3
       ],
       [
@@ -159,14 +158,6 @@
         4
       ],
       [
-        "claude",
-        3
-      ],
-      [
-        "mcp",
-        3
-      ],
-      [
         "agent-skills",
         3
       ],
@@ -175,8 +166,12 @@
         3
       ],
       [
-        "anthropic",
-        2
+        "mcp",
+        3
+      ],
+      [
+        "claude",
+        3
       ],
       [
         "cordis",
@@ -188,6 +183,10 @@
       ],
       [
         "dsh-plugin",
+        2
+      ],
+      [
+        "anthropic",
         2
       ]
     ],
@@ -227,7 +226,7 @@
     ],
     "reasons": [
       "Topic clustering is strong around claude-code, ai-agents, llm, which makes the value proposition easy to search and share.",
-      "JavaScript leads the language mix, so examples and packaging should respect that ecosystem.",
+      "TypeScript leads the language mix, so examples and packaging should respect that ecosystem.",
       "AI and agent language is still a strong discovery hook when paired with a concrete workflow.",
       "Developer automation projects benefit from short setup, visible output, and repeatable commands."
     ]
@@ -301,7 +300,7 @@
     "repo": "Xiao-rx/agent-workbench",
     "current_stars": 0,
     "star_delta": 0,
-    "samples_seen": 198,
+    "samples_seen": 199,
     "git_status": "## main...origin/main\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl",
     "recommendation": "Commit small, explainable improvements and watch the next star sample for response.",
     "recent_change": "Update daily trend brief",
