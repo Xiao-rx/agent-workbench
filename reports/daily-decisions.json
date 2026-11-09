@@ -17,8 +17,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "morluto/rea is likely gaining attention because it combines AI/agent positioning, TypeScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "441228 stars",
-          "109168 forks corroborate reuse",
+          "444086 stars",
+          "109689 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -33,14 +33,13 @@
       },
       {
         "full_name": "mattpocock/skills",
-        "trust_score": 93,
+        "trust_score": 83,
         "trust_level": "high",
         "adoption_hypothesis": "mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit.",
         "evidence": [
-          "317782 stars",
-          "26585 forks corroborate reuse",
-          "MIT license",
-          "recent push activity"
+          "318636 stars",
+          "26660 forks corroborate reuse",
+          "MIT license"
         ],
         "emulate": [
           "Use a concrete one-sentence value proposition.",
@@ -57,8 +56,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "affaan-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "299220 stars",
-          "44202 forks corroborate reuse",
+          "299746 stars",
+          "44273 forks corroborate reuse",
           "MIT license",
           "recent push activity"
         ],
@@ -77,8 +76,8 @@
         "trust_level": "high",
         "adoption_hypothesis": "deepseek-ai/deepseek-harness is likely gaining attention because it combines TypeScript ecosystem fit, clear topic packaging.",
         "evidence": [
-          "275803 stars",
-          "33731 forks corroborate reuse",
+          "276611 stars",
+          "33875 forks corroborate reuse",
           "MIT license",
           "0 open issues"
         ],
@@ -97,8 +96,8 @@
         "trust_level": "medium",
         "adoption_hypothesis": "multica-ai/andrej-karpathy-skills is likely gaining attention because it combines AI/agent positioning.",
         "evidence": [
-          "230637 stars",
-          "22951 forks corroborate reuse",
+          "230981 stars",
+          "22974 forks corroborate reuse",
           "unclear license"
         ],
         "emulate": [
@@ -300,7 +299,7 @@
     "repo": "Xiao-rx/agent-workbench",
     "current_stars": 0,
     "star_delta": 0,
-    "samples_seen": 221,
+    "samples_seen": 222,
     "git_status": "## main...origin/main\n M data/snapshots/trend-product-live.json\n M data/star_history/Xiao-rx__agent-workbench.jsonl",
     "recommendation": "Commit small, explainable improvements and watch the next star sample for response.",
     "recent_change": "Update daily trend brief",
