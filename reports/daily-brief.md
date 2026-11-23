@@ -1,6 +1,6 @@
 # GitHub Trend Lab Daily Brief
 
-Generated: 2026\-11\-22T03:21:57Z
+Generated: 2026\-11\-23T03:54:00Z
 Search window: repositories created since 2026\-01\-01
 Query: `created:>=2026-01-01 stars:>=50 archived:false fork:false`
 
@@ -9,16 +9,16 @@ Query: `created:>=2026-01-01 stars:>=50 archived:false fork:false`
 12 learning candidates analyzed since 2026\-01\-01; 0 risky repositories excluded; top signal is topic:claude\-code\.
 
 Observed top repositories:
-- [morluto/rea](https://github.com/morluto/rea) - 472935 stars - Reverse engineer anything with agents, from app behavior down to native binaries\.
-- [mattpocock/skills](https://github.com/mattpocock/skills) - 329822 stars - Skills for Real Engineers\. Straight from my \.agents directory\.
-- [affaan\-m/ECC](https://github.com/affaan-m/ECC) - 308425 stars - The agent harness performance optimization system\. Skills, instincts, memory, security, and research\-first development for Claude Code, Codex, Opencode, Cursor and beyond\.
-- [deepseek\-ai/deepseek\-harness](https://github.com/deepseek-ai/deepseek-harness) - 285137 stars - DeepSeek Harness: Everything is a Plugin\.
-- [multica\-ai/andrej\-karpathy\-skills](https://github.com/multica-ai/andrej-karpathy-skills) - 234932 stars - A single CLAUDE\.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls\.
-- [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) - 196427 stars - Makes your AI agent think like the laziest senior dev in the room\. The best code is the code you never wrote\.
-- [ultraworkers/claw\-code](https://github.com/ultraworkers/claw-code) - 194740 stars - An agent\-managed museum exhibit, built in Rust with Gajae\-Code / LazyCodex — developed and maintained with no human intervention\.
-- [Graphify\-Labs/graphify](https://github.com/Graphify-Labs/graphify) - 151652 stars - Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph\. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store\.
-- [garrytan/gstack](https://github.com/garrytan/gstack) - 142291 stars - Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager, Doc Engineer, and QA
-- [stablyai/orca](https://github.com/stablyai/orca) - 132074 stars - Orca lets you run a fleet of bots with your own subscription \(e\.g\. Claude Code, Grok, Agy, Codex\)\. Available on desktop, mobile and remote runtime\.
+- [morluto/rea](https://github.com/morluto/rea) - 474322 stars - Reverse engineer anything with agents, from app behavior down to native binaries\.
+- [mattpocock/skills](https://github.com/mattpocock/skills) - 330642 stars - Skills for Real Engineers\. Straight from my \.agents directory\.
+- [affaan\-m/ECC](https://github.com/affaan-m/ECC) - 309088 stars - The agent harness performance optimization system\. Skills, instincts, memory, security, and research\-first development for Claude Code, Codex, Opencode, Cursor and beyond\.
+- [deepseek\-ai/deepseek\-harness](https://github.com/deepseek-ai/deepseek-harness) - 285662 stars - DeepSeek Harness: Everything is a Plugin\.
+- [multica\-ai/andrej\-karpathy\-skills](https://github.com/multica-ai/andrej-karpathy-skills) - 235142 stars - A single CLAUDE\.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls\.
+- [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) - 196985 stars - Makes your AI agent think like the laziest senior dev in the room\. The best code is the code you never wrote\.
+- [ultraworkers/claw\-code](https://github.com/ultraworkers/claw-code) - 194736 stars - An agent\-managed museum exhibit, built in Rust with Gajae\-Code / LazyCodex — developed and maintained with no human intervention\.
+- [Graphify\-Labs/graphify](https://github.com/Graphify-Labs/graphify) - 152114 stars - Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph\. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store\.
+- [garrytan/gstack](https://github.com/garrytan/gstack) - 142393 stars - Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager, Doc Engineer, and QA
+- [stablyai/orca](https://github.com/stablyai/orca) - 133263 stars - Orca lets you run a fleet of bots with your own subscription \(e\.g\. Claude Code, Grok, Agy, Codex\)\. Available on desktop, mobile and remote runtime\.
 
 Learning candidate leaders:
 - morluto/rea
@@ -37,31 +37,31 @@ Per-repository lessons:
 - morluto/rea
   - Trust: high (100/100)
   - Why popular: morluto/rea is likely gaining attention because it combines AI/agent positioning, TypeScript ecosystem fit, clear topic packaging\.
-  - Evidence: 472935 stars; 115419 forks corroborate reuse; MIT license; recent push activity
+  - Evidence: 474322 stars; 115643 forks corroborate reuse; MIT license; recent push activity
   - Emulate: Use a concrete one\-sentence value proposition\.; Keep license and reuse rights explicit\.; Show active maintenance through recent commits\.
   - Avoid: Avoid copying surface topics without reproducing the proof path\.
 - mattpocock/skills
-  - Trust: high (93/100)
+  - Trust: high (83/100)
   - Why popular: mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit\.
-  - Evidence: 329822 stars; 27718 forks corroborate reuse; MIT license; recent push activity
+  - Evidence: 330642 stars; 27788 forks corroborate reuse; MIT license
   - Emulate: Use a concrete one\-sentence value proposition\.; Keep license and reuse rights explicit\.; Show active maintenance through recent commits\.
   - Avoid: Avoid copying surface topics without reproducing the proof path\.
 - affaan\-m/ECC
-  - Trust: high (99/100)
+  - Trust: high (89/100)
   - Why popular: affaan\-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging\.
-  - Evidence: 308425 stars; 45388 forks corroborate reuse; MIT license; recent push activity
+  - Evidence: 309088 stars; 45476 forks corroborate reuse; MIT license
   - Emulate: Use a concrete one\-sentence value proposition\.; Keep license and reuse rights explicit\.; Show active maintenance through recent commits\.
   - Avoid: Avoid copying surface topics without reproducing the proof path\.
 - deepseek\-ai/deepseek\-harness
   - Trust: high (100/100)
   - Why popular: deepseek\-ai/deepseek\-harness is likely gaining attention because it combines TypeScript ecosystem fit, clear topic packaging\.
-  - Evidence: 285137 stars; 35447 forks corroborate reuse; MIT license; 0 open issues; recent push activity
+  - Evidence: 285662 stars; 35544 forks corroborate reuse; MIT license; 0 open issues; recent push activity
   - Emulate: Use a concrete one\-sentence value proposition\.; Keep license and reuse rights explicit\.; Show active maintenance through recent commits\.
   - Avoid: Avoid copying surface topics without reproducing the proof path\.
 - multica\-ai/andrej\-karpathy\-skills
   - Trust: medium (69/100)
   - Why popular: multica\-ai/andrej\-karpathy\-skills is likely gaining attention because it combines AI/agent positioning\.
-  - Evidence: 234932 stars; 23315 forks corroborate reuse; unclear license
+  - Evidence: 235142 stars; 23321 forks corroborate reuse; unclear license
   - Emulate: Use a concrete one\-sentence value proposition\.; Show active maintenance through recent commits\.
   - Avoid: Avoid copying surface topics without reproducing the proof path\.
 
@@ -175,7 +175,7 @@ Description terms:
 - Stars: 0
 - Forks: 0
 - Open issues: 0
-- Sampled at: 2026\-11\-22T03:21:57Z
+- Sampled at: 2026\-11\-23T03:54:01Z
 
 ## Feedback Loop Evidence
 
@@ -187,7 +187,7 @@ Description terms:
 - Repository: Xiao\-rx/agent\-workbench
 - Current stars: 0
 - Star delta in local history: 0
-- Samples seen: 235
+- Samples seen: 236
 - Recommendation: Commit small, explainable improvements and watch the next star sample for response\.
 
 Git status:
