@@ -1,6 +1,6 @@
 # GitHub Trend Lab Daily Brief
 
-Generated: 2026\-11\-27T05:14:35Z
+Generated: 2026\-11\-28T04:52:45Z
 Search window: repositories created since 2026\-01\-01
 Query: `created:>=2026-01-01 stars:>=50 archived:false fork:false`
 
@@ -9,16 +9,16 @@ Query: `created:>=2026-01-01 stars:>=50 archived:false fork:false`
 12 learning candidates analyzed since 2026\-01\-01; 0 risky repositories excluded; top signal is topic:claude\-code\.
 
 Observed top repositories:
-- [morluto/rea](https://github.com/morluto/rea) - 480054 stars - Reverse engineer anything with agents, from app behavior down to native binaries\.
-- [mattpocock/skills](https://github.com/mattpocock/skills) - 333729 stars - Skills for Real Engineers\. Straight from my \.agents directory\.
-- [affaan\-m/ECC](https://github.com/affaan-m/ECC) - 311394 stars - The agent harness performance optimization system\. Skills, instincts, memory, security, and research\-first development for Claude Code, Codex, Opencode, Cursor and beyond\.
-- [deepseek\-ai/deepseek\-harness](https://github.com/deepseek-ai/deepseek-harness) - 287724 stars - DeepSeek Harness: Everything is a Plugin\.
-- [multica\-ai/andrej\-karpathy\-skills](https://github.com/multica-ai/andrej-karpathy-skills) - 235966 stars - A single CLAUDE\.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls\.
-- [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) - 199469 stars - Makes your AI agent think like the laziest senior dev in the room\. The best code is the code you never wrote\.
-- [ultraworkers/claw\-code](https://github.com/ultraworkers/claw-code) - 194721 stars - An agent\-managed museum exhibit, built in Rust with Gajae\-Code / LazyCodex — developed and maintained with no human intervention\.
-- [Graphify\-Labs/graphify](https://github.com/Graphify-Labs/graphify) - 153923 stars - Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph\. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store\.
-- [garrytan/gstack](https://github.com/garrytan/gstack) - 142758 stars - Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager, Doc Engineer, and QA
-- [stablyai/orca](https://github.com/stablyai/orca) - 140906 stars - Orca lets you run a fleet of bots with your own subscription \(e\.g\. Claude Code, Grok, Agy, Codex\)\. Available on desktop, mobile and remote runtime\.
+- [morluto/rea](https://github.com/morluto/rea) - 481312 stars - Reverse engineer anything with agents, from app behavior down to native binaries\.
+- [mattpocock/skills](https://github.com/mattpocock/skills) - 334357 stars - Skills for Real Engineers\. Straight from my \.agents directory\.
+- [affaan\-m/ECC](https://github.com/affaan-m/ECC) - 311963 stars - The agent harness performance optimization system\. Skills, instincts, memory, security, and research\-first development for Claude Code, Codex, Opencode, Cursor and beyond\.
+- [deepseek\-ai/deepseek\-harness](https://github.com/deepseek-ai/deepseek-harness) - 288118 stars - DeepSeek Harness: Everything is a Plugin\.
+- [multica\-ai/andrej\-karpathy\-skills](https://github.com/multica-ai/andrej-karpathy-skills) - 236267 stars - A single CLAUDE\.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls\.
+- [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) - 200226 stars - Makes your AI agent think like the laziest senior dev in the room\. The best code is the code you never wrote\.
+- [ultraworkers/claw\-code](https://github.com/ultraworkers/claw-code) - 194705 stars - An agent\-managed museum exhibit, built in Rust with Gajae\-Code / LazyCodex — developed and maintained with no human intervention\.
+- [Graphify\-Labs/graphify](https://github.com/Graphify-Labs/graphify) - 154319 stars - Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph\. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store\.
+- [garrytan/gstack](https://github.com/garrytan/gstack) - 142822 stars - Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager, Doc Engineer, and QA
+- [stablyai/orca](https://github.com/stablyai/orca) - 142733 stars - Orca lets you run a fleet of bots with your own subscription \(e\.g\. Claude Code, Grok, Agy, Codex\)\. Available on desktop, mobile and remote runtime\.
 
 Learning candidate leaders:
 - morluto/rea
@@ -37,31 +37,31 @@ Per-repository lessons:
 - morluto/rea
   - Trust: high (100/100)
   - Why popular: morluto/rea is likely gaining attention because it combines AI/agent positioning, TypeScript ecosystem fit, clear topic packaging\.
-  - Evidence: 480054 stars; 116659 forks corroborate reuse; MIT license; recent push activity
+  - Evidence: 481312 stars; 116890 forks corroborate reuse; MIT license; recent push activity
   - Emulate: Use a concrete one\-sentence value proposition\.; Keep license and reuse rights explicit\.; Show active maintenance through recent commits\.
   - Avoid: Avoid copying surface topics without reproducing the proof path\.
 - mattpocock/skills
   - Trust: high (93/100)
   - Why popular: mattpocock/skills is likely gaining attention because it combines Shell ecosystem fit\.
-  - Evidence: 333729 stars; 28086 forks corroborate reuse; MIT license; recent push activity
+  - Evidence: 334357 stars; 28139 forks corroborate reuse; MIT license; recent push activity
   - Emulate: Use a concrete one\-sentence value proposition\.; Keep license and reuse rights explicit\.; Show active maintenance through recent commits\.
   - Avoid: Avoid copying surface topics without reproducing the proof path\.
 - affaan\-m/ECC
   - Trust: high (89/100)
   - Why popular: affaan\-m/ECC is likely gaining attention because it combines AI/agent positioning, JavaScript ecosystem fit, clear topic packaging\.
-  - Evidence: 311394 stars; 45746 forks corroborate reuse; MIT license
+  - Evidence: 311963 stars; 45829 forks corroborate reuse; MIT license
   - Emulate: Use a concrete one\-sentence value proposition\.; Keep license and reuse rights explicit\.; Show active maintenance through recent commits\.
   - Avoid: Avoid copying surface topics without reproducing the proof path\.
 - deepseek\-ai/deepseek\-harness
   - Trust: high (92/100)
   - Why popular: deepseek\-ai/deepseek\-harness is likely gaining attention because it combines TypeScript ecosystem fit, clear topic packaging\.
-  - Evidence: 287724 stars; 35930 forks corroborate reuse; MIT license; 0 open issues
+  - Evidence: 288118 stars; 35992 forks corroborate reuse; MIT license; 0 open issues
   - Emulate: Use a concrete one\-sentence value proposition\.; Keep license and reuse rights explicit\.; Show active maintenance through recent commits\.
   - Avoid: Avoid copying surface topics without reproducing the proof path\.
 - multica\-ai/andrej\-karpathy\-skills
   - Trust: medium (69/100)
   - Why popular: multica\-ai/andrej\-karpathy\-skills is likely gaining attention because it combines AI/agent positioning\.
-  - Evidence: 235966 stars; 23399 forks corroborate reuse; unclear license
+  - Evidence: 236267 stars; 23431 forks corroborate reuse; unclear license
   - Emulate: Use a concrete one\-sentence value proposition\.; Show active maintenance through recent commits\.
   - Avoid: Avoid copying surface topics without reproducing the proof path\.
 
@@ -175,7 +175,7 @@ Description terms:
 - Stars: 0
 - Forks: 0
 - Open issues: 0
-- Sampled at: 2026\-11\-27T05:14:36Z
+- Sampled at: 2026\-11\-28T04:52:46Z
 
 ## Feedback Loop Evidence
 
@@ -187,7 +187,7 @@ Description terms:
 - Repository: Xiao\-rx/agent\-workbench
 - Current stars: 0
 - Star delta in local history: 0
-- Samples seen: 240
+- Samples seen: 241
 - Recommendation: Commit small, explainable improvements and watch the next star sample for response\.
 
 Git status:
